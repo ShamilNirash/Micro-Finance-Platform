@@ -11,8 +11,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body class="bg-gray-100 font-sans leading-normal tracking-normal">
-    <main class="container mx-auto my-8 px-4">
+<body class="h-screen w-screen bg-sky-950 font-sans leading-normal tracking-normal p-4">
+    <main class=" bg-blue-100 h-full w-full flex flex-col items-center justify-center">
         @yield('content')
     </main>
 
