@@ -5,21 +5,21 @@
     <div class="h-full w-full flex lg:h-5/6 lg:w-4/6 lg:rounded-lg lg:shadow-lg lg:overflow-hidden lg:flex-row flex-col">
 
     <!-- Left side: Logo and Company Name -->
-        <div class="hidden lg:block  h-full w-full flex flex-col items-center justify-center bg-white p-5 lg:w-1/2 bg-blue-700 lg:pt-10 px-10">
-            <div class="flex ">
-                <img src="logo.png" alt="Logo" class="h-12" />
+        <div class="hidden xl:block  h-full w-full  flex-col items-center justify-center p-5 lg:w-1/2 bg-blue-600 lg:pt-10 px-10 ">
+            <div class="flex mt-8">
+                <img src="{{ asset('assets/images/Logo.png') }}" alt="Logo" class="h-12" />
             </div>
-            <h1 class="text-white text-4xl font-bold ">Company name</h1>
+            <h1 class="text-white text-2xl font-bold mt-4 uppercase">Primeway Investment</h1>
         </div>
 
     <!-- Right side: Sign In Form -->
-        <div class="h-full w-full flex flex-col items-center justify-between bg-white p-5 lg:w-1/2">
-            <div class="w-full max-w-md h-4/5 flex flex-col justify-center">
+        <div class="h-full w-full flex flex-col items-center justify-between bg-white p-5 xl:w-1/2">
+            <div class="w-full max-w-md h-4/5 flex flex-col justify-center mt-8">
                 <div class="flex justify-center mb-4 lg:hidden">
-                    <img src="logo.png" alt="Logo" class="h-12" />
+                    <img src="{{ asset('assets/images/Logo.png') }}" alt="Logo" class="h-12" />
                 </div>
-                <h2 class="text-center text-2xl font-semibold text-blue-700 lg:text-left lg:text-3xl xl:font-bold">Hello!</h2>
-                <p class="text-center text-md text-gray-600 mt-2 lg:text-left ">Sign up to continue</p>
+                <h2 class="text-center text-2xl font-semibold text-blue-700 xl:text-left lg:text-3xl xl:font-bold pt-8 lg:pt-0">Hello!</h2>
+                <p class="text-center text-md text-gray-600 mt-2 xl:text-left ">Sign up to continue</p>
                 
                 <!-- Error Message Container -->
                 <p id="signupErrorMessage" class="text-center text-sm text-red-500 mt-8 lg:mt-2 hidden "></p>
