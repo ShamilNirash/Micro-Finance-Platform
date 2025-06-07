@@ -2,9 +2,7 @@
 
 @section('content')
     <h1 class="text-3xl font-bold text-center text-blue-600">Sign Up</h1>
-@endsection@extends('layouts.mainLayout')
 
-@section('content')
 
     <div class="h-full w-full flex lg:h-5/6 lg:w-4/6 lg:rounded-lg lg:shadow-lg lg:overflow-hidden lg:flex-row flex-col">
 
@@ -24,7 +22,7 @@
                 </div>
                 <h2 class="text-center text-2xl font-semibold text-blue-700 lg:text-left lg:text-3xl xl:font-bold">Welcome back</h2>
                 <p class="text-center text-md text-gray-600 mt-2 lg:text-left ">Sign in to continue</p>
-                
+
                 <!-- Error Message Container -->
                 <p id="errorMessage" class="text-center text-sm text-red-500 mt-8 hidden "></p>
 
@@ -59,7 +57,7 @@
 
         </div>
     </div>
-    
+
     <script>
         // Password toggle functionality
         const togglePassword = document.getElementById('togglePassword');

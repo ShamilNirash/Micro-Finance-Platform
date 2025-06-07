@@ -209,7 +209,7 @@
                                             <span class="sidebar-text-mini">User Logs</span>
                                         </a>
                                     </li>
-                                    
+
                                 </ul>
                             </li>
                         </ul>
@@ -246,7 +246,7 @@
 
                 <!-- Search Bar -->
                 <div class="hidden sm:flex flex-1 mx-4 text-xs">
-                    <div class="relative w-11/12 "> 
+                    <div class="relative w-11/12 ">
                         <input type="text" placeholder="Search..." class="w-full px-4 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  bg-gray-50">
                         <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600 pr-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -273,7 +273,7 @@
                     </div>
                 </div>
             </header>
-            
+
             <!-- Mobile Dropdown (Hidden by Default) -->
             <div id="mobileSidebar" class="absolute max-h-fit top-16 bottom-5 mac-h-1/2 w-60 inset-0 shadow md:hidden hidden ml-4 mt-2 rounded-xl bg-gray-200">
                 <div class="p-4">
@@ -480,11 +480,9 @@
                                             <span class="sidebar-text">User Logs</span>
                                         </a>
                                     </li>
-                                    
+
                                 </ul>
                             </li>
-
-
                         </ul>
                     </nav>
                 </div>
@@ -494,7 +492,7 @@
             <!-- Main Content -->
             <main class="flex-1 p-6">
                1212111111111111111111111111111
-            </main>     
+            </main>
 
         </div>
     </div>
@@ -513,7 +511,7 @@
         #sidebar .small-logo {
             display: none;
         }
-        
+
         /* Hide text and arrows in small sidebar */
         #sidebar.w-20 .sidebar-text,
         #sidebar.w-20 .sidebar-arrow {
@@ -537,12 +535,12 @@
             top: 0;
             z-index: 100;
             width: 11rem; /* w-44 */
-        }      
+        }
 
         #sidebar.w-20 .submenu {
             left: 4rem; /* Adjust based on small sidebar width */
         }
-        
+
         #sidebar.w-20 .username {
             border: none; /* Adjust based on small sidebar width */
         }
@@ -617,7 +615,7 @@
                 document.addEventListener('DOMContentLoaded', () => {
                     const currentPath = window.location.pathname;
                     const links = document.querySelectorAll('#sidebar a, #mobileSidebar a');
-                    
+
                     links.forEach(link => {
                         if (link.getAttribute('href') === currentPath) {
                             link.classList.add('active');
