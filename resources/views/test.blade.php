@@ -2,118 +2,629 @@
 
 @section('content')
 
-    <div class="h-full w-full flex lg:h-5/6 lg:w-4/6 lg:rounded-lg lg:shadow-lg lg:overflow-hidden lg:flex-row flex-col">
+    <div class="flex h-screen w-screen bg-white">
 
-    <!-- Left side: Logo and Company Name -->
-        <div class="hidden lg:block  h-full w-full flex flex-col items-center justify-center bg-white p-5 lg:w-1/2 bg-blue-700 lg:pt-10 px-10">
-            <div class="flex ">
-                <img src="logo.png" alt="Logo" class="h-12" />
-            </div>
-            <h1 class="text-white text-4xl font-bold ">Company name</h1>
+        <div class="hidden sm:flex">
+
+            <!-- Sidebar (Hidden on Mobile by Default) -->
+            <aside id="sidebar" class="w-52 bg-gray-64 border-r transition-all duration-300 md:block ">
+                <div class="p-4 flex flex-col justify-between h-full">
+                    <!-- Sidebar Menu -->
+                    <div class="pb-4 flex items-center justify-center">
+                        <img src="{{ asset('assets/images/Logo.png') }}" alt="Company Logo" class="h-8 w-24 rounded-full full-logo">
+                        <img src="{{ asset('assets/images/SmallLogo.png') }}" alt="Small Company Logo" class="h-8 w-8 rounded-full small-logo hidden">
+                    </div>
+                    <!-- Sidebar Navigation -->
+                    <nav class="h-full overflow-hidden pt-0">
+                        <ul class="space-y-2 content-start min-h-full  overflow-hidden text-xs">
+                            <!-- Dashboard -->
+                            <li >
+                                <a href="#" class="flex items-center p-2 px-4 w-full rounded-lg hover:bg-gray-100 sidebar-toggle space-x-2 active:bg-gray-200">
+                                    <img src="{{ asset('assets/icons/DiamondsFour.svg') }}" alt="Dashboard Icon" class="h-4 w-4 ">
+                                    <span class="sidebar-text">Dashboard</span>
+                                </a>
+                            </li>
+                            <!-- Branches (with Submenu) -->
+                            <li>
+                                <button class="flex items-center justify-between p-2 px-4 w-full rounded-lg hover:bg-gray-100 active:bg-gray-200 sidebar-toggle space-x-2">
+                                    <div class="flex items-center space-x-2">
+                                        <img src="{{ asset('assets/icons/Users.svg') }}" alt="Branches Icon" class="h-4 w-4">
+                                        <span class="sidebar-text">Branches</span>
+                                    </div>
+                                    <svg class="w-4 h-4 transform transition-transform duration-200 arrow sidebar-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <!-- Submenu for Branches -->
+                                <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-white w-44">
+                                    <li>
+                                        <a href="#" class="flex items-center justify-start p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                                            <img src="{{ asset('assets/icons/MapPinLine.svg') }}" alt="Centers Icon" class="h-4 w-4">
+                                            <span class="sidebar-text-mini">Centers</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                                            <img src="{{ asset('assets/icons/Users.svg') }}" alt="Members Icon" class="h-4 w-4">
+                                            <span class="sidebar-text-mini">Members</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                                            <img src="{{ asset('assets/icons/Timer.svg') }}" alt="Recently Added Icon" class="h-4 w-4">
+                                            <span class="sidebar-text-mini">Recently Added</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                                            <img src="{{ asset('assets/icons/IdentificationBadge.svg') }}" alt="Centers Icon" class="h-4 w-4">
+                                            <span class="sidebar-text-mini">Member Summery</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <!-- Income (with Submenu) -->
+                            <li>
+                                <button class="flex items-center justify-between p-2 px-4 w-full rounded-lg hover:bg-gray-100 active:bg-gray-200 sidebar-toggle space-x-2">
+                                    <div class="flex items-center space-x-2">
+                                        <img src="{{ asset('assets/icons/CurrencyDollar.svg') }}" alt="Income Icon" class="h-4 w-4">
+                                        <span class="sidebar-text">Income</span>
+                                    </div>
+                                    <svg class="w-4 h-4 transform transition-transform duration-200 arrow sidebar-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <!-- Submenu for Income -->
+                                <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-white w-44">
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                                            <img src="{{ asset('assets/icons/ChartLineUp.svg') }}" alt="Income Report Icon" class="h-4 w-4">
+                                            <span class="sidebar-text-mini">Income Report</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                                            <img src="{{ asset('assets/icons/CurrencyCircleDollar.svg') }}" alt="Collections Icon" class="h-4 w-4">
+                                            <span class="sidebar-text-mini">Collections</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                                            <img src="{{ asset('assets/icons/pay01.svg') }}" alt="Under Payments Icon" class="h-4 w-4">
+                                            <span class="sidebar-text-mini">Under Payments Added</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <!-- Payments (with Submenu) -->
+                            <li>
+                                <button class="flex items-center justify-between p-2 px-4 w-full rounded-lg hover:bg-gray-100 active:bg-gray-200 sidebar-toggle space-x-2">
+                                    <div class="flex items-center space-x-2">
+                                        <img src="{{ asset('assets/icons/Money.svg') }}" alt="Payments Icon" class="h-4 w-4">
+                                        <span class="sidebar-text">Payments</span>
+                                    </div>
+                                    <svg class="w-4 h-4 transform transition-transform duration-200 arrow sidebar-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <!-- Submenu for Payments -->
+                                <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-white w-44">
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Payments Icon" class="h-4 w-4">
+                                            <span class="sidebar-text-mini">Payments</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                                            <img src="{{ asset('assets/icons/HourglassHigh.svg') }}" alt="Pending Icon" class="h-4 w-4">
+                                            <span class="sidebar-text-mini">Pending</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                                            <img src="{{ asset('assets/icons/MinusCircle.svg') }}" alt="No Paid Icon" class="h-4 w-4">
+                                            <span class="sidebar-text-mini">No Paid</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <!-- Reports (with Submenu) -->
+                            <li>
+                                <button class="flex items-center justify-between p-2 px-4 w-full rounded-lg hover:bg-gray-100 active:bg-gray-200 sidebar-toggle space-x-2">
+                                    <div class="flex items-center space-x-2">
+                                        <img src="{{ asset('assets/icons/IdentificationCard.svg') }}" alt="Reports Icon" class="h-4 w-4">
+                                        <span class="sidebar-text">Reports</span>
+                                    </div>
+                                    <svg class="w-4 h-4 transform transition-transform duration-200 arrow sidebar-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <!-- Submenu for Reports -->
+                                <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-white w-44">
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                                            <img src="{{ asset('assets/icons/ChartBarHorizontal.svg') }}" alt="Lone Issue Icon" class="h-4 w-4">
+                                            <span class="sidebar-text-mini">Lone Issue</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                                            <img src="{{ asset('assets/icons/ChartLineUp.svg') }}" alt="Income Icon" class="h-4 w-4">
+                                            <span class="sidebar-text-mini">Income</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                                            <img src="{{ asset('assets/icons/HourglassHigh.svg') }}" alt="Pending Payments Icon" class="h-4 w-4">
+                                            <span class="sidebar-text-mini">Pending Payments</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                                            <img src="{{ asset('assets/icons/Lockers.svg') }}" alt="Center Managers Icon" class="h-4 w-4">
+                                            <span class="sidebar-text-mini">Center Managers</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                                            <img src="{{ asset('assets/icons/UserGear.svg') }}" alt="Member Managers Icon" class="h-4 w-4">
+                                            <span class="sidebar-text-mini">Member Managers</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <!-- Settings (with Submenu) -->
+                            <li>
+                                <button class="flex items-center justify-between p-2 px-4 w-full rounded-lg hover:bg-gray-100 active:bg-gray-200 sidebar-toggle space-x-2">
+                                    <div class="flex items-center space-x-2">
+                                        <img src="{{ asset('assets/icons/GearSix.svg') }}" alt="Settings Icon" class="h-4 w-4">
+                                        <span class="sidebar-text">Settings</span>
+                                    </div>
+                                    <svg class="w-4 h-4 transform transition-transform duration-200 arrow sidebar-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <!-- Submenu for Settings -->
+                                <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-white w-44">
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                                            <img src="{{ asset('assets/icons/UserSwitch.svg') }}" alt="User Account Icon" class="h-4 w-4">
+                                            <span class="sidebar-text-mini">User Account</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                                            <img src="{{ asset('assets/icons/GearSix.svg') }}" alt="Settings Icon" class="h-4 w-4">
+                                            <span class="sidebar-text-mini">Settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                                            <img src="{{ asset('assets/icons/UserList.svg') }}" alt="User Logs Icon" class="h-4 w-4">
+                                            <span class="sidebar-text-mini">User Logs</span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- User Avatar -->
+                    <div class="h-12 px-2 content-end sidebar-toggle">
+                        <div class="flex items-center space-x-2 border border-blue-300 rounded-full text-small username ">
+                            <img src="{{ asset('icons/Users.png') }}" alt="User Avatar" class=" h-6 w-6 rounded-full bg-blue-800 border border-blue-300">
+                            <span class="text-xs sidebar-text">Dunura Hansaja</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
         </div>
 
-    <!-- Right side: Sign In Form -->
-        <div class="h-full w-full flex flex-col items-center justify-between bg-white p-5 lg:w-1/2">
-            <div class="w-full max-w-md h-4/5 flex flex-col justify-center">
-                <div class="flex justify-center mb-4 lg:hidden">
-                    <img src="logo.png" alt="Logo" class="h-12" />
-                </div>
-                <h2 class="text-center text-2xl font-semibold text-blue-700 lg:text-left lg:text-3xl xl:font-bold">Hello!</h2>
-                <p class="text-center text-md text-gray-600 mt-2 lg:text-left ">Sign up to continue</p>
-                
-                <!-- Error Message Container -->
-                <p id="signupErrorMessage" class="text-center text-sm text-red-500 mt-8 lg:mt-2 hidden "></p>
+        <div class="h-full w-full">
 
-                <form class="mt-12 lg:mt-6" id="signupForm" method="POST" action="">
-                    <div class="relative my-2 text-sm">
-                        <div class="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400">
-                            <svg class="h-5 w-5" ...>...</svg>
-                        </div>
-                        <input type="email" id="email" name="email" placeholder=" Email" class="w-full px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <!-- Topbar -->
+            <header class="bg-gray-200 border-b p-4 flex justify-between items-center sm:p-4 sm:space-x-4 sm:bg-white">
+                <!-- Hamburger Menu Icon(Mobile) -->
+                <button id="mobileMenuButton" class="sm:hidden text-gray-600 focus:outline-none">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <!-- Logo -->
+                <div class="text-xl font-bold hidden">Company Name</div>
+
+                <!--  Icon -->
+                <button id="sidebarToggleButton" class="text-gray-600 pr-8 hidden sm:block">
+                    <img src="{{ asset('assets/icons/Sidebar.svg') }}" alt="Sidebar Icon" class="h-5 w-5">
+                </button>
+
+                <!-- Search Bar -->
+                <div class="hidden sm:flex flex-1 mx-4 text-xs">
+                    <div class="relative w-11/12 "> 
+                        <input type="text" placeholder="Search..." class="w-full px-4 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  bg-gray-50">
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600 pr-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2.828-4.828A7.962 7.962 0 0018 10a8 8 0 10-8 8c1.657 0 3.175-.51 4.414-1.414l4.586 4.586z"></path>
+                            </svg>
+                        </button>
                     </div>
-                    <div class="relative my-2 text-sm">
-                        <div class="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400">
-                            <svg class="h-5 w-5" ...>...</svg>
-                        </div>
-                        <input type="password" id="password" name="password" placeholder=" Password" class="w-full px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                        <div class="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer" id="togglePassword">
-                            👁️
-                        </div>
+                </div>
+
+                <!-- Notifications and User -->
+                <div class="flex items-center space-x-4 sm:space-x-6 pr-4 ">
+                    <!-- Notifications Icon -->
+                    <button class="text-gray-600 hidden sm:block">
+                        <img src="{{ asset('assets/icons/ClockCounterClockwise.svg') }}" alt="Sidebar Icon" class="h-5 w-5">
+                    </button>
+                    <!-- Notifications Icon -->
+                    <button class="text-gray-600">
+                        <img src="{{ asset('assets/icons/Bell.svg') }}" alt="Sidebar Icon" class="h-5 w-5">
+                    </button>
+                    <!-- User Avatar -->
+                    <div class="flex items-center space-x-2 sm:hidden">
+                        <img src="{{ asset('images/user.png') }}" alt="User Avatar" class="h-7 w-7 rounded-full bg-blue-900">
+                        <span class="hidden">Dunura Hansaja</span>
                     </div>
-                    <div class="relative my-2 text-sm">
-                        <div class="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400">
-                            <svg class="h-5 w-5" ...>...</svg>
-                        </div>
-                        <input type="password" id="conformPassword" name="conformPassword" placeholder=" Confirm Password" class="w-full px-10 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                        <div class="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer" id="toggleconformPassword">
-                            👁️
-                        </div>
+                </div>
+            </header>
+            
+            <!-- Mobile Dropdown (Hidden by Default) -->
+            <div id="mobileSidebar" class="absolute max-h-fit top-16 bottom-5 mac-h-1/2 w-60 inset-0 shadow md:hidden hidden ml-4 mt-2 rounded-xl bg-gray-200">
+                <div class="p-4">
+                    <div class="flex justify-between items-center mb-4 ">
+                        <div class="text-xl font-bold ">Company Name</div>
+                        <button id="closeMobileMenu" class="text-gray-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
                     </div>
-                    <div class="flex items-center space-x-2 pr-2 mt-8">
-                        <input type="checkbox" id="remember" name="remember" class="form-checkbox border-gray-300 rounded" />
-                        <label for="remember" class="text-sm text-gray-600">I accept the 
-                            <a href="#" class=" text-blue-700 right-0 top-full mt-2 ">Terms of Use </a> 
-                            &
-                            <a href="#" class=" text-blue-700 right-0 top-full mt-2 "> Privacy Policy</a> 
-                        </label> 
-                    </div>
-                    <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 mt-4">Sign up</button>
-                </form>
+                    <nav class="  ">
+                        <ul class="space-y-1 min-h-full  overflow-y-scroll  scrollbar-hide scroll-smooth">
+
+                            <!-- Dashboard -->
+                            <li >
+                                <a href="#" class="flex items-center p-1 px-4 w-full rounded-lg hover:bg-gray-50 sidebar-toggle space-x-2">
+                                    <img src="{{ asset('assets/icons/DiamondsFour.svg') }}" alt="Dashboard Icon" class="h-4 w-4 ">
+                                    <span class="sidebar-text">Dashboard</span>
+                                </a>
+                            </li>
+                            <!-- Branches (with Submenu) -->
+                            <li>
+                                <button class="flex items-center justify-between p-1 px-4 w-full rounded-lg hover:bg-gray-100 sidebar-toggle space-x-2">
+                                    <div class="flex items-center space-x-2">
+                                        <img src="{{ asset('assets/icons/Users.svg') }}" alt="Branches Icon" class="h-4 w-4">
+                                        <span class="sidebar-text">Branches</span>
+                                    </div>
+                                    <svg class="w-4 h-4 transform transition-transform duration-200 arrow sidebar-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <!-- Submenu for Branches -->
+                                <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-gray-200 w-44">
+                                    <li>
+                                        <a href="#" class="flex items-center justify-start p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
+                                            <img src="{{ asset('assets/icons/MapPinLine.svg') }}" alt="Centers Icon" class="h-4 w-4">
+                                            <span class="sidebar-text">Centers</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center justify-start p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
+                                            <img src="{{ asset('assets/icons/Users.svg') }}" alt="Members Icon" class="h-4 w-4">
+                                            <span class="sidebar-text">Members</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center justify-start p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
+                                            <img src="{{ asset('assets/icons/Timer.svg') }}" alt="Recently Added Icon" class="h-4 w-4">
+                                            <span class="sidebar-text">Recently Added</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center justify-start p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
+                                            <img src="{{ asset('assets/icons/IdentificationBadge.svg') }}" alt="Centers Icon" class="h-4 w-4">
+                                            <span class="sidebar-text">Member Summery</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <!-- Income (with Submenu) -->
+                            <li>
+                                <button class="flex items-center justify-between p-1 px-4 w-full rounded-lg hover:bg-gray-100 sidebar-toggle space-x-2">
+                                    <div class="flex items-center space-x-2">
+                                        <img src="{{ asset('assets/icons/CurrencyDollar.svg') }}" alt="Income Icon" class="h-4 w-4">
+                                        <span class="sidebar-text">Income</span>
+                                    </div>
+                                    <svg class="w-4 h-4 transform transition-transform duration-200 arrow sidebar-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <!-- Submenu for Income -->
+                                <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-gray-200 w-44">
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
+                                            <img src="{{ asset('assets/icons/ChartLineUp.svg') }}" alt="Income Report Icon" class="h-4 w-4">
+                                            <span class="sidebar-text">Income Report</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
+                                            <img src="{{ asset('assets/icons/CurrencyCircleDollar.svg') }}" alt="Collections Icon" class="h-4 w-4">
+                                            <span class="sidebar-text">Collections</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
+                                            <img src="{{ asset('assets/icons/pay01.svg') }}" alt="Under Payments Icon" class="h-4 w-4">
+                                            <span class="sidebar-text">Under Payments Added</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <!-- Payments (with Submenu) -->
+                            <li>
+                                <button class="flex items-center justify-between p-1 px-4 w-full rounded-lg hover:bg-gray-100 sidebar-toggle space-x-2">
+                                    <div class="flex items-center space-x-2">
+                                        <img src="{{ asset('assets/icons/Money.svg') }}" alt="Payments Icon" class="h-4 w-4">
+                                        <span class="sidebar-text">Payments</span>
+                                    </div>
+                                    <svg class="w-4 h-4 transform transition-transform duration-200 arrow sidebar-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <!-- Submenu for Payments -->
+                                <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-gray-200 w-44">
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
+                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Payments Icon" class="h-4 w-4">
+                                            <span class="sidebar-text">Payments</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
+                                            <img src="{{ asset('assets/icons/HourglassHigh.svg') }}" alt="Pending Icon" class="h-4 w-4">
+                                            <span class="sidebar-text">Pending</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
+                                            <img src="{{ asset('assets/icons/MinusCircle.svg') }}" alt="No Paid Icon" class="h-4 w-4">
+                                            <span class="sidebar-text">No Paid</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <!-- Reports (with Submenu) -->
+                            <li>
+                                <button class="flex items-center justify-between p-1 px-4 w-full rounded-lg hover:bg-gray-100 sidebar-toggle space-x-2">
+                                    <div class="flex items-center space-x-2">
+                                        <img src="{{ asset('assets/icons/IdentificationCard.svg') }}" alt="Reports Icon" class="h-4 w-4">
+                                        <span class="sidebar-text">Reports</span>
+                                    </div>
+                                    <svg class="w-4 h-4 transform transition-transform duration-200 arrow sidebar-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <!-- Submenu for Reports -->
+                                <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-gray-200 w-44">
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
+                                            <img src="{{ asset('assets/icons/ChartBarHorizontal.svg') }}" alt="Lone Issue Icon" class="h-4 w-4">
+                                            <span class="sidebar-text">Lone Issue</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
+                                            <img src="{{ asset('assets/icons/ChartLineUp.svg') }}" alt="Income Icon" class="h-4 w-4">
+                                            <span class="sidebar-text">Income</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
+                                            <img src="{{ asset('assets/icons/HourglassHigh.svg') }}" alt="Pending Payments Icon" class="h-4 w-4">
+                                            <span class="sidebar-text">Pending Payments</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
+                                            <img src="{{ asset('assets/icons/Lockers.svg') }}" alt="Center Managers Icon" class="h-4 w-4">
+                                            <span class="sidebar-text">Center Managers</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
+                                            <img src="{{ asset('assets/icons/UserGear.svg') }}" alt="Member Managers Icon" class="h-4 w-4">
+                                            <span class="sidebar-text">Member Managers</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <!-- Settings (with Submenu) -->
+                            <li>
+                                <button class="flex items-center justify-between p-1 px-4 w-full rounded-lg hover:bg-gray-100 sidebar-toggle space-x-2">
+                                    <div class="flex items-center space-x-2">
+                                        <img src="{{ asset('assets/icons/GearSix.svg') }}" alt="Settings Icon" class="h-4 w-4">
+                                        <span class="sidebar-text">Settings</span>
+                                    </div>
+                                    <svg class="w-4 h-4 transform transition-transform duration-200 arrow sidebar-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <!-- Submenu for Settings -->
+                                <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-gray-200 w-44">
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
+                                            <img src="{{ asset('assets/icons/UserSwitch.svg') }}" alt="User Account Icon" class="h-4 w-4">
+                                            <span class="sidebar-text">User Account</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
+                                            <img src="{{ asset('assets/icons/GearSix.svg') }}" alt="Settings Icon" class="h-4 w-4">
+                                            <span class="sidebar-text">Settings</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
+                                            <img src="{{ asset('assets/icons/UserList.svg') }}" alt="User Logs Icon" class="h-4 w-4">
+                                            <span class="sidebar-text">User Logs</span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
+
+
+                        </ul>
+                    </nav>
+                </div>
             </div>
 
-            <p class="text-center text-xs text-gray-500 ">
-                Already have an account? <a href="#" class="text-blue-600 font-medium">Sign In</a>
-            </p>
+            <!----------------------------------------------------------------------------------------------------------->
+            <!-- Main Content -->
+            <main class="flex-1 p-6">
+               1212111111111111111111111111111
+            </main>     
 
         </div>
     </div>
-    
-    <script>
-        // Password toggle functionality
-        const togglePassword = document.getElementById('togglePassword');
-        const toggleconformPassword = document.getElementById('toggleconformPassword');
-        const password = document.getElementById('password');
-        const conformPassword = document.getElementById('conformPassword');
 
-        togglePassword.addEventListener('click', function () {
-            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-            password.setAttribute('type', type);
-            this.textContent = type === 'password' ? '👁️' : '🙈';
-        });
-        toggleconformPassword.addEventListener('click', function () {
-            const type = conformPassword.getAttribute('type') === 'password' ? 'text' : 'password';
-            conformPassword.setAttribute('type', type);
-            this.textContent = type === 'password' ? '👁️' : '🙈';
-        });
-
-        // Mock frontend validation for email and password, check Conformation password
-        const signupForm = document.getElementById('signupForm');
-        const signupErrorMessage = document.getElementById('signupErrorMessage');
-
-        signupForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('conformPassword').value;
-
-        // Basic frontend validation
-        if (!email.includes('@')) {
-            signupErrorMessage.textContent = 'Invalid Email!';
-            signupErrorMessage.classList.remove('hidden');
-        } else if (password.length < 6) {
-            signupErrorMessage.textContent = 'Password must be at least 6 characters!';
-            signupErrorMessage.classList.remove('hidden');
-        } else if (password !== confirmPassword) {
-            signupErrorMessage.textContent = 'Passwords do not match!';
-            signupErrorMessage.classList.remove('hidden');
-        } else {
-            signupErrorMessage.textContent = '';
-            signupErrorMessage.classList.add('hidden');
-            console.log('Signup form would submit to backend now.');
-            // signupForm.submit(); // Uncomment this when backend is ready
+        <style>
+        /* Logo toggle */
+        #sidebar.w-20 .full-logo {
+            display: none;
         }
-    });
-    </script>
+        #sidebar.w-20 .small-logo {
+            display: block;
+        }
+        #sidebar .full-logo {
+            display: block;
+        }
+        #sidebar .small-logo {
+            display: none;
+        }
+        
+        /* Hide text and arrows in small sidebar */
+        #sidebar.w-20 .sidebar-text,
+        #sidebar.w-20 .sidebar-arrow {
+            display: none;
+        }
+
+        /* Center icons in small sidebar */
+        #sidebar.w-20 .flex.items-center {
+            justify-content: center;
+        }
+
+        /* Ensure submenu is visible and styled for both sidebar sizes */
+        #sidebar .submenu {
+            left: 100%;
+            top: 0;
+            z-index: 10;
+        }
+        #sidebar.w-20 .submenu {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            z-index: 100;
+            width: 11rem; /* w-44 */
+        }      
+
+        #sidebar.w-20 .submenu {
+            left: 4rem; /* Adjust based on small sidebar width */
+        }
+        
+        #sidebar.w-20 .username {
+            border: none; /* Adjust based on small sidebar width */
+        }
+            /* Active state styling */
+        .active {
+            background-color: #e5e7eb !important; /* gray-200 */
+            font-weight: 600;
+        }
+    </style>
+
+
+            <script>
+                // Mobile Menu Toggle
+                const mobileMenuButton = document.getElementById('mobileMenuButton');
+                const mobileSidebar = document.getElementById('mobileSidebar');
+                const closeMobileMenu = document.getElementById('closeMobileMenu');
+
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileSidebar.classList.toggle('hidden');
+                });
+
+                closeMobileMenu.addEventListener('click', () => {
+                    mobileSidebar.classList.add('hidden');
+                });
+
+                // Sidebar Toggle (Desktop)
+                const sidebar = document.getElementById('sidebar');
+                const sidebarToggleButton = document.getElementById('sidebarToggleButton');
+
+                sidebarToggleButton.addEventListener('click', () => {
+                    sidebar.classList.toggle('w-20');
+                    sidebar.classList.toggle('w-52');
+                    const arrows = sidebar.querySelectorAll('.arrow');
+                    arrows.forEach(arrow => arrow.classList.toggle('hidden'));
+                    const submenus = sidebar.querySelectorAll('.submenu');
+                    submenus.forEach(submenu => submenu.classList.add('hidden')); // Close submenus on toggle
+                });
+
+                // Sidebar Submenu Toggle (for both mobile and web)
+                const sidebarToggles = document.querySelectorAll('.sidebar-toggle');
+
+                sidebarToggles.forEach(toggle => {
+                    toggle.addEventListener('click', (event) => {
+                        const submenu = toggle.nextElementSibling;
+                        const arrow = toggle.querySelector('.arrow');
+                        const isMinimized = sidebar.classList.contains('w-20');
+
+                        // Close all other submenus
+                        const allSubmenus = document.querySelectorAll(' .submenu');
+                        allSubmenus.forEach(otherSubmenu => {
+                            if (otherSubmenu !== submenu) {
+                                otherSubmenu.classList.add('hidden');
+                                const otherArrow = otherSubmenu.previousElementSibling.querySelector('.arrow');
+                                if (otherArrow) otherArrow.classList.remove('rotate-180');
+                            }
+                        });
+
+                        // Toggle the current submenu
+                        submenu.classList.toggle('hidden');
+                        if (arrow) arrow.classList.toggle('rotate-180');
+
+                        // Position submenu next to the clicked button in minimized state
+                        if (isMinimized && submenu.classList.contains('hidden') === false) {
+                            const toggleRect = toggle.getBoundingClientRect();
+                            const sidebarRect = sidebar.getBoundingClientRect();
+                            submenu.style.top = `${toggleRect.top - sidebarRect.top}px`;
+                        }
+                    });
+                });
+
+                // Active Page Highlighting
+                document.addEventListener('DOMContentLoaded', () => {
+                    const currentPath = window.location.pathname;
+                    const links = document.querySelectorAll('#sidebar a, #mobileSidebar a');
+                    
+                    links.forEach(link => {
+                        if (link.getAttribute('href') === currentPath) {
+                            link.classList.add('active');
+                        }
+                    });
+                });
+            </script>
+
 
 @endsection
