@@ -22,3 +22,16 @@ Route::get('/signup', function () {
 Route::get('/dashboard', function () {
     return view('test');
 });
+
+Route::get('/centers', function () {
+    return view('branches/centers');
+});
+Route::get('/members', function () {
+    return view('branches/members');
+});
+Route::get('/memberSummery', function () {
+    return view('branches/memberSummery');
+});
+Route::get('/recentlyAdded', function () {
+    return view('branches/recentlyAdded');
+});
