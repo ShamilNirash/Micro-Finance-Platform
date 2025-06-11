@@ -12,9 +12,8 @@
 </head>
 
 <body class="h-screen w-screen font-sans leading-normal tracking-normal ">
-    <main class="bg-gray-100 h-full w-full flex flex-col items-center justify-center">
-        @yield('content')
-    </main>
+
+        @yield('content') 
 
 </body>
 
