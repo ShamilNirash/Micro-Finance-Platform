@@ -12,14 +12,14 @@
             <ul class="space-y-2 content-start min-h-full  overflow-hidden text-xs">
                 <!-- Dashboard -->
                 <li>
-                    <a href="#" class="flex items-center p-2 px-4 w-full rounded-lg hover:bg-gray-100 sidebar-toggle space-x-2 active:bg-gray-200">
+                    <a href="#" class="flex items-center p-2 px-4 w-full rounded-lg hover:bg-sky-100 sidebar-toggle space-x-2 active:bg-sky-100">
                         <img src="{{ asset('assets/icons/DiamondsFour.svg') }}" alt="Dashboard Icon" class="h-4 w-4 ">
                         <span class="sidebar-text">Dashboard</span>
                     </a>
                 </li>
                 <!-- Branches (with Submenu) -->
                 <li>
-                    <button class="flex items-center justify-between p-2 px-4 w-full rounded-lg hover:bg-gray-100 active:bg-gray-200 sidebar-toggle space-x-2">
+                    <button class="flex items-center justify-between p-2 px-4 w-full rounded-lg hover:bg-sky-100 active:bg-sky-200 sidebar-toggle space-x-2">
                         <div class="flex items-center space-x-2">
                             <img src="{{ asset('assets/icons/Users.svg') }}" alt="Branches Icon" class="h-4 w-4">
                             <span class="sidebar-text">Branches</span>
@@ -31,25 +31,25 @@
                     <!-- Submenu for Branches -->
                     <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-white w-44">
                         <li>
-                            <a href="#" class="flex items-center justify-start p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                            <a href="#" class="flex items-center justify-start p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/MapPinLine.svg') }}" alt="Centers Icon" class="h-4 w-4">
                                 <span class="sidebar-text-mini">Centers</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/Users.svg') }}" alt="Members Icon" class="h-4 w-4">
                                 <span class="sidebar-text-mini">Members</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/Timer.svg') }}" alt="Recently Added Icon" class="h-4 w-4">
                                 <span class="sidebar-text-mini">Recently Added</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/IdentificationBadge.svg') }}" alt="Centers Icon" class="h-4 w-4">
                                 <span class="sidebar-text-mini">Member Summery</span>
                             </a>
@@ -59,7 +59,7 @@
 
                 <!-- Income (with Submenu) -->
                 <li>
-                    <button class="flex items-center justify-between p-2 px-4 w-full rounded-lg hover:bg-gray-100 active:bg-gray-200 sidebar-toggle space-x-2">
+                    <button class="flex items-center justify-between p-2 px-4 w-full rounded-lg hover:bg-sky-100 active:bg-sky-200 sidebar-toggle space-x-2">
                         <div class="flex items-center space-x-2">
                             <img src="{{ asset('assets/icons/CurrencyDollar.svg') }}" alt="Income Icon" class="h-4 w-4">
                             <span class="sidebar-text">Income</span>
@@ -71,19 +71,19 @@
                     <!-- Submenu for Income -->
                     <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-white w-44">
                         <li>
-                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/ChartLineUp.svg') }}" alt="Income Report Icon" class="h-4 w-4">
                                 <span class="sidebar-text-mini">Income Report</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/CurrencyCircleDollar.svg') }}" alt="Collections Icon" class="h-4 w-4">
                                 <span class="sidebar-text-mini">Collections</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/pay01.svg') }}" alt="Under Payments Icon" class="h-4 w-4">
                                 <span class="sidebar-text-mini">Under Payments Added</span>
                             </a>
@@ -93,7 +93,7 @@
 
                 <!-- Payments (with Submenu) -->
                 <li>
-                    <button class="flex items-center justify-between p-2 px-4 w-full rounded-lg hover:bg-gray-100 active:bg-gray-200 sidebar-toggle space-x-2">
+                    <button class="flex items-center justify-between p-2 px-4 w-full rounded-lg hover:bg-sky-100 active:bg-sky-200 sidebar-toggle space-x-2">
                         <div class="flex items-center space-x-2">
                             <img src="{{ asset('assets/icons/Money.svg') }}" alt="Payments Icon" class="h-4 w-4">
                             <span class="sidebar-text">Payments</span>
@@ -105,19 +105,19 @@
                     <!-- Submenu for Payments -->
                     <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-white w-44">
                         <li>
-                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/Money.svg') }}" alt="Payments Icon" class="h-4 w-4">
                                 <span class="sidebar-text-mini">Payments</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/HourglassHigh.svg') }}" alt="Pending Icon" class="h-4 w-4">
                                 <span class="sidebar-text-mini">Pending</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/MinusCircle.svg') }}" alt="No Paid Icon" class="h-4 w-4">
                                 <span class="sidebar-text-mini">No Paid</span>
                             </a>
@@ -127,7 +127,7 @@
 
                 <!-- Reports (with Submenu) -->
                 <li>
-                    <button class="flex items-center justify-between p-2 px-4 w-full rounded-lg hover:bg-gray-100 active:bg-gray-200 sidebar-toggle space-x-2">
+                    <button class="flex items-center justify-between p-2 px-4 w-full rounded-lg hover:bg-sky-100 active:bg-sky-200 sidebar-toggle space-x-2">
                         <div class="flex items-center space-x-2">
                             <img src="{{ asset('assets/icons/IdentificationCard.svg') }}" alt="Reports Icon" class="h-4 w-4">
                             <span class="sidebar-text">Reports</span>
@@ -139,31 +139,31 @@
                     <!-- Submenu for Reports -->
                     <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-white w-44">
                         <li>
-                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/ChartBarHorizontal.svg') }}" alt="Lone Issue Icon" class="h-4 w-4">
                                 <span class="sidebar-text-mini">Lone Issue</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/ChartLineUp.svg') }}" alt="Income Icon" class="h-4 w-4">
                                 <span class="sidebar-text-mini">Income</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/HourglassHigh.svg') }}" alt="Pending Payments Icon" class="h-4 w-4">
                                 <span class="sidebar-text-mini">Pending Payments</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/Lockers.svg') }}" alt="Center Managers Icon" class="h-4 w-4">
                                 <span class="sidebar-text-mini">Center Managers</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/UserGear.svg') }}" alt="Member Managers Icon" class="h-4 w-4">
                                 <span class="sidebar-text-mini">Member Managers</span>
                             </a>
@@ -173,7 +173,7 @@
 
                 <!-- Settings (with Submenu) -->
                 <li>
-                    <button class="flex items-center justify-between p-2 px-4 w-full rounded-lg hover:bg-gray-100 active:bg-gray-200 sidebar-toggle space-x-2">
+                    <button class="flex items-center justify-between p-2 px-4 w-full rounded-lg hover:bg-sky-100 active:bg-sky-200 sidebar-toggle space-x-2">
                         <div class="flex items-center space-x-2">
                             <img src="{{ asset('assets/icons/GearSix.svg') }}" alt="Settings Icon" class="h-4 w-4">
                             <span class="sidebar-text">Settings</span>
@@ -185,19 +185,19 @@
                     <!-- Submenu for Settings -->
                     <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-white w-44">
                         <li>
-                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/UserSwitch.svg') }}" alt="User Account Icon" class="h-4 w-4">
                                 <span class="sidebar-text-mini">User Account</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/GearSix.svg') }}" alt="Settings Icon" class="h-4 w-4">
                                 <span class="sidebar-text-mini">Settings</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100 active:bg-gray-200">
+                            <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/UserList.svg') }}" alt="User Logs Icon" class="h-4 w-4">
                                 <span class="sidebar-text-mini">User Logs</span>
                             </a>
