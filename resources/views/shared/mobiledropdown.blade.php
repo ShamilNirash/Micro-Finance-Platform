@@ -1,5 +1,5 @@
 @extends('layouts.mainLayout')
-<div id="mobileSidebar" class="absolute max-h-fit top-16 bottom-5 mac-h-1/2 w-60 inset-0 shadow lg:hidden hidden ml-4 mt-2 rounded-xl bg-gray-200">
+<div id="mobileSidebar" class="absolute max-h-fit top-16 bottom-5 mac-h-1/2 w-5/6 inset-0 shadow lg:hidden hidden ml-4 mt-2 rounded-xl bg-gray-200">
     <div class="p-4">
         <div class="flex justify-between items-center mb-4 ">
             <div class="text-xl font-bold ">Company Name</div>
@@ -23,7 +23,7 @@
                 <li>
                     <button class="flex items-center justify-between p-1 px-4 w-full rounded-lg hover:bg-gray-100 sidebar-toggle space-x-2">
                         <div class="flex items-center space-x-2">
-                            <img src="{{ asset('assets/icons/Users.svg') }}" alt="Branches Icon" class="h-4 w-4">
+                            <img src="{{ asset('assets/icons/Elevator.svg') }}" alt="Branches Icon" class="h-4 w-4">
                             <span class="sidebar-text">Branches</span>
                         </div>
                         <svg class="w-4 h-4 transform transition-transform duration-200 arrow sidebar-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -31,7 +31,7 @@
                         </svg>
                     </button>
                     <!-- Submenu for Branches -->
-                    <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-gray-200 w-44">
+                    <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-gray-200 w-60">
                         <li>
                             <a href="#" class="flex items-center justify-start p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
                                 <img src="{{ asset('assets/icons/MapPinLine.svg') }}" alt="Centers Icon" class="h-4 w-4">
@@ -71,7 +71,7 @@
                         </svg>
                     </button>
                     <!-- Submenu for Income -->
-                    <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-gray-200 w-44">
+                    <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-gray-200 w-w-60">
                         <li>
                             <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
                                 <img src="{{ asset('assets/icons/ChartLineUp.svg') }}" alt="Income Report Icon" class="h-4 w-4">
@@ -105,7 +105,7 @@
                         </svg>
                     </button>
                     <!-- Submenu for Payments -->
-                    <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-gray-200 w-44">
+                    <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-gray-200 w-w-60">
                         <li>
                             <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
                                 <img src="{{ asset('assets/icons/Money.svg') }}" alt="Payments Icon" class="h-4 w-4">
@@ -139,7 +139,7 @@
                         </svg>
                     </button>
                     <!-- Submenu for Reports -->
-                    <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-gray-200 w-44">
+                    <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-gray-200 w-w-60">
                         <li>
                             <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
                                 <img src="{{ asset('assets/icons/ChartBarHorizontal.svg') }}" alt="Lone Issue Icon" class="h-4 w-4">
@@ -185,7 +185,7 @@
                         </svg>
                     </button>
                     <!-- Submenu for Settings -->
-                    <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-gray-200 w-44">
+                    <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-gray-200 w-60">
                         <li>
                             <a href="#" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
                                 <img src="{{ asset('assets/icons/UserSwitch.svg') }}" alt="User Account Icon" class="h-4 w-4">

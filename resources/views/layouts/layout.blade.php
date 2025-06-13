@@ -8,14 +8,14 @@
     </div>
 
     <!-- Main Content -->
-    <main class="flex-1 lg:flex flex-col w-full h-full lg:p-0">
+    <main class="flex-1 lg:flex flex-col w-full h-full lg:p-0 lg:max-h-full lg:overflow-hidden">
         <!-- Topbar -->
         @include('shared.navbar')
         <!-- Mobile Dropdown -->
         @include('shared.mobiledropdown')
 
         <!-- Main Content Area -->
-        @include('branches.centers')
+        @include('branches.centersGroups')
 
     </main>
 

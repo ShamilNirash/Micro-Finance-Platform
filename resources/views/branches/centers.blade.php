@@ -134,10 +134,86 @@
                     <div class="h-8 flex items-center justify-center text-sm font-semibold bg-blue-50 text-gray-700">GROUPS 04</div>
                 </div>
                 <!-- Additional cards omitted for brevity -->
+                 <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200" data-center="Malwaragoda">
+                    <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
+                        <div class="text-xs text-gray-600 text-right">002</div>
+                        <div class="text-sm">Malwaragoda</div>
+                        <div class="text-xs flex items-center space-x-1 text-gray-700">
+                            <img src="{{ asset('assets/icons/DiamondsFour.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
+                            <p>Tuesday</p>
+                        </div>
+                        <div class="text-xs flex items-center space-x-1 text-gray-700">
+                            <img src="{{ asset('assets/icons/DiamondsFour.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
+                            <p>Tuesday</p>
+                        </div>
+                    </div>
+                    <div class="h-8 flex items-center justify-center text-sm font-semibold bg-blue-50 text-gray-700">GROUPS 04</div>
+                </div>
+                <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200" data-center="Malwaragoda">
+                    <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
+                        <div class="text-xs text-gray-600 text-right">002</div>
+                        <div class="text-sm">Malwaragoda</div>
+                        <div class="text-xs flex items-center space-x-1 text-gray-700">
+                            <img src="{{ asset('assets/icons/DiamondsFour.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
+                            <p>Tuesday</p>
+                        </div>
+                        <div class="text-xs flex items-center space-x-1 text-gray-700">
+                            <img src="{{ asset('assets/icons/DiamondsFour.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
+                            <p>Tuesday</p>
+                        </div>
+                    </div>
+                    <div class="h-8 flex items-center justify-center text-sm font-semibold bg-blue-50 text-gray-700">GROUPS 04</div>
+                </div>
+                <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200" data-center="Malwaragoda">
+                    <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
+                        <div class="text-xs text-gray-600 text-right">002</div>
+                        <div class="text-sm">Malwaragoda</div>
+                        <div class="text-xs flex items-center space-x-1 text-gray-700">
+                            <img src="{{ asset('assets/icons/DiamondsFour.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
+                            <p>Tuesday</p>
+                        </div>
+                        <div class="text-xs flex items-center space-x-1 text-gray-700">
+                            <img src="{{ asset('assets/icons/DiamondsFour.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
+                            <p>Tuesday</p>
+                        </div>
+                    </div>
+                    <div class="h-8 flex items-center justify-center text-sm font-semibold bg-blue-50 text-gray-700">GROUPS 04</div>
+                </div>
+                <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200" data-center="Malwaragoda">
+                    <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
+                        <div class="text-xs text-gray-600 text-right">002</div>
+                        <div class="text-sm">Malwaragoda</div>
+                        <div class="text-xs flex items-center space-x-1 text-gray-700">
+                            <img src="{{ asset('assets/icons/DiamondsFour.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
+                            <p>Tuesday</p>
+                        </div>
+                        <div class="text-xs flex items-center space-x-1 text-gray-700">
+                            <img src="{{ asset('assets/icons/DiamondsFour.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
+                            <p>Tuesday</p>
+                        </div>
+                    </div>
+                    <div class="h-8 flex items-center justify-center text-sm font-semibold bg-blue-50 text-gray-700">GROUPS 04</div>
+                </div>
+                <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200" data-center="Malwaragoda">
+                    <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
+                        <div class="text-xs text-gray-600 text-right">002</div>
+                        <div class="text-sm">Malwaragoda</div>
+                        <div class="text-xs flex items-center space-x-1 text-gray-700">
+                            <img src="{{ asset('assets/icons/DiamondsFour.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
+                            <p>Tuesday</p>
+                        </div>
+                        <div class="text-xs flex items-center space-x-1 text-gray-700">
+                            <img src="{{ asset('assets/icons/DiamondsFour.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
+                            <p>Tuesday</p>
+                        </div>
+                    </div>
+                    <div class="h-8 flex items-center justify-center text-sm font-semibold bg-blue-50 text-gray-700">GROUPS 04</div>
+                </div>
             </div>
 
             <!-- Centers Grid Table format hidden for mobile screens -->
-            <div id="centersGridTable" class="w-full h-full hidden lg:block p-0 pt-2">
+            <div id="centersGridTable" class="w-full h-full max-h-full hidden lg:block p-0 pt-2">
+                <div class="overflow-y-scroll ">
                 <table class="min-w-full rounded">
                     <thead class="w-full text-gray-700 text-xs font-light">
                         <tr class="uppercase w-full">
@@ -190,28 +266,219 @@
                                 </a>
                             </td>
                         </tr>
+                        <!-- Additional rows with placeholder data -->
+                        <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-center-id="2" data-center-name="Colombo" data-manager="Jane Smith" data-groups="5" data-members="25" data-payment-day="Wednesday">
+                            <td class="pl-2 text-left">
+                                <input type="checkbox" name="selected_ids[]" value="2" class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                            </td>
+                            <td class="py-2 text-left">202</td>
+                            <td class="py-2 text-left">Colombo</td>
+                            <td class="py-2 text-left">5</td>
+                            <td class="py-2 text-left">Jane Smith</td>
+                            <td class="py-2 text-left">Wednesday</td>
+                            <td class="py-2 text-center flex justify-center items-center gap-1">
+                                <a href="#" class="border rounded hover:bg-green-500 ">
+                                    <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                </a>
+                                <a href="#" class="border rounded hover:bg-sky-500">
+                                    <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                </a>
+                            </td>
+                        </tr>
+                        <!-- Additional rows with placeholder data -->
+                        <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-center-id="2" data-center-name="Colombo" data-manager="Jane Smith" data-groups="5" data-members="25" data-payment-day="Wednesday">
+                            <td class="pl-2 text-left">
+                                <input type="checkbox" name="selected_ids[]" value="2" class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                            </td>
+                            <td class="py-2 text-left">202</td>
+                            <td class="py-2 text-left">Colombo</td>
+                            <td class="py-2 text-left">5</td>
+                            <td class="py-2 text-left">Jane Smith</td>
+                            <td class="py-2 text-left">Wednesday</td>
+                            <td class="py-2 text-center flex justify-center items-center gap-1">
+                                <a href="#" class="border rounded hover:bg-green-500 ">
+                                    <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                </a>
+                                <a href="#" class="border rounded hover:bg-sky-500">
+                                    <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                </a>
+                            </td>
+                        </tr>
+                        <!-- Additional rows with placeholder data -->
+                        <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-center-id="2" data-center-name="Colombo" data-manager="Jane Smith" data-groups="5" data-members="25" data-payment-day="Wednesday">
+                            <td class="pl-2 text-left">
+                                <input type="checkbox" name="selected_ids[]" value="2" class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                            </td>
+                            <td class="py-2 text-left">202</td>
+                            <td class="py-2 text-left">Colombo</td>
+                            <td class="py-2 text-left">5</td>
+                            <td class="py-2 text-left">Jane Smith</td>
+                            <td class="py-2 text-left">Wednesday</td>
+                            <td class="py-2 text-center flex justify-center items-center gap-1">
+                                <a href="#" class="border rounded hover:bg-green-500 ">
+                                    <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                </a>
+                                <a href="#" class="border rounded hover:bg-sky-500">
+                                    <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                </a>
+                            </td>
+                        </tr>
+                        <!-- Additional rows with placeholder data -->
+                        <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-center-id="2" data-center-name="Colombo" data-manager="Jane Smith" data-groups="5" data-members="25" data-payment-day="Wednesday">
+                            <td class="pl-2 text-left">
+                                <input type="checkbox" name="selected_ids[]" value="2" class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                            </td>
+                            <td class="py-2 text-left">202</td>
+                            <td class="py-2 text-left">Colombo</td>
+                            <td class="py-2 text-left">5</td>
+                            <td class="py-2 text-left">Jane Smith</td>
+                            <td class="py-2 text-left">Wednesday</td>
+                            <td class="py-2 text-center flex justify-center items-center gap-1">
+                                <a href="#" class="border rounded hover:bg-green-500 ">
+                                    <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                </a>
+                                <a href="#" class="border rounded hover:bg-sky-500">
+                                    <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                </a>
+                            </td>
+                        </tr>
+                        <!-- Additional rows with placeholder data -->
+                        <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-center-id="2" data-center-name="Colombo" data-manager="Jane Smith" data-groups="5" data-members="25" data-payment-day="Wednesday">
+                            <td class="pl-2 text-left">
+                                <input type="checkbox" name="selected_ids[]" value="2" class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                            </td>
+                            <td class="py-2 text-left">202</td>
+                            <td class="py-2 text-left">Colombo</td>
+                            <td class="py-2 text-left">5</td>
+                            <td class="py-2 text-left">Jane Smith</td>
+                            <td class="py-2 text-left">Wednesday</td>
+                            <td class="py-2 text-center flex justify-center items-center gap-1">
+                                <a href="#" class="border rounded hover:bg-green-500 ">
+                                    <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                </a>
+                                <a href="#" class="border rounded hover:bg-sky-500">
+                                    <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                </a>
+                            </td>
+                        </tr>
+                        <!-- Additional rows with placeholder data -->
+                        <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-center-id="2" data-center-name="Colombo" data-manager="Jane Smith" data-groups="5" data-members="25" data-payment-day="Wednesday">
+                            <td class="pl-2 text-left">
+                                <input type="checkbox" name="selected_ids[]" value="2" class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                            </td>
+                            <td class="py-2 text-left">202</td>
+                            <td class="py-2 text-left">Colombo</td>
+                            <td class="py-2 text-left">5</td>
+                            <td class="py-2 text-left">Jane Smith</td>
+                            <td class="py-2 text-left">Wednesday</td>
+                            <td class="py-2 text-center flex justify-center items-center gap-1">
+                                <a href="#" class="border rounded hover:bg-green-500 ">
+                                    <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                </a>
+                                <a href="#" class="border rounded hover:bg-sky-500">
+                                    <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                </a>
+                            </td>
+                        </tr>
+                        <!-- Additional rows with placeholder data -->
+                        <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-center-id="2" data-center-name="Colombo" data-manager="Jane Smith" data-groups="5" data-members="25" data-payment-day="Wednesday">
+                            <td class="pl-2 text-left">
+                                <input type="checkbox" name="selected_ids[]" value="2" class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                            </td>
+                            <td class="py-2 text-left">202</td>
+                            <td class="py-2 text-left">Colombo</td>
+                            <td class="py-2 text-left">5</td>
+                            <td class="py-2 text-left">Jane Smith</td>
+                            <td class="py-2 text-left">Wednesday</td>
+                            <td class="py-2 text-center flex justify-center items-center gap-1">
+                                <a href="#" class="border rounded hover:bg-green-500 ">
+                                    <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                </a>
+                                <a href="#" class="border rounded hover:bg-sky-500">
+                                    <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                </a>
+                            </td>
+                        </tr>
+                        <!-- Additional rows with placeholder data -->
+                        <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-center-id="2" data-center-name="Colombo" data-manager="Jane Smith" data-groups="5" data-members="25" data-payment-day="Wednesday">
+                            <td class="pl-2 text-left">
+                                <input type="checkbox" name="selected_ids[]" value="2" class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                            </td>
+                            <td class="py-2 text-left">202</td>
+                            <td class="py-2 text-left">Colombo</td>
+                            <td class="py-2 text-left">5</td>
+                            <td class="py-2 text-left">Jane Smith</td>
+                            <td class="py-2 text-left">Wednesday</td>
+                            <td class="py-2 text-center flex justify-center items-center gap-1">
+                                <a href="#" class="border rounded hover:bg-green-500 ">
+                                    <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                </a>
+                                <a href="#" class="border rounded hover:bg-sky-500">
+                                    <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                </a>
+                            </td>
+                        </tr>
+                        <!-- Additional rows with placeholder data -->
+                        <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-center-id="2" data-center-name="Colombo" data-manager="Jane Smith" data-groups="5" data-members="25" data-payment-day="Wednesday">
+                            <td class="pl-2 text-left">
+                                <input type="checkbox" name="selected_ids[]" value="2" class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                            </td>
+                            <td class="py-2 text-left">202</td>
+                            <td class="py-2 text-left">Colombo</td>
+                            <td class="py-2 text-left">5</td>
+                            <td class="py-2 text-left">Jane Smith</td>
+                            <td class="py-2 text-left">Wednesday</td>
+                            <td class="py-2 text-center flex justify-center items-center gap-1">
+                                <a href="#" class="border rounded hover:bg-green-500 ">
+                                    <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                </a>
+                                <a href="#" class="border rounded hover:bg-sky-500">
+                                    <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                </a>
+                            </td>
+                        </tr>
+                        <!-- Additional rows with placeholder data -->
+                        <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-center-id="2" data-center-name="Colombo" data-manager="Jane Smith" data-groups="5" data-members="25" data-payment-day="Wednesday">
+                            <td class="pl-2 text-left">
+                                <input type="checkbox" name="selected_ids[]" value="2" class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                            </td>
+                            <td class="py-2 text-left">202</td>
+                            <td class="py-2 text-left">Colombo</td>
+                            <td class="py-2 text-left">5</td>
+                            <td class="py-2 text-left">Jane Smith</td>
+                            <td class="py-2 text-left">Wednesday</td>
+                            <td class="py-2 text-center flex justify-center items-center gap-1">
+                                <a href="#" class="border rounded hover:bg-green-500 ">
+                                    <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                </a>
+                                <a href="#" class="border rounded hover:bg-sky-500">
+                                    <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                </a>
+                            </td>
+                        </tr>
                         <!-- Add more rows as needed -->
                     </tbody>
                 </table>
+                </div>
             </div>
 
             <div class="hidden mt-4 mx-4 lg:flex justify-between items-center text-xs text-gray-500">
-                <span>1-10 of 87</span>
+                <span id="paginationRange">1-10 of 87</span>
                 <div class="flex justify-center items-center">
                     <div class="pr-8">
-                        <select class="rounded bg-sky-50">
-                            <option>10</option>
-                            <option>20</option>
-                            <option>50</option>
+                        <select id="rowsPerPage" class="rounded bg-sky-50 text-xs">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
                         </select>
                         <span>Rows per page</span>
                     </div>
-                    <button class="px-1 py-1 bg-gray-200 rounded hover:bg-sky-200">
-                        <img src="{{ asset('assets/icons/CaretLeft.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
+                    <button id="prevPage" class="px-1 py-1 bg-gray-200 rounded hover:bg-sky-200 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <img src="{{ asset('assets/icons/CaretLeft.svg') }}" alt="Previous" class="h-3 w-3">
                     </button>
-                    <span class="px-2 text-xs">1/15</span>
-                    <button class="px-1 py-1 bg-gray-200 rounded hover:bg-sky-200">
-                        <img src="{{ asset('assets/icons/CaretRight.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
+                    <span id="pageIndicator" class="px-2 text-xs">1/15</span>
+                    <button id="nextPage" class="px-1 py-1 bg-gray-200 rounded hover:bg-sky-200 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <img src="{{ asset('assets/icons/CaretRight.svg') }}" alt="Next" class="h-3 w-3">
                     </button>
                 </div>
             </div>
@@ -256,11 +523,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="w-full text-sm lg:text-xs border-t p-4">
-            <button value="add_group" class="bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 focus:outline-none w-full">
-                + Add Group
-            </button>
         </div>
     </div>
 

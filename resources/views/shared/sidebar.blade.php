@@ -21,7 +21,7 @@
                 <li>
                     <button class="flex items-center justify-between p-2 px-4 w-full rounded-lg hover:bg-sky-100 active:bg-sky-200 sidebar-toggle space-x-2">
                         <div class="flex items-center space-x-2">
-                            <img src="{{ asset('assets/icons/Users.svg') }}" alt="Branches Icon" class="h-4 w-4">
+                            <img src="{{ asset('assets/icons/Elevator.svg') }}" alt="Branches Icon" class="h-4 w-4">
                             <span class="sidebar-text">Branches</span>
                         </div>
                         <svg class="w-4 h-4 transform transition-transform duration-200 arrow sidebar-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
