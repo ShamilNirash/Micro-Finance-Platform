@@ -1,5 +1,6 @@
-@extends('layouts.mainLayout')
+@extends('layouts.layout')
 
+@section('contents')
 <div id="mainContent" class="flex lg:h-full">
     <!-- First Column -->
     <!--Mobile Cards and table View-->
@@ -713,3 +714,4 @@
 
     /* Ensure first column takes full width when second columns are hidden */
 </style>
+@endsection

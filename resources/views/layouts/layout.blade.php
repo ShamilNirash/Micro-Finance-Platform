@@ -15,7 +15,7 @@
         @include('shared.mobiledropdown')
 
         <!-- Main Content Area -->
-        @include('branches.centersGroups')
+        @yield('contents') 
 
     </main>
 

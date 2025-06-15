@@ -36,6 +36,9 @@ Route::get('/nav', function () {
 Route::get('/centers', function () {
     return view('branches/centers');
 });
+Route::get('/centersGroups', function () {
+    return view('branches/centersGroups');
+});
 Route::get('/members', function () {
     return view('branches/members');
 });
