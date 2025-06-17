@@ -1,6 +1,5 @@
-@extends('layouts.mainLayout')
+@extends('layouts.layout')
 
-@section('content')
-
+@section('contents')
 
 @endsection

@@ -252,7 +252,7 @@
                     <div class="h-8 flex items-center justify-center text-sm font-semibold bg-blue-50 text-gray-700">25 000</div>
                 </div>
                 <!-- Additional cards omitted for brevity -->
-                 <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200" data-group="Group02">
+                <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200" data-group="Group02">
                     <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
                         <div class="text-xs text-gray-600 text-right">Group 01</div>
 
@@ -309,62 +309,218 @@
                 </div>
             </div>
 
-            <!-- Centers Grid Table format hidden for mobile screens -->
-            <div id="centersGridTable" class="w-full h-full hidden lg:block p-0 pt-2">
-                <table class="min-w-full rounded">
-                    <thead class="w-full text-gray-700 text-xs font-light">
-                        <tr class="uppercase w-full">
-                            <th class="py-2 center">#</th>
-                            <th class="py-2 text-left">Group Name</th>
-                            <th class="py-2 text-left">Members</th>
-                            <th class="py-2 text-left">Total Received </th>
-                            <th class="py-2 text-left">Center</th>
-                            <th class="py-2 text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-800 text-xs font-light bg-white">
-                        <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-group-id="1" data-group-name="Group 01" data-members="04" data-received="40000" data-center="Malwaragoda">
-                            <td class="py-2 text-center">001</td>
-                            <td class="py-2 text-left">Group01</td>
-                            <td class="py-2 text-left">05</td>
-                            <td class="py-2 text-left">400000 </td>
-                            <td class="py-2 text-left">Malwaragoda</td>
-                            <td class="py-2 text-center flex justify-center items-center gap-1">
-                                <a href="#" class="border rounded hover:bg-green-500">
-                                    <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                </a>
-                                <a href="#" class="border rounded hover:bg-red-500">
-                                    <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                </a>
-                                <a href="#" class="border rounded hover:bg-sky-500">
-                                    <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                </a>
-                            </td>
-                        </tr>
-                        <!-- Additional rows with placeholder data -->
-                        <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-group-id="2" data-group-name="Group 02" data-members="05" data-received="50000" data-center="Rathmalawinna">
-                            <td class="py-2 text-center">002</td>
-                            <td class="py-2 text-left">Group 02</td>
-                            <td class="py-2 text-left">05</td>
-                            <td class="py-2 text-left">50000 </td>
-                            <td class="py-2 text-left">Rathmalawinna</td>
-                            <td class="py-2 text-center flex justify-center items-center gap-1">
-                                <a href="#" class="border rounded hover:bg-green-500">
-                                    <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                </a>
-                                <a href="#" class="border rounded hover:bg-red-500">
-                                    <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                </a>
-                                <a href="#" class="border rounded hover:bg-sky-500">
-                                    <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                </a>
-                            </td>
-                        </tr>
-                        <!-- Add more rows as needed -->
-                    </tbody>
-                </table>
-            </div>
+            <div class="flex justify-start h-full ">
+                <!-- Grid Table format hidden for mobile screens -->
+                <div id="centersGridTable" class="w-full max-h-[calc(100vh-200px)] hidden lg:block p-0 pt-2 overflow-y-auto">
+                    <div class="min-w-full ">
+                        <table class="w-full min-w-max">
+                            <thead class="w-full text-gray-700 text-xs font-light bg-gray-100 sticky top-0">
+                                <tr class="uppercase w-full">
+                                    <th class="py-2 center">#</th>
+                                    <th class="py-2 text-left">Group Name</th>
+                                    <th class="py-2 text-left">Members</th>
+                                    <th class="py-2 text-left">Total Received </th>
+                                    <th class="py-2 text-left">Center</th>
+                                    <th class="py-2 text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-800 text-xs font-light bg-white">
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-group-id="1" data-group-name="Group 01" data-members="04" data-received="40000" data-center="Malwaragoda">
+                                    <td class="py-2 text-center">001</td>
+                                    <td class="py-2 text-left">Group01</td>
+                                    <td class="py-2 text-left">05</td>
+                                    <td class="py-2 text-left">400000 </td>
+                                    <td class="py-2 text-left">Malwaragoda</td>
+                                    <td class="py-2 text-center flex justify-center items-center gap-1">
+                                        <a href="#" class="border rounded hover:bg-green-500">
+                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-red-500">
+                                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-sky-500">
+                                            <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <!-- Additional rows with placeholder data -->
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-group-id="2" data-group-name="Group 02" data-members="05" data-received="50000" data-center="Rathmalawinna">
+                                    <td class="py-2 text-center">002</td>
+                                    <td class="py-2 text-left">Group 02</td>
+                                    <td class="py-2 text-left">05</td>
+                                    <td class="py-2 text-left">50000 </td>
+                                    <td class="py-2 text-left">Rathmalawinna</td>
+                                    <td class="py-2 text-center flex justify-center items-center gap-1">
+                                        <a href="#" class="border rounded hover:bg-green-500">
+                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-red-500">
+                                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-sky-500">
+                                            <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <!-- Additional rows with placeholder data -->
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-group-id="2" data-group-name="Group 02" data-members="05" data-received="50000" data-center="Rathmalawinna">
+                                    <td class="py-2 text-center">002</td>
+                                    <td class="py-2 text-left">Group 02</td>
+                                    <td class="py-2 text-left">05</td>
+                                    <td class="py-2 text-left">50000 </td>
+                                    <td class="py-2 text-left">Rathmalawinna</td>
+                                    <td class="py-2 text-center flex justify-center items-center gap-1">
+                                        <a href="#" class="border rounded hover:bg-green-500">
+                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-red-500">
+                                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-sky-500">
+                                            <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <!-- Additional rows with placeholder data -->
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-group-id="2" data-group-name="Group 02" data-members="05" data-received="50000" data-center="Rathmalawinna">
+                                    <td class="py-2 text-center">002</td>
+                                    <td class="py-2 text-left">Group 02</td>
+                                    <td class="py-2 text-left">05</td>
+                                    <td class="py-2 text-left">50000 </td>
+                                    <td class="py-2 text-left">Rathmalawinna</td>
+                                    <td class="py-2 text-center flex justify-center items-center gap-1">
+                                        <a href="#" class="border rounded hover:bg-green-500">
+                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-red-500">
+                                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-sky-500">
+                                            <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <!-- Additional rows with placeholder data -->
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-group-id="2" data-group-name="Group 02" data-members="05" data-received="50000" data-center="Rathmalawinna">
+                                    <td class="py-2 text-center">002</td>
+                                    <td class="py-2 text-left">Group 02</td>
+                                    <td class="py-2 text-left">05</td>
+                                    <td class="py-2 text-left">50000 </td>
+                                    <td class="py-2 text-left">Rathmalawinna</td>
+                                    <td class="py-2 text-center flex justify-center items-center gap-1">
+                                        <a href="#" class="border rounded hover:bg-green-500">
+                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-red-500">
+                                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-sky-500">
+                                            <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <!-- Additional rows with placeholder data -->
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-group-id="2" data-group-name="Group 02" data-members="05" data-received="50000" data-center="Rathmalawinna">
+                                    <td class="py-2 text-center">002</td>
+                                    <td class="py-2 text-left">Group 02</td>
+                                    <td class="py-2 text-left">05</td>
+                                    <td class="py-2 text-left">50000 </td>
+                                    <td class="py-2 text-left">Rathmalawinna</td>
+                                    <td class="py-2 text-center flex justify-center items-center gap-1">
+                                        <a href="#" class="border rounded hover:bg-green-500">
+                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-red-500">
+                                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-sky-500">
+                                            <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <!-- Additional rows with placeholder data -->
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-group-id="2" data-group-name="Group 02" data-members="05" data-received="50000" data-center="Rathmalawinna">
+                                    <td class="py-2 text-center">002</td>
+                                    <td class="py-2 text-left">Group 02</td>
+                                    <td class="py-2 text-left">05</td>
+                                    <td class="py-2 text-left">50000 </td>
+                                    <td class="py-2 text-left">Rathmalawinna</td>
+                                    <td class="py-2 text-center flex justify-center items-center gap-1">
+                                        <a href="#" class="border rounded hover:bg-green-500">
+                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-red-500">
+                                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-sky-500">
+                                            <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <!-- Additional rows with placeholder data -->
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-group-id="2" data-group-name="Group 02" data-members="05" data-received="50000" data-center="Rathmalawinna">
+                                    <td class="py-2 text-center">002</td>
+                                    <td class="py-2 text-left">Group 02</td>
+                                    <td class="py-2 text-left">05</td>
+                                    <td class="py-2 text-left">50000 </td>
+                                    <td class="py-2 text-left">Rathmalawinna</td>
+                                    <td class="py-2 text-center flex justify-center items-center gap-1">
+                                        <a href="#" class="border rounded hover:bg-green-500">
+                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-red-500">
+                                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-sky-500">
+                                            <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <!-- Additional rows with placeholder data -->
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-group-id="2" data-group-name="Group 02" data-members="05" data-received="50000" data-center="Rathmalawinna">
+                                    <td class="py-2 text-center">002</td>
+                                    <td class="py-2 text-left">Group 02</td>
+                                    <td class="py-2 text-left">05</td>
+                                    <td class="py-2 text-left">50000 </td>
+                                    <td class="py-2 text-left">Rathmalawinna</td>
+                                    <td class="py-2 text-center flex justify-center items-center gap-1">
+                                        <a href="#" class="border rounded hover:bg-green-500">
+                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-red-500">
+                                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-sky-500">
+                                            <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <!-- Additional rows with placeholder data -->
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-group-id="2" data-group-name="Group 02" data-members="05" data-received="50000" data-center="Rathmalawinna">
+                                    <td class="py-2 text-center">002</td>
+                                    <td class="py-2 text-left">Group 02</td>
+                                    <td class="py-2 text-left">05</td>
+                                    <td class="py-2 text-left">50000 </td>
+                                    <td class="py-2 text-left">Rathmalawinna</td>
+                                    <td class="py-2 text-center flex justify-center items-center gap-1">
+                                        <a href="#" class="border rounded hover:bg-green-500">
+                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-red-500">
+                                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-sky-500">
+                                            <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <!-- Add more rows as needed -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
+            </div>
             <div class="hidden mt-4 mx-4 lg:flex justify-between items-center text-xs text-gray-500">
                 <span>1-10 of 87</span>
                 <div class="flex justify-center items-center">
