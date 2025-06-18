@@ -33,6 +33,7 @@ Route::get('/nav', function () {
     return view('shared/sidebar');
 });
 
+/*Centers*/
 Route::get('/centers', function () {
     return view('branches/centers');
 });
@@ -47,4 +48,15 @@ Route::get('/memberSummery', function () {
 });
 Route::get('/recentlyAdded', function () {
     return view('branches/recentlyAdded');
+});
+
+/*income*/
+Route::get('/income', function () {
+    return view('income/incomeReport');
+});
+Route::get('/collections', function () {
+    return view('income/collections');
+});
+Route::get('/underPayments', function () {
+    return view('income/underPayments');
 });
