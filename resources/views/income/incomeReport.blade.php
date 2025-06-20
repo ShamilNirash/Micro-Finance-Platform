@@ -57,7 +57,7 @@
                         </button>
                     </div>
                     <!--Branch Filter-->
-                    <div class="w-full lg:w-1/2 ">
+                    <div class="w-full lg:w-1/2">
                         <div class="w-full lg:mb-0 relative text-sm">
                             <select id="branchSelect" name="branch" class="w-full absolute p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white appearance-none hidden text-sm lg:text-xs" onchange="filterData()">
                                 <option class="text-sm" value="">Select Branch</option>
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                     <!--Center Fliter-->
-                    <div class="w-full lg:w-1/2 flex pr-2">
+                    <div class="w-full lg:w-1/2 flex lg:pr-2">
                         <div class="w-full lg:mb-0 relative text-sm">
                             <select id="centerSelect" name="branch" class="w-full absolute p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white appearance-none hidden text-sm lg:text-xs" onchange="filterData()">
                                 <option class="text-sm" value="">Select Center</option>
