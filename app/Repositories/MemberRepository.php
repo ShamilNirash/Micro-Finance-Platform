@@ -1,0 +1,68 @@
+<?php
+
+/** --------------------------------------------------------------------------------
+ * This repository class manages all the data absctration for users
+ *
+ *
+ *
+ *----------------------------------------------------------------------------------*/
+
+namespace App\Repositories;
+
+use App\Models\Member;
+use Exception;
+use Illuminate\Validation\ValidationException;
+
+class MemberRepository
+{
+    protected $members;
+
+    public function __construct(Member $members)
+    {
+        $this->members = $members;
+    }
+
+    public function create($branch)
+    {
+        try {
+            return $this->members->create($branch);
+        } catch (\Exception $e) {
+            return $e;
+        }
+    }
+    public function search_one($type, $value)
+    {
+        try {
+            return $this->members->where([$type => $value, 'status' => 'ACTIVE'])->first();
+        } catch (\Exception $e) {
+            return $e;
+        }
+    }
+
+    public function search_many($type, $value)
+    {
+        try {
+            return $this->members->where([$type => $value, 'status' => 'ACTIVE'])->get();
+        } catch (\Exception $e) {
+            return $e;
+        }
+    }
+    public function get_all()
+    {
+        try {
+            return $this->members->where(['status' => 'ACTIVE'])->get();
+        } catch (\Exception $e) {
+            return $e;
+        }
+    }
+
+
+    public function update($id, $type, $value)
+    {
+        try {
+            return $this->search_one('id', $id)->update([$type => $value]);
+        } catch (\Exception $e) {
+            return $e;
+        }
+    }
+}
