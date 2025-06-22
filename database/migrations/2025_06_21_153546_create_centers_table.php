@@ -17,7 +17,7 @@ class CreateCentersTable extends Migration
             $table->id();
             $table->string('center_name')->nullable(false);
             $table->string('manager_name')->nullable(false);
-            $table->date('payment_date')->nullable(false);
+            $table->string('payment_date')->nullable(false);
             $table->integer('branch_id')->nullable(false);
             $table->enum('status', ['ACTIVE', 'INACTIVE'])->default('ACTIVE');
             $table->timestamps();

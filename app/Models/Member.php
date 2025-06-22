@@ -12,7 +12,7 @@ class Member extends Model
 
     public $incrementing = true;
 
-    protected $keyType = 'number';
+    protected $keyType = 'int';
 
 
     protected $fillable = [

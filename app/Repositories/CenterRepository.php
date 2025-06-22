@@ -50,7 +50,7 @@ class CenterRepository
     public function get_all()
     {
         try {
-            return $this->centers->where(['status' => 'ACTIVE'])->get();
+            return $this->centers->where(['status' => 'ACTIVE'])->with(['branch.center.group.member'])->get();
         } catch (\Exception $e) {
             return $e;
         }

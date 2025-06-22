@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CenterController;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,21 +24,8 @@ Route::get('/signup', function () {
 Route::get('/dashboard', function () {
     return view('test');
 });
-Route::get('/main', function () {
-    return view('layouts/layout');
-});
 
-Route::get('/nav', function () {
-    return view('shared/navbar');
-});
-Route::get('/nav', function () {
-    return view('shared/sidebar');
-});
-
-/*Centers*/
-Route::get('/centers', function () {
-    return view('branches/centers');
-});
+Route::get('/centers', [CenterController::class, 'getAllActiveCenters'])->name('centers.viewblade');
 Route::get('/centersGroups', function () {
     return view('branches/centersGroups');
 });
