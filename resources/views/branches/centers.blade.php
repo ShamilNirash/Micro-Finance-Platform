@@ -2,7 +2,10 @@
 
 @php
     $count_total_members = 0;
-    $groups = [];
+    require_once resource_path('libs\first_letter_capitalization.php');
+    require_once resource_path('libs\every_word_first_letter_capitalization.php');
+
+    $weekDays = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
 @endphp
 
 @foreach ($all_active_centers as $center)
@@ -25,12 +28,19 @@
                 <div class="shadow-xl w-full max-w-md rounded-lg">
                     <h2 class="text-md bg-blue-100 rounded-t-lg p-4">Add New Branch</h2>
                     <div class="bg-white rounded-b-lg p-4">
-                        <form action="" method="get">
+                        <form action="{{ route('branches.createbranch') }}" method="POST">
+                            @csrf
+
+                            @error('branch_name')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+
                             <div>
                                 <label for="branchName" class="block text-xs text-gray-400 mb-1 ml-2">Branch Name</label>
-                                <input type="text" id="branchName" placeholder=""
+                                <input type="text" name="branch_name" id="branchName" value="{{ old('branch_name') }}"
                                     class="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                             </div>
+
                             <div class="flex justify-end space-x-4 mt-4">
                                 <button id="cancelBranch" type="button"
                                     class="px-6 py-2 bg-gray-300 rounded-lg hover:bg-gray-400 focus:outline-none text-sm">
@@ -52,26 +62,40 @@
                 style="width: 100%; height: 100%;">
                 <div class="bg-white shadow-xl w-full max-w-md rounded-lg">
                     <h2 class="text-md bg-blue-100 rounded-t-lg p-4">Add New Center</h2>
-                    <form>
+                    <form action="{{ route('centers.createcenter') }}" method="POST">
+                        @csrf
                         <div class="bg-white rounded-b-lg p-4 space-y-4">
                             <div>
                                 <label for="centerBranch" class="block text-xs text-gray-400 mb-1 ml-2">Branch*</label>
-                                <input type="text" id="centerBranch" placeholder=""
-                                    class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                                <select id="centerBranch" name="branch_id"
+                                    class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+                                    <option value="" disabled selected>Select a branch</option>
+                                    @foreach ($all_active_branches as $branch_name)
+                                        <option value="{{ $branch_name->id }}">
+                                            {{ capitalizeFirstLetter($branch_name->branch_name) }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div>
                                 <label for="centerName" class="block text-xs text-gray-400 mb-1 ml-2">Center Name*</label>
-                                <input type="text" id="centerName" placeholder=""
+                                <input type="text" id="centerName" placeholder="" name="center_name"
                                     class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                             </div>
                             <div>
-                                <label for="paymentDate" class="block text-xs text-gray-400 mb-1 ml-2">Payment Date</label>
-                                <input type="date" id="paymentDate" placeholder=""
-                                    class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                                <label for="paymentDate" class="block text-xs text-gray-400 mb-1 ml-2">Payment Day</label>
+                                <select id="centerBranch" name="payment_day"
+                                    class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+                                    <option value="" disabled selected>Select a day</option>
+                                    @foreach ($weekDays as $day)
+                                        <option value={{ $day }}>{{ capitalizeFirstLetter($day) }}</option>
+                                    @endforeach
+                                </select>
+
                             </div>
                             <div>
                                 <label for="manager" class="block text-xs text-gray-400 mb-1 ml-2">Manager</label>
-                                <input type="text" id="manager" placeholder=""
+                                <input type="text" id="manager" placeholder="" name="manager_name"
                                     class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                             </div>
                             <div class="flex justify-end space-x-4 mt-4">
@@ -107,10 +131,10 @@
                                 class="w-full absolute p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white appearance-none hidden text-sm lg:text-xs">
                                 <option class="text-sm" value="">Select Branch</option>
                                 <option value="add_new">+ Add New Branch</option>
-                                <option value="balangoda">Balangoda</option>
-                                <option value="ella">Ella</option>
-                                <option value="badulla">Badulla</option>
-                                <option value="colombo">Colombo</option>
+                                @foreach ($all_active_branches as $branch_name)
+                                    <option value={{ $branch_name->branch_name }}>
+                                        {{ capitalizeFirstLetter($branch_name->branch_name) }}</option>
+                                @endforeach
                             </select>
                             <!-- Custom dropdown trigger -->
                             <div id="dropdownTrigger"
@@ -130,14 +154,13 @@
                                 <ul class="py-1 px-8 lg:px-4 lg:text-xs">
                                     <li class="px-4 py-2 text-sm text-center hover:bg-gray-100 cursor-pointer border-b lg:text-xs"
                                         data-value="add_new" id="addBranchButton">+ Add New Branch</li>
-                                    <li class="px-4 py-2 text-sm text-center hover:bg-gray-100 cursor-pointer border-b lg:text-xs"
-                                        data-value="balangoda">Balangoda</li>
-                                    <li class="px-4 py-2 text-sm text-center hover:bg-gray-100 cursor-pointer border-b lg:text-xs"
-                                        data-value="ella">Ella</li>
-                                    <li class="px-4 py-2 text-sm text-center hover:bg-gray-100 cursor-pointer border-b lg:text-xs"
-                                        data-value="badulla">Badulla</li>
-                                    <li class="px-4 py-2 text-sm text-center hover:bg-gray-100 cursor-pointer border-b lg:text-xs"
-                                        data-value="colombo">Colombo</li>
+
+                                    @foreach ($all_active_branches as $branch_name)
+                                        <li class="px-4 py-2 text-sm text-center hover:bg-gray-100 cursor-pointer border-b lg:text-xs"
+                                            data-value={{ $branch_name->branch_name }}>
+                                            {{ capitalizeFirstLetter($branch_name->branch_name) }}
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -167,14 +190,14 @@
                             <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
                                 <div class="text-xs text-gray-600 text-right">
                                     {{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }}</div>
-                                <div class="text-sm">{{ $center->center_name }}</div>
+                                <div class="text-sm">{{ capitalizeFirstLetter($center->center_name) }}</div>
                                 <div class="text-xs flex items-center space-x-1 text-gray-700">
                                     <p>CM - </p>
-                                    <p>{{ $center->manager_name }}</p>
+                                    <p>{{ capitalizeEachWord($center->manager_name) }}</p>
                                 </div>
                                 <div class="text-xs flex items-center space-x-1 text-gray-700">
                                     <p>PDay - </p>
-                                    <p>{{ $center->payment_date }}</p>
+                                    <p>{{ capitalizeFirstLetter($center->payment_date) }}</p>
                                 </div>
                             </div>
                             <div
@@ -208,12 +231,12 @@
                                 <tbody class="text-gray-800 text-xs font-light bg-white">
                                     @foreach ($all_active_centers as $center)
                                         <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details"
-                                            data-branch-name={{ $center->branch->branch_name }}
-                                            data-center-name="{{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }} {{ $center->center_name }}"
-                                            data-manager={{ $center->manager_name }}
+                                            data-branch-name={{ capitalizeFirstLetter($center->branch->branch_name) }}
+                                            data-center-name="{{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }} {{ capitalizeFirstLetter($center->center_name) }}"
+                                            data-manager={{ capitalizeEachWord($center->manager_name) }}
                                             data-groups={{ str_pad($center->group->count(), 2, '0', STR_PAD_LEFT) }}
                                             data-members={{ str_pad($count_total_members, 2, '0', STR_PAD_LEFT) }}
-                                            data-payment-day={{ $center->payment_date }}
+                                            data-payment-day={{ capitalizeFirstLetter($center->payment_date) }}
                                             data-groups-array='@json($center->group)'>
                                             <td class="pl-2 text-left">
                                                 <input type="checkbox" name="selected_ids[]" value="1"
@@ -221,12 +244,13 @@
                                             </td>
                                             <td class="py-2 text-left"> {{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }}
                                             </td>
-                                            <td class="py-2 text-left"> {{ $center->center_name }}</td>
+                                            <td class="py-2 text-left"> {{ capitalizeFirstLetter($center->center_name) }}
+                                            </td>
                                             <td class="py-2 text-left">
                                                 {{ str_pad($center->group->count(), 2, '0', STR_PAD_LEFT) }}</td>
-                                            <td class="py-2 text-left"> {{ $center->manager_name }}
+                                            <td class="py-2 text-left"> {{ capitalizeEachWord($center->manager_name) }}
                                             </td>
-                                            <td class="py-2 text-left"> {{ $center->payment_date }}
+                                            <td class="py-2 text-left"> {{ capitalizeFirstLetter($center->payment_date) }}
                                             </td>
                                             <td class="py-2 text-center flex justify-center items-center gap-1">
                                                 <a href="#" class="border rounded hover:bg-green-500">

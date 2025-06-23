@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CenterController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,13 @@ Route::get('/dashboard', function () {
     return view('test');
 });
 
+//branches routes
+Route::post('/branches/create', action: [BranchController::class, 'create_branch'])->name('branches.createbranch');
+
+//centers routes
 Route::get('/centers', [CenterController::class, 'getAllActiveCenters'])->name('centers.viewblade');
+Route::post('/centers/create',  [CenterController::class, 'createCenter'])->name('centers.createcenter');
+
 Route::get('/centersGroups', function () {
     return view('branches/centersGroups');
 });
