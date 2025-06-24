@@ -33,9 +33,15 @@ Route::post('/branches/create', action: [BranchController::class, 'create_branch
 Route::get('/centers', [CenterController::class, 'getAllActiveCenters'])->name('centers.viewblade');
 Route::post('/centers/create',  [CenterController::class, 'createCenter'])->name('centers.createcenter');
 
-Route::get('/centersGroups', function () {
-    return view('branches/centersGroups');
+// After clciking on eye icon in centers table - view summury of center and group table
+Route::get('/centerSummary', function () {
+    return view('branches/centerSummary');
 });
+// After clciking on eye icon in Group table - view summury of Group and memebers table
+Route::get('/groupSummary', function () {
+    return view('branches/groupSummary');
+});
+
 Route::get('/members', function () {
     return view('branches/members');
 });

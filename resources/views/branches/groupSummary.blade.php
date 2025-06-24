@@ -6,44 +6,23 @@
     <!--Mobile Cards and table View-->
     <div id="firstColumn" class="w-full h-full p-2 lg:border-r lg:p-4 transition-all duration-300  lg:relative space-y-2">
 
-        <!-- Add New Group Modal -->
-        <div id="addGroupModal" class="inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50 lg:absolute fixed p-4" style="width: 100%; height: 100%;">
-            <div class="bg-white shadow-xl w-full max-w-md rounded-lg">
-                <h2 class="text-md bg-blue-100 rounded-t-lg p-4">Add New Group</h2>
-                <form id="addGroupForm">
+        <!-- Add New Member Modal -->
+        <div id="addMemberModal" class="inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50 lg:absolute fixed p-4" style="width: 100%; height: 100%;">
+            <div class="bg-white shadow-xl w-full max-w-md rounded-lg ">
+                <h2 class="text-md bg-blue-100 rounded-t-lg p-4">Add Member</h2>
+                <form id="addmemberForm">
                     <div class="bg-white rounded-b-lg p-4 space-y-4">
-                        <div>
-                            <label for="groupBranch" class="block text-xs text-gray-400 mb-1 ml-2">Branch*</label>
-                            <input type="text" id="groupBranch" placeholder="" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" required />
-                        </div>
-                        <div>
-                            <label for="groupCenter" class="block text-xs text-gray-400 mb-1 ml-2">Center Name*</label>
-                            <input type="text" id="groupCenter" placeholder="" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" required />
-                        </div>
-                        <div>
-                            <label for="groupName" class="block text-xs text-gray-400 mb-1 ml-2">Group Name*</label>
-                            <input type="text" id="groupName" placeholder="" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" required />
-                        </div>
-                        <div>
-                            <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center">
-                                <label class="block text-xs text-gray-400 mb-1 ml-2 ">Members</label>
-                                <div class="flex justify-start items-center lg:justify-end">
-                                    <button type="button" id="addExistingMember" class="text-blue-600  ml-2 text-xs">Add Existing Member </button>
-                                    <span class="ml-2"> |</span>
-                                    <button type="button" id="addNewMember" class="text-blue-600  ml-2  text-xs">+ Add New Members</button>
-                                </div>
-                            </div>
-                            <div id="memberSelection" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm mt-2 flex flex-col">
-                                <span id="selectedMembers">No members selected</span>
-
-                            </div>
-                        </div>
-                        <div class="flex justify-end space-x-4 mt-4">
-                            <button type="button" id="cancelGroup" class="px-6 py-1 bg-gray-300 rounded-lg hover:bg-gray-400 focus:outline-none text-sm">
-                                Cancel
+                        <div class="flex justify-center space-x-4 mt-4">
+                            <button type="button" id="addExistingMember" class="px-6 py-2 bg-gray-300 rounded-lg hover:bg-gray-400 focus:outline-none text-sm">
+                                Add Existing Member
                             </button>
-                            <button type="submit" id="createGroup" class="px-6 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none text-sm">
-                                Create
+                            <button type="button" id="addNewMember" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none text-sm">
+                                Add New Member
+                            </button>
+                        </div>
+                        <div class="flex justify-center items-end pt-8">
+                            <button type="button" id="cancelMember" class="px-6 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none text-sx">
+                                Cancel
                             </button>
                         </div>
                     </div>
@@ -59,7 +38,7 @@
                     <div>
                         <input type="text" id="searchExistingMembers" placeholder="Search members..." class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                     </div>
-                    <div id="existingMembersList" class="max-h-40 overflow-y-auto space-y-2">
+                    <div id="existingMembersList" class="max-h-40 overflow-y-auto space-y-2 text-sm">
                         <!-- Dynamic member list will be populated here -->
                     </div>
                     <div class="flex justify-end space-x-4 mt-4">
@@ -153,60 +132,108 @@
                 </div>
                 <div class="w-40 text-sm lg:text-xs ">
                     <button id="getGroupSummary" value="" class="w-full bg-blue-600 text-white p-1 rounded-lg hover:bg-blue-700 focus:outline-none flex justify-center">
-                        <img src="{{ asset('assets/icons/ArrowLineDownWhite.svg') }}" alt="Pencil" class="h-3 w-3 m-1"> Get Center Summary
+                        <img src="{{ asset('assets/icons/ArrowLineDownWhite.svg') }}" alt="Pencil" class="h-3 w-3 m-1"> Get Group Summary
                     </button>
                 </div>
 
             </div>
             <div class="flex flex-col lg:flex-row border rounded-lg py-4 px-4 h-full ">
+                <!-- Center Details -->
                 <div class="w-full lg:w-2/3 h-full">
-                    <h1 id="" class="text-md font-medium text-gray-800 mb-2">Center Details</h1>
-                    <div class="grid-cols-2 grid lg:grid-cols-3 gap-y-2 ">
+                    <h1 class="text-md font-medium text-gray-800 mb-2">Group Details</h1>
+                    <div class="grid-cols-2 grid lg:grid-cols-3 gap-y-2 gap-x-4">
+                        <!-- Name -->
                         <div>
-                            <p for="" class="text-xs text-gray-400">Name</p>
-                            <p id="" class="text-sm">Malawaragoda</p>
-                        </div>
-                        <div>
-                            <p for="" class="text-xs text-gray-400">Center Manager</p>
-                            <p id="" class="text-sm">Saman</p>
-                        </div>
-                        <div>
-                            <p for="" class="text-xs text-gray-400">Branch</p>
-                            <p id="" class="text-sm">Balangoda</p>
-                        </div>
-                        <div>
-                            <p for="" class="text-xs text-gray-400">Total Group</p>
-                            <p id="" class="text-sm">06</p>
-                        </div>
-                        <div class="hidden lg:block">
-                            <p for="" class="text-xs text-gray-400">Total Members</p>
-                            <p id="" class="text-sm">05 </p>
-                        </div>
-                        <div>
-                            <p for="" class="text-xs text-gray-400">Payment Date</p>
-                            <p id="" class="text-sm">2025.05.02</p>
+                            <p class="text-xs text-gray-400">Name</p>
+                            <p class="text-sm">
+                                <span class="view-mode">Group 01</span>
+                                <input type="text" class="edit-mode hidden border px-2 py-1 rounded w-full" value="Group 01-end">
+                            </p>
                         </div>
 
+                        <!-- Center Manager -->
+                        <div>
+                            <p class="text-xs text-gray-400">Center</p>
+                            <p class="text-sm">
+                                <span class="view-mode">Center name</span>
+                                <input type="text" class="edit-mode hidden border px-2 py-1 rounded w-full" value="Center">
+                            </p>
+                        </div>
+
+                        <!-- Branch -->
+                        <div>
+                            <p class="text-xs text-gray-400">Branch</p>
+                            <p class="text-sm">
+                                <span class="view-mode">Balangoda</span>
+                                <input type="text" class="edit-mode hidden border px-2 py-1 rounded w-full" value="Balangoda">
+                            </p>
+                        </div>
+
+                        <!-- Total Group -->
+                        <div>
+                            <p class="text-xs text-gray-400">Center Manager</p>
+                            <p class="text-sm">
+                                <span class="view-mode">Saman</span>
+                                <input type="number" class="edit-mode hidden border px-2 py-1 rounded w-full" value="Saman">
+                            </p>
+                        </div>
+
+                        <!-- Total Members -->
+                        <div class="lg:block">
+                            <p class="text-xs text-gray-400">Total Members</p>
+                            <p class="text-sm">
+                                <span class="view-mode">05</span>
+                                <input type="number" class="edit-mode hidden border px-2 py-1 rounded w-full" value="05">
+                            </p>
+                        </div>
+
+                        <!-- Payment Date -->
+                        <div>
+                            <p class="text-xs text-gray-400">Payment Date</p>
+                            <p class="text-sm">
+                                <span class="view-mode">2025.05.02</span>
+                                <input type="date" class="edit-mode hidden border px-2 py-1 rounded w-full" value="2025-05-02">
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="flex w-full lg:w-1/3 justify-between lg:justify-end iteam-center lg:items-end space-x-2 pt-8 ">
-                    <div class="lg:hidden flex space-x-2 justify-center items-center">
-                        <p for="" class="text-xs text-gray-400">Total Members</p>
-                        <p id="" class="text-sm">05 </p>
-                    </div>
-                    <div class="flex flex-row space-x-2">
-                        <div class=" text-sm lg:text-xs ">
-                            <button id="getGroupSummary" value="" class="w-full bg-blue-600 text-white p-1 rounded-lg hover:bg-blue-700 focus:outline-none flex  items-center justify-center px-4">
-                                <img src="{{ asset('assets/icons/PencilSimpleWhite.svg') }}" alt="Pencil" class="h-3 w-3 "> <span class="m-1">Edit</span>
-                            </button>
-                        </div>
-                        <div class=" text-sm lg:text-xs  ">
-                            <button id="getGroupSummary" value="" class="w-full bg-gray-100 text-gray-700 p-1 rounded-lg hover:bg-gray-300 focus:outline-none flex  items-center  justify-center px-4">
-                                <img src="{{ asset('assets/icons/Vector.svg') }}" alt="Pencil" class="h-3 w-2"> <span class="m-1">Save</span>
-                            </button>
-                        </div>
-                    </div>
 
+                <!-- Action Buttons -->
+                <div class="flex w-full lg:w-1/3 justify-between lg:justify-end items-end space-x-2">
+                    <div class="flex flex-row lg:space-x-2 bg-white lg:text-xs w-full justify-end">
+                        <!-- Edit -->
+                        <button id="editBtn" class="bg-blue-600 text-white p-1 lg:p-2 rounded-lg hover:bg-blue-700 flex items-center justify-center px-6 w-1/2 lg:w-28 mr-2 lg:mr-0">
+                            <img src="{{ asset('assets/icons/PencilSimpleWhite.svg') }}" alt="Edit" class="h-3 w-3 mr-2">
+                            <span>Edit</span>
+                        </button>
+
+                        <!-- Save -->
+                        <button id="saveBtn" class="bg-green-600 text-white p-1 lg:p-2 rounded-lg hover:bg-green-700 hidden  items-center justify-center px-6 w-1/2 lg:w-28  mr-2 lg:mr-0">
+                            <img src="{{ asset('assets/icons/VectorWhite.svg') }}" alt="Save" class="h-3 w-3 mr-2">
+                            <span>Save</span>
+                        </button>
+
+                        <!-- Delete -->
+                        <button id="deleteBtn" class="bg-red-600 text-white p-1 lg:p-2 rounded-lg hover:bg-red-700 flex items-center justify-center px-4 w-1/2 lg:w-28">
+                            <img src="{{ asset('assets/icons/TrashWhite.svg') }}" alt="Delete" class="h-3 w-3 mr-2">
+                            <span>Delete</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delete Confirmation Modal -->
+            <div id="deleteModal" class="fixed inset-0  items-center justify-center bg-black bg-opacity-40 hidden z-50 h-full">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center w-1/3 h-30">
+                    <p class="text-md font-semibold mb-4">Are you sure you want to delete this Group?</p>
+                    <div class="flex justify-center space-x-4">
+                        <button id="cancelDelete" class="bg-gray-300 text-black p-2 rounded-lg hover:bg-gray-500 flex items-center px-4 text-xs">
+                            <span>Cancel</span>
+                        </button>
+                        <button id="confirmDelete" class="bg-red-600 text-white p-2 rounded-lg hover:bg-red-700 flex items-center px-4 text-xs">
+                            <span>Delete</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -225,21 +252,21 @@
 
                     <!-- Search Bar -->
                     <div class="w-full text-sm lg:text-xs lg:w-5/12">
-                        <input type="text" id="searchGroup" placeholder="Search Group..." class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white" />
+                        <input type="text" id="searchMember" placeholder="Search Member..." class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white" />
                     </div>
                 </div>
                 <!-- Add Center Button -->
                 <div class="w-full text-sm lg:text-xs lg:w-3/12">
-                    <button id="addGroupButton" value="add_new" class="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 focus:outline-none">
-                        + Add Group
+                    <button id="addMemberButton" value="add_new" class="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 focus:outline-none">
+                        + Add Memeber
                     </button>
                 </div>
             </div>
 
-            <p class="text-center text-xs my-2 text-gray-400 lg:hidden">Total Groups 10</p>
+            <p class="text-center text-xs my-2 text-gray-400 lg:hidden">Total Centers 10</p>
 
             <!-- Centers Grid card format hidden for lg screens -->
-            <div id="centersGrid" class="grid grid-cols-2 sm:grid-cols-2 lg:hidden gap-4 p-2">
+            <div id="membersGrid" class="grid grid-cols-2 sm:grid-cols-2 lg:hidden gap-4 p-2">
                 <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200" data-group="Group02">
                     <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
                         <div class="text-xs text-gray-600 text-right">Group 01</div>
@@ -311,210 +338,134 @@
 
             <div class="flex justify-start h-full ">
                 <!-- Grid Table format hidden for mobile screens -->
-                <div id="centersGridTable" class="w-full max-h-[calc(100vh-200px)] hidden lg:block p-0 pt-2 overflow-y-auto">
+                <div id="membersGridTable" class="w-full max-h-[calc(100vh-400px)] hidden lg:block p-0  overflow-y-auto">
                     <div class="min-w-full ">
                         <table class="w-full min-w-max">
                             <thead class="w-full text-gray-700 text-xs font-light bg-gray-100 sticky top-0">
                                 <tr class="uppercase w-full">
-                                    <th class="py-2 center">#</th>
-                                    <th class="py-2 text-left">Group Name</th>
-                                    <th class="py-2 text-left">Members</th>
-                                    <th class="py-2 text-left">Total Received </th>
+                                    <th class="py-2 text-center">#</th>
+                                    <th class="py-2 text-left">Name</th>
                                     <th class="py-2 text-left">Center</th>
+                                    <th class="py-2 text-left">NIC </th>
+                                    <th class="py-2 text-left">Loan Balance</th>
                                     <th class="py-2 text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="text-gray-800 text-xs font-light bg-white">
+                                <!-- AROW -->
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Saman" data-members="04" data-received="40000" data-center="Malwaragoda">
+                                    <td class="py-2 text-center">001</td>
+                                    <td class="py-2 text-left">Saman</td>
+                                    <td class="py-2 text-left">Center</td>
+                                    <td class="py-2 text-left"> 154782452v</td>
+                                    <td class="py-2 text-left">400000</td>
+                                    <td class="py-2 text-center flex justify-center items-center gap-1">
+                                        <a href="#" class="border rounded hover:bg-green-500">
+                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-sky-500">
+                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-lime-500">
+                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <!-- AROW -->
                                 <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-group-id="1" data-group-name="Group 01" data-members="04" data-received="40000" data-center="Malwaragoda">
                                     <td class="py-2 text-center">001</td>
                                     <td class="py-2 text-left">Group01</td>
-                                    <td class="py-2 text-left">05</td>
-                                    <td class="py-2 text-left">400000 </td>
-                                    <td class="py-2 text-left">Malwaragoda</td>
+                                    <td class="py-2 text-left">Center</td>
+                                    <td class="py-2 text-left"> 154782452v</td>
+                                    <td class="py-2 text-left">400000</td>
                                     <td class="py-2 text-center flex justify-center items-center gap-1">
                                         <a href="#" class="border rounded hover:bg-green-500">
                                             <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
                                         </a>
-                                        <a href="#" class="border rounded hover:bg-red-500">
-                                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
                                         <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-lime-500">
+                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
                                         </a>
                                     </td>
                                 </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-group-id="2" data-group-name="Group 02" data-members="05" data-received="50000" data-center="Rathmalawinna">
-                                    <td class="py-2 text-center">002</td>
-                                    <td class="py-2 text-left">Group 02</td>
-                                    <td class="py-2 text-left">05</td>
-                                    <td class="py-2 text-left">50000 </td>
-                                    <td class="py-2 text-left">Rathmalawinna</td>
+                                <!-- AROW -->
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-group-id="1" data-group-name="Group 01" data-members="04" data-received="40000" data-center="Malwaragoda">
+                                    <td class="py-2 text-center">001</td>
+                                    <td class="py-2 text-left">Group01</td>
+                                    <td class="py-2 text-left">Center</td>
+                                    <td class="py-2 text-left"> 154782452v</td>
+                                    <td class="py-2 text-left">400000</td>
                                     <td class="py-2 text-center flex justify-center items-center gap-1">
                                         <a href="#" class="border rounded hover:bg-green-500">
                                             <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
                                         </a>
-                                        <a href="#" class="border rounded hover:bg-red-500">
-                                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
                                         <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-lime-500">
+                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
                                         </a>
                                     </td>
                                 </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-group-id="2" data-group-name="Group 02" data-members="05" data-received="50000" data-center="Rathmalawinna">
-                                    <td class="py-2 text-center">002</td>
-                                    <td class="py-2 text-left">Group 02</td>
-                                    <td class="py-2 text-left">05</td>
-                                    <td class="py-2 text-left">50000 </td>
-                                    <td class="py-2 text-left">Rathmalawinna</td>
+                                <!-- AROW -->
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-group-id="1" data-group-name="Group 01" data-members="04" data-received="40000" data-center="Malwaragoda">
+                                    <td class="py-2 text-center">001</td>
+                                    <td class="py-2 text-left">Group01</td>
+                                    <td class="py-2 text-left">Center</td>
+                                    <td class="py-2 text-left"> 154782452v</td>
+                                    <td class="py-2 text-left">400000</td>
                                     <td class="py-2 text-center flex justify-center items-center gap-1">
                                         <a href="#" class="border rounded hover:bg-green-500">
                                             <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
                                         </a>
-                                        <a href="#" class="border rounded hover:bg-red-500">
-                                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
                                         <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-lime-500">
+                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
                                         </a>
                                     </td>
                                 </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-group-id="2" data-group-name="Group 02" data-members="05" data-received="50000" data-center="Rathmalawinna">
-                                    <td class="py-2 text-center">002</td>
-                                    <td class="py-2 text-left">Group 02</td>
-                                    <td class="py-2 text-left">05</td>
-                                    <td class="py-2 text-left">50000 </td>
-                                    <td class="py-2 text-left">Rathmalawinna</td>
+                                <!-- AROW -->
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-group-id="1" data-group-name="Group 01" data-members="04" data-received="40000" data-center="Malwaragoda">
+                                    <td class="py-2 text-center">001</td>
+                                    <td class="py-2 text-left">Group01</td>
+                                    <td class="py-2 text-left">Center</td>
+                                    <td class="py-2 text-left"> 154782452v</td>
+                                    <td class="py-2 text-left">400000</td>
                                     <td class="py-2 text-center flex justify-center items-center gap-1">
                                         <a href="#" class="border rounded hover:bg-green-500">
                                             <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
                                         </a>
-                                        <a href="#" class="border rounded hover:bg-red-500">
-                                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
                                         <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-lime-500">
+                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
                                         </a>
                                     </td>
                                 </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-group-id="2" data-group-name="Group 02" data-members="05" data-received="50000" data-center="Rathmalawinna">
-                                    <td class="py-2 text-center">002</td>
-                                    <td class="py-2 text-left">Group 02</td>
-                                    <td class="py-2 text-left">05</td>
-                                    <td class="py-2 text-left">50000 </td>
-                                    <td class="py-2 text-left">Rathmalawinna</td>
+                                <!-- AROW -->
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-group-id="1" data-group-name="Group 01" data-members="04" data-received="40000" data-center="Malwaragoda">
+                                    <td class="py-2 text-center">001</td>
+                                    <td class="py-2 text-left">Group01</td>
+                                    <td class="py-2 text-left">Center</td>
+                                    <td class="py-2 text-left"> 154782452v</td>
+                                    <td class="py-2 text-left">400000</td>
                                     <td class="py-2 text-center flex justify-center items-center gap-1">
                                         <a href="#" class="border rounded hover:bg-green-500">
                                             <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
                                         </a>
-                                        <a href="#" class="border rounded hover:bg-red-500">
-                                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
                                         <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
+                                        </a>
+                                        <a href="#" class="border rounded hover:bg-lime-500">
+                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
                                         </a>
                                     </td>
                                 </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-group-id="2" data-group-name="Group 02" data-members="05" data-received="50000" data-center="Rathmalawinna">
-                                    <td class="py-2 text-center">002</td>
-                                    <td class="py-2 text-left">Group 02</td>
-                                    <td class="py-2 text-left">05</td>
-                                    <td class="py-2 text-left">50000 </td>
-                                    <td class="py-2 text-left">Rathmalawinna</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-red-500">
-                                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-group-id="2" data-group-name="Group 02" data-members="05" data-received="50000" data-center="Rathmalawinna">
-                                    <td class="py-2 text-center">002</td>
-                                    <td class="py-2 text-left">Group 02</td>
-                                    <td class="py-2 text-left">05</td>
-                                    <td class="py-2 text-left">50000 </td>
-                                    <td class="py-2 text-left">Rathmalawinna</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-red-500">
-                                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-group-id="2" data-group-name="Group 02" data-members="05" data-received="50000" data-center="Rathmalawinna">
-                                    <td class="py-2 text-center">002</td>
-                                    <td class="py-2 text-left">Group 02</td>
-                                    <td class="py-2 text-left">05</td>
-                                    <td class="py-2 text-left">50000 </td>
-                                    <td class="py-2 text-left">Rathmalawinna</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-red-500">
-                                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-group-id="2" data-group-name="Group 02" data-members="05" data-received="50000" data-center="Rathmalawinna">
-                                    <td class="py-2 text-center">002</td>
-                                    <td class="py-2 text-left">Group 02</td>
-                                    <td class="py-2 text-left">05</td>
-                                    <td class="py-2 text-left">50000 </td>
-                                    <td class="py-2 text-left">Rathmalawinna</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-red-500">
-                                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details" data-group-id="2" data-group-name="Group 02" data-members="05" data-received="50000" data-center="Rathmalawinna">
-                                    <td class="py-2 text-center">002</td>
-                                    <td class="py-2 text-left">Group 02</td>
-                                    <td class="py-2 text-left">05</td>
-                                    <td class="py-2 text-left">50000 </td>
-                                    <td class="py-2 text-left">Rathmalawinna</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-red-500">
-                                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Add more rows as needed -->
                             </tbody>
                         </table>
                     </div>
@@ -547,83 +498,86 @@
     <!-- Second Column: Row Details -->
     <div id="RowDetails" class="hidden h-full lg:w-4/12 flex-col justify-between transition-all duration-300">
         <div id="RowDetailsContent" class="border-b p-4">
-            <h1 id="groupName" class="text-md font-medium text-gray-800 mb-4">Balangoda</h1>
+            <h1 id="memberName" class="text-md font-medium text-gray-800 mb-1">Name</h1>
+            <h1 id="memberName" class="text-xs text-gray-600 mb-4"><span>Branch</span> > <span>Center</span> > <span>Group</span></h1>
             <div class="grid grid-cols-2 gap-y-2">
                 <div>
-                    <p for="Cmanager" class="text-xs text-gray-400">Center Manager</p>
-                    <p id="Cmanager" class="text-sm">Center Manager</p>
+                    <p for="num01" class="text-xs text-gray-400">Mobile number 01</p>
+                    <p id="num01" class="text-sm">+94 78 659823</p>
                 </div>
                 <div>
-                    <p for="Gcenter" class="text-xs text-gray-400">Center</p>
-                    <p id="Gcenter" class="text-sm">12</p>
+                    <p for="num02" class="text-xs text-gray-400">Mobile number 02</p>
+                    <p id="num02" class="text-sm">+94 78 659428</p>
                 </div>
                 <div>
-                    <p for="Gmembers" class="text-xs text-gray-400">Members</p>
-                    <p id="Gmembers" class="text-sm">01</p>
+                    <p for="NIC" class="text-xs text-gray-400">NIC</p>
+                    <p id="NIC" class="text-sm">2459876314</p>
                 </div>
                 <div>
-                    <p for="Greceived" class="text-xs text-gray-400">Total Balance</p>
-                    <p id="Greceived" class="text-sm">01 </p>
-                </div>
-            </div>
-        </div>
-        <div class="bg-gray-200 p-4 ">
-            <div class="w-full text-sm lg:text-xs">
-                <button id="getGroupSummary" value="" class="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 focus:outline-none flex justify-center">
-                    <img src="{{ asset('assets/icons/ArrowLineDownWhite.svg') }}" alt="Pencil" class="h-3 w-3 m-1"> Get Group Summary
-                </button>
-            </div>
-        </div>
-        <div class="p-4 space-y-4 h-full">
-            <div class="space-y-2 flex flex-col justify-start">
-                <div class="flex justify-between items-center bg-sky-50 shadow-sm border rounded-lg">
-                    <div class="flex flex-col p-2">
-                        <span class="text-xs font-medium text-gray-600 ">User Name</span>
-                        <span class="text-xs font-normal text-gray-600 ">982563142V</span>
-                    </div>
-                    <span class="text-xs font-medium text-gray-800 bg-gray-200 p-4 px-8 rounded-lg">5820145/=</span>
-                    <div class="font-medium text-gray-800 px-2 text-xs flex space-x-1">
+                    <p for="Attach" class="text-xs text-gray-400">Attach</p>
+                    <p id="Attach" class="text-sm flex">
                         <a href="#" class="border rounded hover:bg-green-500">
                             <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
                         </a>
-                        <a href="#" class="border rounded hover:bg-red-500">
-                            <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                        </a>
-                    </div>
+                        <span class="ml-2">Img.pn</span>
+                    </p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 gap-y-2 mt-2">
+                <div>
+                    <p for="memberAddress" class="text-xs text-gray-400">Address</p>
+                    <p id="memberAddress" class="text-sm mt-0">Balngoda,Sri lanka</p>
                 </div>
             </div>
         </div>
-    </div>
+        <div class=" space-y-4 h-full ">
+            <div class="p-4 border-b w-full">
+                <h1 id="" class="text-sm font-medium text-gray-800 mb-1">Current Loan Details</h1>
+                <div class="grid grid-cols-3 gap-y-2">
+                    <div>
+                        <p for="LoanAmount" class="text-xs text-gray-400">Loan Amount</p>
+                        <p id="LoanAmount" class="text-sm">10 000 00</p>
+                    </div>
+                    <div>
+                        <p for="Interest" class="text-xs text-gray-400">Interest</p>
+                        <p id="Interest" class="text-sm">15%</p>
+                    </div>
+                    <div>
+                        <p for="IssueDate" class="text-xs text-gray-400">Issue Date</p>
+                        <p id="IssueDate" class="text-sm">2025/06/12</p>
+                    </div>
+                    <div>
+                        <p for="Installment" class="text-xs text-gray-400">Installment</p>
+                        <p id="Installment" class="text-sm">10</p>
+                    </div>
+                    <div>
+                        <p for="Terms" class="text-xs text-gray-400">Terms</p>
+                        <p id="Terms" class="text-sm">Terms</p>
+                    </div>
+                    <div>
+                        <p for="DocumentChagers" class="text-xs text-gray-400">Document Chagers</p>
+                        <p id="DocumentChagers" class="text-sm">-</p>
+                    </div>
 
-    <!-- Second Column: Centers -->
-    <div id="centersColumn" class="hidden  h-full lg:w-4/12 flex-col justify-between transition-all duration-300">
-        <div id="centersColumnContent" class="border-b p-4">
-            <div class="flex justify-between items-center">
-                <h1 class="text-md font-medium text-gray-800 mb-4">Centers</h1>
-                <button id="hideCentersColumn" class="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none text-xs">
-                    Hide
-                </button>
-            </div>
-            <div id="centersList" class="space-y-2">
-                <!-- Dynamic center list will be populated here -->
+                </div>
+                <div class="w-full text-sm lg:text-xs  pt-4">
+                    <button id="addLoanButton" value="add_new_loan" class="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 focus:outline-none">
+                        + Add Loan
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-
-    <!-- Second Column: Branches -->
-    <div id="branchesColumn" class="hidden h-full lg:w-4/12 flex-col justify-between transition-all duration-300">
-        <div id="branchesColumnContent" class="border-b p-4">
-            <div class="flex justify-between items-center">
-                <h1 class="text-md font-medium text-gray-800 mb-4">Branches</h1>
-                <button id="hideBranchesColumn" class="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none text-xs">
-                    Hide
+        <div class=" p-4 border-t">
+            <div class="w-full text-sm lg:text-xs  pt-4">
+                <button id="ViewFullDetail" value="" class="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 focus:outline-none">
+                    View Full Detail
                 </button>
             </div>
-            <div id="branchesList" class="space-y-2">
-                <!-- Dynamic branch list will be populated here -->
-            </div>
+
         </div>
+
     </div>
+
 </div>
 
 <script>
@@ -639,30 +593,100 @@
         });
     });
 
-
     // Search Filter for both mobile and web views
-    document.getElementById('searchGroup').addEventListener('input', function() {
+    document.getElementById('searchMember').addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase();
 
         // Mobile view (cards)
-        const cards = document.querySelectorAll('#centersGrid > div');
+        const cards = document.querySelectorAll('#membersGrid > div');
         cards.forEach(card => {
-            const centerName = card.getAttribute('data-group').toLowerCase();
+            const centerName = card.getAttribute('data-member').toLowerCase();
             card.style.display = centerName.includes(searchTerm) ? 'block' : 'none';
         });
 
         // Web view (table rows)
-        const tableRows = document.querySelectorAll('#centersGridTable tbody tr');
+        const tableRows = document.querySelectorAll('#membersGridTable tbody tr');
         tableRows.forEach(row => {
-            const centerName = row.getAttribute('data-group-name').toLowerCase();
+            const centerName = row.getAttribute('data-member-name').toLowerCase();
             row.style.display = centerName.includes(searchTerm) ? 'table-row' : 'none';
         });
     });
 
+    //Group Details edit and delete functionality
+    const editBtn = document.getElementById('editBtn');
+    const saveBtn = document.getElementById('saveBtn');
+    const deleteBtn = document.getElementById('deleteBtn');
+    const deleteModal = document.getElementById('deleteModal');
+    const cancelDelete = document.getElementById('cancelDelete');
+    const confirmDelete = document.getElementById('confirmDelete');
 
-    //----------------------------------------------------------------
+    editBtn.addEventListener('click', () => {
+        document.querySelectorAll('.view-mode').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('.edit-mode').forEach(el => el.classList.remove('hidden'));
+        editBtn.classList.add('hidden');
+        saveBtn.classList.remove('hidden');
+        saveBtn.classList.add('flex');
+    });
 
-    // Sample data for existing members (replace with your actual data source)
+    saveBtn.addEventListener('click', () => {
+        document.querySelectorAll('.edit-mode').forEach((input, i) => {
+            const value = input.value;
+            document.querySelectorAll('.view-mode')[i].textContent = value;
+        });
+        document.querySelectorAll('.view-mode').forEach(el => el.classList.remove('hidden'));
+        document.querySelectorAll('.edit-mode').forEach(el => el.classList.add('hidden'));
+        saveBtn.classList.add('hidden');
+        editBtn.classList.remove('hidden');
+
+        // TODO: Optional - Send updated values to backend via AJAX or form
+        console.log("Saved successfully.");
+    });
+
+    deleteBtn.addEventListener('click', () => {
+        deleteModal.classList.remove('hidden');
+        deleteModal.classList.add('flex');
+    });
+
+    cancelDelete.addEventListener('click', () => {
+        deleteModal.classList.add('hidden');
+    });
+
+    confirmDelete.addEventListener('click', () => {
+        deleteModal.classList.add('hidden');
+        // TODO: Handle actual delete logic (AJAX or form submit)
+        alert("Deleted group successfully.");
+    });
+
+    // Row Summey
+    document.querySelectorAll('.view-details').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent default link behavior
+            const row = button.closest('tr');
+            const RowDetails = document.getElementById('RowDetails');
+            const firstColumn = document.getElementById('firstColumn');
+
+            // Show second column
+            RowDetails.classList.remove('hidden');
+            firstColumn.classList.remove('lg:w-full');
+            firstColumn.classList.add('lg:w-8/12');
+            RowDetails.classList.add('lg:flex');
+
+            // Update second column content
+            const centerName = row.getAttribute('data-center-name');
+            const manager = row.getAttribute('data-manager');
+            const groups = row.getAttribute('data-groups');
+            const member = row.getAttribute('data-member');
+            const paymentDay = row.getAttribute('data-payment-day');
+
+            document.getElementById('branchName').textContent = centerName;
+            document.getElementById('Cname').textContent = centerName;
+            document.getElementById('Cmanager').textContent = manager;
+            document.getElementById('Tgroup').textContent = groups;
+            document.getElementById('Tmember').textContent = member;
+        });
+    });
+
+    // Add Member Modal
     const existingMembers = [{
             id: 1,
             name: "John Doe",
@@ -691,12 +715,11 @@
     ];
 
     let selectedMembers = [];
-
     document.addEventListener('DOMContentLoaded', function() {
         // Open Add Group Modal
-        document.getElementById('addGroupButton').addEventListener('click', function() {
-            document.getElementById('addGroupModal').classList.remove('hidden');
-            document.getElementById('addGroupModal').classList.add('flex');
+        document.getElementById('addMemberButton').addEventListener('click', function() {
+            document.getElementById('addMemberModal').classList.remove('hidden');
+            document.getElementById('addMemberModal').classList.add('flex');
         });
 
         // Add Existing Member Modal
@@ -776,84 +799,29 @@
         });
 
         // Cancel Group Modal
-        document.getElementById('cancelGroup').addEventListener('click', function() {
-            document.getElementById('addGroupModal').classList.add('hidden');
-            document.getElementById('addGroupForm').reset();
+        document.getElementById('cancelMember').addEventListener('click', function() {
+            document.getElementById('addMemberModal').classList.add('hidden');
+            document.getElementById('addmemberForm').reset();
             selectedMembers = [];
             document.getElementById('selectedMembers').textContent = 'No members selected';
         });
 
-        // Create Group
-        document.getElementById('createGroup').addEventListener('click', function(e) {
-            e.preventDefault();
-            if (!document.getElementById('groupBranch').value || !document.getElementById('groupCenter').value || !document.getElementById('groupName').value) {
-                alert("All fields marked with * are required.");
-                return;
-            }
-            if (selectedMembers.length < 3 || selectedMembers.length > 6) {
-                alert("A group must have between 3 and 6 members.");
-                return;
-            }
-            alert("Group created successfully with " + selectedMembers.length + " members!");
-            document.getElementById('addGroupModal').classList.add('hidden');
-            document.getElementById('addGroupForm').reset();
-            selectedMembers = [];
-            document.getElementById('selectedMembers').textContent = 'No members selected';
-        });
-
-        // Row Details
-        document.querySelectorAll('.view-details').forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
-                const row = button.closest('tr');
-                const RowDetails = document.getElementById('RowDetails');
-                const firstColumn = document.getElementById('firstColumn');
-
-                RowDetails.classList.remove('hidden');
-                firstColumn.classList.remove('lg:w-full');
-                firstColumn.classList.add('lg:w-8/12');
-                RowDetails.classList.add('lg:flex');
-
-                const groupName = row.getAttribute('data-group-name');
-                const members = row.getAttribute('data-members');
-                const received = row.getAttribute('data-received');
-                const center = row.getAttribute('data-center');
-
-                document.getElementById('groupName').textContent = groupName;
-                document.getElementById('Gmembers').textContent = members;
-                document.getElementById('Greceived').textContent = received;
-                document.getElementById('Gcenter').textContent = center;
-            });
-        });
-
-
-
-        // Helper function
-        function hideAllSecondColumns() {
-            const columns = ['RowDetails', 'centersColumn', 'branchesColumn'];
-            columns.forEach(col => document.getElementById(col).classList.add('hidden'));
-            document.getElementById('firstColumn').classList.remove('lg:w-8/12');
-            document.getElementById('firstColumn').classList.add('lg:w-full');
-        }
-
-        document.getElementById('hideCentersColumn').addEventListener('click', hideAllSecondColumns);
-        document.getElementById('hideBranchesColumn').addEventListener('click', hideAllSecondColumns);
-    });
-
-    function renderExistingMembers(searchTerm = '') {
-        const list = document.getElementById('existingMembersList');
-        list.innerHTML = '';
-        const filteredMembers = existingMembers.filter(m => m.name.toLowerCase().includes(searchTerm));
-        filteredMembers.forEach(member => {
-            const div = document.createElement('div');
-            div.className = 'flex items-center justify-between';
-            div.innerHTML = `
+        function renderExistingMembers(searchTerm = '') {
+            const list = document.getElementById('existingMembersList');
+            list.innerHTML = '';
+            const filteredMembers = existingMembers.filter(m => m.name.toLowerCase().includes(searchTerm));
+            filteredMembers.forEach(member => {
+                const div = document.createElement('div');
+                div.className = 'flex items-center justify-between';
+                div.innerHTML = `
             <span>${member.name} (${member.nic})</span>
             <input type="checkbox" value="${member.id}" data-name="${member.name}" data-nic="${member.nic}" class="form-checkbox h-4 w-4 text-blue-600 m-1">
         `;
-            list.appendChild(div);
-        });
-    }
+                list.appendChild(div);
+            });
+        }
+
+    });
 </script>
 
 <style>
