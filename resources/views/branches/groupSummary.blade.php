@@ -199,7 +199,7 @@
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="flex w-full lg:w-1/3 justify-between lg:justify-end items-end space-x-2">
+                <div class="flex w-full lg:w-1/3 justify-between lg:justify-end items-end space-x-2 pt-4 ">
                     <div class="flex flex-row lg:space-x-2 bg-white lg:text-xs w-full justify-end">
                         <!-- Edit -->
                         <button id="editBtn" class="bg-blue-600 text-white p-1 lg:p-2 rounded-lg hover:bg-blue-700 flex items-center justify-center px-6 w-1/2 lg:w-28 mr-2 lg:mr-0">
@@ -263,77 +263,72 @@
                 </div>
             </div>
 
-            <p class="text-center text-xs my-2 text-gray-400 lg:hidden">Total Centers 10</p>
+            <p class="text-center text-xs my-2 text-gray-400 lg:hidden">Total members 10</p>
 
             <!-- Centers Grid card format hidden for lg screens -->
-            <div id="membersGrid" class="grid grid-cols-2 sm:grid-cols-2 lg:hidden gap-4 p-2">
-                <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200" data-group="Group02">
-                    <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
-                        <div class="text-xs text-gray-600 text-right">Group 01</div>
+            <div id="membersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-4 p-2">
+                <div class="rounded-lg shadow-sm flex flex-col justify-between w-full bg-gray-100 border hover:bg-gray-200" data-member-name="saman">
+                    <div class=" py-2 px-4 flex flex-row justify-between space-y-1">
+                        <div class="text-xs text-gray-600 text-left">
+                            <p class="text-sm font-bold  text-gray-700">saman <span> - Center</span></p>
+                            <p class="text-xs font- text-gray-400">2525555515151V </p>
+                        </div>
 
                         <div class="text-xs flex items-center space-x-1 text-gray-700">
-                            <img src="{{ asset('assets/icons/Users.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
-                            <p>Total Members - <span>12</span></p>
+                            <p class="text-sm font-bold  text-gray-700">11515155</p>
                         </div>
                     </div>
-                    <div class="h-8 flex items-center justify-center text-sm font-semibold bg-blue-50 text-gray-700">25 000</div>
                 </div>
                 <!-- Additional cards omitted for brevity -->
-                <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200" data-group="Group02">
-                    <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
-                        <div class="text-xs text-gray-600 text-right">Group 01</div>
+                                 <div class="rounded-lg shadow-sm flex flex-col justify-between w-full bg-gray-100 border hover:bg-gray-200" data-member-name="saman">
+                    <div class=" py-2 px-4 flex flex-row justify-between space-y-1">
+                        <div class="text-xs text-gray-600 text-left">
+                            <p class="text-sm font-bold  text-gray-700">saman <span> - Center</span></p>
+                            <p class="text-xs font- text-gray-400">2525555515151V </p>
+                        </div>
 
                         <div class="text-xs flex items-center space-x-1 text-gray-700">
-                            <img src="{{ asset('assets/icons/Users.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
-                            <p>Total Members - <span>12</span></p>
+                            <p class="text-sm font-bold  text-gray-700">11515155</p>
                         </div>
                     </div>
-                    <div class="h-8 flex items-center justify-center text-sm font-semibold bg-blue-50 text-gray-700">25 000</div>
                 </div>
-                <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200" data-group="Group02">
-                    <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
-                        <div class="text-xs text-gray-600 text-right">Group 01</div>
+                                <div class="rounded-lg shadow-sm flex flex-col justify-between w-full bg-gray-100 border hover:bg-gray-200" data-member-name="saman">
+                    <div class=" py-2 px-4 flex flex-row justify-between space-y-1">
+                        <div class="text-xs text-gray-600 text-left">
+                            <p class="text-sm font-bold  text-gray-700">saman <span> - Center</span></p>
+                            <p class="text-xs font- text-gray-400">2525555515151V </p>
+                        </div>
 
                         <div class="text-xs flex items-center space-x-1 text-gray-700">
-                            <img src="{{ asset('assets/icons/Users.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
-                            <p>Total Members - <span>12</span></p>
+                            <p class="text-sm font-bold  text-gray-700">11515155</p>
                         </div>
                     </div>
-                    <div class="h-8 flex items-center justify-center text-sm font-semibold bg-blue-50 text-gray-700">25 000</div>
                 </div>
-                <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200" data-group="Group02">
-                    <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
-                        <div class="text-xs text-gray-600 text-right">Group 01</div>
+                                <div class="rounded-lg shadow-sm flex flex-col justify-between w-full bg-gray-100 border hover:bg-gray-200" data-member-name="saman">
+                    <div class=" py-2 px-4 flex flex-row justify-between space-y-1">
+                        <div class="text-xs text-gray-600 text-left">
+                            <p class="text-sm font-bold  text-gray-700">saman <span> - Center</span></p>
+                            <p class="text-xs font- text-gray-400">2525555515151V </p>
+                        </div>
 
                         <div class="text-xs flex items-center space-x-1 text-gray-700">
-                            <img src="{{ asset('assets/icons/Users.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
-                            <p>Total Members - <span>12</span></p>
+                            <p class="text-sm font-bold  text-gray-700">11515155</p>
                         </div>
                     </div>
-                    <div class="h-8 flex items-center justify-center text-sm font-semibold bg-blue-50 text-gray-700">25 000</div>
                 </div>
-                <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200" data-group="Group02">
-                    <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
-                        <div class="text-xs text-gray-600 text-right">Group 01</div>
+                                <div class="rounded-lg shadow-sm flex flex-col justify-between w-full bg-gray-100 border hover:bg-gray-200" data-member-name="saman">
+                    <div class=" py-2 px-4 flex flex-row justify-between space-y-1">
+                        <div class="text-xs text-gray-600 text-left">
+                            <p class="text-sm font-bold  text-gray-700">saman <span> - Center</span></p>
+                            <p class="text-xs font- text-gray-400">2525555515151V </p>
+                        </div>
 
                         <div class="text-xs flex items-center space-x-1 text-gray-700">
-                            <img src="{{ asset('assets/icons/Users.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
-                            <p>Total Members - <span>12</span></p>
+                            <p class="text-sm font-bold  text-gray-700">11515155</p>
                         </div>
                     </div>
-                    <div class="h-8 flex items-center justify-center text-sm font-semibold bg-blue-50 text-gray-700">25 000</div>
                 </div>
-                <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200" data-group="Group02">
-                    <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
-                        <div class="text-xs text-gray-600 text-right">Group 01</div>
 
-                        <div class="text-xs flex items-center space-x-1 text-gray-700">
-                            <img src="{{ asset('assets/icons/Users.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
-                            <p>Total Members - <span>12</span></p>
-                        </div>
-                    </div>
-                    <div class="h-8 flex items-center justify-center text-sm font-semibold bg-blue-50 text-gray-700">25 000</div>
-                </div>
             </div>
 
             <div class="flex justify-start h-full ">
@@ -372,7 +367,7 @@
                                     </td>
                                 </tr>
                                 <!-- AROW -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-group-id="1" data-group-name="Group 01" data-members="04" data-received="40000" data-center="Malwaragoda">
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-group-id="1" data-member-name="Group 01" data-members="04" data-received="40000" data-center="Malwaragoda">
                                     <td class="py-2 text-center">001</td>
                                     <td class="py-2 text-left">Group01</td>
                                     <td class="py-2 text-left">Center</td>
@@ -391,7 +386,7 @@
                                     </td>
                                 </tr>
                                 <!-- AROW -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-group-id="1" data-group-name="Group 01" data-members="04" data-received="40000" data-center="Malwaragoda">
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-group-id="1" data-member-name="Group 01" data-members="04" data-received="40000" data-center="Malwaragoda">
                                     <td class="py-2 text-center">001</td>
                                     <td class="py-2 text-left">Group01</td>
                                     <td class="py-2 text-left">Center</td>
@@ -410,7 +405,7 @@
                                     </td>
                                 </tr>
                                 <!-- AROW -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-group-id="1" data-group-name="Group 01" data-members="04" data-received="40000" data-center="Malwaragoda">
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-group-id="1" data-member-name="Group 01" data-members="04" data-received="40000" data-center="Malwaragoda">
                                     <td class="py-2 text-center">001</td>
                                     <td class="py-2 text-left">Group01</td>
                                     <td class="py-2 text-left">Center</td>
@@ -429,7 +424,7 @@
                                     </td>
                                 </tr>
                                 <!-- AROW -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-group-id="1" data-group-name="Group 01" data-members="04" data-received="40000" data-center="Malwaragoda">
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-group-id="1" data-grmemberoup-name="Group 01" data-members="04" data-received="40000" data-center="Malwaragoda">
                                     <td class="py-2 text-center">001</td>
                                     <td class="py-2 text-left">Group01</td>
                                     <td class="py-2 text-left">Center</td>
@@ -448,7 +443,7 @@
                                     </td>
                                 </tr>
                                 <!-- AROW -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-group-id="1" data-group-name="Group 01" data-members="04" data-received="40000" data-center="Malwaragoda">
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-group-id="1" data-member-name="Group 01" data-members="04" data-received="40000" data-center="Malwaragoda">
                                     <td class="py-2 text-center">001</td>
                                     <td class="py-2 text-left">Group01</td>
                                     <td class="py-2 text-left">Center</td>
@@ -600,15 +595,15 @@
         // Mobile view (cards)
         const cards = document.querySelectorAll('#membersGrid > div');
         cards.forEach(card => {
-            const centerName = card.getAttribute('data-member').toLowerCase();
-            card.style.display = centerName.includes(searchTerm) ? 'block' : 'none';
+            const memberName = card.getAttribute('data-member-name').toLowerCase();
+            card.style.display = memberName.includes(searchTerm) ? 'block' : 'none';
         });
 
         // Web view (table rows)
         const tableRows = document.querySelectorAll('#membersGridTable tbody tr');
         tableRows.forEach(row => {
-            const centerName = row.getAttribute('data-member-name').toLowerCase();
-            row.style.display = centerName.includes(searchTerm) ? 'table-row' : 'none';
+            const memberName = row.getAttribute('data-member-name').toLowerCase();
+            row.style.display = memberName.includes(searchTerm) ? 'table-row' : 'none';
         });
     });
 

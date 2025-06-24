@@ -220,7 +220,7 @@
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="flex w-full lg:w-1/3 justify-between lg:justify-end items-end space-x-2">
+                <div class="flex w-full lg:w-1/3 justify-between lg:justify-end items-end space-x-2 pt-4 ">
                     <div class="flex flex-row lg:space-x-2 bg-white lg:text-xs w-full justify-end">
                         <!-- Edit -->
                         <button id="editBtn" class="bg-blue-600 text-white p-1 lg:p-2 rounded-lg hover:bg-blue-700 flex items-center justify-center px-6 w-1/2 lg:w-28 mr-2 lg:mr-0">
