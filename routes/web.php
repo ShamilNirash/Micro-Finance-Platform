@@ -62,3 +62,17 @@ Route::get('/collections', function () {
 Route::get('/underPayments', function () {
     return view('income/underPayments');
 });
+
+/*Payments*/
+Route::get('/payments', function () {
+    return view('payments/payments');
+});
+Route::get('/pending', function () {
+    return view('payments/pending');
+});
+Route::get('/nopaid', function () {
+    return view('payments/nopaid');
+});
+Route::get('/paymentsSummery', function () {
+    return view('payments/paymentsSummery');
+});
