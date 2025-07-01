@@ -14,10 +14,22 @@
             <div id="addNewMemberModal"
                 class="inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50 lg:absolute fixed p-4"
                 style="width: 100%; height: 100%;">
-                <div class="bg-white shadow-xl w-full max-w-lg rounded-lg">
+                <div class="bg-white shadow-xl w-full max-w-lg rounded-lg max-h-[90vh] overflow-y-auto">
                     <h2 class="text-md bg-blue-100 rounded-t-lg p-4">Add New Member</h2>
-                    <form id="addNewMemberForm" method="POST" action="{{ route('members.create') }}">
+                    <form id="addNewMemberForm" method="POST" action="{{ route('members.create') }}"
+                        enctype="multipart/form-data">
                         @csrf
+                        @if ($errors->any())
+                            <div class="bg-red-500 border border-red-700 text-white px-4 py-2 rounded mb-4">
+                                <strong>There were some errors:</strong>
+                                <ul class="mt-2 list-disc list-inside text-sm">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <div class="bg-white rounded-b-lg p-4 space-y-4">
                             <div class="flex items-center space-x-4">
                                 <label for="newMemberCenter" class="block text-xs text-gray-400 mb-1 ml-2 w-36">Branch Name*
@@ -63,7 +75,8 @@
                             <div class="flex items-center space-x-4">
                                 <label for="newMemberFullName" class="block text-xs text-gray-400 mb-1 ml-2 w-36">Full
                                     Name*</label>
-                                <input type="text" id="newMemberFullName" placeholder=""
+                                <input type="text" name="memberFullName" id="newMemberFullName" placeholder=""
+                                    value="{{ old('memberFullName') }}"
                                     class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                                     required />
                             </div>
@@ -72,35 +85,35 @@
                                 <div class="lg:w-1/2 flex items-center space-x-4">
                                     <label for="newMemberMobile01" class="block text-xs text-gray-400 mb-1 ml-2 w-36">Mobile
                                         Number 01</label>
-                                    <input type="tel" id="newMemberMobile01" placeholder=""
+                                    <input type="tel" name="memberPhoneNumber01" id="newMemberMobile01" placeholder=""
                                         class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                                 </div>
                                 <div class="lg:w-1/2 flex items-center space-x-4">
                                     <label for="newMemberMobile02" class="block text-xs text-gray-400 mb-1 ml-2 w-36">Mobile
                                         Number 02</label>
-                                    <input type="tel" id="newMemberMobile02" placeholder=""
+                                    <input type="tel" name="memberPhoneNumber02" id="newMemberMobile02" placeholder=""
                                         class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                                 </div>
                             </div>
                             <div class="flex items-center space-x-4">
                                 <label for="newMemberAddress"
                                     class="block text-xs text-gray-400 mb-1 ml-2 w-36">Address?</label>
-                                <input type="text" id="newMemberAddress" placeholder=""
+                                <input type="text" name="memberAddress" id="newMemberAddress" placeholder=""
                                     class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                             </div>
                             <div class="flex justify-between">
                                 <div class="w-1/2 flex items-center space-x-4">
                                     <label for="newMemberNIC" class="block text-xs text-gray-400 mb-1 ml-2 w-36">NIC</label>
-                                    <input type="text" id="newMemberNIC" placeholder=""
+                                    <input type="text" id="newMemberNIC" name="memberNicNumber" placeholder=""
                                         class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                                 </div>
                                 <div class="w-1/2 flex items-center space-x-4  pl-4">
                                     <label class="text-xs text-gray-400 w-1/2 flex space-x-1">
-                                        <input type="radio" name="newMemberGender" value="Male" class="p-1 " />
+                                        <input type="radio" name="memberGender" value="Male" class="p-1 " />
                                         <p>Male</p>
                                     </label>
                                     <label class="text-xs text-gray-400 w-1/2 flex space-x-1">
-                                        <input type="radio" name="newMemberGender" value="Female" class="p-1 " />
+                                        <input type="radio" name="memberGender" value="Female" class="p-1 " />
                                         <p>Female</p>
                                     </label>
 
@@ -109,13 +122,15 @@
                             <div class="flex justify-between items-center space-x-4">
                                 <div>
                                     <label class="block text-xs text-gray-400 mb-1 ml-2">Image*</label>
-                                    <input type="file" id="newMemberImage1"
-                                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                                    <input type="file" id="newMemberImage1" name="memberImage01"
+                                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                                        required />
                                 </div>
                                 <div>
                                     <label class="block text-xs text-gray-400 mb-1 ml-2">Image*</label>
-                                    <input type="file" id="newMemberImage2"
-                                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                                    <input type="file" id="newMemberImage2" name="memberImage02"
+                                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                                        required />
                                 </div>
                             </div>
                             <div class="flex justify-end space-x-4 mt-2">
@@ -131,6 +146,11 @@
                         </div>
                     </form>
                 </div>
+                @if (session('show_create_popup'))
+                    <script>
+                        window.showCreatePopup = true;
+                    </script>
+                @endif
             </div>
 
             <div class="p-0 border-0 lg:py-2 lg:bg-sky-50 lg:border rounded-lg flex flex-col justify-between h-full">
@@ -607,43 +627,40 @@
                   document.getElementById('Tmember').textContent = member; */
             });
         });
-
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize selectedmember array
             window.selectedmember = window.selectedmember || [];
 
-            // Add New Member Modal
+            const modal = document.getElementById('addNewMemberModal');
+
+            // Show modal if server set a flag (via Blade)
+            if (modal && window.showCreatePopup === true) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                console.log('Modal reopened after validation error');
+            }
+
+            // Open modal on Add button click
             const addNewMemberButton = document.getElementById('addNewMemberButton');
             if (addNewMemberButton) {
                 addNewMemberButton.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const modal = document.getElementById('addNewMemberModal');
-                    if (modal) {
-                        modal.classList.remove('hidden');
-                        modal.classList.add('flex');
-                        console.log('Add Member modal opened'); // Debug log
-                    } else {
-                        console.error('Modal #addNewMemberModal not found');
-                    }
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
                 });
-            } else {
-                console.error('Button #addNewMember not found');
             }
 
-            // Cancel New Member Modal
+            // Close modal on Cancel button click
             const cancelNewMemberButton = document.getElementById('cancelNewMember');
             if (cancelNewMemberButton) {
                 cancelNewMemberButton.addEventListener('click', function() {
-                    const modal = document.getElementById('addNewMemberModal');
-                    if (modal) {
-                        modal.classList.add('hidden');
-                        modal.classList.remove('flex');
-                        document.getElementById('addNewMemberForm').reset(); // Reset form fields
-                        console.log('Add Member modal closed');
-                    }
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                    document.getElementById('addNewMemberForm').reset();
                 });
             }
         });
+
 
         // Handle Cancel buttons
         document.getElementById('cancelBranch').addEventListener('click', () => {

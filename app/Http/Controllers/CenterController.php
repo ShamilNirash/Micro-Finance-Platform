@@ -25,7 +25,7 @@ class CenterController extends Controller
                 'manager_name' => strtolower($request->input('manager_name'))
             ]);
             $request->validate([
-                'center_name' => 'required|string|max:255|regex:/^[a-z-]+$/|unique:centers,center_name',
+                'center_name' => 'required|string|max:255|unique:centers,center_name',
                 'branch_id' => 'required|string|regex:/^[0-9]+$/',
                 'payment_day' => 'required|in:MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY',
                 'manager_name' => 'required|string|max:255'
