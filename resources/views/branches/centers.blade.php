@@ -233,7 +233,7 @@
                                         <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details"
                                             data-branch-name={{ capitalizeFirstLetter($center->branch->branch_name) }}
                                             data-center-name="{{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }} {{ capitalizeFirstLetter($center->center_name) }}"
-                                            data-manager={{ capitalizeEachWord($center->manager_name) }}
+                                            data-manager="{{ capitalizeEachWord($center->manager_name) }}"
                                             data-groups={{ str_pad($center->group->count(), 2, '0', STR_PAD_LEFT) }}
                                             data-members={{ str_pad($count_total_members, 2, '0', STR_PAD_LEFT) }}
                                             data-payment-day={{ capitalizeFirstLetter($center->payment_date) }}
