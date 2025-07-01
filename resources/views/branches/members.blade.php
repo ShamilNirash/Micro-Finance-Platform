@@ -16,61 +16,42 @@
                 style="width: 100%; height: 100%;">
                 <div class="bg-white shadow-xl w-full max-w-lg rounded-lg">
                     <h2 class="text-md bg-blue-100 rounded-t-lg p-4">Add New Member</h2>
-                    <form id="addNewMemberForm">
+                    <form id="addNewMemberForm" method="POST" action="{{ route('members.create') }}">
+                        @csrf
                         <div class="bg-white rounded-b-lg p-4 space-y-4">
                             <div class="flex items-center space-x-4">
-                                <select id="centerBranch" name="branch_id" onchange="this.form.submit()"
+                                <label for="newMemberCenter" class="block text-xs text-gray-400 mb-1 ml-2 w-36">Branch Name*
+                                </label>
+                                <select id="centerBranch" name="branch_id"
                                     class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                                     required>
-                                    <option value="" disabled {{ empty($selectedBranchId) ? 'selected' : '' }}>Select
-                                        a
-                                        branch</option>
-                                    @foreach ($allBranches as $branch_name)
-                                        <option value="{{ $branch_name->id }}"
-                                            {{ $selectedBranchId == $branch_name->id ? 'selected' : '' }}>
-                                            {{ capitalizeFirstLetter($branch_name->branch_name) }}
-                                        </option>
+                                    <option value="" disabled selected>Select a branch</option>
+                                    @foreach ($allBranches as $branch)
+                                        <option value="{{ $branch->id }}">
+                                            {{ capitalizeFirstLetter($branch->branch_name) }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                           {{--  @if ($selectedBranchId)
-                                @php
-                                    $selectedBranch = $allBranches->firstWhere('id', $selectedBranchId);
-                                @endphp
-
-                                @if ($selectedBranch && $selectedBranch->center->count())
-                                    <div class="mt-4">
-                                        <label for="center_id" class="block text-xs text-gray-400 mb-1 ml-2 w-36">Center
-                                            Name*</label>
-                                        <select name="center_id" id="center_id"
-                                            class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                                            required>
-                                            <option value="" disabled selected>Select a center</option>
-                                            @foreach ($selectedBranch->center as $center)
-                                                <option value="{{ $center->id }}">
-                                                    {{ ucfirst(strtolower($center->center_name)) }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                @else
-                                    <p class="text-xs text-red-500 mt-2">No centers available for selected branch.</p>
-                                @endif
-                            @endif --}}
-
-                            {{-- <div class="flex items-center space-x-4">
+                            <div class="flex items-center space-x-4">
                                 <label for="newMemberCenter" class="block text-xs text-gray-400 mb-1 ml-2 w-36">Center
                                     Name*</label>
-                                <input type="text" id="newMemberCenter" placeholder=""
-                                    class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                                    required />
-                            </div> --}}
+                                <select id="newMemberCenter" name="center_id"
+                                    class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                                    required>
+                                    <option value="" disabled selected>Select a center</option>
+                                </select>
+                            </div>
+
                             <div class="flex items-center space-x-4">
                                 <label for="newMemberGroup" class="block text-xs text-gray-400 mb-1 ml-2 w-36">Group
                                     Name*</label>
-                                <input type="text" id="newMemberGroup" placeholder=""
-                                    class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                                    required />
+                                <select id="newMemberGroup" name="group_id"
+                                    class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                                    required>
+                                    <option value="" disabled selected>Select a group</option>
+                                </select>
                             </div>
+
 
                         </div>
                         <div>
@@ -128,15 +109,13 @@
                             <div class="flex justify-between items-center space-x-4">
                                 <div>
                                     <label class="block text-xs text-gray-400 mb-1 ml-2">Image*</label>
-                                    <input type="file" id="newMemberImage"
-                                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                                        required />
+                                    <input type="file" id="newMemberImage1"
+                                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                                 </div>
                                 <div>
                                     <label class="block text-xs text-gray-400 mb-1 ml-2">Image*</label>
-                                    <input type="file" id="newMemberImage"
-                                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                                        required />
+                                    <input type="file" id="newMemberImage2"
+                                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                                 </div>
                             </div>
                             <div class="flex justify-end space-x-4 mt-2">
@@ -183,7 +162,8 @@
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19 9l-7 7-7-7"></path>
+                                        d="M19 9l-7 7-7-7">
+                                    </path>
                                 </svg>
                             </div>
 
@@ -427,7 +407,57 @@
             });
         });
 
+        document.getElementById('centerBranch').addEventListener('change', function() {
+            const branchId = this.value;
+            const centerSelect = document.getElementById('newMemberCenter');
 
+            // Clear existing options
+            centerSelect.innerHTML = '<option value="" disabled selected>Loading...</option>';
+
+            fetch(`/centers/${branchId}`)
+                .then(response => response.json())
+                .then(data => {
+                    centerSelect.innerHTML = '<option value="" disabled selected>Select a center</option>';
+                    data.forEach(center => {
+                        const option = document.createElement('option');
+                        option.value = center.id;
+                        option.textContent = center.center_name.charAt(0).toUpperCase() + center
+                            .center_name.slice(1).toLowerCase();
+                        centerSelect.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    centerSelect.innerHTML =
+                        '<option value="" disabled selected>Error loading centers</option>';
+                    console.error('Error:', error);
+                });
+        });
+        const centerDropdown = document.getElementById('newMemberCenter');
+        const groupDropdown = document.getElementById('newMemberGroup');
+
+        centerDropdown.addEventListener('change', function() {
+            const centerId = this.value;
+            groupDropdown.innerHTML = '<option value="" disabled selected>Loading...</option>';
+
+            fetch(`/groups/${centerId}`)
+                .then(response => response.json())
+                .then(data => {
+                    groupDropdown.innerHTML = '<option value="" disabled selected>Select a group</option>';
+                    data.forEach(group => {
+                        const option = document.createElement('option');
+                        console.log(group)
+                        option.value = group.id;
+                        option.textContent = group.group_name.charAt(0).toUpperCase() + group.group_name
+                            .slice(1).toLowerCase();
+                        groupDropdown.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching groups:', error);
+                    groupDropdown.innerHTML =
+                        '<option value="" disabled selected>Error loading groups</option>';
+                });
+        });
         // Search Filter for both mobile and web views
         document.getElementById('searchMember').addEventListener('input', function() {
             const searchTerm = this.value.toLowerCase();
@@ -610,58 +640,6 @@
                         modal.classList.remove('flex');
                         document.getElementById('addNewMemberForm').reset(); // Reset form fields
                         console.log('Add Member modal closed');
-                    }
-                });
-            }
-
-            // Submit New Member Form
-            const createNewMemberButton = document.getElementById('createNewMember');
-            if (createNewMemberButton) {
-                createNewMemberButton.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const form = document.getElementById('addNewMemberForm');
-                    if (form) {
-                        const newMember = {
-                            branch: document.getElementById('newMemberBranch').value,
-                            center: document.getElementById('newMemberCenter').value,
-                            group: document.getElementById('newMemberGroup').value,
-                            fullName: document.getElementById('newMemberFullName').value,
-                            mobile01: document.getElementById('newMemberMobile01').value,
-                            mobile02: document.getElementById('newMemberMobile02').value,
-                            address: document.getElementById('newMemberAddress').value,
-                            nic: document.getElementById('newMemberNIC').value,
-                            gender: document.querySelector('input[name="newMemberGender"]:checked')
-                                ?.value,
-                            image: document.getElementById('newMemberImage').files[0],
-                            type: 'new'
-                        };
-
-                        if (!newMember.fullName || !newMember.image) {
-                            alert("Full Name and Image are required.");
-                            return;
-                        }
-
-                        if (window.selectedmember.length >= 6) {
-                            window.selectedmember.pop();
-                            alert("Maximum 6 members allowed. This member was not added.");
-                        } else {
-                            window.selectedmember.push(newMember);
-                            const selectedMemberElement = document.getElementById('selectedmember');
-                            if (selectedMemberElement) {
-                                selectedMemberElement.textContent = window.selectedmember.map(m => m
-                                    .fullName || m.name).join(', ') || 'No member selected';
-                            } else {
-                                console.warn('Element #selectedmember not found');
-                            }
-                        }
-
-                        const modal = document.getElementById('addNewMemberModal');
-                        if (modal) {
-                            modal.classList.add('hidden');
-                            modal.classList.remove('flex');
-                            form.reset();
-                            console.log('Member added, modal closed');
-                        }
                     }
                 });
             }

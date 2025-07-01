@@ -3,6 +3,7 @@
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CenterController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,13 +34,19 @@ Route::post('/branches/create',  [BranchController::class, 'create_branch'])->na
 //centers routes
 Route::get('/centers', [CenterController::class, 'getAllActiveCenters'])->name('centers.viewblade');
 Route::post('/centers/create',  [CenterController::class, 'createCenter'])->name('centers.createcenter');
-
+Route::get('/centers/{branchId}', [CenterController::class, 'getCentersByBranch']);
 
 //members routes
 Route::get(
     '/members',
     [MemberController::class, 'viewAllMembers']
 )->name('members.viewblade');
+Route::post(
+    '/members/create',
+    [MemberController::class, 'createMember']
+)->name('members.create');
+//group routes
+Route::get('/groups/{centerId}', [GroupController::class, 'getGroupsByCenter']);
 
 // After clciking on eye icon in centers table - view summury of center and group table
 Route::get('/centerSummary', function () {

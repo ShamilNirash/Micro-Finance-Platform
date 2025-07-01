@@ -22,7 +22,16 @@ class MemberController extends Controller
     {
         $getActiveMembers = $this->memberRepository->get_all();
         $getAllBranches = $this->branchRepository->get_all();
-        return View('branches.members', ['allActiveMembers' => $getActiveMembers, 'allBranches' => $getAllBranches]);
+
+        return view('branches.members', [
+            'allActiveMembers' => $getActiveMembers,
+            'allBranches' => $getAllBranches
+        ]);
     }
 
+
+    public function createMember(Request $request)
+    {
+        dd($request);
+    }
 }

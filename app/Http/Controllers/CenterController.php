@@ -54,4 +54,10 @@ class CenterController extends Controller
             return redirect()->back()->with('error', 'Something went wrong.');
         }
     }
+    // In CenterController.php
+    public function getCentersByBranch($branchId)
+    {
+        $centers = $this->centerRepository->search_many('branch_id', $branchId);
+        return response()->json($centers);
+    }
 }
