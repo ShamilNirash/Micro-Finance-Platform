@@ -17,7 +17,7 @@
 
                 <!-- Dashboard -->
                 <li>
-                    <a href="#"
+                    <a href="/dashboard"
                         class="flex items-center p-1 px-4 w-full rounded-lg hover:bg-gray-50 sidebar-toggle space-x-2">
                         <img src="{{ asset('assets/icons/DiamondsFour.svg') }}" alt="Dashboard Icon" class="h-4 w-4 ">
                         <span class="sidebar-text">Dashboard</span>
@@ -40,7 +40,7 @@
                     <!-- Submenu for Branches -->
                     <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-gray-200 w-60">
                         <li>
-                            <a href="centers"
+                            <a href="/centers"
                                 class="flex items-center justify-start p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
                                 <img src="{{ asset('assets/icons/MapPinLine.svg') }}" alt="Centers Icon"
                                     class="h-4 w-4">
@@ -48,7 +48,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="members"
+                            <a href="/members"
                                 class="flex items-center justify-start p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
                                 <img src="{{ asset('assets/icons/Users.svg') }}" alt="Members Icon" class="h-4 w-4">
                                 <span class="sidebar-text">Members</span>
@@ -86,14 +86,14 @@
                     <!-- Submenu for Income -->
                     <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-gray-200 w-w-60">
                         <li>
-                            <a href="income" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
+                            <a href="/income" class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
                                 <img src="{{ asset('assets/icons/ChartLineUp.svg') }}" alt="Income Report Icon"
                                     class="h-4 w-4">
                                 <span class="sidebar-text">Income Report</span>
                             </a>
                         </li>
                         <li>
-                            <a href="collections"
+                            <a href="/collections"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
                                 <img src="{{ asset('assets/icons/CurrencyCircleDollar.svg') }}" alt="Collections Icon"
                                     class="h-4 w-4">
@@ -101,7 +101,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="underPayments"
+                            <a href="/underPayments"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
                                 <img src="{{ asset('assets/icons/pay01.svg') }}" alt="Under Payments Icon"
                                     class="h-4 w-4">
@@ -128,14 +128,14 @@
                     <!-- Submenu for Payments -->
                     <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-gray-200 w-w-60">
                         <li>
-                            <a href="payments"
+                            <a href="/payments"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
                                 <img src="{{ asset('assets/icons/Money.svg') }}" alt="Payments Icon" class="h-4 w-4">
                                 <span class="sidebar-text">Payments</span>
                             </a>
                         </li>
                         <li>
-                            <a href="pending"
+                            <a href="/pending"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
                                 <img src="{{ asset('assets/icons/HourglassHigh.svg') }}" alt="Pending Icon"
                                     class="h-4 w-4">
@@ -143,7 +143,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="nopaid"
+                            <a href="/nopaid"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-gray-100">
                                 <img src="{{ asset('assets/icons/MinusCircle.svg') }}" alt="No Paid Icon"
                                     class="h-4 w-4">

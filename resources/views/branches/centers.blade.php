@@ -253,7 +253,8 @@
                                             <td class="py-2 text-left"> {{ capitalizeFirstLetter($center->payment_date) }}
                                             </td>
                                             <td class="py-2 text-center flex justify-center items-center gap-1">
-                                                <a href="#" class="border rounded hover:bg-green-500">
+                                                <a href="{{ route('center.summary',$center->id) }}"
+                                                    class="border rounded hover:bg-green-500">
                                                     <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
                                                         class="h-3 w-3 m-1">
                                                 </a>
@@ -477,7 +478,6 @@
         // Row Summey
         document.querySelectorAll('.view-details').forEach(button => {
             button.addEventListener('click', (e) => {
-                e.preventDefault(); // Prevent default link behavior
                 const row = button.closest('tr');
                 const RowDetails = document.getElementById('RowDetails');
                 const firstColumn = document.getElementById('firstColumn');

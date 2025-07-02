@@ -35,6 +35,8 @@ Route::post('/branches/create',  [BranchController::class, 'create_branch'])->na
 Route::get('/centers', [CenterController::class, 'getAllActiveCenters'])->name('centers.viewblade');
 Route::post('/centers/create',  [CenterController::class, 'createCenter'])->name('centers.createcenter');
 Route::get('/centers/{branchId}', [CenterController::class, 'getCentersByBranch']);
+Route::get('/centerSummary/{centerId}', [CenterController::class,'viewCenterSummary'])->name('center.summary');
+
 
 //members routes
 Route::get(
@@ -49,9 +51,6 @@ Route::post(
 Route::get('/groups/{centerId}', [GroupController::class, 'getGroupsByCenter']);
 
 // After clciking on eye icon in centers table - view summury of center and group table
-Route::get('/centerSummary', function () {
-    return view('branches/centerSummary');
-});
 // After clciking on eye icon in Group table - view summury of Group and memebers table
 Route::get('/groupSummary', function () {
     return view('branches/groupSummary');

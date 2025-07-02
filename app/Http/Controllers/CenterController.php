@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\BranchRepository;
 use App\Repositories\CenterRepository;
+use Facade\FlareClient\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
@@ -56,7 +57,22 @@ class CenterController extends Controller
     // In CenterController.php
     public function getCentersByBranch($branchId)
     {
-        $centers = $this->centerRepository->search_many('branch_id', $branchId);
-        return response()->json($centers);
+        try {
+            $centers = $this->centerRepository->search_many('branch_id', $branchId);
+            return response()->json($centers);
+        } catch (\Exception $e) {
+            Log::error('Error getting branch: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+    }
+    public function viewCenterSummary($centerId)
+    {
+        try {
+            $centerDetails = $this->centerRepository->search_one('id', $centerId);
+            return View('branches.centerSummary', ['center_details' => $centerDetails]);
+        } catch (\Exception $e) {
+            Log::error('Error getting center summary: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
     }
 }

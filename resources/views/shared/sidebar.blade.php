@@ -13,7 +13,7 @@
             <ul class="space-y-2 content-start min-h-full  overflow-hidden text-xs">
                 <!-- Dashboard -->
                 <li>
-                    <a href="dashboard"
+                    <a href="/dashboard"
                         class="flex items-center p-2 px-4 w-full rounded-lg hover:bg-sky-100 sidebar-toggle space-x-2 active:bg-sky-100 {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                         <img src="{{ asset('assets/icons/DiamondsFour.svg') }}" alt="Dashboard Icon" class="h-4 w-4 ">
                         <span class="sidebar-text">Dashboard</span>
@@ -36,7 +36,7 @@
                     <!-- Submenu for Branches -->
                     <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-white w-44">
                         <li>
-                            <a href="centers"
+                            <a href="/centers"
                                 class="flex items-center justify-start p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200 {{ request()->routeIs('centers.viewblade') ? 'active' : '' }}">
                                 <img src="{{ asset('assets/icons/MapPinLine.svg') }}" alt="Centers Icon"
                                     class="h-4 w-4">
@@ -44,7 +44,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="members"
+                            <a href="/members"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200 {{ request()->routeIs('members.viewblade') ? 'active' : '' }}">
                                 <img src="{{ asset('assets/icons/Users.svg') }}" alt="Members Icon" class="h-4 w-4">
                                 <span class="sidebar-text-mini">Members</span>
@@ -87,7 +87,7 @@
                     <!-- Submenu for Income -->
                     <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-white w-44">
                         <li>
-                            <a href="income"
+                            <a href="/income"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/ChartLineUp.svg') }}" alt="Income Report Icon"
                                     class="h-4 w-4">
@@ -95,7 +95,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="collections"
+                            <a href="/collections"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/CurrencyCircleDollar.svg') }}" alt="Collections Icon"
                                     class="h-4 w-4">
@@ -103,7 +103,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="underPayments"
+                            <a href="/underPayments"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/pay01.svg') }}" alt="Under Payments Icon"
                                     class="h-4 w-4">
@@ -131,7 +131,7 @@
                     <!-- Submenu for Payments -->
                     <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-white w-44">
                         <li>
-                            <a href="payments"
+                            <a href="/payments"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/Money.svg') }}" alt="Payments Icon"
                                     class="h-4 w-4">
@@ -139,7 +139,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="pending"
+                            <a href="/pending"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/HourglassHigh.svg') }}" alt="Pending Icon"
                                     class="h-4 w-4">
@@ -147,7 +147,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="nopaid"
+                            <a href="/nopaid"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/MinusCircle.svg') }}" alt="No Paid Icon"
                                     class="h-4 w-4">
