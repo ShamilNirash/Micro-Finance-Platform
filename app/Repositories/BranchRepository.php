@@ -50,7 +50,7 @@ class BranchRepository
     public function get_all()
     {
         try {
-            return $this->branches->where(['status' => 'ACTIVE'])->get();
+            return $this->branches->where(['status' => 'ACTIVE'])->with('center.group')->get();
         } catch (\Exception $e) {
             return $e;
         }

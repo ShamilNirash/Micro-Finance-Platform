@@ -3,6 +3,8 @@
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CenterController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,28 +25,38 @@ Route::get('/signup', function () {
     return view('auth.signUp');
 });
 Route::get('/dashboard', function () {
-    return view('test');
-});
+    return view('dashboard');
+})->name('dashboard');
 
 //branches routes
-Route::post('/branches/create', action: [BranchController::class, 'create_branch'])->name('branches.createbranch');
+Route::post('/branches/create',  [BranchController::class, 'create_branch'])->name('branches.createbranch');
 
 //centers routes
 Route::get('/centers', [CenterController::class, 'getAllActiveCenters'])->name('centers.viewblade');
 Route::post('/centers/create',  [CenterController::class, 'createCenter'])->name('centers.createcenter');
+Route::get('/centers/{branchId}', [CenterController::class, 'getCentersByBranch']);
+Route::get('/centerSummary/{centerId}', [CenterController::class,'viewCenterSummary'])->name('center.summary');
+
+
+//members routes
+Route::get(
+    '/members',
+    [MemberController::class, 'viewAllMembers']
+)->name('members.viewblade');
+Route::post(
+    '/members/create',
+    [MemberController::class, 'createMember']
+)->name('members.create');
+//group routes
+Route::get('/groups/{centerId}', [GroupController::class, 'getGroupsByCenter']);
 
 // After clciking on eye icon in centers table - view summury of center and group table
-Route::get('/centerSummary', function () {
-    return view('branches/centerSummary');
-});
 // After clciking on eye icon in Group table - view summury of Group and memebers table
 Route::get('/groupSummary', function () {
     return view('branches/groupSummary');
 });
 
-Route::get('/members', function () {
-    return view('branches/members');
-});
+
 Route::get('/memberSummery', function () {
     return view('branches/memberSummery');
 });

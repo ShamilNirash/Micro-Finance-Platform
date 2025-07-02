@@ -33,7 +33,7 @@ class CenterRepository
     public function search_one($type, $value)
     {
         try {
-            return $this->centers->where([$type => $value, 'status' => 'ACTIVE'])->first();
+            return $this->centers->where([$type => $value, 'status' => 'ACTIVE'])->with(['branch', 'group.member'])->first();
         } catch (\Exception $e) {
             return $e;
         }

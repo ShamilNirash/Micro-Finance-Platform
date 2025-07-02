@@ -233,7 +233,7 @@
                                         <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details"
                                             data-branch-name={{ capitalizeFirstLetter($center->branch->branch_name) }}
                                             data-center-name="{{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }} {{ capitalizeFirstLetter($center->center_name) }}"
-                                            data-manager={{ capitalizeEachWord($center->manager_name) }}
+                                            data-manager="{{ capitalizeEachWord($center->manager_name) }}"
                                             data-groups={{ str_pad($center->group->count(), 2, '0', STR_PAD_LEFT) }}
                                             data-members={{ str_pad($count_total_members, 2, '0', STR_PAD_LEFT) }}
                                             data-payment-day={{ capitalizeFirstLetter($center->payment_date) }}
@@ -253,7 +253,8 @@
                                             <td class="py-2 text-left"> {{ capitalizeFirstLetter($center->payment_date) }}
                                             </td>
                                             <td class="py-2 text-center flex justify-center items-center gap-1">
-                                                <a href="#" class="border rounded hover:bg-green-500">
+                                                <a href="{{ route('center.summary',$center->id) }}"
+                                                    class="border rounded hover:bg-green-500">
                                                     <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
                                                         class="h-3 w-3 m-1">
                                                 </a>
@@ -477,7 +478,6 @@
         // Row Summey
         document.querySelectorAll('.view-details').forEach(button => {
             button.addEventListener('click', (e) => {
-                e.preventDefault(); // Prevent default link behavior
                 const row = button.closest('tr');
                 const RowDetails = document.getElementById('RowDetails');
                 const firstColumn = document.getElementById('firstColumn');

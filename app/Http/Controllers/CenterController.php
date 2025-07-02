@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Repositories\BranchRepository;
 use App\Repositories\CenterRepository;
-use Dotenv\Exception\ValidationException;
+use Facade\FlareClient\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
 class CenterController extends Controller
 {
@@ -25,7 +26,7 @@ class CenterController extends Controller
                 'manager_name' => strtolower($request->input('manager_name'))
             ]);
             $request->validate([
-                'center_name' => 'required|string|max:255|regex:/^[a-z-]+$/|unique:centers,center_name',
+                'center_name' => 'required|string|max:255|unique:centers,center_name',
                 'branch_id' => 'required|string|regex:/^[0-9]+$/',
                 'payment_day' => 'required|in:MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY',
                 'manager_name' => 'required|string|max:255'
@@ -35,7 +36,6 @@ class CenterController extends Controller
 
             return redirect()->back()->with('success', 'Branch created successfully.');
         } catch (ValidationException $e) {
-            dd($e);
             session()->flash('show_create_popup', true);
             throw $e;
         } catch (\Exception $e) {
@@ -51,6 +51,27 @@ class CenterController extends Controller
             return View('branches.centers', ['all_active_centers' => $all_active_centers, 'all_active_branches' => $all_active_branches]);
         } catch (\Exception $e) {
             Log::error('Error creating branch: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+    }
+    // In CenterController.php
+    public function getCentersByBranch($branchId)
+    {
+        try {
+            $centers = $this->centerRepository->search_many('branch_id', $branchId);
+            return response()->json($centers);
+        } catch (\Exception $e) {
+            Log::error('Error getting branch: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+    }
+    public function viewCenterSummary($centerId)
+    {
+        try {
+            $centerDetails = $this->centerRepository->search_one('id', $centerId);
+            return View('branches.centerSummary', ['center_details' => $centerDetails]);
+        } catch (\Exception $e) {
+            Log::error('Error getting center summary: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong.');
         }
     }
