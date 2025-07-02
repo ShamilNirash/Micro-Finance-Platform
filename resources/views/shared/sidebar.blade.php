@@ -50,7 +50,7 @@
                                 <span class="sidebar-text-mini">Members</span>
                             </a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="recentlyAdded"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/Timer.svg') }}" alt="Recently Added Icon"
@@ -65,7 +65,7 @@
                                     class="h-4 w-4">
                                 <span class="sidebar-text-mini">Member Summery</span>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
 
@@ -74,7 +74,8 @@
                     <button
                         class="flex items-center justify-between p-2 px-4 w-full rounded-lg hover:bg-sky-100 active:bg-sky-200 sidebar-toggle space-x-2">
                         <div class="flex items-center space-x-2">
-                            <img src="{{ asset('assets/icons/CurrencyDollar.svg') }}" alt="Income Icon" class="h-4 w-4">
+                            <img src="{{ asset('assets/icons/CurrencyDollar.svg') }}" alt="Income Icon"
+                                class="h-4 w-4">
                             <span class="sidebar-text">Income</span>
                         </div>
                         <svg class="w-4 h-4 transform transition-transform duration-200 arrow sidebar-arrow"
@@ -130,7 +131,7 @@
                     <!-- Submenu for Payments -->
                     <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-white w-44">
                         <li>
-                            <a href=""
+                            <a href="payments"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/Money.svg') }}" alt="Payments Icon"
                                     class="h-4 w-4">
@@ -138,7 +139,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="pending"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/HourglassHigh.svg') }}" alt="Pending Icon"
                                     class="h-4 w-4">
@@ -146,7 +147,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="nopaid"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/MinusCircle.svg') }}" alt="No Paid Icon"
                                     class="h-4 w-4">

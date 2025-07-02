@@ -121,7 +121,7 @@
                             </div>
                             <div class="flex justify-between items-center space-x-4">
                                 <div>
-                                    <label class="block text-xs text-gray-400 mb-1 ml-2">Image*</label>
+                                    <label class="block text-xs text-gray-400 mb-1 ml-2">Image (NIC)*</label>
                                     <input type="file" id="newMemberImage1" name="memberImage01"
                                         class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                                         required />

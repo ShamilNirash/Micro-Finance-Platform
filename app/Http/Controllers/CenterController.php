@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Repositories\BranchRepository;
 use App\Repositories\CenterRepository;
-use Dotenv\Exception\ValidationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
 class CenterController extends Controller
 {
@@ -35,7 +35,6 @@ class CenterController extends Controller
 
             return redirect()->back()->with('success', 'Branch created successfully.');
         } catch (ValidationException $e) {
-            dd($e);
             session()->flash('show_create_popup', true);
             throw $e;
         } catch (\Exception $e) {
