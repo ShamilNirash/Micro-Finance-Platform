@@ -52,6 +52,20 @@ Route::get('/recentlyAdded', function () {
     return view('branches/recentlyAdded');
 });
 
+/*Branches/Recently*/
+Route::get('/recentCenters', function () {
+    return view('branches/recentlyAdded/centers');
+});
+Route::get('/recentGroups', function () {
+    return view('branches/recentlyAdded/groups');
+});
+Route::get('/recentLoans', function () {
+    return view('branches/recentlyAdded/loans');
+});
+Route::get('/recentMembers', function () {
+    return view('branches/recentlyAdded/members');
+});
+
 /*income*/
 Route::get('/income', function () {
     return view('income/incomeReport');

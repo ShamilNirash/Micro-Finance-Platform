@@ -90,7 +90,16 @@
             </div>
         </div>
 
-        <div class="p-0 border-0 lg:py-2 lg:bg-sky-50 lg:border rounded-lg flex flex-col justify-between h-full">
+        <div class="h-8 pb-4 ">
+            <ul class="flex text-xs space-x-4">
+                <li class="border-b-2 pb-1 border-black  "><a href="http://">New Members</a></li>
+                <li class=" border-black text-gray-400 hover:text-gray-700"><a href="http://">New Loan</a></li>
+                <li class=" border-black text-gray-400 hover:text-gray-700"><a href="http://">New Centers</a></li>
+                <li class=" border-black text-gray-400 hover:text-gray-700"><a href="http://">New Groups</a></li>
+            </ul>
+        </div>
+        <!--Content-->
+        <div class="p-0 border-0 lg:py-2 lg:bg-sky-50 lg:border rounded-lg flex flex-col justify-between h-[calc(100vh-115px)] ">
             <!-- Top Bar -->
             <div class="flex flex-col w-full space-y-2 p-2 lg:px-2 text-md lg:flex lg:flex-row lg:space-y-0 lg:justify-between lg:items-center lg:p-1">
                 <!-- Filter Button -->
@@ -284,32 +293,26 @@
 
             <!-- member Grid Table format hidden for mobile screens -->
             <div class="flex justify-start h-full pt-2">
-                <div id="memberGridTable" class="w-full max-h-[calc(100vh-200px)]  hidden lg:block p-0 overflow-y-auto">
+                <div id="memberGridTable" class="w-full max-h-[calc(100vh-210px)]  hidden lg:block p-0 overflow-y-auto">
                     <div class="min-w-full ">
                         <table class="w-full min-w-max">
                             <thead class="w-full text-gray-700 text-xs font-light bg-gray-100 sticky top-0">
                                 <tr class="uppercase w-full">
-                                    <th class="pl-2 text-left">
-                                        <input type="checkbox" id="select-all" class="form-checkbox h-4 w-4 text-blue-400 m-1">
-                                    </th>
-                                    <th class="py-2 text-left">#</th>
+                                    <th class="py-2 text-center">#</th>
                                     <th class="py-2 text-left">Name</th>
                                     <th class="py-2 text-left">Center</th>
                                     <th class="py-2 text-left">NIC</th>
-                                    <th class="py-2 text-left">Loan Balance</th>
+                                    <th class="py-2 text-center">Loan Balance</th>
                                     <th class="py-2 text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="text-gray-800 text-xs font-light bg-white w-full">
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Dunura Hansja" data-center-name="Maharagama" data-NIC="20001589432" data-loan-balance="20000">
-                                    <td class="pl-2 text-left">
-                                        <input type="checkbox" name="selected_ids[]" value="1" class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                    </td>
-                                    <td class="py-2 text-left">001</td>
-                                    <td class="py-2 text-left">Dunura hansaja</td>
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Kinura" data-center-name="Maharagama" data-NIC="20001589432" data-loan-balance="20000" data-num01="0719865324" data-num02="879652314">
+                                    <td class="py-2 text-center">001</td>
+                                    <td class="py-2 text-left">Kinura</td>
                                     <td class="py-2 text-left">waththegedra</td>
                                     <td class="py-2 text-left">20015896423</td>
-                                    <td class="py-2 text-left">2000</td>
+                                    <td class="py-2 text-center">2000</td>
                                     <td class="py-2 text-center flex justify-center items-center gap-1">
                                         <a href="#" class="border rounded hover:bg-green-500">
                                             <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
@@ -323,15 +326,13 @@
                                     </td>
                                 </tr>
                                 <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Dunura Hansja" data-center-name="Maharagama" data-NIC="20001589432" data-loan-balance="20000">
-                                    <td class="pl-2 text-left">
-                                        <input type="checkbox" name="selected_ids[]" value="1" class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                    </td>
-                                    <td class="py-2 text-left">001</td>
+                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Dunura Hansja" data-center-name="Maharagama" data-NIC="20001589432" data-loan-balance="20000" data-num01="0719865324" data-num02="078658923">
+
+                                    <td class="py-2 text-center">001</td>
                                     <td class="py-2 text-left">Dunura hansaja</td>
                                     <td class="py-2 text-left">waththegedra</td>
                                     <td class="py-2 text-left">20015896423</td>
-                                    <td class="py-2 text-left">2000</td>
+                                    <td class="py-2 text-center">12000</td>
                                     <td class="py-2 text-center flex justify-center items-center gap-1">
                                         <a href="#" class="border rounded hover:bg-green-500">
                                             <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
@@ -374,6 +375,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
     <!-- Second Column: Row Details -->
@@ -458,10 +460,8 @@
         </div>
 
     </div>
-
-
-
 </div>
+
 
 <script>
     // Add alternating background colors to table rows
@@ -475,7 +475,6 @@
             row.classList.add('hover:bg-sky-100');
         });
     });
-
 
     // Search Filter for both mobile and web views
     document.getElementById('searchMember').addEventListener('input', function() {
@@ -496,8 +495,7 @@
         });
     });
 
-
-    //Coustom dropdown
+        //Coustom dropdown
     function toggleDropdown() {
         const dropdownMenu = document.getElementById('dropdownMenu');
         dropdownMenu.classList.toggle('hidden');
@@ -527,87 +525,13 @@
         }
     });
 
-    // Toggle dropdown menu
+        // Toggle dropdown menu
     function toggleDropdown() {
         const dropdownMenu = document.getElementById('dropdownMenu');
         dropdownMenu.classList.toggle('hidden');
     }
 
-    // Handle dropdown selection
-    document.querySelectorAll('#dropdownMenu li').forEach(item => {
-        item.addEventListener('click', () => {
-            const value = item.getAttribute('data-value');
-            const text = item.textContent;
-            document.getElementById('selectedOption').textContent = text;
-            document.getElementById('branchSelect').value = value;
-            document.getElementById('dropdownMenu').classList.add('hidden');
-
-            if (value === 'add_new') {
-                document.getElementById('addBranchModal').classList.remove('hidden');
-            }
-        });
-    });
-
-    //check box selection
-    document.getElementById('select-all').addEventListener('change', function(e) {
-        let checkboxes = document.querySelectorAll('input[name="selected_ids[]"]');
-        checkboxes.forEach(checkbox => checkbox.checked = e.target.checked);
-    });
-
-    // Checkbox handling
-    document.querySelectorAll('input[name="selected_ids[]"]').forEach(checkbox => {
-        checkbox.addEventListener('click', function(e) {
-            e.stopPropagation();
-
-            if (this.id !== 'select-all') {
-                // Update "select all" status
-                const allCheckboxes = document.querySelectorAll('input[name="selected_ids[]"]:not(#select-all)');
-                const allChecked = [...allCheckboxes].every(cb => cb.checked);
-                document.getElementById('select-all').checked = allChecked;
-            }
-        });
-    });
-
-
-    // Helper function to hide all second columns
-    function hideAllSecondColumns() {
-        const columns = ['RowDetails', 'centersColumn', 'branchesColumn'];
-        columns.forEach(col => document.getElementById(col).classList.add('hidden'));
-
-        document.getElementById('firstColumn').classList.remove('lg:w-8/12');
-        document.getElementById('firstColumn').classList.add('lg:w-full');
-
-    }
-
-    // Row Summey
-    document.querySelectorAll('.view-details').forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault(); // Prevent default link behavior
-            const row = button.closest('tr');
-            const RowDetails = document.getElementById('RowDetails');
-            const firstColumn = document.getElementById('firstColumn');
-
-            // Show second column
-            RowDetails.classList.remove('hidden');
-            firstColumn.classList.remove('lg:w-full');
-            firstColumn.classList.add('lg:w-8/12');
-            RowDetails.classList.add('lg:flex');
-
-            // Update second column content
-            const centerName = row.getAttribute('data-center-name');
-            const manager = row.getAttribute('data-manager');
-            const groups = row.getAttribute('data-groups');
-            const member = row.getAttribute('data-member');
-            const paymentDay = row.getAttribute('data-payment-day');
-
-            document.getElementById('branchName').textContent = centerName;
-            document.getElementById('Cname').textContent = centerName;
-            document.getElementById('Cmanager').textContent = manager;
-            document.getElementById('Tgroup').textContent = groups;
-            document.getElementById('Tmember').textContent = member;
-        });
-    });
-
+    //Add New Member Modle
     document.addEventListener('DOMContentLoaded', function() {
         // Initialize selectedmember array
         window.selectedmember = window.selectedmember || [];
@@ -695,25 +619,49 @@
         }
     });
 
-    // Handle Cancel buttons
-    document.getElementById('cancelBranch').addEventListener('click', () => {
-        document.getElementById('addBranchModal').classList.add('hidden');
-        hideAllSecondColumns();
+    // Helper function to hide all second columns
+    function hideAllSecondColumns() {
+        const columns = ['RowDetails', 'centersColumn', 'branchesColumn'];
+        columns.forEach(col => document.getElementById(col).classList.add('hidden'));
+
+        document.getElementById('firstColumn').classList.remove('lg:w-8/12');
+        document.getElementById('firstColumn').classList.add('lg:w-full');
+
+    }
+
+    // Row Summey
+    document.querySelectorAll('.view-details').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent default link behavior
+            const row = button.closest('tr');
+            const RowDetails = document.getElementById('RowDetails');
+            const firstColumn = document.getElementById('firstColumn');
+
+            // Show second column
+            RowDetails.classList.remove('hidden');
+            firstColumn.classList.remove('lg:w-full');
+            firstColumn.classList.add('lg:w-8/12');
+            RowDetails.classList.add('lg:flex');
+
+            // Update second column content
+            const memberName = row.getAttribute('data-member-name');
+            const num01 = row.getAttribute('data-num01');
+            const num02 = row.getAttribute('data-num02');
+            const NIC = row.getAttribute('data-NIC');
+            const groups = row.getAttribute('data-groups');
+            const member = row.getAttribute('data-member');
+            const paymentDay = row.getAttribute('data-payment-day');
+
+            document.getElementById('memberName').textContent = memberName;
+            document.getElementById('num01').textContent = num01;
+            document.getElementById('num02').textContent = num01;
+            document.getElementById('NIC').textContent = NIC;
+            document.getElementById('Cmanager').textContent = manager;
+            document.getElementById('Tgroup').textContent = groups;
+            document.getElementById('Tmember').textContent = member;
+        });
     });
 
-    document.getElementById('cancelCenter').addEventListener('click', () => {
-        document.getElementById('addCenterModal').classList.add('hidden');
-        hideAllSecondColumns();
-    });
-
-    // Hide column buttons
-    document.getElementById('hideCentersColumn').addEventListener('click', () => {
-        hideAllSecondColumns();
-    });
-
-    document.getElementById('hideBranchesColumn').addEventListener('click', () => {
-        hideAllSecondColumns();
-    });
 </script>
 
 <style>
@@ -730,5 +678,4 @@
 
     /* Ensure first column takes full width when second columns are hidden */
 </style>
-
 @endsection
