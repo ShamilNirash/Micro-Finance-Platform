@@ -1,7 +1,10 @@
 @extends('layouts.layout')
 @php
+    $count_total_members = 0;
     require_once resource_path('libs\first_letter_capitalization.php');
     require_once resource_path('libs\every_word_first_letter_capitalization.php');
+
+    $weekDays = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
 @endphp
 @section('contents')
     <div id="mainContent" class="flex lg:h-full">
@@ -221,8 +224,7 @@
                             <div>
                                 <p class="text-xs text-gray-400">Name</p>
                                 <p class="text-sm">
-                                    <span
-                                        class="view-mode">{{ capitalizeFirstLetter($center_details->center_name) }}</span>
+                                    <span class="view-mode">{{ capitalizeEachWord($center_details->center_name) }}</span>
                                     <input type="text" class="edit-mode hidden border px-2 py-1 rounded w-full"
                                         value="Malawaragoda">
                                 </p>
@@ -243,7 +245,7 @@
                                 <p class="text-xs text-gray-400">Branch</p>
                                 <p class="text-sm">
                                     <span
-                                        class="view-mode">{{ capitalizeFirstLetter($center_details->branch->branch_name) }}</span>
+                                        class="view-mode">{{ capitalizeEachWord($center_details->branch->branch_name) }}</span>
                                     <input type="text" class="edit-mode hidden border px-2 py-1 rounded w-full"
                                         value="Balangoda">
                                 </p>
@@ -254,11 +256,9 @@
                                 <p class="text-xs text-gray-400">Total Group</p>
                                 <p class="text-sm">
                                     <span class="view-mode">
-                                        {{ str_pad($center_details->group->count(), 2, '0', STR_PAD_LEFT) }}
-                                </p>
-                                </span>
-                                <input type="number" class="edit-mode hidden border px-2 py-1 rounded w-full"
-                                    value="06">
+                                        {{ str_pad($center_details->group->count(), 2, '0', STR_PAD_LEFT) }}</span>
+                                    <input type="number" class="edit-mode hidden border px-2 py-1 rounded w-full"
+                                        value="06">
                                 </p>
                             </div>
 
@@ -368,85 +368,27 @@
 
                 <!-- Centers Grid card format hidden for lg screens -->
                 <div id="centersGrid" class="grid grid-cols-2 sm:grid-cols-2 lg:hidden gap-4 p-2">
-                    <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200"
-                        data-group="Group02">
-                        <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
-                            <div class="text-xs text-gray-600 text-right">Group 01</div>
+                    @foreach ($center_details->group as $group)
+                        <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200"
+                            data-group="Group02">
+                            <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
+                                <div class="text-xs text-gray-600 text-right">{{ capitalizeEachWord($group->group_name) }}
+                                </div>
 
-                            <div class="text-xs flex items-center space-x-1 text-gray-700">
-                                <img src="{{ asset('assets/icons/Users.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
-                                <p>Total Members - <span>12</span></p>
+                                <div class="text-xs flex items-center space-x-1 text-gray-700">
+                                    <img src="{{ asset('assets/icons/Users.svg') }}" alt="Dashboard Icon"
+                                        class="h-3 w-3">
+                                    <p>Total Members -
+                                        <span>{{ str_pad($group->member->count(), 2, '0', STR_PAD_LEFT) }}</span>
+                                    </p>
+                                </div>
                             </div>
+                            <div
+                                class="h-8 flex items-center justify-center text-sm font-semibold bg-blue-50 text-gray-700">
+                                25
+                                000</div>
                         </div>
-                        <div class="h-8 flex items-center justify-center text-sm font-semibold bg-blue-50 text-gray-700">25
-                            000</div>
-                    </div>
-                    <!-- Additional cards omitted for brevity -->
-                    <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200"
-                        data-group="Group02">
-                        <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
-                            <div class="text-xs text-gray-600 text-right">Group 01</div>
-
-                            <div class="text-xs flex items-center space-x-1 text-gray-700">
-                                <img src="{{ asset('assets/icons/Users.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
-                                <p>Total Members - <span>12</span></p>
-                            </div>
-                        </div>
-                        <div class="h-8 flex items-center justify-center text-sm font-semibold bg-blue-50 text-gray-700">25
-                            000</div>
-                    </div>
-                    <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200"
-                        data-group="Group02">
-                        <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
-                            <div class="text-xs text-gray-600 text-right">Group 01</div>
-
-                            <div class="text-xs flex items-center space-x-1 text-gray-700">
-                                <img src="{{ asset('assets/icons/Users.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
-                                <p>Total Members - <span>12</span></p>
-                            </div>
-                        </div>
-                        <div class="h-8 flex items-center justify-center text-sm font-semibold bg-blue-50 text-gray-700">25
-                            000</div>
-                    </div>
-                    <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200"
-                        data-group="Group02">
-                        <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
-                            <div class="text-xs text-gray-600 text-right">Group 01</div>
-
-                            <div class="text-xs flex items-center space-x-1 text-gray-700">
-                                <img src="{{ asset('assets/icons/Users.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
-                                <p>Total Members - <span>12</span></p>
-                            </div>
-                        </div>
-                        <div class="h-8 flex items-center justify-center text-sm font-semibold bg-blue-50 text-gray-700">25
-                            000</div>
-                    </div>
-                    <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200"
-                        data-group="Group02">
-                        <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
-                            <div class="text-xs text-gray-600 text-right">Group 01</div>
-
-                            <div class="text-xs flex items-center space-x-1 text-gray-700">
-                                <img src="{{ asset('assets/icons/Users.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
-                                <p>Total Members - <span>12</span></p>
-                            </div>
-                        </div>
-                        <div class="h-8 flex items-center justify-center text-sm font-semibold bg-blue-50 text-gray-700">25
-                            000</div>
-                    </div>
-                    <div class="rounded-lg shadow flex flex-col justify-between w-full bg-blue-100 hover:bg-blue-200"
-                        data-group="Group02">
-                        <div class="h-24 py-2 px-4 flex flex-col justify-between space-y-1">
-                            <div class="text-xs text-gray-600 text-right">Group 01</div>
-
-                            <div class="text-xs flex items-center space-x-1 text-gray-700">
-                                <img src="{{ asset('assets/icons/Users.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
-                                <p>Total Members - <span>12</span></p>
-                            </div>
-                        </div>
-                        <div class="h-8 flex items-center justify-center text-sm font-semibold bg-blue-50 text-gray-700">25
-                            000</div>
-                    </div>
+                    @endforeach
                 </div>
 
                 <div class="flex justify-start h-full ">
@@ -468,437 +410,434 @@
                                 <tbody class="text-gray-800 text-xs font-light bg-white">
                                     @foreach ($center_details->group as $group)
                                         <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details"
-                                            data-group-id="1" data-group-name="Group 01" data-members="04"
-                                            data-received="40000" data-center="Malwaragoda">
-                                            <td class="py-2 text-center"> {{ str_pad($group->id, 3, '0', STR_PAD_LEFT) }}
+                                            data-group-id={{ str_pad($group->id, 3, '0', STR_PAD_LEFT) }}
+                                            data-group-name="{{ capitalizeEachWord($group->group_name) }}"
+                                            data-members="{{ str_pad($group->member->count(), 2, '0', STR_PAD_LEFT) }}"
+                                            data-received="40000"
+                                            data-center="{{ capitalizeFirstLetter($center_details->center_name) }}"
+                                            data-center-manager="{{ capitalizeEachWord($center_details->manager_name) }}"
+                                            data-member='@json($group->member)'>
+                                            <td class="py-2 text-center">{{ str_pad($group->id, 3, '0', STR_PAD_LEFT) }}
+                                            </td>
+                                            <td class="py-2 text-left">{{ capitalizeEachWord($group->group_name) }}</td>
+                                            <td class="py-2 text-left">
+                                                {{ str_pad($group->member->count(), 2, '0', STR_PAD_LEFT) }}</td>
+                                            <td class="py-2 text-left">400000 </td>
+                                            <td class="py-2 text-left">
+                                                {{ capitalizeFirstLetter($center_details->center_name) }}</td>
+                                            <td class="py-2 text-center flex justify-center items-center gap-1">
+                                                <a href="#" class="border rounded hover:bg-green-500">
+                                                    <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
+                                                        class="h-3 w-3 m-1">
+                                                </a>
+                                                <a href="#" class="border rounded hover:bg-red-500">
+                                                    <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil"
+                                                        class="h-3 w-3 m-1">
+                                                </a>
+                                                <a href="#" class="border rounded hover:bg-sky-500">
+                                                    <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}"
+                                                        alt="Pencil" class="h-3 w-3 m-1">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
-                        </td>
-                        <td class="py-2 text-left">{{ capitalizeFirstLetter($group->group_name) }}</td>
-                        <td class="py-2 text-left">{{ str_pad($group->member->count(), 2, '0', STR_PAD_LEFT) }}</td>
-                        <td class="py-2 text-left">400000 </td>
-                        <td class="py-2 text-left">{{ capitalizeFirstLetter($center_details->center_name) }}</td>
-                        <td class="py-2 text-center flex justify-center items-center gap-1">
+                    </div>
+
+                </div>
+                <div class="hidden mt-4 mx-4 lg:flex justify-between items-center text-xs text-gray-500">
+                    <span>1-10 of 87</span>
+                    <div class="flex justify-center items-center">
+                        <div class="pr-8">
+                            <select class="rounded bg-sky-50">
+                                <option>10</option>
+                                <option>20</option>
+                                <option>50</option>
+                            </select>
+                            <span>Rows per page</span>
+                        </div>
+                        <button class="px-1 py-1 bg-gray-200 rounded hover:bg-sky-200">
+                            <img src="{{ asset('assets/icons/CaretLeft.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
+                        </button>
+                        <span class="px-2 text-xs">1/15</span>
+                        <button class="px-1 py-1 bg-gray-200 rounded hover:bg-sky-200">
+                            <img src="{{ asset('assets/icons/CaretRight.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Column: Row Details -->
+        <div id="RowDetails" class="hidden h-full lg:w-4/12 flex-col justify-between transition-all duration-300">
+            <div id="RowDetailsContent" class="border-b p-4">
+                <h1 id="groupNameSlideBar" class="text-md font-medium text-gray-800 mb-4">--</h1>
+                <div class="grid grid-cols-2 gap-y-2">
+                    <div>
+                        <p for="Cmanager" class="text-xs text-gray-400">Center Manager</p>
+                        <p id="CmanagerSlideBar" class="text-sm">--</p>
+                    </div>
+                    <div>
+                        <p for="Gcenter" class="text-xs text-gray-400">Center</p>
+                        <p id="GcenterSlideBar" class="text-sm">--</p>
+                    </div>
+                    <div>
+                        <p for="Gmembers" class="text-xs text-gray-400">Members</p>
+                        <p id="GmembersSlideBar" class="text-sm">--</p>
+                    </div>
+                    <div>
+                        <p for="Greceived" class="text-xs text-gray-400">Total Balance</p>
+                        <p id="GreceivedSlideBar" class="text-sm">--</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-200 p-4 ">
+                <div class="w-full text-sm lg:text-xs">
+                    <button id="getGroupSummary" value=""
+                        class="w-full bg-blue-600 text-white py-1 rounded-lg hover:bg-blue-700 focus:outline-none flex justify-center">
+                        <img src="{{ asset('assets/icons/ArrowLineDownWhite.svg') }}" alt="Pencil"
+                            class="h-3 w-3 m-1"> Get Group Summary
+                    </button>
+                </div>
+            </div>
+            <div class="p-4 space-y-4 h-full">
+                <div id="memberList" class="space-y-2 flex flex-col justify-start">
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Column: Centers -->
+        <div id="centersColumn" class="hidden  h-full lg:w-4/12 flex-col justify-between transition-all duration-300">
+            <div id="centersColumnContent" class="border-b p-4">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-md font-medium text-gray-800 mb-4">Centers</h1>
+                    <button id="hideCentersColumn"
+                        class="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none text-xs">
+                        Hide
+                    </button>
+                </div>
+                <div id="centersList" class="space-y-2">
+                    <!-- Dynamic center list will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Column: Branches -->
+        <div id="branchesColumn" class="hidden h-full lg:w-4/12 flex-col justify-between transition-all duration-300">
+            <div id="branchesColumnContent" class="border-b p-4">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-md font-medium text-gray-800 mb-4">Branches</h1>
+                    <button id="hideBranchesColumn"
+                        class="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none text-xs">
+                        Hide
+                    </button>
+                </div>
+                <div id="branchesList" class="space-y-2">
+                    <!-- Dynamic branch list will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add alternating background colors to table rows
+        document.addEventListener('DOMContentLoaded', function() {
+            const rows = document.querySelectorAll('#centersGridTable tbody tr');
+            rows.forEach((row, index) => {
+                // Add alternating background colors
+                row.classList.add(index % 2 === 0 ? 'bg-white' : 'bg-gray-100');
+
+                // Ensure hover color overrides the background
+                row.classList.add('hover:bg-sky-100');
+            });
+        });
+
+
+        // Search Filter for both mobile and web views
+        document.getElementById('searchGroup').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+
+            // Mobile view (cards)
+            const cards = document.querySelectorAll('#centersGrid > div');
+            cards.forEach(card => {
+                const centerName = card.getAttribute('data-group').toLowerCase();
+                card.style.display = centerName.includes(searchTerm) ? 'block' : 'none';
+            });
+
+            // Web view (table rows)
+            const tableRows = document.querySelectorAll('#centersGridTable tbody tr');
+            tableRows.forEach(row => {
+                const centerName = row.getAttribute('data-group-name').toLowerCase();
+                row.style.display = centerName.includes(searchTerm) ? 'table-row' : 'none';
+            });
+        });
+
+
+        //----------------------------------------------------------------
+
+        // Sample data for existing members (replace with your actual data source)
+
+
+        let selectedMembers = [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Open Add Group Modal
+            document.getElementById('addGroupButton').addEventListener('click', function() {
+                document.getElementById('addGroupModal').classList.remove('hidden');
+                document.getElementById('addGroupModal').classList.add('flex');
+            });
+
+            // Add Existing Member Modal
+            document.getElementById('addExistingMember').addEventListener('click', function() {
+                document.getElementById('addExistingMemberModal').classList.remove('hidden');
+                document.getElementById('addExistingMemberModal').classList.add('flex');
+                renderExistingMembers();
+            });
+
+            document.getElementById('searchExistingMembers').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                renderExistingMembers(searchTerm);
+            });
+
+            document.getElementById('okExistingMember').addEventListener('click', function() {
+                const checkboxes = document.querySelectorAll(
+                    '#existingMembersList input[type="checkbox"]:checked');
+                const newSelections = Array.from(checkboxes).map(cb => ({
+                    id: cb.value,
+                    name: cb.getAttribute('data-name'),
+                    nic: cb.getAttribute('data-nic'),
+                    type: 'existing'
+                }));
+
+                selectedMembers = [...selectedMembers, ...newSelections];
+                if (selectedMembers.length > 6) {
+                    selectedMembers = selectedMembers.slice(0, 6); // Limit to 6
+                    alert("Maximum 6 members allowed. Excess members removed.");
+                }
+                document.getElementById('selectedMembers').textContent = selectedMembers.map(m => m.name)
+                    .join(', ') || 'No members selected';
+                document.getElementById('addExistingMemberModal').classList.add('hidden');
+            });
+
+            document.getElementById('cancelExistingMember').addEventListener('click', function() {
+                document.getElementById('addExistingMemberModal').classList.add('hidden');
+            });
+
+            // Add New Member Modal
+            document.getElementById('addNewMember').addEventListener('click', function() {
+                document.getElementById('addNewMemberModal').classList.remove('hidden');
+                document.getElementById('addNewMemberModal').classList.add('flex');
+            });
+
+            document.getElementById('cancelNewMember').addEventListener('click', function() {
+                document.getElementById('addNewMemberModal').classList.add('hidden');
+            });
+
+            document.getElementById('createNewMember').addEventListener('click', function(e) {
+                e.preventDefault();
+                const newMember = {
+                    branch: document.getElementById('newMemberBranch').value,
+                    center: document.getElementById('newMemberCenter').value,
+                    group: document.getElementById('newMemberGroup').value,
+                    fullName: document.getElementById('newMemberFullName').value,
+                    mobile01: document.getElementById('newMemberMobile01').value,
+                    mobile02: document.getElementById('newMemberMobile02').value,
+                    address: document.getElementById('newMemberAddress').value,
+                    nic: document.getElementById('newMemberNIC').value,
+                    gender: document.querySelector('input[name="newMemberGender"]:checked')?.value,
+                    image: document.getElementById('newMemberImage').files[0],
+                    type: 'new'
+                };
+
+                if (!newMember.fullName || !newMember.image) {
+                    alert("Full Name and Image are required.");
+                    return;
+                }
+
+                selectedMembers.push(newMember);
+                if (selectedMembers.length > 6) {
+                    selectedMembers.pop();
+                    alert("Maximum 6 members allowed. This member was not added.");
+                } else {
+                    document.getElementById('selectedMembers').textContent = selectedMembers.map(m => m
+                        .fullName || m.name).join(', ') || 'No members selected';
+                }
+                document.getElementById('addNewMemberModal').classList.add('hidden');
+                document.getElementById('addNewMemberForm').reset();
+            });
+
+            // Cancel Group Modal
+            document.getElementById('cancelGroup').addEventListener('click', function() {
+                document.getElementById('addGroupModal').classList.add('hidden');
+                document.getElementById('addGroupForm').reset();
+                selectedMembers = [];
+                document.getElementById('selectedMembers').textContent = 'No members selected';
+            });
+
+            // Create Group
+            document.getElementById('createGroup').addEventListener('click', function(e) {
+                e.preventDefault();
+                if (!document.getElementById('groupBranch').value || !document.getElementById('groupCenter')
+                    .value || !document.getElementById('groupName').value) {
+                    alert("All fields marked with * are required.");
+                    return;
+                }
+                if (selectedMembers.length < 3 || selectedMembers.length > 6) {
+                    alert("A group must have between 3 and 6 members.");
+                    return;
+                }
+                alert("Group created successfully with " + selectedMembers.length + " members!");
+                document.getElementById('addGroupModal').classList.add('hidden');
+                document.getElementById('addGroupForm').reset();
+                selectedMembers = [];
+                document.getElementById('selectedMembers').textContent = 'No members selected';
+            });
+
+            // Row Details
+            document.querySelectorAll('.view-details').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const row = button.closest('tr');
+                    const RowDetails = document.getElementById('RowDetails');
+                    const firstColumn = document.getElementById('firstColumn');
+
+                    RowDetails.classList.remove('hidden');
+                    firstColumn.classList.remove('lg:w-full');
+                    firstColumn.classList.add('lg:w-8/12');
+                    RowDetails.classList.add('lg:flex');
+
+                    const groupName = row.getAttribute('data-group-name');
+                    const members = row.getAttribute('data-members');
+                    const received = row.getAttribute('data-received');
+                    const center = row.getAttribute('data-center');
+                    const center_manager = row.getAttribute('data-center-manager');
+
+                    document.getElementById('groupNameSlideBar').textContent = groupName;
+                    document.getElementById('CmanagerSlideBar').textContent = center_manager;
+                    document.getElementById('GcenterSlideBar').textContent = center;
+                    document.getElementById('GmembersSlideBar').textContent = members;
+                    document.getElementById('GreceivedSlideBar').textContent = received;
+                    const membersArray = JSON.parse(row.getAttribute('data-member'));
+                    console.log(membersArray);
+                    const memberList = document.getElementById('memberList');
+                    memberList.innerHTML = ''; // Clear existing
+
+                    membersArray.forEach(member => {
+                        const groupId = String(member.id).padStart(2, '0');
+
+                        const html = `
+        <div class="flex justify-between items-center bg-sky-50 shadow-sm border rounded-lg">
+                        <div class="flex flex-col p-2">
+                            <span class="text-xs font-medium text-gray-600 ">${member.full_name}</span>
+                            <span class="text-xs font-normal text-gray-600 ">${member.nic_number}</span>
+                        </div>
+                        <span class="text-xs font-medium text-gray-800 bg-gray-200 p-4 px-8 rounded-lg">5820145/=</span>
+                        <div class="font-medium text-gray-800 px-2 text-xs flex space-x-1">
                             <a href="#" class="border rounded hover:bg-green-500">
                                 <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
                             </a>
                             <a href="#" class="border rounded hover:bg-red-500">
                                 <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
                             </a>
-                            <a href="#" class="border rounded hover:bg-sky-500">
-                                <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}" alt="Pencil"
-                                    class="h-3 w-3 m-1">
-                            </a>
-                        </td>
-                        </tr>
-                        @endforeach
-
-
-
-                    </div>
-                    <div class="hidden mt-4 mx-4 lg:flex justify-between items-center text-xs text-gray-500">
-                        <span>1-10 of 87</span>
-                        <div class="flex justify-center items-center">
-                            <div class="pr-8">
-                                <select class="rounded bg-sky-50">
-                                    <option>10</option>
-                                    <option>20</option>
-                                    <option>50</option>
-                                </select>
-                                <span>Rows per page</span>
-                            </div>
-                            <button class="px-1 py-1 bg-gray-200 rounded hover:bg-sky-200">
-                                <img src="{{ asset('assets/icons/CaretLeft.svg') }}" alt="Dashboard Icon"
-                                    class="h-3 w-3">
-                            </button>
-                            <span class="px-2 text-xs">1/15</span>
-                            <button class="px-1 py-1 bg-gray-200 rounded hover:bg-sky-200">
-                                <img src="{{ asset('assets/icons/CaretRight.svg') }}" alt="Dashboard Icon"
-                                    class="h-3 w-3">
-                            </button>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Second Column: Row Details -->
-            <div id="RowDetails" class="hidden h-full lg:w-4/12 flex-col justify-between transition-all duration-300">
-                <div id="RowDetailsContent" class="border-b p-4">
-                    <h1 id="groupName" class="text-md font-medium text-gray-800 mb-4">Group Name</h1>
-                    <div class="grid grid-cols-2 gap-y-2">
-                        <div>
-                            <p for="Cmanager" class="text-xs text-gray-400">Center Manager</p>
-                            <p id="Cmanager" class="text-sm">Center Manager</p>
-                        </div>
-                        <div>
-                            <p for="Gcenter" class="text-xs text-gray-400">Center</p>
-                            <p id="Gcenter" class="text-sm">12</p>
-                        </div>
-                        <div>
-                            <p for="Gmembers" class="text-xs text-gray-400">Members</p>
-                            <p id="Gmembers" class="text-sm">01</p>
-                        </div>
-                        <div>
-                            <p for="Greceived" class="text-xs text-gray-400">Total Balance</p>
-                            <p id="Greceived" class="text-sm">01 </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-gray-200 p-4 ">
-                    <div class="w-full text-sm lg:text-xs">
-                        <button id="getGroupSummary" value=""
-                            class="w-full bg-blue-600 text-white py-1 rounded-lg hover:bg-blue-700 focus:outline-none flex justify-center">
-                            <img src="{{ asset('assets/icons/ArrowLineDownWhite.svg') }}" alt="Pencil"
-                                class="h-3 w-3 m-1">
-                            Get Group Summary
-                        </button>
-                    </div>
-                </div>
-                <div class="p-4 space-y-4 h-full">
-                    <div class="space-y-2 flex flex-col justify-start">
-                        <div class="flex justify-between items-center bg-sky-50 shadow-sm border rounded-lg">
-                            <div class="flex flex-col p-2">
-                                <span class="text-xs font-medium text-gray-600 ">User Name</span>
-                                <span class="text-xs font-normal text-gray-600 ">982563142V</span>
-                            </div>
-                            <span
-                                class="text-xs font-medium text-gray-800 bg-gray-200 p-4 px-8 rounded-lg">5820145/=</span>
-                            <div class="font-medium text-gray-800 px-2 text-xs flex space-x-1">
-                                <a href="#" class="border rounded hover:bg-green-500">
-                                    <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                </a>
-                                <a href="#" class="border rounded hover:bg-red-500">
-                                    <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Second Column: Centers -->
-            <div id="centersColumn" class="hidden  h-full lg:w-4/12 flex-col justify-between transition-all duration-300">
-                <div id="centersColumnContent" class="border-b p-4">
-                    <div class="flex justify-between items-center">
-                        <h1 class="text-md font-medium text-gray-800 mb-4">Centers</h1>
-                        <button id="hideCentersColumn"
-                            class="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none text-xs">
-                            Hide
-                        </button>
-                    </div>
-                    <div id="centersList" class="space-y-2">
-                        <!-- Dynamic center list will be populated here -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Second Column: Branches -->
-            <div id="branchesColumn" class="hidden h-full lg:w-4/12 flex-col justify-between transition-all duration-300">
-                <div id="branchesColumnContent" class="border-b p-4">
-                    <div class="flex justify-between items-center">
-                        <h1 class="text-md font-medium text-gray-800 mb-4">Branches</h1>
-                        <button id="hideBranchesColumn"
-                            class="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none text-xs">
-                            Hide
-                        </button>
-                    </div>
-                    <div id="branchesList" class="space-y-2">
-                        <!-- Dynamic branch list will be populated here -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <script>
-            // Add alternating background colors to table rows
-            document.addEventListener('DOMContentLoaded', function() {
-                const rows = document.querySelectorAll('#centersGridTable tbody tr');
-                rows.forEach((row, index) => {
-                    // Add alternating background colors
-                    row.classList.add(index % 2 === 0 ? 'bg-white' : 'bg-gray-100');
-
-                    // Ensure hover color overrides the background
-                    row.classList.add('hover:bg-sky-100');
-                });
-            });
-
-
-            // Search Filter for both mobile and web views
-            document.getElementById('searchGroup').addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
-
-                // Mobile view (cards)
-                const cards = document.querySelectorAll('#centersGrid > div');
-                cards.forEach(card => {
-                    const centerName = card.getAttribute('data-group').toLowerCase();
-                    card.style.display = centerName.includes(searchTerm) ? 'block' : 'none';
-                });
-
-                // Web view (table rows)
-                const tableRows = document.querySelectorAll('#centersGridTable tbody tr');
-                tableRows.forEach(row => {
-                    const centerName = row.getAttribute('data-group-name').toLowerCase();
-                    row.style.display = centerName.includes(searchTerm) ? 'table-row' : 'none';
-                });
-            });
-
-
-            //----------------------------------------------------------------
-
-            // Sample data for existing members (replace with your actual data source)
-            const existingMembers = [{
-                    id: 1,
-                    name: "John Doe",
-                    nic: "982563142V"
-                },
-                {
-                    id: 2,
-                    name: "Jane Smith",
-                    nic: "983214567V"
-                },
-                {
-                    id: 3,
-                    name: "Saman Perera",
-                    nic: "981234567V"
-                },
-                {
-                    id: 4,
-                    name: "Kamal Silva",
-                    nic: "980123456V"
-                },
-                {
-                    id: 5,
-                    name: "Nimal Fernando",
-                    nic: "984321567V"
-                }
-            ];
-
-            let selectedMembers = [];
-
-            document.addEventListener('DOMContentLoaded', function() {
-                // Open Add Group Modal
-                document.getElementById('addGroupButton').addEventListener('click', function() {
-                    document.getElementById('addGroupModal').classList.remove('hidden');
-                    document.getElementById('addGroupModal').classList.add('flex');
-                });
-
-                // Add Existing Member Modal
-                document.getElementById('addExistingMember').addEventListener('click', function() {
-                    document.getElementById('addExistingMemberModal').classList.remove('hidden');
-                    document.getElementById('addExistingMemberModal').classList.add('flex');
-                    renderExistingMembers();
-                });
-
-                document.getElementById('searchExistingMembers').addEventListener('input', function() {
-                    const searchTerm = this.value.toLowerCase();
-                    renderExistingMembers(searchTerm);
-                });
-
-                document.getElementById('okExistingMember').addEventListener('click', function() {
-                    const checkboxes = document.querySelectorAll(
-                        '#existingMembersList input[type="checkbox"]:checked');
-                    const newSelections = Array.from(checkboxes).map(cb => ({
-                        id: cb.value,
-                        name: cb.getAttribute('data-name'),
-                        nic: cb.getAttribute('data-nic'),
-                        type: 'existing'
-                    }));
-
-                    selectedMembers = [...selectedMembers, ...newSelections];
-                    if (selectedMembers.length > 6) {
-                        selectedMembers = selectedMembers.slice(0, 6); // Limit to 6
-                        alert("Maximum 6 members allowed. Excess members removed.");
-                    }
-                    document.getElementById('selectedMembers').textContent = selectedMembers.map(m => m.name)
-                        .join(', ') || 'No members selected';
-                    document.getElementById('addExistingMemberModal').classList.add('hidden');
-                });
-
-                document.getElementById('cancelExistingMember').addEventListener('click', function() {
-                    document.getElementById('addExistingMemberModal').classList.add('hidden');
-                });
-
-                // Add New Member Modal
-                document.getElementById('addNewMember').addEventListener('click', function() {
-                    document.getElementById('addNewMemberModal').classList.remove('hidden');
-                    document.getElementById('addNewMemberModal').classList.add('flex');
-                });
-
-                document.getElementById('cancelNewMember').addEventListener('click', function() {
-                    document.getElementById('addNewMemberModal').classList.add('hidden');
-                });
-
-                document.getElementById('createNewMember').addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const newMember = {
-                        branch: document.getElementById('newMemberBranch').value,
-                        center: document.getElementById('newMemberCenter').value,
-                        group: document.getElementById('newMemberGroup').value,
-                        fullName: document.getElementById('newMemberFullName').value,
-                        mobile01: document.getElementById('newMemberMobile01').value,
-                        mobile02: document.getElementById('newMemberMobile02').value,
-                        address: document.getElementById('newMemberAddress').value,
-                        nic: document.getElementById('newMemberNIC').value,
-                        gender: document.querySelector('input[name="newMemberGender"]:checked')?.value,
-                        image: document.getElementById('newMemberImage').files[0],
-                        type: 'new'
-                    };
-
-                    if (!newMember.fullName || !newMember.image) {
-                        alert("Full Name and Image are required.");
-                        return;
-                    }
-
-                    selectedMembers.push(newMember);
-                    if (selectedMembers.length > 6) {
-                        selectedMembers.pop();
-                        alert("Maximum 6 members allowed. This member was not added.");
-                    } else {
-                        document.getElementById('selectedMembers').textContent = selectedMembers.map(m => m
-                            .fullName || m.name).join(', ') || 'No members selected';
-                    }
-                    document.getElementById('addNewMemberModal').classList.add('hidden');
-                    document.getElementById('addNewMemberForm').reset();
-                });
-
-                // Cancel Group Modal
-                document.getElementById('cancelGroup').addEventListener('click', function() {
-                    document.getElementById('addGroupModal').classList.add('hidden');
-                    document.getElementById('addGroupForm').reset();
-                    selectedMembers = [];
-                    document.getElementById('selectedMembers').textContent = 'No members selected';
-                });
-
-                // Create Group
-                document.getElementById('createGroup').addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (!document.getElementById('groupBranch').value || !document.getElementById('groupCenter')
-                        .value || !document.getElementById('groupName').value) {
-                        alert("All fields marked with * are required.");
-                        return;
-                    }
-                    if (selectedMembers.length < 3 || selectedMembers.length > 6) {
-                        alert("A group must have between 3 and 6 members.");
-                        return;
-                    }
-                    alert("Group created successfully with " + selectedMembers.length + " members!");
-                    document.getElementById('addGroupModal').classList.add('hidden');
-                    document.getElementById('addGroupForm').reset();
-                    selectedMembers = [];
-                    document.getElementById('selectedMembers').textContent = 'No members selected';
-                });
-
-                // Row Details
-                document.querySelectorAll('.view-details').forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const row = button.closest('tr');
-                        const RowDetails = document.getElementById('RowDetails');
-                        const firstColumn = document.getElementById('firstColumn');
-
-                        RowDetails.classList.remove('hidden');
-                        firstColumn.classList.remove('lg:w-full');
-                        firstColumn.classList.add('lg:w-8/12');
-                        RowDetails.classList.add('lg:flex');
-
-                        const groupName = row.getAttribute('data-group-name');
-                        const members = row.getAttribute('data-members');
-                        const received = row.getAttribute('data-received');
-                        const center = row.getAttribute('data-center');
-
-                        document.getElementById('groupName').textContent = groupName;
-                        document.getElementById('Gmembers').textContent = members;
-                        document.getElementById('Greceived').textContent = received;
-                        document.getElementById('Gcenter').textContent = center;
+    `;
+                        memberList.insertAdjacentHTML('beforeend', html);
                     });
+
                 });
-
-
-
-                // Helper function
-                function hideAllSecondColumns() {
-                    const columns = ['RowDetails', 'centersColumn', 'branchesColumn'];
-                    columns.forEach(col => document.getElementById(col).classList.add('hidden'));
-                    document.getElementById('firstColumn').classList.remove('lg:w-8/12');
-                    document.getElementById('firstColumn').classList.add('lg:w-full');
-                }
-
-                document.getElementById('hideCentersColumn').addEventListener('click', hideAllSecondColumns);
-                document.getElementById('hideBranchesColumn').addEventListener('click', hideAllSecondColumns);
             });
 
-            function renderExistingMembers(searchTerm = '') {
-                const list = document.getElementById('existingMembersList');
-                list.innerHTML = '';
-                const filteredMembers = existingMembers.filter(m => m.name.toLowerCase().includes(searchTerm));
-                filteredMembers.forEach(member => {
-                    const div = document.createElement('div');
-                    div.className = 'flex items-center justify-between';
-                    div.innerHTML = `
+
+
+            // Helper function
+            function hideAllSecondColumns() {
+                const columns = ['RowDetails', 'centersColumn', 'branchesColumn'];
+                columns.forEach(col => document.getElementById(col).classList.add('hidden'));
+                document.getElementById('firstColumn').classList.remove('lg:w-8/12');
+                document.getElementById('firstColumn').classList.add('lg:w-full');
+            }
+
+            document.getElementById('hideCentersColumn').addEventListener('click', hideAllSecondColumns);
+            document.getElementById('hideBranchesColumn').addEventListener('click', hideAllSecondColumns);
+        });
+
+        function renderExistingMembers(searchTerm = '') {
+            const list = document.getElementById('existingMembersList');
+            list.innerHTML = '';
+            const filteredMembers = existingMembers.filter(m => m.name.toLowerCase().includes(searchTerm));
+            filteredMembers.forEach(member => {
+                const div = document.createElement('div');
+                div.className = 'flex items-center justify-between';
+                div.innerHTML = `
             <span>${member.name} (${member.nic})</span>
             <input type="checkbox" value="${member.id}" data-name="${member.name}" data-nic="${member.nic}" class="form-checkbox h-4 w-4 text-blue-600 m-1">
         `;
-                    list.appendChild(div);
-                });
-            }
-
-            // Cneter Details edit and delete functionality
-            const editBtn = document.getElementById('editBtn');
-            const saveBtn = document.getElementById('saveBtn');
-            const deleteBtn = document.getElementById('deleteBtn');
-            const deleteModal = document.getElementById('deleteModal');
-            const cancelDelete = document.getElementById('cancelDelete');
-            const confirmDelete = document.getElementById('confirmDelete');
-
-            editBtn.addEventListener('click', () => {
-                document.querySelectorAll('.view-mode').forEach(el => el.classList.add('hidden'));
-                document.querySelectorAll('.edit-mode').forEach(el => el.classList.remove('hidden'));
-                editBtn.classList.add('hidden');
-                saveBtn.classList.remove('hidden');
-                saveBtn.classList.add('flex');
+                list.appendChild(div);
             });
+        }
 
-            saveBtn.addEventListener('click', () => {
-                document.querySelectorAll('.edit-mode').forEach((input, i) => {
-                    const value = input.value;
-                    document.querySelectorAll('.view-mode')[i].textContent = value;
-                });
-                document.querySelectorAll('.view-mode').forEach(el => el.classList.remove('hidden'));
-                document.querySelectorAll('.edit-mode').forEach(el => el.classList.add('hidden'));
-                saveBtn.classList.add('hidden');
-                editBtn.classList.remove('hidden');
+        // Cneter Details edit and delete functionality
+        const editBtn = document.getElementById('editBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const deleteBtn = document.getElementById('deleteBtn');
+        const deleteModal = document.getElementById('deleteModal');
+        const cancelDelete = document.getElementById('cancelDelete');
+        const confirmDelete = document.getElementById('confirmDelete');
 
-                // TODO: Optional - Send updated values to backend via AJAX or form
-                console.log("Saved successfully.");
+        editBtn.addEventListener('click', () => {
+            document.querySelectorAll('.view-mode').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.edit-mode').forEach(el => el.classList.remove('hidden'));
+            editBtn.classList.add('hidden');
+            saveBtn.classList.remove('hidden');
+            saveBtn.classList.add('flex');
+        });
+
+        saveBtn.addEventListener('click', () => {
+            document.querySelectorAll('.edit-mode').forEach((input, i) => {
+                const value = input.value;
+                document.querySelectorAll('.view-mode')[i].textContent = value;
             });
+            document.querySelectorAll('.view-mode').forEach(el => el.classList.remove('hidden'));
+            document.querySelectorAll('.edit-mode').forEach(el => el.classList.add('hidden'));
+            saveBtn.classList.add('hidden');
+            editBtn.classList.remove('hidden');
 
-            deleteBtn.addEventListener('click', () => {
-                deleteModal.classList.remove('hidden');
-                deleteModal.classList.add('flex');
-            });
+            // TODO: Optional - Send updated values to backend via AJAX or form
+            console.log("Saved successfully.");
+        });
 
-            cancelDelete.addEventListener('click', () => {
-                deleteModal.classList.add('hidden');
-            });
+        deleteBtn.addEventListener('click', () => {
+            deleteModal.classList.remove('hidden');
+            deleteModal.classList.add('flex');
+        });
 
-            confirmDelete.addEventListener('click', () => {
-                deleteModal.classList.add('hidden');
-                // TODO: Handle actual delete logic (AJAX or form submit)
-                alert("Deleted group successfully.");
-            });
-        </script>
+        cancelDelete.addEventListener('click', () => {
+            deleteModal.classList.add('hidden');
+        });
 
-        <style>
-            /* Override any flex properties for hidden columns */
-            #RowDetails.hidden,
-            #centersColumn.hidden,
-            #branchesColumn.hidden {
-                display: none !important;
-                visibility: hidden !important;
-                width: 0 !important;
-                min-width: 0 !important;
-                flex: 0 !important;
-            }
+        confirmDelete.addEventListener('click', () => {
+            deleteModal.classList.add('hidden');
+            // TODO: Handle actual delete logic (AJAX or form submit)
+            alert("Deleted group successfully.");
+        });
+    </script>
 
-            /* Ensure first column takes full width when second columns are hidden */
-        </style>
-    @endsection
+    <style>
+        /* Override any flex properties for hidden columns */
+        #RowDetails.hidden,
+        #centersColumn.hidden,
+        #branchesColumn.hidden {
+            display: none !important;
+            visibility: hidden !important;
+            width: 0 !important;
+            min-width: 0 !important;
+            flex: 0 !important;
+        }
+
+        /* Ensure first column takes full width when second columns are hidden */
+    </style>
+@endsection

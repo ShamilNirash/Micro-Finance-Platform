@@ -225,7 +225,7 @@
                             data-member="Dunura Hansaja">
                             <div class=" py-2 px-4 flex flex-col justify-center space-y-">
                                 <div class="text-sm">{{ $member->full_name }}<span>-
-                                        {{ $member->group->center->center_name }}</span></div>
+                                        {{ $member->group->group_name }}</span></div>
                                 <div class="text-xs flex items-center space-x-1 text-gray-700">
                                     <p>{{ $member->nic_number }}</p>
                                 </div>
@@ -237,384 +237,68 @@
                     @endforeach
                 </div>
 
-            <!-- member Grid Table format hidden for mobile screens -->
-            <div class="flex justify-start h-full pt-2">
-                <div id="memberGridTable" class="w-full max-h-[calc(100vh-200px)]  hidden lg:block p-0 overflow-y-auto">
-                    <div class="min-w-full ">
-                        <table class="w-full min-w-max">
-                            <thead class="w-full text-gray-700 text-xs font-light bg-gray-100 sticky top-0">
-                                <tr class="uppercase w-full">
-                                    <th class="pl-2 text-left">
-                                        <input type="checkbox" id="select-all" class="form-checkbox h-4 w-4 text-blue-400 m-1">
-                                    </th>
-                                    <th class="py-2 text-left">#</th>
-                                    <th class="py-2 text-left">Name</th>
-                                    <th class="py-2 text-left">Center</th>
-                                    <th class="py-2 text-left">NIC</th>
-                                    <th class="py-2 text-left">Loan Balance</th>
-                                    <th class="py-2 text-center">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-gray-800 text-xs font-light bg-white w-full">
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Dunura Hansja" data-center-name="Maharagama" data-NIC="20001589432" data-loan-balance="20000">
-                                    <td class="pl-2 text-left">
-                                        <input type="checkbox" name="selected_ids[]" value="1" class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                    </td>
-                                    <td class="py-2 text-left">001</td>
-                                    <td class="py-2 text-left">Dunura hansaja</td>
-                                    <td class="py-2 text-left">waththegedra</td>
-                                    <td class="py-2 text-left">20015896423</td>
-                                    <td class="py-2 text-left">2000</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-lime-500">
-                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Dunura Hansja" data-center-name="Maharagama" data-NIC="20001589432" data-loan-balance="20000">
-                                    <td class="pl-2 text-left">
-                                        <input type="checkbox" name="selected_ids[]" value="1" class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                    </td>
-                                    <td class="py-2 text-left">001</td>
-                                    <td class="py-2 text-left">Dunura hansaja</td>
-                                    <td class="py-2 text-left">waththegedra</td>
-                                    <td class="py-2 text-left">20015896423</td>
-                                    <td class="py-2 text-left">2000</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-lime-500">
-                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Dunura Hansja" data-center-name="Maharagama" data-NIC="20001589432" data-loan-balance="20000">
-                                    <td class="pl-2 text-left">
-                                        <input type="checkbox" name="selected_ids[]" value="1" class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                    </td>
-                                    <td class="py-2 text-left">001</td>
-                                    <td class="py-2 text-left">Dunura hansaja</td>
-                                    <td class="py-2 text-left">waththegedra</td>
-                                    <td class="py-2 text-left">20015896423</td>
-                                    <td class="py-2 text-left">2000</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-lime-500">
-                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Dunura Hansja" data-center-name="Maharagama" data-NIC="20001589432" data-loan-balance="20000">
-                                    <td class="pl-2 text-left">
-                                        <input type="checkbox" name="selected_ids[]" value="1" class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                    </td>
-                                    <td class="py-2 text-left">001</td>
-                                    <td class="py-2 text-left">Dunura hansaja</td>
-                                    <td class="py-2 text-left">waththegedra</td>
-                                    <td class="py-2 text-left">20015896423</td>
-                                    <td class="py-2 text-left">2000</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-lime-500">
-                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Dunura Hansja" data-center-name="Maharagama" data-NIC="20001589432" data-loan-balance="20000">
-                                    <td class="pl-2 text-left">
-                                        <input type="checkbox" name="selected_ids[]" value="1" class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                    </td>
-                                    <td class="py-2 text-left">001</td>
-                                    <td class="py-2 text-left">Dunura hansaja</td>
-                                    <td class="py-2 text-left">waththegedra</td>
-                                    <td class="py-2 text-left">20015896423</td>
-                                    <td class="py-2 text-left">2000</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-lime-500">
-                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Dunura Hansja" data-center-name="Maharagama" data-NIC="20001589432" data-loan-balance="20000">
-                                    <td class="pl-2 text-left">
-                                        <input type="checkbox" name="selected_ids[]" value="1" class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                    </td>
-                                    <td class="py-2 text-left">001</td>
-                                    <td class="py-2 text-left">Dunura hansaja</td>
-                                    <td class="py-2 text-left">waththegedra</td>
-                                    <td class="py-2 text-left">20015896423</td>
-                                    <td class="py-2 text-left">2000</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-lime-500">
-                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Dunura Hansja" data-center-name="Maharagama" data-NIC="20001589432" data-loan-balance="20000">
-                                    <td class="pl-2 text-left">
-                                        <input type="checkbox" name="selected_ids[]" value="1" class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                    </td>
-                                    <td class="py-2 text-left">001</td>
-                                    <td class="py-2 text-left">Dunura hansaja</td>
-                                    <td class="py-2 text-left">waththegedra</td>
-                                    <td class="py-2 text-left">20015896423</td>
-                                    <td class="py-2 text-left">2000</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-lime-500">
-                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Dunura Hansja" data-center-name="Maharagama" data-NIC="20001589432" data-loan-balance="20000">
-                                    <td class="pl-2 text-left">
-                                        <input type="checkbox" name="selected_ids[]" value="1" class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                    </td>
-                                    <td class="py-2 text-left">001</td>
-                                    <td class="py-2 text-left">Dunura hansaja</td>
-                                    <td class="py-2 text-left">waththegedra</td>
-                                    <td class="py-2 text-left">20015896423</td>
-                                    <td class="py-2 text-left">2000</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-lime-500">
-                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Dunura Hansja" data-center-name="Maharagama" data-NIC="20001589432" data-loan-balance="20000">
-                                    <td class="pl-2 text-left">
-                                        <input type="checkbox" name="selected_ids[]" value="1" class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                    </td>
-                                    <td class="py-2 text-left">001</td>
-                                    <td class="py-2 text-left">Dunura hansaja</td>
-                                    <td class="py-2 text-left">waththegedra</td>
-                                    <td class="py-2 text-left">20015896423</td>
-                                    <td class="py-2 text-left">2000</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-lime-500">
-                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Dunura Hansja" data-center-name="Maharagama" data-NIC="20001589432" data-loan-balance="20000">
-                                    <td class="pl-2 text-left">
-                                        <input type="checkbox" name="selected_ids[]" value="1" class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                    </td>
-                                    <td class="py-2 text-left">001</td>
-                                    <td class="py-2 text-left">Dunura hansaja</td>
-                                    <td class="py-2 text-left">waththegedra</td>
-                                    <td class="py-2 text-left">20015896423</td>
-                                    <td class="py-2 text-left">2000</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-lime-500">
-                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Dunura Hansja" data-center-name="Maharagama" data-NIC="20001589432" data-loan-balance="20000">
-                                    <td class="pl-2 text-left">
-                                        <input type="checkbox" name="selected_ids[]" value="1" class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                    </td>
-                                    <td class="py-2 text-left">001</td>
-                                    <td class="py-2 text-left">Dunura hansaja</td>
-                                    <td class="py-2 text-left">waththegedra</td>
-                                    <td class="py-2 text-left">20015896423</td>
-                                    <td class="py-2 text-left">2000</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-lime-500">
-                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Dunura Hansja" data-center-name="Maharagama" data-NIC="20001589432" data-loan-balance="20000">
-                                    <td class="pl-2 text-left">
-                                        <input type="checkbox" name="selected_ids[]" value="1" class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                    </td>
-                                    <td class="py-2 text-left">001</td>
-                                    <td class="py-2 text-left">Dunura hansaja</td>
-                                    <td class="py-2 text-left">waththegedra</td>
-                                    <td class="py-2 text-left">20015896423</td>
-                                    <td class="py-2 text-left">2000</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-lime-500">
-                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Dunura Hansja" data-center-name="Maharagama" data-NIC="20001589432" data-loan-balance="20000">
-                                    <td class="pl-2 text-left">
-                                        <input type="checkbox" name="selected_ids[]" value="1" class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                    </td>
-                                    <td class="py-2 text-left">001</td>
-                                    <td class="py-2 text-left">Dunura hansaja</td>
-                                    <td class="py-2 text-left">waththegedra</td>
-                                    <td class="py-2 text-left">20015896423</td>
-                                    <td class="py-2 text-left">2000</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-lime-500">
-                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Dunura Hansja" data-center-name="Maharagama" data-NIC="20001589432" data-loan-balance="20000">
-                                    <td class="pl-2 text-left">
-                                        <input type="checkbox" name="selected_ids[]" value="1" class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                    </td>
-                                    <td class="py-2 text-left">001</td>
-                                    <td class="py-2 text-left">Dunura hansaja</td>
-                                    <td class="py-2 text-left">waththegedra</td>
-                                    <td class="py-2 text-left">20015896423</td>
-                                    <td class="py-2 text-left">2000</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-lime-500">
-                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Dunura Hansja" data-center-name="Maharagama" data-NIC="20001589432" data-loan-balance="20000">
-                                    <td class="pl-2 text-left">
-                                        <input type="checkbox" name="selected_ids[]" value="1" class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                    </td>
-                                    <td class="py-2 text-left">001</td>
-                                    <td class="py-2 text-left">Dunura hansaja</td>
-                                    <td class="py-2 text-left">waththegedra</td>
-                                    <td class="py-2 text-left">20015896423</td>
-                                    <td class="py-2 text-left">2000</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-lime-500">
-                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <!-- Additional rows with placeholder data -->
-                                <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details" data-member-id="1" data-member-name="Dunura Hansja" data-center-name="Maharagama" data-NIC="20001589432" data-loan-balance="20000">
-                                    <td class="pl-2 text-left">
-                                        <input type="checkbox" name="selected_ids[]" value="1" class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                    </td>
-                                    <td class="py-2 text-left">001</td>
-                                    <td class="py-2 text-left">Dunura hansaja</td>
-                                    <td class="py-2 text-left">waththegedra</td>
-                                    <td class="py-2 text-left">20015896423</td>
-                                    <td class="py-2 text-left">2000</td>
-                                    <td class="py-2 text-center flex justify-center items-center gap-1">
-                                        <a href="#" class="border rounded hover:bg-green-500">
-                                            <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-sky-500">
-                                            <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                        <a href="#" class="border rounded hover:bg-lime-500">
-                                            <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                                        </a>
-                                    </td>
-                                </tr>
-
-
-                                <!-- Add more rows as needed -->
-                            </tbody>
-                        </table>
+                <!-- member Grid Table format hidden for mobile screens -->
+                <div class="flex justify-start h-full pt-2">
+                    <div id="memberGridTable"
+                        class="w-full max-h-[calc(100vh-200px)]  hidden lg:block p-0 overflow-y-auto">
+                        <div class="min-w-full ">
+                            <table class="w-full min-w-max">
+                                <thead class="w-full text-gray-700 text-xs font-light bg-gray-100 sticky top-0">
+                                    <tr class="uppercase w-full">
+                                        <th class="pl-2 text-left">
+                                            <input type="checkbox" id="select-all"
+                                                class="form-checkbox h-4 w-4 text-blue-400 m-1">
+                                        </th>
+                                        <th class="py-2 text-left">#</th>
+                                        <th class="py-2 text-left">Name</th>
+                                        <th class="py-2 text-left">Center</th>
+                                        <th class="py-2 text-left">NIC</th>
+                                        <th class="py-2 text-left">Loan Balance</th>
+                                        <th class="py-2 text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-800 text-xs font-light bg-white w-full">
+                                    @foreach ($allActiveMembers as $member)
+                                        <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details"
+                                            data-member-id={{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
+                                            data-member-fullname='{{ capitalizeEachWord($member->full_name) }}'
+                                            data-branchname='{{ capitalizeEachWord($member->group->center->branch->branch_name) }}'
+                                            data-center-name='{{ capitalizeEachWord($member->group->center->center_name) }}'
+                                            data-member_id='{{ $member->nic_number }}' data-loan-balance="20000"
+                                            data-member='@json($member)'>
+                                            <td class="pl-2 text-left">
+                                                <input type="checkbox" name="selected_ids[]" value="1"
+                                                    class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                                            </td>
+                                            <td class="py-2 text-left">{{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
+                                            </td>
+                                            <td class="py-2 text-left">{{ capitalizeEachWord($member->full_name) }}</td>
+                                            <td class="py-2 text-left">
+                                                {{ capitalizeEachWord($member->group->center->center_name) }}</td>
+                                            <td class="py-2 text-left">{{ $member->nic_number }}</td>
+                                            <td class="py-2 text-left">2000</td>
+                                            <td class="py-2 text-center flex justify-center items-center gap-1">
+                                                <a href="#" class="border rounded hover:bg-green-500">
+                                                    <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
+                                                        class="h-3 w-3 m-1">
+                                                </a>
+                                                <a href="#" class="border rounded hover:bg-sky-500">
+                                                    <img src="{{ asset('assets/icons/PencilSimple.svg') }}"
+                                                        alt="Pencil" class="h-3 w-3 m-1">
+                                                </a>
+                                                <a href="#" class="border rounded hover:bg-lime-500">
+                                                    <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil"
+                                                        class="h-3 w-3 m-1">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    <!-- Add more rows as needed -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
 
                 <div class="hidden mt-2 mx-4 lg:flex justify-between items-center text-xs text-gray-500">
                     <span id="paginationRange">1-10 of 87</span>
@@ -733,13 +417,13 @@
 
     </div>
 
-<script>
-    // Add alternating background colors to table rows
-    document.addEventListener('DOMContentLoaded', function() {
-        const rows = document.querySelectorAll('#centersGridTable tbody tr');
-        rows.forEach((row, index) => {
-            // Add alternating background colors
-            row.classList.add(index % 2 === 0 ? 'bg-white' : 'bg-gray-100');
+    <script>
+        // Add alternating background colors to table rows
+        document.addEventListener('DOMContentLoaded', function() {
+            const rows = document.querySelectorAll('#centersGridTable tbody tr');
+            rows.forEach((row, index) => {
+                // Add alternating background colors
+                row.classList.add(index % 2 === 0 ? 'bg-white' : 'bg-gray-100');
 
                 // Ensure hover color overrides the background
                 row.classList.add('hover:bg-sky-100');

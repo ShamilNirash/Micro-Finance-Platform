@@ -253,12 +253,13 @@
                                             <td class="py-2 text-left"> {{ capitalizeFirstLetter($center->payment_date) }}
                                             </td>
                                             <td class="py-2 text-center flex justify-center items-center gap-1">
-                                                <a href="{{ route('center.summary',$center->id) }}"
+                                                <a href="{{ route('center.summary', $center->id) }}"
                                                     class="border rounded hover:bg-green-500">
                                                     <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
                                                         class="h-3 w-3 m-1">
                                                 </a>
-                                                <a href="#" class="border rounded hover:bg-sky-500">
+                                                <a href="{{ route('center.summary', $center->id) }}"
+                                                    class="border rounded hover:bg-sky-500">
                                                     <img src="{{ asset('assets/icons/PencilSimple.svg') }}"
                                                         alt="Pencil" class="h-3 w-3 m-1">
                                                 </a>
@@ -513,7 +514,7 @@
             <span class="text-xs font-medium text-gray-600 p-2">Group ${groupId}</span>
             <span class="text-xs font-medium text-gray-800 bg-gray-200 p-2 px-8 rounded-lg">${group.member.length}</span>
             <div class="font-medium text-gray-800 px-2 text-xs flex space-x-1">
-                <a href="#" class="border rounded hover:bg-green-500">
+                <a href="/groupSummary/${groupId}" class="border rounded hover:bg-green-500">
                     <img src="/assets/icons/Eye.svg" alt="Eye" class="h-3 w-3 m-1">
                 </a>
                 <a href="#" class="border rounded hover:bg-red-500">
