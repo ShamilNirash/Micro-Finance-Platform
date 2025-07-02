@@ -217,8 +217,8 @@
                                 <thead class="w-full text-gray-700 text-xs font-light bg-gray-100 sticky top-0">
                                     <tr class="uppercase w-full">
                                         <th class="pl-2 text-left">
-                                            <input type="checkbox" id="select-all"
-                                                class="form-checkbox h-4 w-4 text-blue-400 m-1">
+                                            <!--<input type="checkbox" id="select-all"
+                                                class="form-checkbox h-4 w-4 text-blue-400 m-1">-->
                                         </th>
                                         <th class="py-2 px-2 text-left">#</th>
                                         <th class="py-2 text-left">Center Name</th>
@@ -239,8 +239,8 @@
                                             data-payment-day={{ capitalizeFirstLetter($center->payment_date) }}
                                             data-groups-array='@json($center->group)'>
                                             <td class="pl-2 text-left">
-                                                <input type="checkbox" name="selected_ids[]" value="1"
-                                                    class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                                                <!--<input type="checkbox" name="selected_ids[]" value="1"
+                                                    class="form-checkbox h-4 w-4 text-blue-600 m-1">-->
                                             </td>
                                             <td class="py-2 text-left"> {{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }}
                                             </td>
@@ -445,7 +445,7 @@
         });
 
         //check box selection
-        document.getElementById('select-all').addEventListener('change', function(e) {
+        /*document.getElementById('select-all').addEventListener('change', function(e) {
             let checkboxes = document.querySelectorAll('input[name="selected_ids[]"]');
             checkboxes.forEach(checkbox => checkbox.checked = e.target.checked);
         });
@@ -463,7 +463,7 @@
                     document.getElementById('select-all').checked = allChecked;
                 }
             });
-        });
+        });*/
 
 
         // Helper function to hide all second columns
