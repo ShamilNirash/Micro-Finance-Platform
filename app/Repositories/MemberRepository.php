@@ -38,6 +38,18 @@ class MemberRepository
             return $e;
         }
     }
+    public function un_assign_member_search($query)
+    {
+        try {
+            return $this->members
+                ->where('full_name', 'like', '%' . $query . '%')
+                ->where('status', 'UNASSIGN')
+                ->limit(10)
+                ->get(['id', 'full_name']);
+        } catch (\Exception $e) {
+            return $e;
+        }
+    }
 
     public function search_many($type, $value)
     {

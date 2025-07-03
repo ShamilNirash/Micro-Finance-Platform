@@ -24,7 +24,7 @@ class CreateMembersTable extends Migration
             $table->string('address')->nullable(false);
             $table->string('nic_number')->unique();
             $table->integer('group_id')->nullable(false);
-            $table->enum('status', ['ACTIVE', 'INACTIVE'])->default('ACTIVE');
+            $table->enum('status', ['ACTIVE', 'INACTIVE', 'UNASSIGN'])->default('ACTIVE');
             $table->timestamps();
         });
     }

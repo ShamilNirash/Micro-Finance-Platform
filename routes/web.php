@@ -52,6 +52,8 @@ Route::post(
     '/members/create',
     [MemberController::class, 'createMember']
 )->name('members.create');
+Route::get('/unassignmembers/search', [MemberController::class, 'unAssignMemberSearch']);
+
 //group routes
 
 // After clciking on eye icon in centers table - view summury of center and group table

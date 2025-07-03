@@ -30,7 +30,12 @@ class MemberController extends Controller
             'allBranches' => $getAllBranches
         ]);
     }
-
+    public function unAssignMemberSearch(Request $request)
+    {
+        $query = $request->input('q');
+        $members = $this->memberRepository->un_assign_member_search($query);
+        return response()->json($members);
+    }
 
     public function createMember(Request $request)
     {
@@ -65,7 +70,7 @@ class MemberController extends Controller
                 'address' => $memberAddress,
                 'nic_number' => $request->memberNicNumber,
                 'group_id' => $request->group_id,
-                'status' => 'ACTIVE'
+                'status' => 'UNASSIGN'
 
             ]);
             return redirect()->back()->with('success', 'Member created successfully.');

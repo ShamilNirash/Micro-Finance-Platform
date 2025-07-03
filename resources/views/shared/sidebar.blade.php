@@ -188,7 +188,7 @@
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/ChartLineUp.svg') }}" alt="Income Icon"
                                     class="h-4 w-4">
-                                <span class="sidebar-text-mini">Income</span>
+                                <span class="sidebar-text-mini">Income Reports</span>
                             </a>
                         </li>
                         <li>
@@ -212,7 +212,7 @@
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/UserGear.svg') }}" alt="Member Managers Icon"
                                     class="h-4 w-4">
-                                <span class="sidebar-text-mini">Member Managers</span>
+                                <span class="sidebar-text-mini">Inactive Members</span>
                             </a>
                         </li>
                     </ul>
@@ -248,7 +248,7 @@
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/GearSix.svg') }}" alt="Settings Icon"
                                     class="h-4 w-4">
-                                <span class="sidebar-text-mini">Settings</span>
+                                <span class="sidebar-text-mini">User Roles</span>
                             </a>
                         </li>
                         <li>
