@@ -35,12 +35,13 @@ Route::post('/branches/create',  [BranchController::class, 'create_branch'])->na
 Route::get('/centers', [CenterController::class, 'getAllActiveCenters'])->name('centers.viewblade');
 Route::post('/centers/create',  [CenterController::class, 'createCenter'])->name('centers.createcenter');
 Route::get('/centers/{branchId}', [CenterController::class, 'getCentersByBranch']);
-Route::get('/centerSummary/{centerId}', [CenterController::class,'viewCenterSummary'])->name('center.summary');
+Route::get('/centerSummary/{centerId}', [CenterController::class, 'viewCenterSummary'])->name('center.summary');
 
 
 //group route
-Route::get('/groupSummary/{groupId}', [GroupController::class,'viewGroupSummary'])->name('group.summary');
+Route::get('/groupSummary/{groupId}', [GroupController::class, 'viewGroupSummary'])->name('group.summary');
 Route::get('/groups/{centerId}', [GroupController::class, 'getGroupsByCenter']);
+Route::post('/group/create', [GroupController::class, 'createGroup'])->name('groups.creategroup');
 
 
 //members routes
@@ -52,7 +53,7 @@ Route::post(
     '/members/create',
     [MemberController::class, 'createMember']
 )->name('members.create');
-Route::get('/unassignmembers/search', [MemberController::class, 'unAssignMemberSearch']);
+Route::get('/unassignmembers/search',  [MemberController::class, 'unAssignMemberSearch']);
 
 //group routes
 

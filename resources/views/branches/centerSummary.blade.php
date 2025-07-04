@@ -18,49 +18,53 @@
                 style="width: 100%; height: 100%;">
                 <div class="bg-white shadow-xl w-full max-w-md rounded-lg">
                     <h2 class="text-md bg-blue-100 rounded-t-lg p-4">Add New Group</h2>
-                    <form id="addGroupForm">
+                    <form id="addGroupForm" method="POST" action="{{ route('groups.creategroup') }}">
+                        @csrf
                         <div class="bg-white rounded-b-lg p-4 space-y-4">
                             <div>
                                 <label for="groupBranch" class="block text-xs text-gray-400 mb-1 ml-2">Branch*</label>
                                 <input type="text" id="groupBranch" placeholder=""
                                     class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                                    disabled value="{{ capitalizeEachWord($center_details->branch->branch_name) }}" />
+                                    value="{{ capitalizeEachWord($center_details->branch->branch_name) }}" disabled />
+                                <input type="hidden" name="branch_id" value="{{ $center_details->branch->id }}" />
+
                             </div>
                             <div>
                                 <label for="groupCenter" class="block text-xs text-gray-400 mb-1 ml-2">Center Name*</label>
                                 <input type="text" id="groupCenter" placeholder=""
                                     class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                                    disabled value="{{ capitalizeEachWord($center_details->center_name) }}" />
+                                    value="{{ capitalizeEachWord($center_details->center_name) }}" disabled />
+                                <input type="hidden" name="center_id" value="{{ $center_details->id }}" />
                             </div>
                             <div>
                                 <label for="groupName" class="block text-xs text-gray-400 mb-1 ml-2">Group Name*</label>
-                                <input type="text" id="groupName" placeholder=""
+                                <input type="text" id="groupName" placeholder="" name="group_name"
                                     class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                                     required />
                             </div>
                             <div>
                                 <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center">
-                                    <label class="block text-xs text-gray-400 mb-1 ml-2 ">Members</label>
-                                    <div class="flex justify-start items-center lg:justify-end">
+                                    {{--                                     <label class="block text-xs text-gray-400 mb-1 ml-2 ">Members</label>
+ --}} <div class="flex justify-start items-center lg:justify-end">
                                         <button type="button" id="addExistingMember"
-                                            class="text-blue-600  ml-2 text-xs">Add Existing Member </button>
-                                        <span class="ml-2"> |</span>
-                                        <button type="button" id="addNewMember" class="text-blue-600  ml-2  text-xs">+ Add
-                                            New Members</button>
+                                            class="text-blue-600  ml-2 text-xs">{{-- Add Existing Member --}} </button>
+                                        {{-- <span class="ml-2"> |</span> --}}
+                                        <button type="button" id="addNewMember" class="text-blue-600  ml-2  text-xs">
+                                            {{--  New Members --}}</button>
                                     </div>
                                 </div>
-                                <div id="memberSelection"
+                                {{--  <div id="memberSelection"
                                     class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm mt-2 flex flex-col">
                                     <span id="selectedMembers">No members selected</span>
 
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="flex justify-end space-x-4 mt-4">
                                 <button type="button" id="cancelGroup"
                                     class="px-6 py-1 bg-gray-300 rounded-lg hover:bg-gray-400 focus:outline-none text-sm">
                                     Cancel
                                 </button>
-                                <button type="submit" id="createGroup"
+                                <button type="submit"
                                     class="px-6 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none text-sm">
                                     Create
                                 </button>
@@ -72,7 +76,7 @@
 
             <!-- Add Existing Member Modal -->
             <div id="addExistingMemberModal"
-                class="inset-0 bg-gray-600  bg-opacity-50 hidden transition-opacity duration-300 opacity-0 items-center justify-center z-50 lg:absolute fixed p-4"
+                class="inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50 lg:absolute fixed p-4"
                 style="width: 100%; height: 100%;">
                 <div class="bg-white shadow-xl w-full max-w-md rounded-lg">
                     <h2 class="text-md bg-blue-100 rounded-t-lg p-4">Add Existing Members</h2>
@@ -80,10 +84,19 @@
                         <div>
                             <input type="text" id="searchExistingMembers" placeholder="Search members..."
                                 class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
-
                         </div>
                         <div id="existingMembersList" class="max-h-40 overflow-y-auto space-y-2 text-sm">
                             <!-- Dynamic member list will be populated here -->
+                        </div>
+                        <div class="flex justify-end space-x-4 mt-4">
+                            <button type="button" id="cancelExistingMember"
+                                class="px-6 py-1 bg-gray-300 rounded-lg hover:bg-gray-400 focus:outline-none text-sm">
+                                Cancel
+                            </button>
+                            <button type="button" id="okExistingMember"
+                                class="px-6 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none text-sm">
+                                OK
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -537,145 +550,6 @@
     </div>
 
     <script>
-        //Existing member search function
-        /*  document.getElementById('searchExistingMembers').addEventListener('input', function() {
-                    const query = this.value.trim();
-                    const resultList = document.getElementById('existingMembersList');
-                    if (query.length === 0) {
-                        resultList.innerHTML = '';
-                        return;
-                    }
-
-                    fetch(`/unassignmembers/search?q=${encodeURIComponent(query)}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            resultList.innerHTML = '';
-
-                            if (data.length === 0) {
-                                resultList.innerHTML = '<p class="text-gray-500 text-xs">No members found.</p>';
-                                return;
-                            }
-
-                            data.forEach(member => {
-                                const item = document.createElement('div');
-                                item.className = 'p-2 bg-gray-100 rounded cursor-pointer hover:bg-blue-100';
-                                item.textContent = member.full_name;
-                                item.dataset.id = member.id;
-
-                                // Optional: attach selection logic
-                                item.addEventListener('click', () => {
-                                    console.log("Selected Member ID:", member.id);
-                                    // Do something with selected member
-                                });
-
-                                resultList.appendChild(item);
-                            });
-                        })
-                        .catch(error => {
-                            console.error('Search error:', error);
-                            resultList.innerHTML = '<p class="text-red-500 text-xs">Error searching members.</p>';
-                        });
-                });
-         */
-        const selectedMembers = new Map(); // To store selected member data
-        const memberSelectionContainer = document.getElementById('memberSelection');
-        const selectedMembersPlaceholder = document.getElementById('selectedMembers');
-
-        document.getElementById('searchExistingMembers').addEventListener('input', function() {
-            const query = this.value.trim();
-            const resultList = document.getElementById('existingMembersList');
-            resultList.innerHTML = '';
-
-            if (query.length === 0) return;
-
-            fetch(`/unassignmembers/search?q=${encodeURIComponent(query)}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.length === 0) {
-                        resultList.innerHTML = '<p class="text-gray-500 text-xs">No members found.</p>';
-                        return;
-                    }
-
-                    data.forEach(member => {
-                        const item = document.createElement('div');
-                        item.className = 'p-2 bg-gray-100 rounded cursor-pointer hover:bg-blue-100';
-                        item.textContent = member.full_name;
-                        item.dataset.id = member.id;
-
-                        item.addEventListener('click', () => {
-                            if (selectedMembers.has(member.id)) {
-                                alert('Member already selected');
-                                return;
-                            }
-
-                            if (selectedMembers.size >= 5) {
-                                alert('You can only select up to 5 members');
-                                return;
-                            }
-
-                            // Add to selected members map
-                            selectedMembers.set(member.id, member.full_name);
-                            updateSelectedMembersView();
-                            document.getElementById('addExistingMemberModal').classList.add(
-                                'hidden');
-
-                        });
-
-                        resultList.appendChild(item);
-                    });
-                });
-        });
-
-        function updateSelectedMembersView() {
-            memberSelectionContainer.innerHTML = '';
-
-            if (selectedMembers.size === 0) {
-                selectedMembersPlaceholder.textContent = 'No members selected';
-                memberSelectionContainer.appendChild(selectedMembersPlaceholder);
-                return;
-            }
-
-            selectedMembers.forEach((name, id) => {
-                const tag = document.createElement('div');
-                tag.className =
-                    'flex items-center justify-between bg-blue-100 text-blue-900 px-2 py-1 rounded mb-1';
-
-                const nameSpan = document.createElement('span');
-                nameSpan.textContent = name;
-
-                const removeBtn = document.createElement('button');
-                removeBtn.className = 'text-xs text-red-500 ml-2';
-                removeBtn.textContent = 'Remove';
-                removeBtn.onclick = () => {
-                    selectedMembers.delete(id);
-                    updateSelectedMembersView();
-                };
-
-                tag.appendChild(nameSpan);
-                tag.appendChild(removeBtn);
-                memberSelectionContainer.appendChild(tag);
-            });
-        }
-
-        // Optional: Check minimum 3 members before submitting group form
-        document.getElementById('addGroupForm').addEventListener('submit', function(e) {
-            if (selectedMembers.size < 3) {
-                alert('Please select at least 3 members.');
-                e.preventDefault();
-            } else {
-                // Add hidden inputs to form with selected member IDs
-                selectedMembers.forEach((name, id) => {
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = 'member_ids[]';
-                    input.value = id;
-                    this.appendChild(input);
-                });
-            }
-        });
-
-
-
         // Add alternating background colors to table rows
         document.addEventListener('DOMContentLoaded', function() {
             const rows = document.querySelectorAll('#centersGridTable tbody tr');
@@ -714,7 +588,7 @@
         // Sample data for existing members (replace with your actual data source)
 
 
-
+        let selectedMembers = [];
 
         document.addEventListener('DOMContentLoaded', function() {
             // Open Add Group Modal
@@ -755,7 +629,9 @@
                 document.getElementById('addExistingMemberModal').classList.add('hidden');
             });
 
-
+            document.getElementById('cancelExistingMember').addEventListener('click', function() {
+                document.getElementById('addExistingMemberModal').classList.add('hidden');
+            });
 
             // Add New Member Modal
             document.getElementById('addNewMember').addEventListener('click', function() {
@@ -804,7 +680,6 @@
             document.getElementById('cancelGroup').addEventListener('click', function() {
                 console.log("hi");
                 document.getElementById('addGroupModal').classList.add('hidden');
-                document.getElementById('addGroupModal').classList.remove('flex');
                 document.getElementById('addGroupForm').reset();
                 selectedMembers = [];
                 document.getElementById('selectedMembers').textContent = 'No members selected';
