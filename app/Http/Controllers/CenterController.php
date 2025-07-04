@@ -36,8 +36,10 @@ class CenterController extends Controller
 
             return redirect()->back()->with('success', 'Branch created successfully.');
         } catch (ValidationException $e) {
-            session()->flash('show_create_popup', true);
-            throw $e;
+            return redirect()->back()
+                ->with('show_create_center_popup', true)
+                ->withInput()
+                ->withErrors($e->errors());
         } catch (\Exception $e) {
             Log::error('Error creating branch: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong.');

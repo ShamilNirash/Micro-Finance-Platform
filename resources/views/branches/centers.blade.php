@@ -38,7 +38,8 @@
                             <div>
                                 <label for="branchName" class="block text-xs text-gray-400 mb-1 ml-2">Branch Name</label>
                                 <input type="text" name="branch_name" id="branchName" value="{{ old('branch_name') }}"
-                                    class="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                                    class="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                                    required />
                             </div>
 
                             <div class="flex justify-end space-x-4 mt-4">
@@ -65,10 +66,21 @@
                     <form action="{{ route('centers.createcenter') }}" method="POST">
                         @csrf
                         <div class="bg-white rounded-b-lg p-4 space-y-4">
+                            @if ($errors->any())
+                                <div class="bg-red-500 border border-red-700 text-white px-4 py-2 rounded mb-4">
+                                    <strong>There were some errors:</strong>
+                                    <ul class="mt-2 list-disc list-inside text-sm">
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <div>
                                 <label for="centerBranch" class="block text-xs text-gray-400 mb-1 ml-2">Branch*</label>
                                 <select id="centerBranch" name="branch_id"
-                                    class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+                                    class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                                    required>
                                     <option value="" disabled selected>Select a branch</option>
                                     @foreach ($all_active_branches as $branch_name)
                                         <option value="{{ $branch_name->id }}">
@@ -79,13 +91,14 @@
                             </div>
                             <div>
                                 <label for="centerName" class="block text-xs text-gray-400 mb-1 ml-2">Center Name*</label>
-                                <input type="text" id="centerName" placeholder="" name="center_name"
+                                <input type="text" id="centerName" placeholder="" name="center_name" required
                                     class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                             </div>
                             <div>
                                 <label for="paymentDate" class="block text-xs text-gray-400 mb-1 ml-2">Payment Day</label>
                                 <select id="centerBranch" name="payment_day"
-                                    class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+                                    class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                                    required>
                                     <option value="" disabled selected>Select a day</option>
                                     @foreach ($weekDays as $day)
                                         <option value={{ $day }}>{{ capitalizeFirstLetter($day) }}</option>
@@ -96,14 +109,15 @@
                             <div>
                                 <label for="manager" class="block text-xs text-gray-400 mb-1 ml-2">Manager</label>
                                 <input type="text" id="manager" placeholder="" name="manager_name"
-                                    class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                                    class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                                    required />
                             </div>
                             <div class="flex justify-end space-x-4 mt-4">
                                 <button id="cancelCenter" type="button"
                                     class="px-6 py-2 bg-gray-300 rounded-lg hover:bg-gray-400 focus:outline-none text-sm">
                                     Cancel
                                 </button>
-                                <button id="createCenter" type="submit"
+                                <button type="submit"
                                     class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none text-sm">
                                     Create
                                 </button>
@@ -111,6 +125,9 @@
                         </div>
                     </form>
                 </div>
+                <script>
+                    window.showCreateCenterPopup = {{ session('show_create_center_popup') ? 'true' : 'false' }};
+                </script>
             </div>
 
             <div class="p-0 border-0 lg:py-2 lg:bg-sky-50 lg:border rounded-lg flex flex-col justify-between h-full">
@@ -218,7 +235,7 @@
                                     <tr class="uppercase w-full">
                                         <th class="pl-2 text-left">
                                             <!--<input type="checkbox" id="select-all"
-                                                class="form-checkbox h-4 w-4 text-blue-400 m-1">-->
+                                                                        class="form-checkbox h-4 w-4 text-blue-400 m-1">-->
                                         </th>
                                         <th class="py-2 px-2 text-left">#</th>
                                         <th class="py-2 text-left">Center Name</th>
@@ -240,7 +257,7 @@
                                             data-groups-array='@json($center->group)'>
                                             <td class="pl-2 text-left">
                                                 <!--<input type="checkbox" name="selected_ids[]" value="1"
-                                                    class="form-checkbox h-4 w-4 text-blue-600 m-1">-->
+                                                                            class="form-checkbox h-4 w-4 text-blue-600 m-1">-->
                                             </td>
                                             <td class="py-2 text-left"> {{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }}
                                             </td>
@@ -597,6 +614,36 @@
 
         document.getElementById('hideBranchesColumn').addEventListener('click', () => {
             hideAllSecondColumns();
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const centerModal = document.getElementById('addCenterModal');
+
+            // Show modal if validation failed
+            if (window.showCreateCenterPopup === true && centerModal) {
+                centerModal.classList.remove('hidden');
+                centerModal.classList.add('flex');
+                console.log('Center modal reopened after validation error');
+            }
+
+            // Show modal on open button (if applicable)
+            const addNewCenterButton = document.getElementById('addNewCenterButton');
+            if (addNewCenterButton) {
+                addNewCenterButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    centerModal.classList.remove('hidden');
+                    centerModal.classList.add('flex');
+                });
+            }
+
+            // Hide modal on cancel
+            const cancelCenterButton = document.getElementById('cancelCenter');
+            if (cancelCenterButton) {
+                cancelCenterButton.addEventListener('click', function() {
+                    centerModal.classList.add('hidden');
+                    centerModal.classList.remove('flex');
+                    document.getElementById('addNewCenterForm').reset();
+                });
+            }
         });
     </script>
 
