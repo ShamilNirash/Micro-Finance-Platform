@@ -10,7 +10,7 @@
         <div id="firstColumn" class="w-full h-full p-2 lg:border-r lg:p-4 transition-all duration-300  lg:relative space-y-2">
 
             <!-- Add New Member Modal -->
-            <div id="addMemberModal"
+            {{--  <div id="addMemberModal"
                 class="inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50 lg:absolute fixed p-4"
                 style="width: 100%; height: 100%;">
                 <div class="bg-white shadow-xl w-full max-w-md rounded-lg ">
@@ -36,10 +36,10 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Add Existing Member Modal -->
-            <div id="addExistingMemberModal"
+            {{--  <div id="addExistingMemberModal"
                 class="inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50 lg:absolute fixed p-4"
                 style="width: 100%; height: 100%;">
                 <div class="bg-white shadow-xl w-full max-w-md rounded-lg">
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Add New Member Modal -->
             <div id="addNewMemberModal"
@@ -72,33 +72,39 @@
                 style="width: 100%; height: 100%;">
                 <div class="bg-white shadow-xl w-full max-w-lg rounded-lg">
                     <h2 class="text-md bg-blue-100 rounded-t-lg p-4">Add New Member</h2>
-                    <form id="addNewMemberForm">
+                    <form id="addNewMemberForm" method="POST" action="{{ route('members.create') }}"
+                        enctype="multipart/form-data">
+                        @csrf
                         <div class="bg-white rounded-b-lg p-4 space-y-4">
                             <div class="flex items-center space-x-4">
                                 <label for="newMemberBranch"
                                     class="block text-xs text-gray-400 mb-1 ml-2 w-36">Branch*</label>
                                 <input type="text" id="newMemberBranch" placeholder=""
                                     class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                                    required />
+                                    value={{ capitalizeFirstLetter($group_details->center->branch->branch_name) }}
+                                    disabled />
                             </div>
+                            <input type="hidden" name="branch_id" value="{{ $group_details->center->branch->id }}" />
                             <div class="flex items-center space-x-4">
                                 <label for="newMemberCenter" class="block text-xs text-gray-400 mb-1 ml-2 w-36">Center
                                     Name*</label>
                                 <input type="text" id="newMemberCenter" placeholder=""
                                     class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                                    required />
+                                    value={{ capitalizeFirstLetter($group_details->center->center_name) }} disabled />
                             </div>
+                            <input type="hidden" name="center_id" value="{{ $group_details->center->id }}" />
                             <div class="flex items-center space-x-4">
                                 <label for="newMemberGroup" class="block text-xs text-gray-400 mb-1 ml-2 w-36">Group
                                     Name*</label>
                                 <input type="text" id="newMemberGroup" placeholder=""
                                     class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                                    required />
+                                    value="{{ capitalizeFirstLetter($group_details->group_name) }}" disabled />
                             </div>
+                            <input type="hidden" name="group_id" value="{{ $group_details->id }}" />
                             <div class="flex items-center space-x-4">
                                 <label for="newMemberFullName" class="block text-xs text-gray-400 mb-1 ml-2 w-36">Full
                                     Name*</label>
-                                <input type="text" id="newMemberFullName" placeholder=""
+                                <input type="text" id="newMemberFullName" placeholder="" name="memberFullName"
                                     class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                                     required />
                             </div>
@@ -106,57 +112,56 @@
                                 <div class="w-1/2 flex items-center space-x-4">
                                     <label for="newMemberMobile01" class="block text-xs text-gray-400 mb-1 ml-2">Mobile
                                         Number 01</label>
-                                    <input type="tel" id="newMemberMobile01" placeholder=""
+                                    <input type="tel" id="newMemberMobile01" placeholder="" name="memberPhoneNumber01"
                                         class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                                 </div>
                                 <div class="w-1/2 flex items-center space-x-4">
                                     <label for="newMemberMobile02" class="block text-xs text-gray-400 mb-1 ml-2">Mobile
                                         Number 02</label>
-                                    <input type="tel" id="newMemberMobile02" placeholder=""
+                                    <input type="tel" id="newMemberMobile02" placeholder="" name="memberPhoneNumber02"
                                         class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                                 </div>
                             </div>
                             <div class="flex items-center space-x-4">
                                 <label for="newMemberAddress"
-                                    class="block text-xs text-gray-400 mb-1 ml-2 w-36">Address?</label>
-                                <input type="text" id="newMemberAddress" placeholder=""
+                                    class="block text-xs text-gray-400 mb-1 ml-2 w-36">Address</label>
+                                <input type="text" id="newMemberAddress" placeholder="" name="memberAddress"
                                     class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                             </div>
                             <div class="flex justify-between">
                                 <div class="w-1/2 flex items-center space-x-4">
-                                    <label for="newMemberNIC"
-                                        class="block text-xs text-gray-400 mb-1 ml-2 w-36">NIC</label>
-                                    <input type="text" id="newMemberNIC" placeholder=""
+                                    <label for="newMemberNIC" class="block text-xs text-gray-400 mb-1 ml-2 w-36">NIC</label>
+                                    <input type="text" id="newMemberNIC" placeholder="" name="memberNicNumber"
                                         class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                                 </div>
                                 <div class="w-1/2 flex items-center space-x-4 pl-8">
-                                    <label class="text-xs text-gray-400 w-1/2"><input type="radio"
-                                            name="newMemberGender" value="Male" class="p-1 " /> Male</label>
-                                    <label class="text-xs text-gray-400 w-1/2"><input type="radio"
-                                            name="newMemberGender" value="Female" class="p-1 " /> Female</label>
+                                    <label class="text-xs text-gray-400 w-1/2"><input type="radio" name="memberGender"
+                                            value="Male" class="p-1 " /> Male</label>
+                                    <label class="text-xs text-gray-400 w-1/2"><input type="radio" name="memberGender"
+                                            value="Female" class="p-1 " /> Female</label>
 
                                 </div>
                             </div>
-                            <div class="flex justify-between items-center space-x-4">
-                                <div>
+                            <div class="flex justify-between items-center ">
+
+                                <label class="block text-xs text-gray-400 mb-1 ml-2 mr-2">Image*</label>
+                                <input type="file" id="newMemberImage" name="memberImage01"
+                                    class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                                    required />
+
+                                {{-- <div>
                                     <label class="block text-xs text-gray-400 mb-1 ml-2">Image*</label>
                                     <input type="file" id="newMemberImage"
                                         class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                                         required />
-                                </div>
-                                <div>
-                                    <label class="block text-xs text-gray-400 mb-1 ml-2">Image*</label>
-                                    <input type="file" id="newMemberImage"
-                                        class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                                        required />
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="flex justify-end space-x-4 mt-2">
                                 <button type="button" id="cancelNewMember"
                                     class="px-6 py-1 bg-gray-300 rounded-lg hover:bg-gray-400 focus:outline-none text-sm">
                                     Cancel
                                 </button>
-                                <button type="submit" id="createNewMember"
+                                <button type="submit"
                                     class="px-6 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none text-sm">
                                     Create
                                 </button>
@@ -617,7 +622,7 @@
                 const branch_name = row.getAttribute('data-branch-name');
                 const group_name = row.getAttribute('data-group-name');
                 const memberObject = JSON.parse(row.getAttribute('data-member-object'));
-console.log(memberObject.address);
+                console.log(memberObject.address);
                 document.getElementById('memberNameSlideBar').textContent = member_name;
                 document
                     .getElementById('branchNameSlideBar').textContent = branch_name;
@@ -668,8 +673,8 @@ console.log(memberObject.address);
         document.addEventListener('DOMContentLoaded', function() {
             // Open Add Group Modal
             document.getElementById('addMemberButton').addEventListener('click', function() {
-                document.getElementById('addMemberModal').classList.remove('hidden');
-                document.getElementById('addMemberModal').classList.add('flex');
+                document.getElementById('addNewMemberModal').classList.remove('hidden');
+                document.getElementById('addNewMemberModal').classList.add('flex');
             });
 
             // Add Existing Member Modal

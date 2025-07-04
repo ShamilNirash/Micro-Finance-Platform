@@ -51,26 +51,23 @@ class MemberController extends Controller
                 'memberNicNumber' => 'required|string',
                 'memberGender' => 'required|in:Female,Male',
                 'memberImage01' => 'required|file|image|mimes:jpeg,png,jpg',
-                'memberImage02' => 'required|file|image|mimes:jpeg,png,jpg',
-
-
             ]);
             $memberFullName = strtolower($request->input('memberFullName'));
             $memberAddress = strtolower($request->input('memberAddress'));
             $memberGender = $request->input('memberGender') == 'Female' ? 'FEMALE' : 'MALE';
             $image1Path = $request->file('memberImage01')->store('members/images', 'public');
-            $image2Path = $request->file('memberImage02')->store('members/images', 'public');
+            /*             $image2Path = $request->file('memberImage02')->store('members/images', 'public');
+ */
             $this->memberRepository->create([
                 'full_name' => $memberFullName,
                 'mobile_number_1' => $request->memberPhoneNumber01,
                 'mobile_number_2' => $request->memberPhoneNumber02,
                 'image_1' => $image1Path,
-                'image_2' => $image2Path,
                 'gender' => $memberGender,
                 'address' => $memberAddress,
                 'nic_number' => $request->memberNicNumber,
                 'group_id' => $request->group_id,
-                'status' => 'UNASSIGN'
+                'status' => 'ACTIVE'
 
             ]);
             return redirect()->back()->with('success', 'Member created successfully.');

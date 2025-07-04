@@ -19,7 +19,7 @@ class CreateMembersTable extends Migration
             $table->string('mobile_number_1')->nullable(false);
             $table->string('mobile_number_2')->nullable(false);
             $table->string('image_1')->nullable(false);
-            $table->string('image_2')->nullable(false);
+            $table->string('image_2')->nullable(true);
             $table->enum('gender', ['MALE', 'FEMALE'])->nullable(false);
             $table->string('address')->nullable(false);
             $table->string('nic_number')->unique();
