@@ -38,7 +38,7 @@ class MemberController extends Controller
     }
 
     public function createMember(Request $request)
-    { 
+    {
         try {
             $request->validate([
                 'branch_id' => 'required|string|regex:/^[0-9]+$/',
@@ -48,7 +48,7 @@ class MemberController extends Controller
                 'memberPhoneNumber01' => 'required|string|regex:/^[0-9]+$/',
                 'memberPhoneNumber02' => 'required|string|regex:/^[0-9]+$/',
                 'memberAddress' => 'required|string',
-                'memberNicNumber' => 'required|string',
+                'memberNicNumber' => 'required|string|unique:members,nic_number',
                 'memberGender' => 'required|in:Female,Male',
                 'memberImage01' => 'required|file|image|mimes:jpeg,png,jpg',
             ]);

@@ -87,12 +87,14 @@
                                     <label for="newMemberMobile01" class="block text-xs text-gray-400 mb-1 ml-2 w-36">Mobile
                                         Number 01</label>
                                     <input type="tel" name="memberPhoneNumber01" id="newMemberMobile01" placeholder=""
+                                        value="{{ old('memberPhoneNumber01') }}"
                                         class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                                 </div>
                                 <div class="lg:w-1/2 flex items-center space-x-4">
                                     <label for="newMemberMobile02" class="block text-xs text-gray-400 mb-1 ml-2 w-36">Mobile
                                         Number 02</label>
                                     <input type="tel" name="memberPhoneNumber02" id="newMemberMobile02" placeholder=""
+                                        value="{{ old('memberPhoneNumber02') }}"
                                         class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                                 </div>
                             </div>
@@ -100,21 +102,25 @@
                                 <label for="newMemberAddress"
                                     class="block text-xs text-gray-400 mb-1 ml-2 w-36">Address?</label>
                                 <input type="text" name="memberAddress" id="newMemberAddress" placeholder=""
+                                    value="{{ old('memberAddress') }}"
                                     class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                             </div>
                             <div class="flex justify-between">
                                 <div class="w-1/2 flex items-center space-x-4">
                                     <label for="newMemberNIC" class="block text-xs text-gray-400 mb-1 ml-2 w-36">NIC</label>
                                     <input type="text" id="newMemberNIC" name="memberNicNumber" placeholder=""
+                                        value="{{ old('memberNicNumber') }}"
                                         class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                                 </div>
                                 <div class="w-1/2 flex items-center space-x-4  pl-4">
                                     <label class="text-xs text-gray-400 w-1/2 flex space-x-1">
-                                        <input type="radio" name="memberGender" value="Male" class="p-1 " />
+                                        <input type="radio" name="memberGender" value="Male" class="p-1 "
+                                            value="{{ old('memberGender') }}" />
                                         <p>Male</p>
                                     </label>
                                     <label class="text-xs text-gray-400 w-1/2 flex space-x-1">
-                                        <input type="radio" name="memberGender" value="Female" class="p-1 " />
+                                        <input type="radio" name="memberGender" value="Female" class="p-1 "
+                                            value="{{ old('memberGender') }}" />
                                         <p>Female</p>
                                     </label>
 
@@ -124,6 +130,7 @@
 
                                 <label class="block text-xs text-gray-400 mb-1 ml-2">Image </label>
                                 <input type="file" id="newMemberImage1" name="memberImage01"
+                                    value="{{ old('memberImage01') }}"
                                     class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                                     required />
 
@@ -139,7 +146,7 @@
                                     class="px-6 py-1 bg-gray-300 rounded-lg hover:bg-gray-400 focus:outline-none text-sm">
                                     Cancel
                                 </button>
-                                <button type="submit" id="createNewMember"
+                                <button type="submit"
                                     class="px-6 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none text-sm">
                                     Create
                                 </button>
@@ -147,11 +154,11 @@
                         </div>
                     </form>
                 </div>
-                @if (session('show_create_popup'))
-                    <script>
-                        window.showCreatePopup = true;
-                    </script>
-                @endif
+
+                <script>
+                    window.showCreatePopup = {{ session('show_create_popup') ? 'true' : 'false' }};
+                </script>
+
             </div>
             <!-- Tab Navigation -->
             <div class="lg:h-8 lg:pb-4 w-full pl-4">
@@ -262,9 +269,9 @@
                                 <thead class="w-full text-gray-700 text-xs font-light bg-gray-100 sticky top-0">
                                     <tr class="uppercase w-full">
                                         <!--<th class="pl-2 text-left">
-                                                <input type="checkbox" id="select-all"
-                                                    class="form-checkbox h-4 w-4 text-blue-400 m-1">
-                                            </th>-->
+                                                                    <input type="checkbox" id="select-all"
+                                                                        class="form-checkbox h-4 w-4 text-blue-400 m-1">
+                                                                </th>-->
                                         <th class="py-2 text-center">#</th>
                                         <th class="py-2 text-left">Name</th>
                                         <th class="py-2 text-left">Center</th>
@@ -283,9 +290,9 @@
                                             data-member_id='{{ $member->nic_number }}' data-loan-balance="20000"
                                             data-member='@json($member)'>
                                             <!--<td class="pl-2 text-left">
-                                                    <input type="checkbox" name="selected_ids[]" value="1"
-                                                        class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                                </td>-->
+                                                                        <input type="checkbox" name="selected_ids[]" value="1"
+                                                                            class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                                                                    </td>-->
                                             <td class="py-2 text-center">{{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
                                             </td>
                                             <td class="py-2 text-left">{{ capitalizeEachWord($member->full_name) }}</td>
