@@ -511,7 +511,7 @@
 
                     const html = `
         <div class="flex justify-between items-center bg-sky-50 border rounded-lg">
-            <span class="text-xs font-medium text-gray-600 p-2">Group ${groupId}</span>
+            <span class="text-xs font-medium text-gray-600 p-2">${group.group_name}</span>
             <span class="text-xs font-medium text-gray-800 bg-gray-200 p-2 px-8 rounded-lg">${group.member.length}</span>
             <div class="font-medium text-gray-800 px-2 text-xs flex space-x-1">
                 <a href="/groupSummary/${groupId}" class="border rounded hover:bg-green-500">
