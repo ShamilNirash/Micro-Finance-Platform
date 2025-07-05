@@ -4,6 +4,8 @@
     require_once resource_path('libs\every_word_first_letter_capitalization.php');
 @endphp
 @section('contents')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <div id="mainContent" class="flex lg:h-full">
         <!-- First Column -->
         <!--Mobile Cards and table View-->
@@ -188,128 +190,139 @@
                     </div>
 
                 </div>
-                <div class="flex flex-col lg:flex-row border rounded-lg py-4 px-4 h-full ">
-                    <!-- Center Details -->
-                    <div class="w-full lg:w-2/3 h-full">
-                        <h1 class="text-md font-medium text-gray-800 mb-2">Group Details</h1>
-                        <div class="grid-cols-2 grid lg:grid-cols-3 gap-y-2 gap-x-4">
-                            <!-- Name -->
-                            <div>
-                                <p class="text-xs text-gray-400">Name</p>
-                                <p class="text-sm">
-                                    <span class="view-mode">{{ capitalizeFirstLetter($group_details->group_name) }}</span>
-                                    <input type="text" class="edit-mode hidden border px-2 py-1 rounded w-full"
-                                        value="Group 01-end">
-                                </p>
-                            </div>
+                <form action="{{ route('groups.updateGroup', ['groupId' => $group_details->id]) }}" method="POST">
+                    @csrf
+                    <div class="flex flex-col lg:flex-row border rounded-lg py-4 px-4 h-full ">
+                        <!-- Center Details -->
+                        <div class="w-full lg:w-2/3 h-full">
+                            <h1 class="text-md font-medium text-gray-800 mb-2">Group Details</h1>
+                            <div class="grid-cols-2 grid lg:grid-cols-3 gap-y-2 gap-x-4">
+                                <!-- Name -->
+                                <div>
+                                    <p class="text-xs text-gray-400">Name</p>
+                                    <p class="text-sm">
+                                        <span
+                                            class="view-mode">{{ capitalizeFirstLetter($group_details->group_name) }}</span>
+                                        <span id="group_id_span" class="hidden">{{ $group_details->id }}</span>
 
-                            <!-- Center Manager -->
-                            <div>
-                                <p class="text-xs text-gray-400">Center</p>
-                                <p class="text-sm">
-                                    <span
-                                        class="view-mode">{{ capitalizeFirstLetter($group_details->center->center_name) }}</span>
-                                    <input type="text" class="edit-mode hidden border px-2 py-1 rounded w-full"
-                                        value="Center">
-                                </p>
-                            </div>
+                                        <input type="text" class="edit-mode hidden border px-2 py-1 rounded w-full"
+                                            name="group_name"
+                                            value="{{ capitalizeFirstLetter($group_details->group_name) }}">
+                                    </p>
+                                </div>
 
-                            <!-- Branch -->
-                            <div>
-                                <p class="text-xs text-gray-400">Branch</p>
-                                <p class="text-sm">
-                                    <span
-                                        class="view-mode">{{ capitalizeFirstLetter($group_details->center->branch->branch_name) }}</span>
-                                    <input type="text" class="edit-mode hidden border px-2 py-1 rounded w-full"
-                                        value="Balangoda">
-                                </p>
-                            </div>
+                                <!-- Center Manager -->
+                                <div>
+                                    <p class="text-xs text-gray-400">Center</p>
+                                    <p class="text-sm">
+                                        <span
+                                            class="view-mode">{{ capitalizeFirstLetter($group_details->center->center_name) }}</span>
+                                        <input type="text" class="edit-mode hidden border px-2 py-1 rounded w-full"
+                                            value="{{ capitalizeFirstLetter($group_details->center->center_name) }}"
+                                            disabled>
+                                    </p>
+                                </div>
 
-                            <!-- Total Group -->
-                            <div>
-                                <p class="text-xs text-gray-400">Center Manager</p>
-                                <p class="text-sm">
-                                    <span
-                                        class="view-mode">{{ capitalizeEachWord($group_details->center->manager_name) }}</span>
-                                    <input type="number" class="edit-mode hidden border px-2 py-1 rounded w-full"
-                                        value="Saman">
-                                </p>
-                            </div>
+                                <!-- Branch -->
+                                <div>
+                                    <p class="text-xs text-gray-400">Branch</p>
+                                    <p class="text-sm">
+                                        <span
+                                            class="view-mode">{{ capitalizeFirstLetter($group_details->center->branch->branch_name) }}</span>
+                                        <input type="text" class="edit-mode hidden border px-2 py-1 rounded w-full"
+                                            value="{{ capitalizeFirstLetter($group_details->center->branch->branch_name) }}"
+                                            disabled>
+                                    </p>
+                                </div>
 
-                            <!-- Total Members -->
-                            <div class="lg:block">
-                                <p class="text-xs text-gray-400">Total Members</p>
-                                <p class="text-sm">
-                                    <span class="view-mode">
-                                        {{ str_pad($group_details->member->count(), 2, '0', STR_PAD_LEFT) }}
-                                    </span>
-                                    <input type="number" class="edit-mode hidden border px-2 py-1 rounded w-full"
-                                        value="05">
-                                </p>
-                            </div>
+                                <!-- Total Group -->
+                                <div>
+                                    <p class="text-xs text-gray-400">Center Manager</p>
+                                    <p class="text-sm">
+                                        <span
+                                            class="view-mode">{{ capitalizeEachWord($group_details->center->manager_name) }}</span>
+                                        <input type="text" class="edit-mode hidden border px-2 py-1 rounded w-full"
+                                            value="{{ capitalizeEachWord($group_details->center->manager_name) }}"
+                                            disabled>
+                                    </p>
+                                </div>
 
-                            <!-- Payment Date -->
-                            <div>
-                                <p class="text-xs text-gray-400">Payment Date</p>
-                                <p class="text-sm">
-                                    <span
-                                        class="view-mode">{{ capitalizeFirstLetter($group_details->center->payment_date) }}</span>
-                                    <input type="date" class="edit-mode hidden border px-2 py-1 rounded w-full"
-                                        value="2025-05-02">
-                                </p>
+                                <!-- Total Members -->
+                                <div class="lg:block">
+                                    <p class="text-xs text-gray-400">Total Members</p>
+                                    <p class="text-sm">
+                                        <span class="view-mode">
+                                            {{ str_pad($group_details->member->count(), 2, '0', STR_PAD_LEFT) }}
+                                        </span>
+                                        <input type="number" class="edit-mode hidden border px-2 py-1 rounded w-full"
+                                            value="{{ str_pad($group_details->member->count(), 2, '0', STR_PAD_LEFT) }}"
+                                            disabled>
+                                    </p>
+                                </div>
+
+                                <!-- Payment Date -->
+                                <div>
+                                    <p class="text-xs text-gray-400">Payment Date</p>
+                                    <p class="text-sm">
+                                        <span
+                                            class="view-mode">{{ capitalizeFirstLetter($group_details->center->payment_date) }}</span>
+                                        <input class="edit-mode hidden border px-2 py-1 rounded w-full"
+                                            value="{{ capitalizeFirstLetter($group_details->center->payment_date) }}"
+                                            disabled>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="flex w-full lg:w-1/3 justify-between lg:justify-end items-end space-x-2 pt-4 ">
+                            <div class="flex flex-row lg:space-x-2 bg-white lg:text-xs w-full justify-end">
+                                <!-- Edit -->
+                                <button id="editBtn" type="button"
+                                    class="bg-blue-600 text-white p-1 lg:p-2 rounded-lg hover:bg-blue-700 flex items-center justify-center px-6 w-1/2 lg:w-28 mr-2 lg:mr-0">
+                                    <img src="{{ asset('assets/icons/PencilSimpleWhite.svg') }}" alt="Edit"
+                                        class="h-3 w-3 mr-2">
+                                    <span>Edit</span>
+                                </button>
+
+                                <!-- Save -->
+                                <button id="saveBtn" type="submit"
+                                    class="bg-green-600 text-white p-1 lg:p-2 rounded-lg hover:bg-green-700 hidden  items-center justify-center px-6 w-1/2 lg:w-28  mr-2 lg:mr-0">
+                                    <img src="{{ asset('assets/icons/VectorWhite.svg') }}" alt="Save"
+                                        class="h-3 w-3 mr-2">
+                                    <span>Save</span>
+                                </button>
+
+                                <!-- Delete -->
+                                <button id="deleteBtn" type="button"
+                                    class="bg-red-600 text-white p-1 lg:p-2 rounded-lg hover:bg-red-700 flex items-center justify-center px-4 w-1/2 lg:w-28">
+                                    <img src="{{ asset('assets/icons/TrashWhite.svg') }}" alt="Delete"
+                                        class="h-3 w-3 mr-2">
+                                    <span>Delete</span>
+                                </button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Action Buttons -->
-                    <div class="flex w-full lg:w-1/3 justify-between lg:justify-end items-end space-x-2 pt-4 ">
-                        <div class="flex flex-row lg:space-x-2 bg-white lg:text-xs w-full justify-end">
-                            <!-- Edit -->
-                            <button id="editBtn"
-                                class="bg-blue-600 text-white p-1 lg:p-2 rounded-lg hover:bg-blue-700 flex items-center justify-center px-6 w-1/2 lg:w-28 mr-2 lg:mr-0">
-                                <img src="{{ asset('assets/icons/PencilSimpleWhite.svg') }}" alt="Edit"
-                                    class="h-3 w-3 mr-2">
-                                <span>Edit</span>
-                            </button>
-
-                            <!-- Save -->
-                            <button id="saveBtn"
-                                class="bg-green-600 text-white p-1 lg:p-2 rounded-lg hover:bg-green-700 hidden  items-center justify-center px-6 w-1/2 lg:w-28  mr-2 lg:mr-0">
-                                <img src="{{ asset('assets/icons/VectorWhite.svg') }}" alt="Save"
-                                    class="h-3 w-3 mr-2">
-                                <span>Save</span>
-                            </button>
-
-                            <!-- Delete -->
-                            <button id="deleteBtn"
-                                class="bg-red-600 text-white p-1 lg:p-2 rounded-lg hover:bg-red-700 flex items-center justify-center px-4 w-1/2 lg:w-28">
-                                <img src="{{ asset('assets/icons/TrashWhite.svg') }}" alt="Delete"
-                                    class="h-3 w-3 mr-2">
-                                <span>Delete</span>
-                            </button>
+                    <!-- Delete Confirmation Modal -->
+                    <div id="deleteModal"
+                        class="fixed inset-0  items-center justify-center bg-black bg-opacity-40 hidden z-50 h-full">
+                        <div class="bg-white p-6 rounded-lg shadow-md text-center w-1/3 h-30">
+                            <p class="text-md font-semibold mb-4">Are you sure you want to delete this Group?</p>
+                            <div class="flex justify-center space-x-4">
+                                <button id="cancelDelete"
+                                    class="bg-gray-300 text-black p-2 rounded-lg hover:bg-gray-500 flex items-center px-4 text-xs">
+                                    <span>Cancel</span>
+                                </button>
+                                <button id="confirmDelete"
+                                    class="bg-red-600 text-white p-2 rounded-lg hover:bg-red-700 flex items-center px-4 text-xs">
+                                    <span>Delete</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Delete Confirmation Modal -->
-                <div id="deleteModal"
-                    class="fixed inset-0  items-center justify-center bg-black bg-opacity-40 hidden z-50 h-full">
-                    <div class="bg-white p-6 rounded-lg shadow-md text-center w-1/3 h-30">
-                        <p class="text-md font-semibold mb-4">Are you sure you want to delete this Group?</p>
-                        <div class="flex justify-center space-x-4">
-                            <button id="cancelDelete"
-                                class="bg-gray-300 text-black p-2 rounded-lg hover:bg-gray-500 flex items-center px-4 text-xs">
-                                <span>Cancel</span>
-                            </button>
-                            <button id="confirmDelete"
-                                class="bg-red-600 text-white p-2 rounded-lg hover:bg-red-700 flex items-center px-4 text-xs">
-                                <span>Delete</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
-
+            </form>
             <div class="p-0 border-0 lg:py-2 lg:bg-sky-50 lg:border rounded-lg flex flex-col justify-between h-max ">
 
                 <!-- Top Bar -->
@@ -573,19 +586,6 @@
             saveBtn.classList.add('flex');
         });
 
-        saveBtn.addEventListener('click', () => {
-            document.querySelectorAll('.edit-mode').forEach((input, i) => {
-                const value = input.value;
-                document.querySelectorAll('.view-mode')[i].textContent = value;
-            });
-            document.querySelectorAll('.view-mode').forEach(el => el.classList.remove('hidden'));
-            document.querySelectorAll('.edit-mode').forEach(el => el.classList.add('hidden'));
-            saveBtn.classList.add('hidden');
-            editBtn.classList.remove('hidden');
-
-            // TODO: Optional - Send updated values to backend via AJAX or form
-            console.log("Saved successfully.");
-        });
 
         deleteBtn.addEventListener('click', () => {
             deleteModal.classList.remove('hidden');
@@ -595,12 +595,31 @@
         cancelDelete.addEventListener('click', () => {
             deleteModal.classList.add('hidden');
         });
+        const groupId = document.getElementById('group_id_span').innerText.trim();
+        confirmDelete.addEventListener(
+            'click', () => {
+                console.log(groupId);
+                fetch(`/groups/delete/${groupId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        deleteModal.classList.add('hidden');
+                        alert(data.message);
+                        const viewCenterBladeUrl = "{{ route('centers.viewblade') }}";
+                        window.location.href = viewCenterBladeUrl;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert("Something went wrong!");
 
-        confirmDelete.addEventListener('click', () => {
-            deleteModal.classList.add('hidden');
-            // TODO: Handle actual delete logic (AJAX or form submit)
-            alert("Deleted group successfully.");
-        });
+                    });
+            });
+
 
         // Row Summey
         document.querySelectorAll('.view-details').forEach(button => {

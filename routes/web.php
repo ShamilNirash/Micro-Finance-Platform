@@ -44,6 +44,9 @@ Route::post('/centers/update/{centerId}', [CenterController::class, 'updateCente
 Route::get('/groupSummary/{groupId}', [GroupController::class, 'viewGroupSummary'])->name('group.summary');
 Route::get('/groups/{centerId}', [GroupController::class, 'getGroupsByCenter']);
 Route::post('/group/create', [GroupController::class, 'createGroup'])->name('groups.creategroup');
+Route::post('/groups/update/{groupId}', [GroupController::class, 'updateGroup'])->name('groups.updateGroup');
+Route::delete('/groups/delete/{centerId}', [GroupController::class, 'deleteGroup']);
+
 
 
 //members routes

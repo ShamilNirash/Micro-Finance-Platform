@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\GroupRepository;
+use App\Repositories\MemberRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException as ValidationValidationException;
@@ -10,9 +11,12 @@ use Illuminate\Validation\ValidationException as ValidationValidationException;
 class GroupController extends Controller
 {
     protected $groupRepository;
-    public function __construct(GroupRepository $groupRepository)
+    protected $memberRepository;
+
+    public function __construct(GroupRepository $groupRepository, MemberRepository $memberRepository)
     {
         $this->groupRepository = $groupRepository;
+        $this->memberRepository = $memberRepository;
     }
 
     public function getGroupsByCenter($centerId)
@@ -52,6 +56,37 @@ class GroupController extends Controller
             throw $e;
         } catch (\Exception $e) {
             Log::error('Error creating group: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+    }
+    public function deleteGroup($groupId)
+    {
+        try {
+            $this->groupRepository->update($groupId, 'status', 'INACTIVE');
+            $selectMembers = $this->memberRepository->search_many('group_id', $groupId);
+            foreach ($selectMembers as $member) {
+                $this->memberRepository->update($member->id, 'status', 'TERMINATED');
+            }
+
+            return response()->json(['message' => 'Group Delete successfully.']);
+        } catch (\Exception $e) {
+            Log::error('Error delete group: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+    }
+    public function  updateGroup($groupId, Request $request)
+    {
+        try {
+            $request->merge([
+                'group_name' => strtolower($request->input('group_name'))
+            ]);
+            $request->validate([
+                'group_name' => 'required|string|max:255'
+            ]);
+            $this->groupRepository->update($groupId, 'group_name', $request->group_name);
+            return redirect()->back()->with('success', 'Group updated successfully.');
+        } catch (\Exception $e) {
+            Log::error('Error update group: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong.');
         }
     }

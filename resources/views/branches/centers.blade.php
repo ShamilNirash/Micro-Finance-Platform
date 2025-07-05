@@ -235,7 +235,7 @@
                                     <tr class="uppercase w-full">
                                         <th class="pl-2 text-left">
                                             <!--<input type="checkbox" id="select-all"
-                                                                        class="form-checkbox h-4 w-4 text-blue-400 m-1">-->
+                                                                            class="form-checkbox h-4 w-4 text-blue-400 m-1">-->
                                         </th>
                                         <th class="py-2 px-2 text-left">#</th>
                                         <th class="py-2 text-left">Center Name</th>
@@ -257,7 +257,7 @@
                                             data-groups-array='@json($center->group)'>
                                             <td class="pl-2 text-left">
                                                 <!--<input type="checkbox" name="selected_ids[]" value="1"
-                                                                            class="form-checkbox h-4 w-4 text-blue-600 m-1">-->
+                                                                                class="form-checkbox h-4 w-4 text-blue-600 m-1">-->
                                             </td>
                                             <td class="py-2 text-left"> {{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }}
                                             </td>
@@ -523,10 +523,12 @@
                 const groupList = document.getElementById('groupList');
                 groupList.innerHTML = ''; // Clear existing
 
-                groupsArray.forEach(group => {
-                    const groupId = String(group.id).padStart(2, '0');
+                groupsArray
+                    .filter(group => group.status === 'ACTIVE') // ✅ only active groups
+                    .forEach(group => {
+                        const groupId = String(group.id).padStart(2, '0');
 
-                    const html = `
+                        const html = `
         <div class="flex justify-between items-center bg-sky-50 border rounded-lg">
             <span class="text-xs font-medium text-gray-600 p-2">${group.group_name}</span>
             <span class="text-xs font-medium text-gray-800 bg-gray-200 p-2 px-8 rounded-lg">${group.member.length}</span>
@@ -539,9 +541,10 @@
                 </a>
             </div>
         </div>
-    `;
-                    groupList.insertAdjacentHTML('beforeend', html);
-                });
+        `;
+                        groupList.insertAdjacentHTML('beforeend', html);
+                    });
+
 
             });
         });
