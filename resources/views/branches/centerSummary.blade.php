@@ -7,6 +7,9 @@
     $weekDays = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];
 @endphp
 @section('contents')
+    <!-- CSRF token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <div id="mainContent" class="flex lg:h-full">
         <!-- First Column -->
         <!--Mobile Cards and table View-->
@@ -219,106 +222,128 @@
                     </div>
 
                 </div>
-                <div class="flex flex-col lg:flex-row border rounded-lg py-4 px-4 h-full ">
-                    <!-- Center Details -->
-                    <div class="w-full lg:w-2/3 h-full">
-                        <h1 class="text-md font-medium text-gray-800 mb-2">Center Details</h1>
-                        <div class="grid-cols-2 grid lg:grid-cols-3 gap-y-2 gap-x-4">
-                            <!-- Name -->
-                            <div>
-                                <p class="text-xs text-gray-400">Name</p>
-                                <p class="text-sm">
-                                    <span class="view-mode">{{ capitalizeEachWord($center_details->center_name) }}</span>
-                                    <input type="text" class="edit-mode hidden border px-2 py-1 rounded w-full"
-                                        value="Malawaragoda">
-                                </p>
-                            </div>
+                <form action="{{ route('centers.updateCenter', ['centerId' => $center_details->id]) }}" method="POST">
+                    @csrf
+                    <div class="flex flex-col lg:flex-row border rounded-lg py-4 px-4 h-full ">
+                        <!-- Center Details -->
+                        <div class="w-full lg:w-2/3 h-full">
+                            <h1 class="text-md font-medium text-gray-800 mb-2">Center Details</h1>
+                            <div class="grid-cols-2 grid lg:grid-cols-3 gap-y-2 gap-x-4">
+                                <!-- Name -->
+                                <div>
+                                    <p class="text-xs text-gray-400">Name</p>
+                                    <p class="text-sm">
+                                        <span
+                                            class="view-mode">{{ capitalizeEachWord($center_details->center_name) }}</span>
+                                        <span id="center_id_span" class="hidden">{{ $center_details->id }}</span>
+                                        <input type="text" class="edit-mode hidden border px-2 py-1 rounded w-full"
+                                            name="center_name"
+                                            value="{{ capitalizeEachWord($center_details->center_name) }}" required>
+                                    </p>
+                                </div>
 
-                            <!-- Center Manager -->
-                            <div>
-                                <p class="text-xs text-gray-400">Center Manager</p>
-                                <p class="text-sm">
-                                    <span class="view-mode">{{ capitalizeEachWord($center_details->manager_name) }}</span>
-                                    <input type="text" class="edit-mode hidden border px-2 py-1 rounded w-full"
-                                        value="Saman">
-                                </p>
-                            </div>
+                                <!-- Center Manager -->
+                                <div>
+                                    <p class="text-xs text-gray-400">Center Manager</p>
+                                    <p class="text-sm">
+                                        <span
+                                            class="view-mode">{{ capitalizeEachWord($center_details->manager_name) }}</span>
+                                        <input type="text" class="edit-mode hidden border px-2 py-1 rounded w-full"
+                                            name="manager_name"
+                                            value="{{ capitalizeEachWord($center_details->manager_name) }}" required>
+                                    </p>
+                                </div>
 
-                            <!-- Branch -->
-                            <div>
-                                <p class="text-xs text-gray-400">Branch</p>
-                                <p class="text-sm">
-                                    <span
-                                        class="view-mode">{{ capitalizeEachWord($center_details->branch->branch_name) }}</span>
-                                    <input type="text" class="edit-mode hidden border px-2 py-1 rounded w-full"
-                                        value="Balangoda">
-                                </p>
-                            </div>
+                                <!-- Branch -->
+                                <div>
+                                    <p class="text-xs text-gray-400">Branch</p>
+                                    <p class="text-sm">
+                                        <span
+                                            class="view-mode">{{ capitalizeEachWord($center_details->branch->branch_name) }}</span>
+                                        <input type="text" class="edit-mode hidden border px-2 py-1 rounded w-full"
+                                            value={{ capitalizeEachWord($center_details->branch->branch_name) }} disabled
+                                            required>
+                                    </p>
+                                </div>
 
-                            <!-- Total Group -->
-                            <div>
-                                <p class="text-xs text-gray-400">Total Group</p>
-                                <p class="text-sm">
-                                    <span class="view-mode">
-                                        {{ str_pad($center_details->group->count(), 2, '0', STR_PAD_LEFT) }}</span>
-                                    <input type="number" class="edit-mode hidden border px-2 py-1 rounded w-full"
-                                        value="06">
-                                </p>
-                            </div>
+                                <!-- Total Group -->
+                                <div>
+                                    <p class="text-xs text-gray-400">Total Group</p>
+                                    <p class="text-sm">
+                                        <span class="view-mode">
+                                            {{ str_pad($center_details->group->count(), 2, '0', STR_PAD_LEFT) }}</span>
+                                        <input type="number" class="edit-mode hidden border px-2 py-1 rounded w-full"
+                                            value={{ str_pad($center_details->group->count(), 2, '0', STR_PAD_LEFT) }}
+                                            disabled>
+                                    </p>
+                                </div>
 
-                            <!-- Total Members -->
-                            <div class="lg:block">
-                                <p class="text-xs text-gray-400">Total Members</p>
-                                <p class="text-sm">
-                                    <span
-                                        class="view-mode">{{ str_pad($center_details->group->sum(fn($g) => $g->member->count()), 2, '0', STR_PAD_LEFT) }}</span>
-                                    <input type="number" class="edit-mode hidden border px-2 py-1 rounded w-full"
-                                        value="05">
-                                </p>
-                            </div>
+                                <!-- Total Members -->
+                                <div class="lg:block">
+                                    <p class="text-xs text-gray-400">Total Members</p>
+                                    <p class="text-sm">
+                                        <span
+                                            class="view-mode">{{ str_pad($center_details->group->sum(fn($g) => $g->member->count()), 2, '0', STR_PAD_LEFT) }}</span>
+                                        <input type="number" class="edit-mode hidden border px-2 py-1 rounded w-full"
+                                            value={{ str_pad($center_details->group->sum(fn($g) => $g->member->count()), 2, '0', STR_PAD_LEFT) }}
+                                            disabled>
+                                    </p>
+                                </div>
 
-                            <!-- Payment Date -->
-                            <div>
-                                <p class="text-xs text-gray-400">Payment Date</p>
-                                <p class="text-sm">
-                                    <span
-                                        class="view-mode">{{ capitalizeFirstLetter($center_details->payment_date) }}</span>
-                                    <input type="date" class="edit-mode hidden border px-2 py-1 rounded w-full"
-                                        value="2025-05-02">
-                                </p>
+                                <!-- Payment Date -->
+                                <div>
+                                    <p class="text-xs text-gray-400">Payment Date</p>
+                                    <p class="text-sm">
+                                        <span
+                                            class="view-mode">{{ capitalizeFirstLetter($center_details->payment_date) }}</span>
+                                        <select id="centerBranch" name="payment_day"
+                                            class="edit-mode hidden border px-2 py-1 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                                            required>
+                                            <option value="{{ $center_details->payment_date }}" selected>
+                                                {{ capitalizeFirstLetter($center_details->payment_date) }}
+                                            </option>
+                                            @foreach ($weekDays as $day)
+                                                @if ($day != $center_details->payment_date)
+                                                    <option value="{{ $day }}">{{ capitalizeFirstLetter($day) }}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="flex w-full lg:w-1/3 justify-between lg:justify-end items-end space-x-2 pt-4 ">
+                            <div class="flex flex-row lg:space-x-2 bg-white lg:text-xs w-full justify-end">
+                                <!-- Edit -->
+                                <button id="editBtn" type="button"
+                                    class="bg-blue-600 text-white p-1 lg:p-2 rounded-lg hover:bg-blue-700 flex items-center justify-center px-6 w-1/2 lg:w-28 mr-2 lg:mr-0">
+                                    <img src="{{ asset('assets/icons/PencilSimpleWhite.svg') }}" alt="Edit"
+                                        class="h-3 w-3 mr-2">
+                                    <span>Edit</span>
+                                </button>
+
+                                <!-- Save -->
+                                <button id="saveBtn" type="submit"
+                                    class="bg-green-600 text-white p-1 lg:p-2 rounded-lg hover:bg-green-700 hidden  items-center justify-center px-6 w-1/2 lg:w-28  mr-2 lg:mr-0">
+                                    <img src="{{ asset('assets/icons/VectorWhite.svg') }}" alt="Save"
+                                        class="h-3 w-3 mr-2">
+                                    <span>Save</span>
+                                </button>
+
+                                <!-- Delete -->
+                                <button id="deleteBtn" type="button"
+                                    class="bg-red-600 text-white p-1 lg:p-2 rounded-lg hover:bg-red-700 flex items-center justify-center px-4 w-1/2 lg:w-28">
+                                    <img src="{{ asset('assets/icons/TrashWhite.svg') }}" alt="Delete"
+                                        class="h-3 w-3 mr-2">
+                                    <span>Delete</span>
+                                </button>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Action Buttons -->
-                    <div class="flex w-full lg:w-1/3 justify-between lg:justify-end items-end space-x-2 pt-4 ">
-                        <div class="flex flex-row lg:space-x-2 bg-white lg:text-xs w-full justify-end">
-                            <!-- Edit -->
-                            <button id="editBtn"
-                                class="bg-blue-600 text-white p-1 lg:p-2 rounded-lg hover:bg-blue-700 flex items-center justify-center px-6 w-1/2 lg:w-28 mr-2 lg:mr-0">
-                                <img src="{{ asset('assets/icons/PencilSimpleWhite.svg') }}" alt="Edit"
-                                    class="h-3 w-3 mr-2">
-                                <span>Edit</span>
-                            </button>
-
-                            <!-- Save -->
-                            <button id="saveBtn"
-                                class="bg-green-600 text-white p-1 lg:p-2 rounded-lg hover:bg-green-700 hidden  items-center justify-center px-6 w-1/2 lg:w-28  mr-2 lg:mr-0">
-                                <img src="{{ asset('assets/icons/VectorWhite.svg') }}" alt="Save"
-                                    class="h-3 w-3 mr-2">
-                                <span>Save</span>
-                            </button>
-
-                            <!-- Delete -->
-                            <button id="deleteBtn"
-                                class="bg-red-600 text-white p-1 lg:p-2 rounded-lg hover:bg-red-700 flex items-center justify-center px-4 w-1/2 lg:w-28">
-                                <img src="{{ asset('assets/icons/TrashWhite.svg') }}" alt="Delete"
-                                    class="h-3 w-3 mr-2">
-                                <span>Delete</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                </form>
 
                 <!-- Delete Confirmation Modal -->
                 <div id="deleteModal"
@@ -433,7 +458,8 @@
                                                 {{ capitalizeFirstLetter($center_details->center_name) }}
                                             </td>
                                             <td class="py-2 text-center flex justify-center items-center gap-1">
-                                                <a href="#" class="border rounded hover:bg-green-500">
+                                                <a href="{{ url('/groupSummary/' . $group->id) }}"
+                                                    class="border rounded hover:bg-green-500">
                                                     <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
                                                         class="h-3 w-3 m-1">
                                                 </a>
@@ -705,38 +731,42 @@
             });
 
             // Row Details
-            document.querySelectorAll('.view-details').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const row = button.closest('tr');
-                    const RowDetails = document.getElementById('RowDetails');
-                    const firstColumn = document.getElementById('firstColumn');
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('.view-details').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        console.log(test);
+                        e.preventDefault();
+                        const row = button.closest('tr');
+                        const RowDetails = document.getElementById('RowDetails');
+                        const firstColumn = document.getElementById('firstColumn');
 
-                    RowDetails.classList.remove('hidden');
-                    firstColumn.classList.remove('lg:w-full');
-                    firstColumn.classList.add('lg:w-8/12');
-                    RowDetails.classList.add('lg:flex');
+                        RowDetails.classList.remove('hidden');
+                        firstColumn.classList.remove('lg:w-full');
+                        firstColumn.classList.add('lg:w-8/12');
+                        RowDetails.classList.add('lg:flex');
 
-                    const groupName = row.getAttribute('data-group-name');
-                    const members = row.getAttribute('data-members');
-                    const received = row.getAttribute('data-received');
-                    const center = row.getAttribute('data-center');
-                    const center_manager = row.getAttribute('data-center-manager');
+                        const groupName = row.getAttribute('data-group-name');
+                        const members = row.getAttribute('data-members');
+                        const received = row.getAttribute('data-received');
+                        const center = row.getAttribute('data-center');
+                        const center_manager = row.getAttribute('data-center-manager');
 
-                    document.getElementById('groupNameSlideBar').textContent = groupName;
-                    document.getElementById('CmanagerSlideBar').textContent = center_manager;
-                    document.getElementById('GcenterSlideBar').textContent = center;
-                    document.getElementById('GmembersSlideBar').textContent = members;
-                    document.getElementById('GreceivedSlideBar').textContent = received;
-                    const membersArray = JSON.parse(row.getAttribute('data-member'));
-                    console.log(membersArray);
-                    const memberList = document.getElementById('memberList');
-                    memberList.innerHTML = ''; // Clear existing
+                        document.getElementById('groupNameSlideBar').textContent =
+                            groupName;
+                        document.getElementById('CmanagerSlideBar').textContent =
+                            center_manager;
+                        document.getElementById('GcenterSlideBar').textContent = center;
+                        document.getElementById('GmembersSlideBar').textContent = members;
+                        document.getElementById('GreceivedSlideBar').textContent = received;
+                        const membersArray = JSON.parse(row.getAttribute('data-member'));
+                        console.log(membersArray);
+                        const memberList = document.getElementById('memberList');
+                        memberList.innerHTML = ''; // Clear existing
 
-                    membersArray.forEach(member => {
-                        const groupId = String(member.id).padStart(2, '0');
+                        membersArray.forEach(member => {
+                            const groupId = String(member.id).padStart(2, '0');
 
-                        const html = `
+                            const html = `
         <div class="flex justify-between items-center bg-sky-50 shadow-sm border rounded-lg">
                         <div class="flex flex-col p-2">
                             <span class="text-xs font-medium text-gray-600 ">${member.full_name}</span>
@@ -753,13 +783,13 @@
                         </div>
                     </div>
     `;
-                        memberList.insertAdjacentHTML('beforeend', html);
+                            memberList.insertAdjacentHTML('beforeend', html);
+                        });
+
                     });
-
                 });
+
             });
-
-
 
             // Helper function
             function hideAllSecondColumns() {
@@ -769,8 +799,10 @@
                 document.getElementById('firstColumn').classList.add('lg:w-full');
             }
 
-            document.getElementById('hideCentersColumn').addEventListener('click', hideAllSecondColumns);
-            document.getElementById('hideBranchesColumn').addEventListener('click', hideAllSecondColumns);
+            document.getElementById('hideCentersColumn').addEventListener('click',
+                hideAllSecondColumns);
+            document.getElementById('hideBranchesColumn').addEventListener('click',
+                hideAllSecondColumns);
         });
 
         function renderExistingMembers(searchTerm = '') {
@@ -803,21 +835,6 @@
             saveBtn.classList.remove('hidden');
             saveBtn.classList.add('flex');
         });
-
-        saveBtn.addEventListener('click', () => {
-            document.querySelectorAll('.edit-mode').forEach((input, i) => {
-                const value = input.value;
-                document.querySelectorAll('.view-mode')[i].textContent = value;
-            });
-            document.querySelectorAll('.view-mode').forEach(el => el.classList.remove('hidden'));
-            document.querySelectorAll('.edit-mode').forEach(el => el.classList.add('hidden'));
-            saveBtn.classList.add('hidden');
-            editBtn.classList.remove('hidden');
-
-            // TODO: Optional - Send updated values to backend via AJAX or form
-            console.log("Saved successfully.");
-        });
-
         deleteBtn.addEventListener('click', () => {
             deleteModal.classList.remove('hidden');
             deleteModal.classList.add('flex');
@@ -826,12 +843,30 @@
         cancelDelete.addEventListener('click', () => {
             deleteModal.classList.add('hidden');
         });
+        const centerId = document.getElementById('center_id_span').innerText.trim();
+        confirmDelete.addEventListener(
+            'click', () => {
+                console.log(centerId);
+                fetch(`/centers/delete/${centerId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        deleteModal.classList.add('hidden');
+                        alert(data.message);
+                        const viewCenterBladeUrl = "{{ route('centers.viewblade') }}";
+                        window.location.href = viewCenterBladeUrl;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert("Something went wrong!");
 
-        confirmDelete.addEventListener('click', () => {
-            deleteModal.classList.add('hidden');
-            // TODO: Handle actual delete logic (AJAX or form submit)
-            alert("Deleted group successfully.");
-        });
+                    });
+            });
     </script>
 
     <style>

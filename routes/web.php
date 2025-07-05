@@ -36,6 +36,8 @@ Route::get('/centers', [CenterController::class, 'getAllActiveCenters'])->name('
 Route::post('/centers/create',  [CenterController::class, 'createCenter'])->name('centers.createcenter');
 Route::get('/centers/{branchId}', [CenterController::class, 'getCentersByBranch']);
 Route::get('/centerSummary/{centerId}', [CenterController::class, 'viewCenterSummary'])->name('center.summary');
+Route::delete('/centers/delete/{centerId}', [CenterController::class, 'deleteCenter']);
+Route::post('/centers/update/{centerId}', [CenterController::class, 'updateCenter'])->name('centers.updateCenter');
 
 
 //group route
