@@ -114,3 +114,8 @@ Route::get('/nopaid', function () {
 Route::get('/paymentsSummery', function () {
     return view('payments/paymentsSummery');
 });
+
+/*Profile View*/
+Route::get('/profile', function () {
+    return view('profile/profile');
+});

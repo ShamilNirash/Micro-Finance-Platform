@@ -264,8 +264,8 @@
             </div>
         </div>
         <div class=" h-full overflow-y-auto max-h-[calc(100vh-350px)]">
-            <div class="p-4 border-b w-full">
-                <h1 id="" class="text-sm font-medium text-gray-800 mb-1">Current Loan Details</h1>
+            <div class="p-4 pt-1 border-b w-full">
+                <h1 id="" class="text-sm font-medium text-gray-800 mb-1 pb-2">Current Loan Details</h1>
                 <div class="grid grid-cols-3 gap-y-2">
                     <div>
                         <p for="LoanAmount" class="text-xs text-gray-400">Loan Amount</p>
@@ -306,36 +306,37 @@
                 </div>
             </div>
             <!--Installment Card-->
-            <div class="w-full text-sm lg:text-xs  p-4  m-0 ">
+            <div class="w-full text-sm lg:text-xs p-4 m-0 ">
                 <div class="grid grid-cols-1 gap-y-2">
+                    <p class="text-xs text-red-500 pb-2">03 Installments are No Paid</p>
                     <!-- Main Card -->
                     <!-- Main Card --------------------------------------------------------------------------------->
-                    <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+                    <div class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm">
                         <!-- Header Row -->
                         <div class="flex justify-between items-center">
                             <div class="flex items-center space-x-2">
-                                <p class="text-sm font-medium">Installment # <span>7</span></p>
+                                <p class="text-sm text-gray-600">Installment # <span>7</span></p>
                                 <button class="toggle-details-btn p-1 rounded hover:bg-sky-200">
                                     <img src="{{ asset('assets/icons/CaretDown.svg') }}" alt="Toggle" class="h-3 w-3 transform transition-transform">
                                 </button>
                             </div>
-                            <p class="text-xs font-medium">3/25/2025 - 10:55AM</p>
+                            <p class="text-xs text-gray-600">3/25/2025 - 10:55AM</p>
                         </div>
 
                         <!-- Sub Info -->
-                        <div class="mt-2 flex justify-between items-center text-xs">
+                        <div class="mt-0 flex justify-between items-center text-xs">
                             <div class="flex items-center space-x-2">
                                 <p class="text-gray-400">Amount</p>
-                                <p class="font-medium">2,000/=</p>
+                                <p class="font-medium text-gray-600">2,000/=</p>
                             </div>
                             <div class="flex items-center space-x-2">
                                 <p class="text-gray-400">Pay in Date</p>
-                                <p class="text-xs font-medium p-1 bg-red-500 rounded px-2">NO</p>
+                                <p class="text-xs font-medium p-0.5 bg-red-500 rounded px-1">No</p>
                             </div>
                         </div>
 
                         <!-- Collapsible Section -->
-                        <div class="installment-details mt-4 hidden border-t border-gray-600 pt-4">
+                        <div class="installment-details mt-2 hidden border-t border-gray-600 pt-2">
                             <div class="grid gap-3">
                                 <!-- Amount -->
                                 <div class="flex justify-between items-center">
@@ -349,7 +350,6 @@
                                         <label for="payDate" class="block text-xs font-medium">Date *</label>
                                         <input type="date" name="payDate" id="payDate" class="w-full mt-1 px-3 py-1.5 border rounded-md">
                                     </div>
-
                                     <div>
                                         <label for="bill" class="block text-xs font-medium">Attach Bill</label>
                                         <input type="file" name="bill" id="bill" class="w-full mt-1 px-2 py-1 border rounded-md text-sm bg-white">
@@ -358,39 +358,39 @@
 
                                 <!-- Buttons -->
                                 <div class="flex justify-end space-x-2 mt-3">
-                                    <button type="button" id="cancelBtn" class="bg-gray-300 text-black px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
-                                    <button type="submit" id="saveBtn" class="bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
+                                    <button type="button" class="cancel-btn bg-gray-300 text-black px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
+                                    <button type="submit" class="save-btn bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Main Card --------------------------------------------------------------------------------->
-                    <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+                    <div class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm">
                         <!-- Header Row -->
                         <div class="flex justify-between items-center">
                             <div class="flex items-center space-x-2">
-                                <p class="text-sm font-medium">Installment # <span>7</span></p>
+                                <p class="text-sm text-gray-600">Installment # <span>7</span></p>
                                 <button class="toggle-details-btn p-1 rounded hover:bg-sky-200">
                                     <img src="{{ asset('assets/icons/CaretDown.svg') }}" alt="Toggle" class="h-3 w-3 transform transition-transform">
                                 </button>
                             </div>
-                            <p class="text-xs font-medium">3/25/2025 - 10:55AM</p>
+                            <p class="text-xs text-gray-600">3/25/2025 - 10:55AM</p>
                         </div>
 
                         <!-- Sub Info -->
-                        <div class="mt-2 flex justify-between items-center text-xs">
+                        <div class="mt-0 flex justify-between items-center text-xs">
                             <div class="flex items-center space-x-2">
                                 <p class="text-gray-400">Amount</p>
-                                <p class="font-medium">2,000/=</p>
+                                <p class="font-medium text-gray-600">2,000/=</p>
                             </div>
                             <div class="flex items-center space-x-2">
                                 <p class="text-gray-400">Pay in Date</p>
-                                <p class="text-xs font-medium p-1 bg-red-500 rounded px-2">NO</p>
+                                <p class="text-xs font-medium p-0.5 bg-red-500 rounded px-1">No</p>
                             </div>
                         </div>
 
                         <!-- Collapsible Section -->
-                        <div class="installment-details mt-4 hidden border-t border-gray-600 pt-4">
+                        <div class="installment-details mt-2 hidden border-t border-gray-600 pt-2">
                             <div class="grid gap-3">
                                 <!-- Amount -->
                                 <div class="flex justify-between items-center">
@@ -404,7 +404,6 @@
                                         <label for="payDate" class="block text-xs font-medium">Date *</label>
                                         <input type="date" name="payDate" id="payDate" class="w-full mt-1 px-3 py-1.5 border rounded-md">
                                     </div>
-
                                     <div>
                                         <label for="bill" class="block text-xs font-medium">Attach Bill</label>
                                         <input type="file" name="bill" id="bill" class="w-full mt-1 px-2 py-1 border rounded-md text-sm bg-white">
@@ -413,8 +412,8 @@
 
                                 <!-- Buttons -->
                                 <div class="flex justify-end space-x-2 mt-3">
-                                    <button type="button" id="cancelBtn" class="bg-gray-300 text-black px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
-                                    <button type="submit" id="saveBtn" class="bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
+                                    <button type="button" class="cancel-btn bg-gray-300 text-black px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
+                                    <button type="submit" class="save-btn bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
                                 </div>
                             </div>
                         </div>

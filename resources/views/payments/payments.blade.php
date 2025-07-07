@@ -166,7 +166,7 @@
             <!-------------TABLE------------------------------------------------------------------------------------------------------------>
             <!-- Centers Grid Table format hidden for mobile screens -->
             <div class="flex justify-start h-full pt-4">
-                <div id="memberGridTable" class="w-full max-h-[calc(100vh-200px)]  hidden lg:block p-0 overflow-y-auto border-t">
+                <div id="memberGridTable" class="w-full max-h-[calc(100vh-200px)]  hidden lg:block p-0 overflow-y-auto border-t ">
                     <div class="min-w-full h-full">
                         <table class="w-full min-w-max">
                             <thead class="w-full text-gray-700 text-xs font-light bg-gray-100 sticky top-0">
@@ -410,7 +410,7 @@
                 </div>
             </div>
 
-            <div class="hidden mt- mx-4 lg:flex justify-between items-center text-xs text-gray-500">
+            <div class="hidden  mx-4 lg:flex justify-between items-center text-xs text-gray-500">
                 <span id="paginationRange">1-10 of 87</span>
                 <div class="flex justify-center items-center">
                     <div class="pr-8">
@@ -469,8 +469,8 @@
             </div>
         </div>
         <div class=" h-full overflow-y-auto max-h-[calc(100vh-350px)]">
-            <div class="p-4 border-b w-full">
-                <h1 id="" class="text-sm font-medium text-gray-800 mb-1">Current Loan Details</h1>
+            <div class="p-4 pt-1 border-b w-full">
+                <h1 id="" class="text-sm font-medium text-gray-800 mb-1 pb-2">Current Loan Details</h1>
                 <div class="grid grid-cols-3 gap-y-2">
                     <div>
                         <p for="LoanAmount" class="text-xs text-gray-400">Loan Amount</p>
@@ -514,32 +514,32 @@
             <div class="w-full text-sm lg:text-xs  p-4  m-0 ">
                 <div class="grid grid-cols-1 gap-y-2">
                     <!-- Main Card -->
-                    <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+                    <div class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm">
                         <!-- Header Row -->
                         <div class="flex justify-between items-center">
                             <div class="flex items-center space-x-2">
-                                <p class="text-sm font-medium">Installment # <span>7</span></p>
-                                <button id="toggleDetails" class="p-1 rounded hover:bg-sky-200">
-                                    <img src="{{ asset('assets/icons/CaretDown.svg') }}" alt="Toggle" class="h-3 w-3 transform transition-transform" id="toggleIcon">
+                                <p class="text-sm text-gray-600">Installment # <span>7</span></p>
+                                <button class="toggle-details-btn p-1 rounded hover:bg-sky-200">
+                                    <img src="{{ asset('assets/icons/CaretDown.svg') }}" alt="Toggle" class="h-3 w-3 transform transition-transform">
                                 </button>
                             </div>
-                            <p class="text-xs  font-medium">3/25/2025 - 10.55AM</p>
+                            <p class="text-xs text-gray-600">3/25/2025 - 10:55AM</p>
                         </div>
 
                         <!-- Sub Info -->
-                        <div class="mt-2 flex justify-between iteams-center text-xs">
+                        <div class="mt-0 flex justify-between items-center text-xs">
                             <div class="flex items-center space-x-2">
                                 <p class="text-gray-400">Amount</p>
-                                <p class="font-medium">2,000/=</p>
+                                <p class="font-medium text-gray-600">2,000/=</p>
                             </div>
                             <div class="flex items-center space-x-2">
                                 <p class="text-gray-400">Pay in Date</p>
-                                <p class="text-xs font-medium p-1 bg-green-500 rounded px-2">Yes</p>
+                                <p class="text-xs font-medium p-0.5 bg-green-500 rounded px-1">Yes</p>
                             </div>
                         </div>
 
                         <!-- Collapsible Section -->
-                        <div id="installmentDetails" class="mt-4 hidden border-t border-gray-600 pt-4">
+                        <div class="installment-details mt-2 hidden border-t border-gray-600 pt-2">
                             <div class="grid gap-3">
                                 <!-- Amount -->
                                 <div class="flex justify-between items-center">
@@ -553,103 +553,48 @@
                                         <label for="payDate" class="block text-xs font-medium">Date *</label>
                                         <input type="date" name="payDate" id="payDate" class="w-full mt-1 px-3 py-1.5 border rounded-md">
                                     </div>
-
                                     <div>
                                         <label for="bill" class="block text-xs font-medium">Attach Bill</label>
-                                        <input type="file" name="bill" id="bill" class="w-full mt-1 px-2 py-1 border rounded-md text-sm bg-white ">
+                                        <input type="file" name="bill" id="bill" class="w-full mt-1 px-2 py-1 border rounded-md text-sm bg-white">
                                     </div>
                                 </div>
 
                                 <!-- Buttons -->
                                 <div class="flex justify-end space-x-2 mt-3">
-                                    <button type="button" id="cancelBtn" class="bg-gray-300 text-black  px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
-                                    <button type="submit" id="saveBtn" class="bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
+                                    <button type="button" class="cancel-btn bg-gray-300 text-black px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
+                                    <button type="submit" class="save-btn bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Sample -->
-                    <div class="bg-gray-200 p-4 rounded-lg shadow-md">
-                        <!-- Header Row -->
-                        <div class="flex justify-between items-center">
-                            <div class="flex items-center space-x-2">
-                                <p class="text-sm font-medium">Installment # <span>7</span></p>
-                                <button id="toggleDetails" class="p-1 rounded hover:bg-sky-200">
-                                    <img src="{{ asset('assets/icons/CaretDown.svg') }}" alt="Toggle" class="h-3 w-3 transform transition-transform" id="toggleIcon">
-                                </button>
-                            </div>
-                            <p class="text-xs  font-medium">3/25/2025 - 10.55AM</p>
-                        </div>
-
-                        <!-- Sub Info -->
-                        <div class="mt-2 flex justify-between iteams-center text-xs">
-                            <div class="flex items-center space-x-2">
-                                <p class="text-gray-400">Amount</p>
-                                <p class="font-medium">2,000/=</p>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <p class="text-gray-400">Pay in Date</p>
-                                <p class="text-xs font-medium p-1 bg-green-500 rounded px-2">Yes</p>
-                            </div>
-                        </div>
-
-                        <!-- Collapsible Section -->
-                        <div id="installmentDetails" class="mt-4 hidden border-t border-gray-600 pt-4">
-                            <div class="grid gap-3">
-                                <!-- Amount -->
-                                <div class="flex justify-between items-center">
-                                    <label for="amount" class="block text-xs font-medium">Amount *</label>
-                                    <input type="number" name="amount" id="amount" class="w-2/3 mt-1 px-3 py-1 border rounded-md">
-                                </div>
-
-                                <!-- Date and File -->
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    <div>
-                                        <label for="payDate" class="block text-xs font-medium">Date *</label>
-                                        <input type="date" name="payDate" id="payDate" class="w-full mt-1 px-3 py-1.5 border rounded-md">
-                                    </div>
-
-                                    <div>
-                                        <label for="bill" class="block text-xs font-medium">Attach Bill</label>
-                                        <input type="file" name="bill" id="bill" class="w-full mt-1 px-2 py-1 border rounded-md text-sm">
-                                    </div>
-                                </div>
-
-                                <!-- Buttons -->
-                                <div class="flex justify-end space-x-2 mt-3">
-                                    <button type="button" id="cancelBtn" class="bg-gray-300 text-black  px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
-                                    <button type="submit" id="saveBtn" class="bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <!-- Main Card -->
-                    <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+                    <div class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm">
                         <!-- Header Row -->
                         <div class="flex justify-between items-center">
                             <div class="flex items-center space-x-2">
-                                <p class="text-sm font-medium">Installment # <span>7</span></p>
-                                <button id="toggleDetails" class="p-1 rounded hover:bg-sky-200">
-                                    <img src="{{ asset('assets/icons/CaretDown.svg') }}" alt="Toggle" class="h-3 w-3 transform transition-transform" id="toggleIcon">
+                                <p class="text-sm text-gray-600">Installment # <span>7</span></p>
+                                <button class="toggle-details-btn p-1 rounded hover:bg-sky-200">
+                                    <img src="{{ asset('assets/icons/CaretDown.svg') }}" alt="Toggle" class="h-3 w-3 transform transition-transform">
                                 </button>
                             </div>
-                            <p class="text-xs  font-medium">3/25/2025 - 10.55AM</p>
+                            <p class="text-xs text-gray-600">3/25/2025 - 10:55AM</p>
                         </div>
 
                         <!-- Sub Info -->
-                        <div class="mt-2 flex justify-between iteams-center text-xs">
+                        <div class="mt-0 flex justify-between items-center text-xs">
                             <div class="flex items-center space-x-2">
                                 <p class="text-gray-400">Amount</p>
-                                <p class="font-medium">2,000/=</p>
+                                <p class="font-medium text-gray-600">2,000/=</p>
                             </div>
                             <div class="flex items-center space-x-2">
                                 <p class="text-gray-400">Pay in Date</p>
-                                <p class="text-xs font-medium p-1 bg-green-500 rounded px-2">Yes</p>
+                                <p class="text-xs font-medium p-0.5 bg-green-500 rounded px-1">Yes</p>
                             </div>
                         </div>
 
                         <!-- Collapsible Section -->
-                        <div id="installmentDetails" class="mt-4 hidden border-t border-gray-600 pt-4">
+                        <div class="installment-details mt-2 hidden border-t border-gray-600 pt-2">
                             <div class="grid gap-3">
                                 <!-- Amount -->
                                 <div class="flex justify-between items-center">
@@ -663,72 +608,16 @@
                                         <label for="payDate" class="block text-xs font-medium">Date *</label>
                                         <input type="date" name="payDate" id="payDate" class="w-full mt-1 px-3 py-1.5 border rounded-md">
                                     </div>
-
                                     <div>
                                         <label for="bill" class="block text-xs font-medium">Attach Bill</label>
-                                        <input type="file" name="bill" id="bill" class="w-full mt-1 px-2 py-1 border rounded-md text-sm">
+                                        <input type="file" name="bill" id="bill" class="w-full mt-1 px-2 py-1 border rounded-md text-sm bg-white">
                                     </div>
                                 </div>
 
                                 <!-- Buttons -->
                                 <div class="flex justify-end space-x-2 mt-3">
-                                    <button type="button" id="cancelBtn" class="bg-gray-300 text-black  px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
-                                    <button type="submit" id="saveBtn" class="bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Main Card -->
-                    <div class="bg-gray-200 p-4 rounded-lg shadow-md">
-                        <!-- Header Row -->
-                        <div class="flex justify-between items-center">
-                            <div class="flex items-center space-x-2">
-                                <p class="text-sm font-medium">Installment # <span>7</span></p>
-                                <button id="toggleDetails" class="p-1 rounded hover:bg-sky-200">
-                                    <img src="{{ asset('assets/icons/CaretDown.svg') }}" alt="Toggle" class="h-3 w-3 transform transition-transform" id="toggleIcon">
-                                </button>
-                            </div>
-                            <p class="text-xs  font-medium">3/25/2025 - 10.55AM</p>
-                        </div>
-
-                        <!-- Sub Info -->
-                        <div class="mt-2 flex justify-between iteams-center text-xs">
-                            <div class="flex items-center space-x-2">
-                                <p class="text-gray-400">Amount</p>
-                                <p class="font-medium">2,000/=</p>
-                            </div>
-                            <div class="flex items-center space-x-2">
-                                <p class="text-gray-400">Pay in Date</p>
-                                <p class="text-xs font-medium p-1 bg-green-500 rounded px-2">Yes</p>
-                            </div>
-                        </div>
-
-                        <!-- Collapsible Section -->
-                        <div id="installmentDetails" class="mt-4 hidden border-t border-gray-600 pt-4">
-                            <div class="grid gap-3">
-                                <!-- Amount -->
-                                <div class="flex justify-between items-center">
-                                    <label for="amount" class="block text-xs font-medium">Amount *</label>
-                                    <input type="number" name="amount" id="amount" class="w-2/3 mt-1 px-3 py-1 border rounded-md">
-                                </div>
-
-                                <!-- Date and File -->
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    <div>
-                                        <label for="payDate" class="block text-xs font-medium">Date *</label>
-                                        <input type="date" name="payDate" id="payDate" class="w-full mt-1 px-3 py-1.5 border rounded-md">
-                                    </div>
-
-                                    <div>
-                                        <label for="bill" class="block text-xs font-medium">Attach Bill</label>
-                                        <input type="file" name="bill" id="bill" class="w-full mt-1 px-2 py-1 border rounded-md text-sm">
-                                    </div>
-                                </div>
-
-                                <!-- Buttons -->
-                                <div class="flex justify-end space-x-2 mt-3">
-                                    <button type="button" id="cancelBtn" class="bg-gray-300 text-black  px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
-                                    <button type="submit" id="saveBtn" class="bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
+                                    <button type="button" class="cancel-btn bg-gray-300 text-black px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
+                                    <button type="submit" class="save-btn bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
                                 </div>
                             </div>
                         </div>
@@ -908,13 +797,66 @@
     });
 
     //Laon Card
-    const toggleBtn = document.getElementById('toggleDetails');
+    /*const toggleBtn = document.getElementById('toggleDetails');
     const details = document.getElementById('installmentDetails');
     const icon = document.getElementById('toggleIcon');
 
     toggleBtn.addEventListener('click', () => {
         details.classList.toggle('hidden');
         icon.classList.toggle('rotate-180');
+    });*/
+    document.addEventListener('click', function(event) {
+        const button = event.target.closest('.toggle-details-btn');
+        if (button) {
+            const card = button.closest('.bg-gray-200');
+            const details = card.querySelector('.installment-details');
+            const icon = button.querySelector('img');
+            if (details && icon) {
+                details.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            }
+        }
     });
+    document.addEventListener('click', function(event) {
+        const cancelButton = event.target.closest('.cancel-btn');
+        if (cancelButton) {
+            const card = cancelButton.closest('.bg-gray-200');
+            const details = card.querySelector('.installment-details');
+            const form = card.querySelector('.installment-form');
+            const icon = card.querySelector('.toggle-details-btn img');
+            if (details && form && icon) {
+                form.reset();
+                details.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+    });
+    document.addEventListener('submit', function(event) {
+        const form = event.target.closest('.installment-form');
+        if (form) {
+            event.preventDefault();
+            const card = form.closest('.bg-gray-200');
+            const amountInput = form.querySelector('input[name="amount"]');
+            const payDateInput = form.querySelector('input[name="payDate"]');
+            const billInput = form.querySelector('input[name="bill"]');
+            const details = card.querySelector('.installment-details');
+            const icon = card.querySelector('.toggle-details-btn img');
+            if (!amountInput.value || !payDateInput.value) {
+                alert('Please fill in all required fields (Amount and Date).');
+                return;
+            }
+            console.log({
+                installmentId: form.getAttribute('data-installment-id'),
+                amount: amountInput.value,
+                payDate: payDateInput.value,
+                bill: billInput.files[0] ? billInput.files[0].name : 'No file uploaded'
+            });
+            form.reset();
+            details.classList.add('hidden');
+            icon.classList.remove('rotate-180');
+            alert('Installment data saved (front-end placeholder).');
+        }
+    });
+</script>
 </script>
 @endsection

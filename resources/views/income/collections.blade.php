@@ -5,10 +5,10 @@
     <!--Mobile Cards and table View-->
     <div id="firstColumn" class="w-full h-full p-2 lg:border-r lg:p-4 transition-all duration-300 lg:relative lg:py-4">
         <!---Cards-->
-        <div class="flex w-full lg:h-1/6">
-            <!-- Mobile View: Cards for each center -->
+        <!--<div class="flex w-full lg:h-1/6">
+             Mobile View: Cards for each center 
             <div id="topCards" class="grid grid-cols-1 lg:flex gap-2 lg:gap-08 w-full p-2 lg:p-0 lg:pb-4">
-                <!-- Card for Total Loans -->
+
                 <div id="totalLoan" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="balangoda">
                     <div class="flex flex-col w-1/2">
                         <h2 class="text-sm font-semibold text-gray-600">Total Loans</h2>
@@ -18,7 +18,7 @@
                         <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">05</h1>
                     </div>
                 </div>
-                <!-- Total Today Income -->
+
                 <div id="totalIncome" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="ella">
                     <div class="flex flex-col w-1/2">
                         <h2 class="text-sm font-semibold text-gray-600">Today Income</h2>
@@ -29,10 +29,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
 
         <!--Start Table and Card Views-->
-        <div class="p-0 border-0 lg:py-2 lg:bg-sky-50 lg:border rounded-lg flex flex-col justify-between lg:h-5/6">
+        <div class="p-0 border-0 lg:py-2 lg:bg-sky-50 lg:border rounded-lg flex flex-col justify-between lg:h-full"> <!--lg:h-5/6-->
             <!-- Top Bar - Search bar and filter option for both mobile and web -->
             <div class="flex flex-col w-full space-y-2 p-2 lg:px-2 text-md lg:flex lg:flex-row lg:space-y-0 lg:justify-between lg:items-center lg:p-1">
                 <!-- Filter line -->
@@ -174,7 +174,7 @@
             <!-------------TABLE------------------------------------------------------------------------------------------------------------>
             <!-- Centers Grid Table format hidden for mobile screens -->
             <div class="flex justify-start h-full pt-2">
-                <div id="centersGridTable" class="w-full max-h-[calc(70vh-180px)] hidden lg:block p-0 overflow-y-auto border-t">
+                <div id="centersGridTable" class="w-full h-full   hidden lg:block p-0 overflow-y-auto border-t"> <!--max-h-[calc(70vh-180px)]-->
                     <div class="min-w-full h-full">
                         <table class="w-full min-w-max">
                             <thead class="w-full text-gray-700 text-xs font-light bg-gray-200 sticky top-0">
