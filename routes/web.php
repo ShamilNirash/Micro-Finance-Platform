@@ -119,3 +119,17 @@ Route::get('/paymentsSummery', function () {
 Route::get('/profile', function () {
     return view('profile/profile');
 });
+
+/*Reports*/
+Route::get('/loneIssue', function () {
+    return view('reports/loneIssue');
+});
+Route::get('/incomeReports', function () {
+    return view('reports/incomeReports');
+});
+Route::get('/pendingPaymentsReport', function () {
+    return view('reports/pendingPaymentsReport');
+});
+Route::get('/membersReport', function () {
+    return view('reports/membersReport');
+});
