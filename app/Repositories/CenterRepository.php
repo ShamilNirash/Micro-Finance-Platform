@@ -33,7 +33,15 @@ class CenterRepository
     public function search_one($type, $value)
     {
         try {
-            return $this->centers->where([$type => $value, 'status' => 'ACTIVE'])->with(['branch', 'group.member'])->first();
+            return $this->centers->where([$type => $value, 'status' => 'ACTIVE'])->with([
+                'branch',
+                'group' => function ($query) {
+                    $query->where('status', 'ACTIVE');
+                },
+                'group.member' => function ($query) {
+                    $query->where('status', '!=', 'TERMINATED');
+                },
+            ])->first();
         } catch (\Exception $e) {
             return $e;
         }
@@ -50,7 +58,18 @@ class CenterRepository
     public function get_all()
     {
         try {
-            return $this->centers->where(['status' => 'ACTIVE'])->with(['branch.center.group.member'])->get();
+            return $this->centers
+                ->where('status', 'ACTIVE')
+                ->with([
+                    'branch',
+                    'group' => function ($query) {
+                        $query->where('status', 'ACTIVE');
+                    },
+                    'group.member' => function ($query) {
+                        $query->where('status', '!=', 'TERMINATED');
+                    },
+                ])
+                ->get();
         } catch (\Exception $e) {
             return $e;
         }

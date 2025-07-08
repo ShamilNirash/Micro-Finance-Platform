@@ -96,13 +96,18 @@ class CenterController extends Controller
         try {
             $this->centerRepository->update($centerId, 'status', 'INACTIVE');
             $selectGroups = $this->groupRepository->search_many('center_id', $centerId);
-            foreach ($selectGroups as $group) {
-                $this->groupRepository->update($group->id, 'status', 'INACTIVE');
-                $selectMembers = $this->memberRepository->search_many('group_id', $group->id);
-                foreach ($selectMembers as $member) {
-                    $this->memberRepository->update($member->id, 'status', 'TERMINATED');
+            if (!empty($selectGroups) && is_iterable($selectGroups)) {
+                foreach ($selectGroups as $group) {
+                    $this->groupRepository->update($group->id, 'status', 'INACTIVE');
+                    $selectMembers = $this->memberRepository->search_many('group_id', $group->id);
+                    if (!empty($selectMembers) && is_iterable($selectMembers)) {
+                        foreach ($selectMembers as $member) {
+                            $this->memberRepository->update($member->id, 'status', 'TERMINATED');
+                        }
+                    }
                 }
             }
+
 
             return response()->json(['message' => 'Center Delete successfully.']);
         } catch (\Exception $e) {
@@ -123,7 +128,7 @@ class CenterController extends Controller
                     'string',
                     'max:255',
                     Rule::unique('centers')->ignore($centerId)->where(function ($query) {
-                        return $query->where('status', 'active');
+                        return $query->where('status', 'ACTIVE');
                     }),
                 ],
                 'payment_day' => 'required|in:MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY',

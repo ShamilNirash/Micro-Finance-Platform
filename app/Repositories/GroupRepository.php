@@ -33,7 +33,9 @@ class GroupRepository
     public function search_one($type, $value)
     {
         try {
-            return $this->groups->where([$type => $value, 'status' => 'ACTIVE'])->with('member','center.branch')->first();
+            return $this->groups->where([$type => $value, 'status' => 'ACTIVE'])->with(['member' => function ($query) {
+                $query->where('status', '!=', 'TERMINATED');
+            }, 'center.branch'])->first();
         } catch (\Exception $e) {
             return $e;
         }

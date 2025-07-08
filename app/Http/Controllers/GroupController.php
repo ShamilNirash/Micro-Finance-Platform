@@ -64,14 +64,18 @@ class GroupController extends Controller
         try {
             $this->groupRepository->update($groupId, 'status', 'INACTIVE');
             $selectMembers = $this->memberRepository->search_many('group_id', $groupId);
-            foreach ($selectMembers as $member) {
-                $this->memberRepository->update($member->id, 'status', 'TERMINATED');
+            if (!empty($selectMembers) && is_iterable($selectMembers)) {
+                foreach ($selectMembers as $member) {
+                    if (is_object($member)) {
+                        $this->memberRepository->update($member->id, 'status', 'TERMINATED');
+                    }
+                }
             }
 
             return response()->json(['message' => 'Group Delete successfully.']);
         } catch (\Exception $e) {
             Log::error('Error delete group: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Something went wrong.');
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
     public function  updateGroup($groupId, Request $request)

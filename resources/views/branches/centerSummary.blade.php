@@ -463,10 +463,10 @@
                                                     <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
                                                         class="h-3 w-3 m-1">
                                                 </a>
-                                                <a href="#" class="border rounded hover:bg-red-500">
+                                                {{-- <a href="#" class="border rounded hover:bg-red-500">
                                                     <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil"
                                                         class="h-3 w-3 m-1">
-                                                </a>
+                                                </a> --}}
                                                 <a href="#" class="border rounded hover:bg-sky-500">
                                                     <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}"
                                                         alt="Pencil" class="h-3 w-3 m-1">
@@ -777,9 +777,9 @@
                             <a href="#" class="border rounded hover:bg-green-500">
                                 <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
                             </a>
-                            <a href="#" class="border rounded hover:bg-red-500">
+                            /* <a href="#" class="border rounded hover:bg-red-500">
                                 <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Pencil" class="h-3 w-3 m-1">
-                            </a>
+                            </a> */
                         </div>
                     </div>
     `;

@@ -59,19 +59,12 @@ Route::post(
     [MemberController::class, 'createMember']
 )->name('members.create');
 Route::get('/unassignmembers/search',  [MemberController::class, 'unAssignMemberSearch']);
-
-//group routes
-
-// After clciking on eye icon in centers table - view summury of center and group table
-// After clciking on eye icon in Group table - view summury of Group and memebers table
-Route::get('/groupSummary', function () {
-    return view('branches/groupSummary');
-});
+Route::get('/memberSummery/{memberId}', [MemberController::class, 'viewMemberSummary'])->name('member.summary');
+Route::post('/members/update/{memberId}', [memberController::class, 'updateMember'])->name('members.updateMember');
+Route::delete('/members/delete/{memberId}', [MemberController::class, 'deleteMember']);
 
 
-Route::get('/memberSummery', function () {
-    return view('branches/memberSummery');
-});
+
 Route::get('/recentlyAdded', function () {
     return view('branches/recentlyAdded');
 });

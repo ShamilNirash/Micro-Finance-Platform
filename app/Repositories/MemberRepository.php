@@ -33,7 +33,10 @@ class MemberRepository
     public function search_one($type, $value)
     {
         try {
-            return $this->members->where([$type => $value, 'status' => 'ACTIVE'])->first();
+            return $this->members
+                ->where($type, $value)
+                ->whereIn('status', ['ACTIVE', 'INACTIVE'])->with('group.center.branch')
+                ->first();
         } catch (\Exception $e) {
             return $e;
         }
@@ -54,7 +57,10 @@ class MemberRepository
     public function search_many($type, $value)
     {
         try {
-            return $this->members->where([$type => $value, 'status' => 'ACTIVE'])->get();
+            return $this->members
+                ->where($type, $value)
+                ->whereIn('status', ['ACTIVE', 'INACTIVE'])
+                ->first();
         } catch (\Exception $e) {
             return $e;
         }

@@ -235,7 +235,7 @@
                                     <tr class="uppercase w-full">
                                         <th class="pl-2 text-left">
                                             <!--<input type="checkbox" id="select-all"
-                                                                            class="form-checkbox h-4 w-4 text-blue-400 m-1">-->
+                                                                                class="form-checkbox h-4 w-4 text-blue-400 m-1">-->
                                         </th>
                                         <th class="py-2 px-2 text-left">#</th>
                                         <th class="py-2 text-left">Center Name</th>
@@ -257,7 +257,7 @@
                                             data-groups-array='@json($center->group)'>
                                             <td class="pl-2 text-left">
                                                 <!--<input type="checkbox" name="selected_ids[]" value="1"
-                                                                                class="form-checkbox h-4 w-4 text-blue-600 m-1">-->
+                                                                                    class="form-checkbox h-4 w-4 text-blue-600 m-1">-->
                                             </td>
                                             <td class="py-2 text-left"> {{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }}
                                             </td>
@@ -536,9 +536,7 @@
                 <a href="/groupSummary/${groupId}" class="border rounded hover:bg-green-500">
                     <img src="/assets/icons/Eye.svg" alt="Eye" class="h-3 w-3 m-1">
                 </a>
-                <a href="#" class="border rounded hover:bg-red-500">
-                    <img src="/assets/icons/Trash.svg" alt="Trash" class="h-3 w-3 m-1">
-                </a>
+
             </div>
         </div>
         `;
@@ -548,7 +546,9 @@
 
             });
         });
-
+        /* <a href="#" class="border rounded hover:bg-red-500">
+                            <img src="/assets/icons/Trash.svg" alt="Trash" class="h-3 w-3 m-1">
+                        </a> */
         //Centers
         document.getElementById('addCenterButton').addEventListener('click', () => {
 

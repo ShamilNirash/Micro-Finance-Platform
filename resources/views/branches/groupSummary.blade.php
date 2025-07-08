@@ -391,14 +391,16 @@
                                 <tbody class="text-gray-800 text-xs font-light bg-white">
                                     <!-- AROW -->
                                     @foreach ($group_details->member as $member)
-                                        <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details"
-                                            data-member-id={{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
-                                            data-member-name='{{ capitalizeEachWord($member->full_name) }}'
-                                            data-center-name='{{ capitalizeFirstLetter($group_details->center->center_name) }}'
-                                            data-group-name='{{ capitalizeEachWord($group_details->group_name) }}'
-                                            data-branch-name='{{ capitalizeFirstLetter($group_details->center->branch->branch_name) }}'
-                                            data-received="40000" data-member-object='@json($member)'>
-                                            <td class="py-2 text-center"> {{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
+
+                                            <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details"
+                                                data-member-id={{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
+                                                data-member-name='{{ capitalizeEachWord($member->full_name) }}'
+                                                data-center-name='{{ capitalizeFirstLetter($group_details->center->center_name) }}'
+                                                data-group-name='{{ capitalizeEachWord($group_details->group_name) }}'
+                                                data-branch-name='{{ capitalizeFirstLetter($group_details->center->branch->branch_name) }}'
+                                                data-received="40000" data-member-object='@json($member)'>
+                                                <td class="py-2 text-center">
+                                                    {{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
                         </div>
                         </td>
                         <td class="py-2 text-left">{{ capitalizeEachWord($member->full_name) }}</td>
@@ -406,7 +408,8 @@
                         <td class="py-2 text-left"> {{ $member->nic_number }}</td>
                         <td class="py-2 text-left">400000</td>
                         <td class="py-2 text-center flex justify-center items-center gap-1">
-                            <a href="#" class="border rounded hover:bg-green-500">
+                            <a href="{{ url('/memberSummery/' . $member->id) }}"
+                                class="border rounded hover:bg-green-500">
                                 <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye" class="h-3 w-3 m-1">
                             </a>
                             <a href="#" class="border rounded hover:bg-sky-500">
@@ -598,7 +601,6 @@
         const groupId = document.getElementById('group_id_span').innerText.trim();
         confirmDelete.addEventListener(
             'click', () => {
-                console.log(groupId);
                 fetch(`/groups/delete/${groupId}`, {
                         method: 'DELETE',
                         headers: {
@@ -615,7 +617,7 @@
                     })
                     .catch(error => {
                         console.error('Error:', error);
-                        alert("Something went wrong!");
+                        alert(error);
 
                     });
             });
@@ -624,7 +626,6 @@
         // Row Summey
         document.querySelectorAll('.view-details').forEach(button => {
             button.addEventListener('click', (e) => {
-                e.preventDefault(); // Prevent default link behavior
                 const row = button.closest('tr');
                 const RowDetails = document.getElementById('RowDetails');
                 const firstColumn = document.getElementById('firstColumn');

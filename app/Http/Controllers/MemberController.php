@@ -3,18 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\BranchRepository;
+use App\Repositories\LoanRepository;
 use App\Repositories\MemberRepository;
 use Illuminate\Validation\ValidationException;
 use Facade\FlareClient\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 
 class MemberController extends Controller
 {
     protected $memberRepository;
     protected $branchRepository;
 
-    public function __construct(MemberRepository $memberRepository, BranchRepository $branchRepository)
+    protected $loanRepository;
+
+    public function __construct(MemberRepository $memberRepository, BranchRepository $branchRepository, LoanRepository $loanRepository)
     {
         $this->memberRepository = $memberRepository;
         $this->branchRepository = $branchRepository;
@@ -83,6 +87,59 @@ class MemberController extends Controller
                 ->with('show_create_popup', true)
                 ->withInput()
                 ->withErrors(['error' => 'Unexpected error occurred']);
+        }
+    }
+    public function viewMemberSummary($memberId)
+    {
+        try {
+            $memberDetails = $this->memberRepository->search_one('id', $memberId);
+            return View('branches.memberSummary', ['member_details' => $memberDetails]);
+        } catch (\Exception $e) {
+            Log::error('Error getting member summary: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+    }
+    public function updateMember($memberId, Request $request)
+    {
+        $request->merge([
+            'full_name' => strtolower($request->input('full_name')),
+            'address' => strtolower($request->input('address')),
+        ]);
+        $request->validate([
+            'full_name' => 'required|string|max:255',
+            'address' => 'required|string',
+            'mobile_number_1' => 'required|string|regex:/^[0-9]+$/',
+            'mobile_number_2' => 'required|string|regex:/^[0-9]+$/',
+            'nic_number' => [
+                'required',
+                'string',
+                Rule::unique('members')->ignore($memberId)->where(function ($query) {
+                    return $query->whereIn('status', ['ACTIVE', 'INACTIVE']);
+                }),
+            ],
+        ]);
+        try {
+
+            $this->memberRepository->update($memberId, 'full_name', $request->full_name);
+            $this->memberRepository->update($memberId, 'nic_number', $request->nic_number);
+            $this->memberRepository->update($memberId, 'mobile_number_1', $request->mobile_number_1);
+            $this->memberRepository->update($memberId, 'mobile_number_2', $request->mobile_number_2);
+            $this->memberRepository->update($memberId, 'address', $request->address);
+            return redirect()->back()->with('success', 'Member updated successfully.');
+        } catch (\Exception $e) {
+            Log::error('Error update member: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+    }
+
+    public function  deleteMember($memberId)
+    {
+        try {
+            $this->memberRepository->update($memberId, 'status', 'TERMINATED');
+            return response()->json(['message' => 'Member Delete successfully.']);
+        } catch (\Exception $e) {
+            Log::error('Error delete member: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong.');
         }
     }
 }
