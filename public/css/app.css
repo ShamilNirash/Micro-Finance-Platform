@@ -835,6 +835,9 @@ video {
 .max-h-full {
   max-height: 100%;
 }
+.max-h-12 {
+  max-height: 3rem;
+}
 .min-h-full {
   min-height: 100%;
 }
@@ -991,6 +994,9 @@ video {
 }
 .cursor-pointer {
   cursor: pointer;
+}
+.cursor-not-allowed {
+  cursor: not-allowed;
 }
 .select-all {
   -webkit-user-select: all;
@@ -1670,6 +1676,9 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+.opacity-50 {
+  opacity: 0.5;
 }
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);

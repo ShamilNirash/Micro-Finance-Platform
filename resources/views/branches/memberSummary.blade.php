@@ -11,6 +11,76 @@
         <!--Mobile Cards and table View-->
         <div id="firstColumn"
             class="w-full h-full p-2 lg:border-r lg:p-4 lg:pt-2 transition-all duration-300 lg:relative space-y-2 px-4">
+
+                             <!-- Add New Loan Modal -->
+        <div id="addLoanModal"
+            class="inset-0 bg-gray-600 bg-opacity-50 hidden items- justify-center lg:absolute z-50  p-4 pb-0"
+            style="width: 100%; height: 100%;">
+            <div class="bg-white shadow-xl w-full max-w-2xl rounded-lg h-max">
+                <h2 class="text-md bg-blue-100 rounded-t-lg p-4 font-">Add new Loan (Member Name)</h2>
+                <form action="#" method="POST" enctype="multipart/form-data">
+                    <div class="bg-white rounded-b-lg p-4 space-y-2 pb-0">
+                        <div class="grid grid-cols-1 gap-1">
+                            <div>
+                                <label class="block text-xs text-gray-500 mb-1 ml-1">Loan Amount*</label>
+                                <input type="number" placeholder="10 000" class="w-full p-2 border rounded-lg text-sm" required>
+                            </div>
+                            <div class="grid grid-cols-2 md:grid-cols-2 gap-2">
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Interest Rate*</label>
+                                    <input type="text" placeholder="10%" class="w-full p-2 border rounded-lg text-sm" required>
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Interest</label>
+                                    <input type="number" placeholder="1 000" class="w-full p-2 border rounded-lg text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Terms*</label>
+                                    <input type="number" placeholder="18" class="w-full p-2 border rounded-lg text-sm" required>
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Installment*</label>
+                                    <input type="number" placeholder="12 000" class="w-full p-2 border rounded-lg text-sm" required>
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Issue Date*</label>
+                                    <input type="date" class="w-full p-2 border rounded-lg text-sm" required>
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Document Charges*</label>
+                                    <input type="text" placeholder="Type" class="w-full p-2 border rounded-lg text-sm" required>
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Image*</label>
+                                    <input type="file" class="w-full p-2 border rounded-lg text-sm" required>
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Image</label>
+                                    <input type="file" class="w-full p-2 border rounded-lg text-sm">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs text-gray-500 mb-1 ml-1">Guarantor*</label>
+                                <input type="text" placeholder="Type" class="w-full p-2 border rounded-lg text-sm" required>
+                            </div>
+                        </div>
+                        <div class="flex justify-end space-x-4 pt-2">
+                            <button id="cancelLoan" type="button"
+                                class="px-6 py-1 bg-gray-300 rounded-lg hover:bg-gray-400 focus:outline-none text-sm">
+                                Cancel
+                            </button>
+                            <button type="submit"
+                                class="px-6 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none text-sm">
+                                Create
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
             <div class="flex flex-col h-full lg:h-auto space-y-2 pb-4">
                 <div class="flex w-full justify-between items-center">
                     <div class="w-24 text-sm lg:text-xs">
@@ -27,6 +97,7 @@
                         </button>
                     </div>
                 </div>
+
 
                 <!-- Customer Details Card -->
                 <form action="{{ route('members.updateMember', ['memberId' => $member_details->id]) }}" method="POST"
@@ -303,11 +374,11 @@
                                     @php
                                         $isDisabled = $member_details->loan->contains('status', 'UNCOMPLETED');
                                     @endphp
-                                    <button id="AddLoan" @if ($isDisabled) disabled @endif
+                                    <button id="addLoanButton" @if ($isDisabled) disabled @endif
                                         class="p-1 lg:p-1 px-6 lg:w-36 w-full lg:mr-0 rounded-lg flex items-center justify-center
         text-white {{ $isDisabled ? 'bg-blue-400 opacity-50 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700' }}">
                                         <span>+</span>
-                                        <span class="ml-2 text-sm">Add Loan</span>
+                                        <span class="ml-2 text-xs">Add Loan</span>
                                     </button>
                                     <!-- Edit -->
                                     <button id="ViewPreviousLoan"
@@ -1320,6 +1391,32 @@
                 alert('Installment data saved (front-end placeholder).');
             }
         });
+
+         //Loan
+    document.getElementById('addLoanButton').addEventListener('click', () => {
+        if (window.innerWidth >= 1024) {
+            document.getElementById('addLoanModal').classList.remove('hidden');
+            document.getElementById('addLoanModal').classList.add('flex');
+
+            // Optional: Adjust layout if you're using side-by-side columns
+            const loansColumn = document.getElementById('loansColumn');
+            const firstColumn = document.getElementById('firstColumn');
+            if (loansColumn && firstColumn) {
+                loansColumn.classList.remove('hidden');
+                firstColumn.classList.remove('lg:w-full');
+                firstColumn.classList.add('lg:w-8/12');
+                loansColumn.classList.add('lg:flex');
+            }
+        } else {
+            document.getElementById('addLoanModal').classList.remove('hidden');
+            document.getElementById('addLoanModal').classList.add('flex');
+        }
+    });
+
+    document.getElementById('cancelLoan').addEventListener('click', () => {
+        document.getElementById('addLoanModal').classList.add('hidden');
+        document.getElementById('addLoanModal').classList.remove('flex');
+    });
     </script>
 
     <style>

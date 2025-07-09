@@ -160,6 +160,76 @@
                 </script>
 
             </div>
+
+                    <!-- Add New Loan Modal -->
+        <div id="addLoanModal"
+            class="inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center lg:absolute z-50 fixed p-4 pb-0"
+            style="width: 100%; height: 100%;">
+            <div class="bg-white shadow-xl w-full max-w-3xl rounded-lg">
+                <h2 class="text-md bg-blue-100 rounded-t-lg p-4 font-">Add new Loan (Member Name)</h2>
+                <form action="#" method="POST" enctype="multipart/form-data">
+                    <div class="bg-white rounded-b-lg p-4 space-y-2 pb-0">
+                        <div class="grid grid-cols-1 gap-1">
+                            <div>
+                                <label class="block text-xs text-gray-500 mb-1 ml-1">Loan Amount*</label>
+                                <input type="number" placeholder="10 000" class="w-full p-2 border rounded-lg text-sm" required>
+                            </div>
+                            <div class="grid grid-cols-2 md:grid-cols-2 gap-2">
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Interest Rate*</label>
+                                    <input type="text" placeholder="10%" class="w-full p-2 border rounded-lg text-sm" required>
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Interest</label>
+                                    <input type="number" placeholder="1 000" class="w-full p-2 border rounded-lg text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Terms*</label>
+                                    <input type="number" placeholder="18" class="w-full p-2 border rounded-lg text-sm" required>
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Installment*</label>
+                                    <input type="number" placeholder="12 000" class="w-full p-2 border rounded-lg text-sm" required>
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Issue Date*</label>
+                                    <input type="date" class="w-full p-2 border rounded-lg text-sm" required>
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Document Charges*</label>
+                                    <input type="text" placeholder="Type" class="w-full p-2 border rounded-lg text-sm" required>
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Image*</label>
+                                    <input type="file" class="w-full p-2 border rounded-lg text-sm" required>
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Image</label>
+                                    <input type="file" class="w-full p-2 border rounded-lg text-sm">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs text-gray-500 mb-1 ml-1">Guarantor*</label>
+                                <input type="text" placeholder="Type" class="w-full p-2 border rounded-lg text-sm" required>
+                            </div>
+                        </div>
+                        <div class="flex justify-end space-x-4 pt-2">
+                            <button id="cancelLoan" type="button"
+                                class="px-6 py-1 bg-gray-300 rounded-lg hover:bg-gray-400 focus:outline-none text-sm">
+                                Cancel
+                            </button>
+                            <button type="submit"
+                                class="px-6 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none text-sm">
+                                Create
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
             <!-- Tab Navigation -->
             <div class="lg:h-8 lg:pb-4 w-full pl-4">
                 <ul class="flex text-xs lg:space-x-4 space-x-4">
@@ -1132,6 +1202,32 @@
                 updateRowDetails(selectedRow);
             }
         }
+
+        //Loan
+    document.getElementById('addLoanButton').addEventListener('click', () => {
+        if (window.innerWidth >= 1024) {
+            document.getElementById('addLoanModal').classList.remove('hidden');
+            document.getElementById('addLoanModal').classList.add('flex');
+
+            // Optional: Adjust layout if you're using side-by-side columns
+            const loansColumn = document.getElementById('loansColumn');
+            const firstColumn = document.getElementById('firstColumn');
+            if (loansColumn && firstColumn) {
+                loansColumn.classList.remove('hidden');
+                firstColumn.classList.remove('lg:w-full');
+                firstColumn.classList.add('lg:w-8/12');
+                loansColumn.classList.add('lg:flex');
+            }
+        } else {
+            document.getElementById('addLoanModal').classList.remove('hidden');
+            document.getElementById('addLoanModal').classList.add('flex');
+        }
+    });
+
+    document.getElementById('cancelLoan').addEventListener('click', () => {
+        document.getElementById('addLoanModal').classList.add('hidden');
+        document.getElementById('addLoanModal').classList.remove('flex');
+    });
     </script>
 
     <style>
