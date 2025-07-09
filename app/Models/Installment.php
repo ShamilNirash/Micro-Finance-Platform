@@ -17,6 +17,7 @@ class Installment extends Model
 
     protected $fillable = [
         'amount',
+        'installment_amount',
         'bill_image',
         'installment_number',
         'payed_date',

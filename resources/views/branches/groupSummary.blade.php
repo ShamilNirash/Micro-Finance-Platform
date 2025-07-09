@@ -351,26 +351,33 @@
                     </div>
                 </div>
 
-                <p class="text-center text-xs my-2 text-gray-400 lg:hidden">Total members 10</p>
+                <p class="text-center text-xs my-2 text-gray-400 lg:hidden">Total members
+                    {{ str_pad($group_details->member->count(), 2, '0', STR_PAD_LEFT) }}</p>
 
-                <!-- Centers Grid card format hidden for lg screens -->
                 <div id="membersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-4 p-2">
-                    <div
-                        class="rounded-lg shadow-sm flex flex-col justify-between w-full bg-gray-100 border hover:bg-gray-200">
-                        <div class=" py-2 px-4 flex flex-row justify-between space-y-1">
-                            <div class="text-xs text-gray-600 text-left">
-                                <p class="text-sm font-bold  text-gray-700">saman <span> - Center</span></p>
-                                <p class="text-xs font- text-gray-400">2525555515151V </p>
+                    @foreach ($group_details->member as $member)
+                        <a href="{{ url('/memberSummery/' . $member->id) }}" class="block">
+                            <div
+                                class="rounded-lg shadow-sm flex flex-col justify-between w-full bg-gray-100 border hover:bg-gray-200">
+                                <div class=" py-2 px-4 flex flex-row justify-between space-y-1">
+                                    <div class="text-xs text-gray-600 text-left">
+                                        <p class="text-sm font-bold  text-gray-700">
+                                            {{ capitalizeEachWord($member->full_name) }} <span> -
+                                                {{ capitalizeFirstLetter($group_details->center->center_name) }} </span>
+                                        </p>
+                                        <p class="text-xs font- text-gray-400">{{ $member->nic_number }} </p>
+                                    </div>
+
+                                    <div class="text-xs flex items-center space-x-1 text-gray-700">
+                                        <p class="text-sm font-bold  text-gray-700">11515155</p>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="text-xs flex items-center space-x-1 text-gray-700">
-                                <p class="text-sm font-bold  text-gray-700">11515155</p>
-                            </div>
-                        </div>
-                    </div>
-
-
+                        </a>
+                    @endforeach
                 </div>
+                <!-- Centers Grid card format hidden for lg screens -->
+
 
                 <div class="flex justify-start h-full ">
                     <!-- Grid Table format hidden for mobile screens -->

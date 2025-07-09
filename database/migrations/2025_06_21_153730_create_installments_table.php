@@ -21,6 +21,7 @@ class CreateInstallmentsTable extends Migration
             $table->boolean('pay_in_date')->nullable(true);
             $table->dateTime('payed_date')->nullable(true);
             $table->string('amount')->nullable(false);
+            $table->string('installment_amount')->nullable(false);
             $table->integer('loan_id')->nullable(false);
             $table->enum('status', ['PAYED', 'UNPAYED'])->default('UNPAYED');
             $table->timestamps();
