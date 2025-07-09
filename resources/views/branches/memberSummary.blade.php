@@ -304,7 +304,7 @@
                                     <p class="text-sm">
                                         <span class="view-mode-loan">
                                             Rs.
-                                            {{ optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->loan_amount ?? '__' }}</span>
+                                            {{number_format( optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->loan_amount ,2)?? '__' }}</span>
                                         <input type="number"
                                             class="edit-mode-loan hidden border px-2 py-1 rounded w-full" value="400000">
                                     </p>
@@ -315,7 +315,7 @@
                                     <p class="text-sm">
                                         <span class="view-mode-loan">
                                             Rs.
-                                            {{ optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->interest ?? '__' }}
+                                            {{number_format( optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->interest,2) ?? '__' }}
                                         </span> <input type="text"
                                             class="edit-mode-loan hidden border px-2 py-1 rounded w-full" value="5%">
                                     </p>
@@ -337,7 +337,7 @@
                                     <p class="text-sm">
                                         <span class="view-mode-loan">
                                             Rs.
-                                            {{ optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment_price ?? '__' }}
+                                            {{number_format( optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment_price,2) ?? '__' }}
                                         </span> <input type="number"
                                             class="edit-mode-loan hidden border px-2 py-1 rounded w-full" value="10000">
                                     </p>
@@ -359,7 +359,7 @@
                                     <p class="text-sm">
                                         <span class="view-mode-loan">
                                             Rs.
-                                            {{ optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->document_charges ?? '__' }}
+                                            {{ number_format(optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->document_charges,2) ?? '__' }}
                                         </span> <input type="number"
                                             class="edit-mode-loan hidden border px-2 py-1 rounded w-full" value="5000">
                                     </p>
@@ -498,7 +498,7 @@
                                     <div class="mt-0 flex justify-between items-center text-xs">
                                         <div class="flex items-center space-x-2">
                                             <p class="text-gray-400">Amount</p>
-                                            <p class="font-medium text-gray-600">Rs. {{ $installement->amount }}</p>
+                                            <p class="font-medium text-gray-600">Rs. {{number_format( $installement->amount,2) }}</p>
                                         </div>
                                         <div class="flex items-center space-x-2">
                                             <p class="text-gray-400">Pay in Date</p>
@@ -528,7 +528,7 @@
                                                     <label for="amount" class="block text-xs font-medium">Amount
                                                         *</label>
                                                     @if ($installement->status == 'PAYED')
-                                                        <span>Rs. {{ $installement->amount }}</span>
+                                                        <span>Rs. {{number_format( $installement->amount,2) }}</span>
                                                     @else
                                                         <input type="text" name="amount" id="amount"
                                                             class="w-2/3 mt-1 px-2 py-0.5 border rounded-md" required>

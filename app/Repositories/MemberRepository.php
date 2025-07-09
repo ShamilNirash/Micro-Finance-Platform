@@ -59,7 +59,7 @@ class MemberRepository
         try {
             return $this->members
                 ->where($type, $value)
-                ->whereIn('status', ['ACTIVE', 'INACTIVE'])
+                ->whereIn('status', ['ACTIVE', 'INACTIVE'])->with('loan.installment')
                 ->first();
         } catch (\Exception $e) {
             return $e;
@@ -68,7 +68,7 @@ class MemberRepository
     public function get_all()
     {
         try {
-            return $this->members->where(['status' => 'ACTIVE'])->with('group.center.branch')->get();
+            return $this->members->where(['status' => 'ACTIVE'])->with('group.center.branch', 'loan.installment')->get();
         } catch (\Exception $e) {
             return $e;
         }

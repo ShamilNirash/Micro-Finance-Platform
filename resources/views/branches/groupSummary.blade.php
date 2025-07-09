@@ -412,7 +412,15 @@
                         <td class="py-2 text-left">{{ capitalizeEachWord($member->full_name) }}</td>
                         <td class="py-2 text-left">{{ capitalizeFirstLetter($group_details->center->center_name) }}</td>
                         <td class="py-2 text-left"> {{ $member->nic_number }}</td>
-                        <td class="py-2 text-left">400000</td>
+                        @php
+                            $total_paid_amount = collect(
+                                optional($member->loan->firstWhere('status', 'UNCOMPLETED'))->installment,
+                            )->sum('amount');
+                            $total_balance =
+                                optional($member->loan->firstWhere('status', 'UNCOMPLETED'))->loan_amount -
+                                $total_paid_amount;
+                        @endphp
+                        <td class="py-2 text-left">Rs. {{ number_format($total_balance, 2) }}</td>
                         <td class="py-2 text-center flex justify-center items-center gap-1">
                             <a href="{{ url('/memberSummery/' . $member->id) }}"
                                 class="border rounded hover:bg-green-500">
@@ -501,27 +509,27 @@
                 <div class="grid grid-cols-3 gap-y-2">
                     <div>
                         <p for="LoanAmount" class="text-xs text-gray-400">Loan Amount</p>
-                        <p id="LoanAmount" class="text-sm">10 000 00</p>
+                        <p id="LoanAmountSlideBar" class="text-sm">--</p>
                     </div>
                     <div>
                         <p for="Interest" class="text-xs text-gray-400">Interest</p>
-                        <p id="Interest" class="text-sm">15%</p>
+                        <p id="InterestSlideBar" class="text-sm">--</p>
                     </div>
                     <div>
                         <p for="IssueDate" class="text-xs text-gray-400">Issue Date</p>
-                        <p id="IssueDate" class="text-sm">2025/06/12</p>
+                        <p id="IssueDateSlideBar" class="text-sm">--</p>
                     </div>
                     <div>
                         <p for="Installment" class="text-xs text-gray-400">Installment</p>
-                        <p id="Installment" class="text-sm">10</p>
+                        <p id="InstallmentSlideBar" class="text-sm">--</p>
                     </div>
                     <div>
                         <p for="Terms" class="text-xs text-gray-400">Terms</p>
-                        <p id="Terms" class="text-sm">Terms</p>
+                        <p id="TermsSlideBar" class="text-sm">--</p>
                     </div>
                     <div>
                         <p for="DocumentChagers" class="text-xs text-gray-400">Document Chagers</p>
-                        <p id="DocumentChagers" class="text-sm">-</p>
+                        <p id="DocumentChagersSlideBar" class="text-sm">--</p>
                     </div>
 
                 </div>
@@ -664,8 +672,27 @@
                     .getElementById('num02SlideBar').textContent = memberObject.mobile_number_2;
                 document.getElementById(
                     'nicSlideBar').textContent = memberObject.nic_number;
-                document.getElementById('memberAddressSlideBar')
-                    .textContent = memberObject.address;
+                document.getElementById(
+                    'memberAddressSlideBar').textContent = memberObject.address;
+
+                const uncompletedLoan = memberObject.loan.find(loan => loan.status === 'UNCOMPLETED');
+                console.log(uncompletedLoan);
+                document.getElementById('LoanAmountSlideBar').textContent =
+                    uncompletedLoan ? 'Rs. ' + parseFloat(uncompletedLoan.loan_amount).toFixed(2) :
+                    '--';
+                document.getElementById('InterestSlideBar').textContent =
+                    uncompletedLoan ? 'Rs. ' + parseFloat(uncompletedLoan.interest).toFixed(2) :
+                    '--';
+                document.getElementById('IssueDateSlideBar').textContent =
+                    uncompletedLoan ? uncompletedLoan.issue_date : '--';
+                document.getElementById('InstallmentSlideBar').textContent =
+                    uncompletedLoan ? 'Rs. ' + parseFloat(uncompletedLoan.installment_price).toFixed(2) :
+                    '--';
+                document.getElementById('TermsSlideBar').textContent =
+                    uncompletedLoan ? uncompletedLoan.terms : '--';
+                document.getElementById('DocumentChagersSlideBar').textContent =
+                    uncompletedLoan ? 'Rs. ' + parseFloat(uncompletedLoan.document_charges).toFixed(2) :
+                    '--';
             });
         });
         document.getElementById('ViewFullDetail').addEventListener('click', () => {
