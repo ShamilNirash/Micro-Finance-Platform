@@ -35,7 +35,7 @@ class MemberRepository
         try {
             return $this->members
                 ->where($type, $value)
-                ->whereIn('status', ['ACTIVE', 'INACTIVE'])->with('group.center.branch')
+                ->whereIn('status', ['ACTIVE', 'INACTIVE'])->with('group.center.branch', 'loan.installment')
                 ->first();
         } catch (\Exception $e) {
             return $e;

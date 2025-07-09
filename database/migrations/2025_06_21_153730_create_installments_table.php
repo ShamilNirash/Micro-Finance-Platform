@@ -15,12 +15,12 @@ class CreateInstallmentsTable extends Migration
     {
         Schema::create('installments', function (Blueprint $table) {
             $table->id();
-            $table->string('bill_image')->nullable(false);
+            $table->string('bill_image')->nullable(true);
             $table->integer('installment_number')->nullable(false);
             $table->dateTime('date_and_time')->nullable(false);
-            $table->date('pay_in_date')->nullable(false);
-            $table->dateTime('payed_date')->nullable(false);
-            $table->date('amount')->nullable(false);
+            $table->boolean('pay_in_date')->nullable(true);
+            $table->dateTime('payed_date')->nullable(true);
+            $table->string('amount')->nullable(false);
             $table->integer('loan_id')->nullable(false);
             $table->enum('status', ['PAYED', 'UNPAYED'])->default('UNPAYED');
             $table->timestamps();

@@ -391,16 +391,15 @@
                                 <tbody class="text-gray-800 text-xs font-light bg-white">
                                     <!-- AROW -->
                                     @foreach ($group_details->member as $member)
-
-                                            <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details"
-                                                data-member-id={{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
-                                                data-member-name='{{ capitalizeEachWord($member->full_name) }}'
-                                                data-center-name='{{ capitalizeFirstLetter($group_details->center->center_name) }}'
-                                                data-group-name='{{ capitalizeEachWord($group_details->group_name) }}'
-                                                data-branch-name='{{ capitalizeFirstLetter($group_details->center->branch->branch_name) }}'
-                                                data-received="40000" data-member-object='@json($member)'>
-                                                <td class="py-2 text-center">
-                                                    {{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
+                                        <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details"
+                                            data-member-id={{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
+                                            data-member-name='{{ capitalizeEachWord($member->full_name) }}'
+                                            data-center-name='{{ capitalizeFirstLetter($group_details->center->center_name) }}'
+                                            data-group-name='{{ capitalizeEachWord($group_details->group_name) }}'
+                                            data-branch-name='{{ capitalizeFirstLetter($group_details->center->branch->branch_name) }}'
+                                            data-received="40000" data-member-object='@json($member)'>
+                                            <td class="py-2 text-center">
+                                                {{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
                         </div>
                         </td>
                         <td class="py-2 text-left">{{ capitalizeEachWord($member->full_name) }}</td>
@@ -529,10 +528,11 @@
         </div>
         <div class=" p-4 border-t">
             <div class="w-full text-sm lg:text-xs  pt-4">
-                <button id="ViewFullDetail" value=""
+                <button id="ViewFullDetail"
                     class="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 focus:outline-none">
                     View Full Detail
                 </button>
+
             </div>
 
         </div>
@@ -622,7 +622,7 @@
                     });
             });
 
-
+        let select_member_id = '';
         // Row Summey
         document.querySelectorAll('.view-details').forEach(button => {
             button.addEventListener('click', (e) => {
@@ -643,6 +643,7 @@
                 const group_name = row.getAttribute('data-group-name');
                 const memberObject = JSON.parse(row.getAttribute('data-member-object'));
                 console.log(memberObject.address);
+                select_member_id = memberObject.id;
                 document.getElementById('memberNameSlideBar').textContent = member_name;
                 document
                     .getElementById('branchNameSlideBar').textContent = branch_name;
@@ -659,6 +660,9 @@
                 document.getElementById('memberAddressSlideBar')
                     .textContent = memberObject.address;
             });
+        });
+        document.getElementById('ViewFullDetail').addEventListener('click', () => {
+            window.location.href = `/memberSummery/${select_member_id}`;
         });
 
         // Add Member Modal

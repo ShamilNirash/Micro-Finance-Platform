@@ -14,7 +14,7 @@
             <div class="flex flex-col h-full lg:h-auto space-y-2 pb-4">
                 <div class="flex w-full justify-between items-center">
                     <div class="w-24 text-sm lg:text-xs">
-                        <button id="" value=""  onclick="window.history.back();"
+                        <button id="" value="" onclick="window.history.back();"
                             class="w-full bg-gray-100 text-gray-700 p-1.5 rounded-lg hover:bg-gray-300 focus:outline-none flex items-center pl-4">
                             <img src="{{ asset('assets/icons/CaretLeft.svg') }}" alt="Pencil" class="h-3 w-3 m-1"> Back
                         </button>
@@ -220,15 +220,20 @@
                         <div class="w-full h-full border rounded-lg    py-2 px-4">
                             <div class="flex items-baseline space-x-2">
                                 <h1 class="text-md font-medium text-gray-800 mb-2">Current Loan</h1>
-                                <span class="bg-green-400 p-0.5 px-2 rounded text-black text-xs">Active</span>
-                                <span class="bg-red-400 p-0.5 px-2 rounded text-black text-xs">Inctive</span>
+                                @if ($member_details->loan->contains('status', 'UNCOMPLETED'))
+                                    <span class="bg-green-400 p-0.5 px-2 rounded text-black text-xs">Active</span>
+                                @else
+                                    <span class="bg-red-400 p-0.5 px-2 rounded text-black text-xs">Inctive</span>
+                                @endif
                             </div>
                             <div class="grid-cols-1 grid lg:grid-cols-3 lg:gap-y-1 lg:gap-x-4 gap-y-4">
                                 <!-- Loan Amount -->
                                 <div>
                                     <p class="text-xs text-gray-400">Loan Amount</p>
                                     <p class="text-sm">
-                                        <span class="view-mode-loan">400000</span>
+                                        <span class="view-mode-loan">
+                                            Rs.
+                                            {{ optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->loan_amount ?? '__' }}</span>
                                         <input type="number"
                                             class="edit-mode-loan hidden border px-2 py-1 rounded w-full" value="400000">
                                     </p>
@@ -237,8 +242,10 @@
                                 <div>
                                     <p class="text-xs text-gray-400">Interest</p>
                                     <p class="text-sm">
-                                        <span class="view-mode-loan">5%</span>
-                                        <input type="text"
+                                        <span class="view-mode-loan">
+                                            Rs.
+                                            {{ optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->interest ?? '__' }}
+                                        </span> <input type="text"
                                             class="edit-mode-loan hidden border px-2 py-1 rounded w-full" value="5%">
                                     </p>
                                 </div>
@@ -246,8 +253,9 @@
                                 <div>
                                     <p class="text-xs text-gray-400">Issue Date</p>
                                     <p class="text-sm">
-                                        <span class="view-mode-loan">2025.01.01</span>
-                                        <input type="date"
+                                        <span class="view-mode-loan">
+                                            {{ optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->issue_date ?? '__' }}
+                                        </span> <input type="date"
                                             class="edit-mode-loan hidden border px-2 py-1 rounded w-full"
                                             value="2025-01-01">
                                     </p>
@@ -256,8 +264,10 @@
                                 <div>
                                     <p class="text-xs text-gray-400">Installment</p>
                                     <p class="text-sm">
-                                        <span class="view-mode-loan">10000</span>
-                                        <input type="number"
+                                        <span class="view-mode-loan">
+                                            Rs.
+                                            {{ optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment_price ?? '__' }}
+                                        </span> <input type="number"
                                             class="edit-mode-loan hidden border px-2 py-1 rounded w-full" value="10000">
                                     </p>
                                 </div>
@@ -265,8 +275,9 @@
                                 <div>
                                     <p class="text-xs text-gray-400">Terms</p>
                                     <p class="text-sm">
-                                        <span class="view-mode-loan">12 Months</span>
-                                        <input type="text"
+                                        <span class="view-mode-loan">
+                                            {{ optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->terms ?? '__' }}
+                                        </span> <input type="text"
                                             class="edit-mode-loan hidden border px-2 py-1 rounded w-full"
                                             value="12 Months">
                                     </p>
@@ -275,8 +286,10 @@
                                 <div>
                                     <p class="text-xs text-gray-400">Document Charges</p>
                                     <p class="text-sm">
-                                        <span class="view-mode-loan">5000</span>
-                                        <input type="number"
+                                        <span class="view-mode-loan">
+                                            Rs.
+                                            {{ optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->document_charges ?? '__' }}
+                                        </span> <input type="number"
                                             class="edit-mode-loan hidden border px-2 py-1 rounded w-full" value="5000">
                                     </p>
                                 </div>
@@ -287,8 +300,12 @@
                                 class="flex w-full lg:w-full  justify-between lg:justify-end items-end space-x-2 pt-4 pb-2">
                                 <div class="flex flex-row lg:space-x-2 bg-white lg:text-xs w-full justify-end">
                                     <!-- Edit -->
-                                    <button id="Add Loan"
-                                        class="bg-blue-600 text-white p-1 lg:p-1 rounded-lg hover:bg-blue-700 flex items-center justify-center px-6 lg:w-36 w-full lg:mr-0">
+                                    @php
+                                        $isDisabled = $member_details->loan->contains('status', 'UNCOMPLETED');
+                                    @endphp
+                                    <button id="AddLoan" @if ($isDisabled) disabled @endif
+                                        class="p-1 lg:p-1 px-6 lg:w-36 w-full lg:mr-0 rounded-lg flex items-center justify-center
+        text-white {{ $isDisabled ? 'bg-blue-400 opacity-50 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700' }}">
                                         <span>+</span>
                                         <span class="ml-2 text-sm">Add Loan</span>
                                     </button>
@@ -305,19 +322,21 @@
                     </div>
 
                     <!--Balnce Summury--> <!--Need to hide if is memeber is didnt have active loan-->
-                    <div
-                        class="flex flex-col w-full lg:w-1/3 justify-between items-center p-2  rounded-lg border space-y-2">
+                    @if ($member_details->loan->contains('status', 'UNCOMPLETED'))
                         <div
-                            class="w-full text-sm lg:text-xs flex space-x-2 lg:h-1/2 h-8 justify-center items-center border-black rounded-md  bg-gray-200">
-                            <p class="text-sm text-gray-800">Total Paid</p>
-                            <p class="text-sm text-gray-600">12 250/=</p>
+                            class="flex flex-col w-full lg:w-1/3 justify-between items-center p-2  rounded-lg border space-y-2">
+                            <div
+                                class="w-full text-sm lg:text-xs flex space-x-2 lg:h-1/2 h-8 justify-center items-center border-black rounded-md  bg-gray-200">
+                                <p class="text-sm text-gray-800">Total Paid</p>
+                                <p class="text-sm text-gray-600">12 250/=</p>
+                            </div>
+                            <div
+                                class="w-full text-sm lg:text-xs flex space-x-2 lg:h-1/2 h-8 justify-center items-center  border-black rounded-md bg-gray-200">
+                                <p class="text-sm text-gray-800">Balance</p>
+                                <p class="text-sm text-gray-600">12 250/=</p>
+                            </div>
                         </div>
-                        <div
-                            class="w-full text-sm lg:text-xs flex space-x-2 lg:h-1/2 h-8 justify-center items-center  border-black rounded-md bg-gray-200">
-                            <p class="text-sm text-gray-800">Balance</p>
-                            <p class="text-sm text-gray-600">12 250/=</p>
-                        </div>
-                    </div>
+                    @endif
                 </div>
 
                 <!-- Existing Members Grid and Table -->
@@ -341,9 +360,34 @@
                         </div>
                         <!-- Summury -->
                         <div class="w-full text-sm lg:text-xs lg:w-6/12 flex justify-between items-center">
-                            <div class="border bg-white rounded-lg  p-2 px-2">Complete - <span>08</span></div>
-                            <div class="border bg-white rounded-lg  p-2 px-2">Pending - <span>09</span></div>
-                            <div class="border bg-white rounded-lg  p-2 px-2">Waiting - <span>01</span></div>
+                            <div class="border bg-white rounded-lg  p-2 px-2">Complete - <span>
+                                    {{ str_pad(collect(optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment)->where('status', 'PAYED')->count(),2,'0',STR_PAD_LEFT) }}
+                                </span></div>
+                            @php
+                                use Illuminate\Support\Carbon;
+
+                                $pendingCount = collect(
+                                    optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment,
+                                )
+                                    ->where('status', 'UNPAYED')
+                                    ->filter(function ($item) {
+                                        return \Carbon\Carbon::parse($item->date_and_time)->lt(now());
+                                    })
+                                    ->count();
+
+                                $waitingCount = collect(
+                                    optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment,
+                                )
+                                    ->where('status', 'UNPAYED')
+                                    ->filter(function ($item) {
+                                        return \Carbon\Carbon::parse($item->date_and_time)->gte(now());
+                                    })
+                                    ->count();
+                            @endphp
+                            <div class="border bg-white rounded-lg  p-2 px-2">Pending - <span>
+                                    {{ str_pad($pendingCount, 2, '0', STR_PAD_LEFT) }} </span></div>
+                            <div class="border bg-white rounded-lg  p-2 px-2">Waiting - <span>
+                                    {{ str_pad($waitingCount, 2, '0', STR_PAD_LEFT) }} </span></div>
                         </div>
                     </div>
                     <p class="text-center text-xs my-2 text-gray-400 lg:hidden">Loan #2 - Installment2/10</p>
@@ -662,135 +706,48 @@
                                 </thead>
                                 <tbody class="text-gray-800 text-xs font-light bg-white">
                                     <!-- Row -->
-                                    <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details"
-                                        data-member-id="1" data-member-name="Saman" data-members="04"
-                                        data-received="40000" data-center="Malwaragoda">
-                                        <td class="py-2 pl-4 text-left">Installment #1</td>
-                                        <td class="py-2 text-left">Center</td>
-                                        <td class="py-2 text-left">154782452v</td>
-                                        <td class="py-2 text-left"><span
-                                                class="bg-green-400 p-0.5 px-2 rounded text-black text-xs">Yes</span></td>
-                                        <td class="py-2 text-center flex justify-center items-center gap-1">
-                                            <a href="#" class="border rounded hover:bg-green-500">
-                                                <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
-                                                    class="h-3 w-3 m-1">
-                                            </a>
-                                            <a href="#" class="border rounded hover:bg-lime-500">
-                                                <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil"
-                                                    class="h-3 w-3 m-1">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <!-- Additional Rows -->
-                                    <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details"
-                                        data-group-id="1" data-member-name="Group 01" data-members="04"
-                                        data-received="40000" data-center="Malwaragoda">
-                                        <td class="py-2 pl-4 text-left">Installment #2</td>
-                                        <td class="py-2 text-left">Center</td>
-                                        <td class="py-2 text-left">154782452v</td>
-                                        <td class="py-2 text-left"><span
-                                                class="bg-green-400 p-0.5 px-2 rounded text-black text-xs">Yes</span></td>
-                                        <td class="py-2 text-center flex justify-center items-center gap-1">
-                                            <a href="#" class="border rounded hover:bg-green-500">
-                                                <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
-                                                    class="h-3 w-3 m-1">
-                                            </a>
-                                            <a href="#" class="border rounded hover:bg-lime-500">
-                                                <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil"
-                                                    class="h-3 w-3 m-1">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <!-- Additional Rows -->
-                                    <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details"
-                                        data-group-id="1" data-member-name="Group 01" data-members="04"
-                                        data-received="40000" data-center="Malwaragoda">
-                                        <td class="py-2 pl-4 text-left">Installment #3</td>
-                                        <td class="py-2 text-left">Center</td>
-                                        <td class="py-2 text-left">154782452v</td>
-                                        <td class="py-2 text-left"><span
-                                                class="bg-red-400 p-0.5 px-2 rounded text-black text-xs">No</span></td>
-                                        <td class="py-2 text-center flex justify-center items-center gap-1">
-                                            <a href="#" class="border rounded hover:bg-green-500">
-                                                <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
-                                                    class="h-3 w-3 m-1">
-                                            </a>
-                                            <a href="#" class="border rounded hover:bg-lime-500">
-                                                <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil"
-                                                    class="h-3 w-3 m-1">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    </tr>
-                                    <!-- Additional Rows -->
-                                    <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details"
-                                        data-group-id="1" data-member-name="Group 01" data-members="04"
-                                        data-received="40000" data-center="Malwaragoda">
-                                        <td class="py-2 pl-4 text-left">Installment #3</td>
-                                        <td class="py-2 text-left">Center</td>
-                                        <td class="py-2 text-left">154782452v</td>
-                                        <td class="py-2 text-left"><span
-                                                class="bg-red-400 p-0.5 px-2 rounded text-black text-xs">No</span></td>
-                                        <td class="py-2 text-center flex justify-center items-center gap-1">
-                                            <a href="#" class="border rounded hover:bg-green-500">
-                                                <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
-                                                    class="h-3 w-3 m-1">
-                                            </a>
-                                            <a href="#" class="border rounded hover:bg-lime-500">
-                                                <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil"
-                                                    class="h-3 w-3 m-1">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    </tr>
-                                    <!-- Additional Rows -->
-                                    <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details"
-                                        data-group-id="1" data-member-name="Group 01" data-members="04"
-                                        data-received="40000" data-center="Malwaragoda">
-                                        <td class="py-2 pl-4 text-left">Installment #78</td>
-                                        <td class="py-2 text-left">Center</td>
-                                        <td class="py-2 text-left">154782452v</td>
-                                        <td class="py-2 text-left"><span
-                                                class="bg-red-400 p-0.5 px-2 rounded text-black text-xs">No</span></td>
-                                        <td class="py-2 text-center flex justify-center items-center gap-1">
-                                            <a href="#" class="border rounded hover:bg-green-500">
-                                                <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
-                                                    class="h-3 w-3 m-1">
-                                            </a>
-                                            <a href="#" class="border rounded hover:bg-lime-500">
-                                                <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil"
-                                                    class="h-3 w-3 m-1">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    </tr>
-                                    <!-- Additional Rows -->
-                                    <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details"
-                                        data-group-id="1" data-member-name="Group 01" data-members="04"
-                                        data-received="40000" data-center="Malwaragoda">
-                                        <td class="py-2 pl-4 text-left">Installment #3</td>
-                                        <td class="py-2 text-left">Center</td>
-                                        <td class="py-2 text-left">154782452v</td>
-                                        <td class="py-2 text-left">
-                                            <span
-                                                class="bg-yellow-400 p-0.5 px-2 rounded text-black text-xs flex w-8 justify-center items-center">
-                                                <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
-                                                    class="h-3 w-3 m-1">
-                                            </span>
-                                        </td>
-                                        <td class="py-2 text-center flex justify-center items-center gap-1">
-                                            <a href="#" class="border rounded hover:bg-green-500">
-                                                <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
-                                                    class="h-3 w-3 m-1">
-                                            </a>
-                                            <a href="#" class="border rounded hover:bg-lime-500">
-                                                <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil"
-                                                    class="h-3 w-3 m-1">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    </tr>
+                                    @if ($member_details->loan->firstWhere('status', 'UNCOMPLETED'))
+                                        @foreach (optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment as $installement)
+                                            <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details"
+                                                data-group-id="1" data-member-name="Group 01" data-members="04"
+                                                data-received="40000" data-center="Malwaragoda">
+                                                <td class="py-2 pl-4 text-left">Installment #
+                                                    {{ $installement->installment_number }}
+                                                </td>
+                                                <td class="py-2 text-left">Rs. {{ $installement->amount }}</td>
+                                                <td class="py-2 text-left">{{ $installement->date_and_time }}</td>
+                                                <td class="py-2 text-left">
 
+
+                                                    @if ($installement->pay_in_date)
+                                                        <span
+                                                            class="bg-green-400 p-0.5 px-2 rounded text-black text-xs">Yes</span>
+                                                    @else
+                                                        @if (\Carbon\Carbon::parse($installement->date_and_time)->lt(now()))
+                                                            <span
+                                                                class="bg-red-400 p-0.5 px-2 rounded text-black text-xs">No</span>
+                                                        @else
+                                                            <span
+                                                                class="bg-yellow-400 p-0.5 px-2 rounded text-black text-xs flex w-8 justify-center items-center">
+                                                                <img src="{{ asset('assets/icons/Eye.svg') }}"
+                                                                    alt="Eye" class="h-3 w-3 m-1">
+                                                            </span>
+                                                        @endif
+                                                    @endif
+                                                </td>
+                                                <td class="py-2 text-center flex justify-center items-center gap-1">
+                                                    <a href="#" class="border rounded hover:bg-green-500">
+                                                        <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
+                                                            class="h-3 w-3 m-1">
+                                                    </a>
+                                                    <a href="#" class="border rounded hover:bg-lime-500">
+                                                        <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil"
+                                                            class="h-3 w-3 m-1">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                     <!-- Repeat rows as needed -->
                                 </tbody>
                             </table>
@@ -831,44 +788,7 @@
 
 
             </div>
-            <!--<div class="inactiveMemberDetails hidden space-y-4 h-full ">
-                                                                                                                <div class="p-4 pt-2 border-b w-full">
-                                                                                                                    <h1 id="" class="text-sm font-medium text-gray-800 mb-1">Current Loan Details</h1>
-                                                                                                                    <div class="grid grid-cols-3 gap-y-2">
-                                                                                                                        <div>
-                                                                                                                            <p for="LoanAmount" class="text-xs text-gray-400">Loan Amount</p>
-                                                                                                                            <p id="LoanAmount" class="text-sm">10 000 00</p>
-                                                                                                                        </div>
-                                                                                                                        <div>
-                                                                                                                            <p for="Interest" class="text-xs text-gray-400">Interest</p>
-                                                                                                                            <p id="Interest" class="text-sm">15%</p>
-                                                                                                                        </div>
-                                                                                                                        <div>
-                                                                                                                            <p for="IssueDate" class="text-xs text-gray-400">Issue Date</p>
-                                                                                                                            <p id="IssueDate" class="text-sm">2025/06/12</p>
-                                                                                                                        </div>
-                                                                                                                        <div>
-                                                                                                                            <p for="Installment" class="text-xs text-gray-400">Installment</p>
-                                                                                                                            <p id="Installment" class="text-sm">10</p>
-                                                                                                                        </div>
-                                                                                                                        <div>
-                                                                                                                            <p for="Terms" class="text-xs text-gray-400">Terms</p>
-                                                                                                                            <p id="Terms" class="text-sm">Terms</p>
-                                                                                                                        </div>
-                                                                                                                        <div>
-                                                                                                                            <p for="DocumentChagers" class="text-xs text-gray-400">Document Chagers</p>
-                                                                                                                            <p id="DocumentChagers" class="text-sm">-</p>
-                                                                                                                        </div>
-
-                                                                                                                    </div>
-                                                                                                                    <div class="w-full text-sm lg:text-xs  pt-4">
-                                                                                                                        <button id="addLoanButton" value="add_new_loan"
-                                                                                                                            class="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 focus:outline-none">
-                                                                                                                            + Add Loan
-                                                                                                                        </button>
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                            </div>-->
+            <!--<div class="inactiveMemberDetails hidden space-y-4 h-full ">                                                                                                                                                </div>-->
             <h1 id="" class="text-sm font-medium text-gray-800  pl-4 py-2 border-b border-t">Previous Loan
                 Details</h1>
             <div class="activeMemberDetails previousLoan overflow-y-auto h-[calc(100vh-500px)] bg-slate-50">

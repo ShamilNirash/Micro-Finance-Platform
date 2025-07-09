@@ -269,9 +269,9 @@
                                 <thead class="w-full text-gray-700 text-xs font-light bg-gray-100 sticky top-0">
                                     <tr class="uppercase w-full">
                                         <!--<th class="pl-2 text-left">
-                                                                        <input type="checkbox" id="select-all"
-                                                                            class="form-checkbox h-4 w-4 text-blue-400 m-1">
-                                                                    </th>-->
+                                                                                <input type="checkbox" id="select-all"
+                                                                                    class="form-checkbox h-4 w-4 text-blue-400 m-1">
+                                                                            </th>-->
                                         <th class="py-2 text-center">#</th>
                                         <th class="py-2 text-left">Name</th>
                                         <th class="py-2 text-left">Center</th>
@@ -290,9 +290,9 @@
                                             data-member_id='{{ $member->nic_number }}' data-loan-balance="20000"
                                             data-member='@json($member)'>
                                             <!--<td class="pl-2 text-left">
-                                                                            <input type="checkbox" name="selected_ids[]" value="1"
-                                                                                class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                                                        </td>-->
+                                                                                    <input type="checkbox" name="selected_ids[]" value="1"
+                                                                                        class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                                                                                </td>-->
                                             <td class="py-2 text-center">{{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
                                             </td>
                                             <td class="py-2 text-left">{{ capitalizeEachWord($member->full_name) }}</td>
@@ -957,7 +957,7 @@
             document.getElementById('firstColumn').classList.add('lg:w-full');
 
         }
-
+        let select_member_id = '';
         // Row Summey
         document.querySelectorAll('.view-details').forEach(button => {
             button.addEventListener('click', (e) => {
@@ -977,6 +977,7 @@
                 const branch_name = row.getAttribute('data-branchname');
                 const center_name = row.getAttribute('data-center-name');
                 const member_id = row.getAttribute('data-member-id');
+                select_member_id = memberData.id;
                 console.log(memberData);
                 document.getElementById('memberNameShow').textContent = member_fullname;
                 document.getElementById('branchNameShow').textContent = branch_name;
@@ -997,6 +998,10 @@
                   document.getElementById('Tmember').textContent = member; */
             });
         });
+        document.getElementById('ViewFullDetail').addEventListener('click', () => {
+        window.location.href = `/memberSummery/${select_member_id}`;
+             });
+
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize selectedmember array
             window.selectedmember = window.selectedmember || [];

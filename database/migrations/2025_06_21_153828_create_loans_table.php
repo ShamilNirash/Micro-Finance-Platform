@@ -19,7 +19,7 @@ class CreateLoansTable extends Migration
             $table->string('document_charges')->nullable(false);
             $table->string('loan_amount')->nullable(false);
             $table->string('image_1')->nullable(false);
-            $table->string('image_2')->nullable(false);
+            $table->string('installment_price')->nullable(false);
             $table->date('issue_date')->nullable(false);
             $table->string('interest_rate')->nullable(false);
             $table->string('terms')->nullable(false);
