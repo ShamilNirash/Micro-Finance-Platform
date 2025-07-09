@@ -126,3 +126,14 @@ Route::get('/pendingPaymentsReport', function () {
 Route::get('/membersReport', function () {
     return view('reports/membersReport');
 });
+
+/*Settings*/
+Route::get('/userRole', function () {
+    return view('settings/userRole');
+});
+Route::get('/userAccount', function () {
+    return view('settings/userAccount');
+});
+Route::get('/userLogs', function () {
+    return view('settings/userLogs');
+});
