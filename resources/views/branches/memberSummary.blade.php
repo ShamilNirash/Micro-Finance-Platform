@@ -12,73 +12,80 @@
         <div id="firstColumn"
             class="w-full h-full p-2 lg:border-r lg:p-4 lg:pt-2 transition-all duration-300 lg:relative space-y-2 px-4">
 
-                             <!-- Add New Loan Modal -->
-        <div id="addLoanModal"
-            class="inset-0 bg-gray-600 bg-opacity-50 hidden items- justify-center lg:absolute z-50  p-4 pb-0"
-            style="width: 100%; height: 100%;">
-            <div class="bg-white shadow-xl w-full max-w-2xl rounded-lg h-max">
-                <h2 class="text-md bg-blue-100 rounded-t-lg p-4 font-">Add new Loan (Member Name)</h2>
-                <form action="#" method="POST" enctype="multipart/form-data">
-                    <div class="bg-white rounded-b-lg p-4 space-y-2 pb-0">
-                        <div class="grid grid-cols-1 gap-1">
-                            <div>
-                                <label class="block text-xs text-gray-500 mb-1 ml-1">Loan Amount*</label>
-                                <input type="number" placeholder="10 000" class="w-full p-2 border rounded-lg text-sm" required>
-                            </div>
-                            <div class="grid grid-cols-2 md:grid-cols-2 gap-2">
+            <!-- Add New Loan Modal -->
+            <div id="addLoanModal"
+                class="inset-0 bg-gray-600 bg-opacity-50 hidden items- justify-center lg:absolute z-50  p-4 pb-0"
+                style="width: 100%; height: 100%;">
+                <div class="bg-white shadow-xl w-full max-w-2xl rounded-lg h-max">
+                    <h2 class="text-md bg-blue-100 rounded-t-lg p-4 font-">Add new Loan (Member Name)</h2>
+                    <form action="#" method="POST" enctype="multipart/form-data">
+                        <div class="bg-white rounded-b-lg p-4 space-y-2 pb-0">
+                            <div class="grid grid-cols-1 gap-1">
                                 <div>
-                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Interest Rate*</label>
-                                    <input type="text" placeholder="10%" class="w-full p-2 border rounded-lg text-sm" required>
+                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Loan Amount*</label>
+                                    <input type="number" placeholder="10 000" class="w-full p-2 border rounded-lg text-sm"
+                                        required>
                                 </div>
-                                <div>
-                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Interest</label>
-                                    <input type="number" placeholder="1 000" class="w-full p-2 border rounded-lg text-sm">
+                                <div class="grid grid-cols-2 md:grid-cols-2 gap-2">
+                                    <div>
+                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Interest Rate*</label>
+                                        <input type="text" placeholder="10%" class="w-full p-2 border rounded-lg text-sm"
+                                            required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Interest</label>
+                                        <input type="number" placeholder="1 000"
+                                            class="w-full p-2 border rounded-lg text-sm">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Terms*</label>
+                                        <input type="number" placeholder="18" class="w-full p-2 border rounded-lg text-sm"
+                                            required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Installment*</label>
+                                        <input type="number" placeholder="12 000"
+                                            class="w-full p-2 border rounded-lg text-sm" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Issue Date*</label>
+                                        <input type="date" class="w-full p-2 border rounded-lg text-sm" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Document Charges*</label>
+                                        <input type="text" placeholder="Type"
+                                            class="w-full p-2 border rounded-lg text-sm" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Image*</label>
+                                        <input type="file" class="w-full p-2 border rounded-lg text-sm" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Image</label>
+                                        <input type="file" class="w-full p-2 border rounded-lg text-sm">
+                                    </div>
                                 </div>
-                                <div>
-                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Terms*</label>
-                                    <input type="number" placeholder="18" class="w-full p-2 border rounded-lg text-sm" required>
-                                </div>
-                                <div>
-                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Installment*</label>
-                                    <input type="number" placeholder="12 000" class="w-full p-2 border rounded-lg text-sm" required>
-                                </div>
-                                <div>
-                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Issue Date*</label>
-                                    <input type="date" class="w-full p-2 border rounded-lg text-sm" required>
-                                </div>
-                                <div>
-                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Document Charges*</label>
-                                    <input type="text" placeholder="Type" class="w-full p-2 border rounded-lg text-sm" required>
-                                </div>
-                                <div>
-                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Image*</label>
-                                    <input type="file" class="w-full p-2 border rounded-lg text-sm" required>
-                                </div>
-                                <div>
-                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Image</label>
-                                    <input type="file" class="w-full p-2 border rounded-lg text-sm">
-                                </div>
-                            </div>
 
-                            <div>
-                                <label class="block text-xs text-gray-500 mb-1 ml-1">Guarantor*</label>
-                                <input type="text" placeholder="Type" class="w-full p-2 border rounded-lg text-sm" required>
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Guarantor*</label>
+                                    <input type="text" placeholder="Type" class="w-full p-2 border rounded-lg text-sm"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="flex justify-end space-x-4 pt-2">
+                                <button id="cancelLoan" type="button"
+                                    class="px-6 py-1 bg-gray-300 rounded-lg hover:bg-gray-400 focus:outline-none text-sm">
+                                    Cancel
+                                </button>
+                                <button type="submit"
+                                    class="px-6 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none text-sm">
+                                    Create
+                                </button>
                             </div>
                         </div>
-                        <div class="flex justify-end space-x-4 pt-2">
-                            <button id="cancelLoan" type="button"
-                                class="px-6 py-1 bg-gray-300 rounded-lg hover:bg-gray-400 focus:outline-none text-sm">
-                                Cancel
-                            </button>
-                            <button type="submit"
-                                class="px-6 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none text-sm">
-                                Create
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
 
 
             <div class="flex flex-col h-full lg:h-auto space-y-2 pb-4">
@@ -304,7 +311,7 @@
                                     <p class="text-sm">
                                         <span class="view-mode-loan">
                                             Rs.
-                                            {{number_format( optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->loan_amount ,2)?? '__' }}</span>
+                                            {{ number_format(optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->loan_amount, 2) ?? '__' }}</span>
                                         <input type="number"
                                             class="edit-mode-loan hidden border px-2 py-1 rounded w-full" value="400000">
                                     </p>
@@ -315,7 +322,7 @@
                                     <p class="text-sm">
                                         <span class="view-mode-loan">
                                             Rs.
-                                            {{number_format( optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->interest,2) ?? '__' }}
+                                            {{ number_format(optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->interest, 2) ?? '__' }}
                                         </span> <input type="text"
                                             class="edit-mode-loan hidden border px-2 py-1 rounded w-full" value="5%">
                                     </p>
@@ -337,7 +344,7 @@
                                     <p class="text-sm">
                                         <span class="view-mode-loan">
                                             Rs.
-                                            {{number_format( optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment_price,2) ?? '__' }}
+                                            {{ number_format(optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment_price, 2) ?? '__' }}
                                         </span> <input type="number"
                                             class="edit-mode-loan hidden border px-2 py-1 rounded w-full" value="10000">
                                     </p>
@@ -359,7 +366,7 @@
                                     <p class="text-sm">
                                         <span class="view-mode-loan">
                                             Rs.
-                                            {{ number_format(optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->document_charges,2) ?? '__' }}
+                                            {{ number_format(optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->document_charges, 2) ?? '__' }}
                                         </span> <input type="number"
                                             class="edit-mode-loan hidden border px-2 py-1 rounded w-full" value="5000">
                                     </p>
@@ -399,18 +406,23 @@
                             <div
                                 class="w-full text-sm lg:text-xs flex space-x-2 lg:h-1/2 h-8 justify-center items-center border-black rounded-md  bg-gray-200">
                                 <p class="text-sm text-gray-800">Total Paid</p>
-                                <p class="text-sm text-gray-600">Rs. {{ number_format(collect(optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment)->sum('amount'), 2) }}
-</p>
+                                <p class="text-sm text-gray-600">Rs.
+                                    {{ number_format(collect(optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment)->sum('amount'), 2) }}
+                                </p>
                             </div>
                             @php
-                             $total_paid_amount=   collect(optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment)->sum('amount');
-                            $total_balance= optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->loan_amount-$total_paid_amount;
-                           @endphp
+                                $total_paid_amount = collect(
+                                    optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment,
+                                )->sum('amount');
+                                $total_balance =
+                                    optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->loan_amount -
+                                    $total_paid_amount;
+                            @endphp
                             <div
                                 class="w-full text-sm lg:text-xs flex space-x-2 lg:h-1/2 h-8 justify-center items-center  border-black rounded-md bg-gray-200">
                                 <p class="text-sm text-gray-800">Balance</p>
                                 <p class="text-sm text-gray-600">Rs. {{ number_format($total_balance, 2) }}
-</p>
+                                </p>
                             </div>
                         </div>
                     @endif
@@ -498,7 +510,8 @@
                                     <div class="mt-0 flex justify-between items-center text-xs">
                                         <div class="flex items-center space-x-2">
                                             <p class="text-gray-400">Amount</p>
-                                            <p class="font-medium text-gray-600">Rs. {{number_format( $installement->amount,2) }}</p>
+                                            <p class="font-medium text-gray-600">Rs.
+                                                {{ number_format($installement->amount, 2) }}</p>
                                         </div>
                                         <div class="flex items-center space-x-2">
                                             <p class="text-gray-400">Pay in Date</p>
@@ -528,7 +541,7 @@
                                                     <label for="amount" class="block text-xs font-medium">Amount
                                                         *</label>
                                                     @if ($installement->status == 'PAYED')
-                                                        <span>Rs. {{number_format( $installement->amount,2) }}</span>
+                                                        <span>Rs. {{ number_format($installement->amount, 2) }}</span>
                                                     @else
                                                         <input type="text" name="amount" id="amount"
                                                             class="w-2/3 mt-1 px-2 py-0.5 border rounded-md" required>
@@ -579,9 +592,8 @@
                                 <!-- Row -->
                                 @if ($member_details->loan->firstWhere('status', 'UNCOMPLETED'))
                                     @foreach (optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment as $installement)
-                                        <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details"
-                                            data-group-id="1" data-member-name="Group 01" data-members="04"
-                                            data-received="40000" data-center="Malwaragoda">
+                                        <tr
+                                            class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details">
                                             <td class="py-2 pl-4 text-left">Installment #
                                                 {{ $installement->installment_number }}
                                             </td>
@@ -632,18 +644,26 @@
             <div class="flex w-full justify-between">
                 <div class="w-2/3">
                     <div class="flex items-baseline space-x-2">
-                        <h1 id="memberNameShow" class="text-md font-medium text-gray-800 "></h1>
+                        <h1 id="memberNameShow" class="text-md font-medium text-gray-800 ">
+                            {{ capitalizeEachWord($member_details->full_name) }}</h1>
                         <!--Member Status-->
-                        <p id="activeMemberStatus" class="items-center">
-                            <span class="bg-green-400 p-0.5 px-1 rounded text-black text-xs">Active</span>
-                        </p>
-                        <p id="inactiveMemberStatus" class="items-center hidden">
-                            <span class="bg-red-400 p-0.5 px-1 rounded text-black text-xs">Inactive</span>
-                        </p>
+                        @if ($member_details->status === 'ACTIVE')
+                            <p id="activeMemberStatus" class="items-center">
+                                <span class="bg-green-400 p-0.5 px-1 rounded text-black text-xs">Active</span>
+                            </p>
+                        @elseif ($member_details->status === 'INACTIVE')
+                            <p id="inactiveMemberStatus" class="items-center ">
+                                <span class="bg-red-400 p-0.5 px-1 rounded text-black text-xs">Inactive</span>
+                            </p>
+                        @endif
+
+
                     </div>
-                    <h1 id="memberName" class="text-xs text-gray-600 mb-2"><span id="branchNameShow"></span> > <span
-                            id="centerNameShow"></span> >
-                        <span id="groupNameShow"></span>
+                    <h1 id="memberName" class="text-xs text-gray-600 mb-2"><span id="branchNameShow">
+                            {{ capitalizeEachWord($member_details->group->center->branch->branch_name) }}</span> > <span
+                            id="centerNameShow">{{ capitalizeEachWord($member_details->group->center->center_name) }}</span>
+                        >
+                        <span id="groupNameShow">{{ capitalizeEachWord($member_details->group->group_name) }}</span>
                     </h1>
                 </div>
                 <div class="flex justify-end w-1/3 h-8">
@@ -667,144 +687,33 @@
                     <!--Card Gri-->
                     <div class="grid grid-cols-1 gap-y-2">
                         <!--  Card -->
-                        <div class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm">
-                            <!-- Header Row -->
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-sm text-gray-600">laon # <span>1</span></p>
-                                </div>
-                                <p class="text-xs text-gray-600"></p>
-                            </div>
+                        @foreach ($member_details->loan as $loan)
+                            @if ($loan->status === 'COMPLETED')
+                                <div class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm">
+                                    <!-- Header Row -->
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex items-center space-x-2">
+                                            <p class="text-sm text-gray-600">laon # <span>{{ $loan->id }}</span></p>
+                                        </div>
+                                        <p class="text-xs text-gray-600">
+                                        </p>
+                                    </div>
 
-                            <!-- Sub Info -->
-                            <div class="mt-0 flex justify-between items-center text-xs">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Amount</p>
-                                    <p class="font-medium text-gray-600">2,000/=</p>
+                                    <!-- Sub Info -->
+                                    <div class="mt-0 flex justify-between items-center text-xs">
+                                        <div class="flex items-center space-x-2">
+                                            <p class="text-gray-400">Amount</p>
+                                            <p class="font-medium text-gray-600">Rs.
+                                                {{ number_format($loan->loan_amount, 2) }}</p>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <p class="text-gray-400">Complete Date</p>
+                                            <p class="font-medium text-gray-600">{{ $loan->completed_date }}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Complete Date</p>
-                                    <p class="font-medium text-gray-600">3/25/2025</p>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!--  Card -->
-                        <div class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm">
-                            <!-- Header Row -->
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-sm text-gray-600">laon # <span>2</span></p>
-                                </div>
-                                <p class="text-xs text-gray-600"></p>
-                            </div>
-
-                            <!-- Sub Info -->
-                            <div class="mt-0 flex justify-between items-center text-xs">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Amount</p>
-                                    <p class="font-medium text-gray-600">2,000/=</p>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Complete Date</p>
-                                    <p class="font-medium text-gray-600">3/25/2025</p>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!--  Card -->
-                        <div class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm">
-                            <!-- Header Row -->
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-sm text-gray-600">laon # <span>3</span></p>
-                                </div>
-                                <p class="text-xs text-gray-600"></p>
-                            </div>
-
-                            <!-- Sub Info -->
-                            <div class="mt-0 flex justify-between items-center text-xs">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Amount</p>
-                                    <p class="font-medium text-gray-600">2,000/=</p>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Complete Date</p>
-                                    <p class="font-medium text-gray-600">3/25/2025</p>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!--  Card -->
-                        <div class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm">
-                            <!-- Header Row -->
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-sm text-gray-600">laon # <span>4</span></p>
-                                </div>
-                                <p class="text-xs text-gray-600"></p>
-                            </div>
-
-                            <!-- Sub Info -->
-                            <div class="mt-0 flex justify-between items-center text-xs">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Amount</p>
-                                    <p class="font-medium text-gray-600">2,000/=</p>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Complete Date</p>
-                                    <p class="font-medium text-gray-600">3/25/2025</p>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!--  Card -->
-                        <div class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm">
-                            <!-- Header Row -->
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-sm text-gray-600">laon # <span>4</span></p>
-                                </div>
-                                <p class="text-xs text-gray-600"></p>
-                            </div>
-
-                            <!-- Sub Info -->
-                            <div class="mt-0 flex justify-between items-center text-xs">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Amount</p>
-                                    <p class="font-medium text-gray-600">2,000/=</p>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Complete Date</p>
-                                    <p class="font-medium text-gray-600">3/25/2025</p>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!--  Card -->
-                        <div class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm">
-                            <!-- Header Row -->
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-sm text-gray-600">laon # <span>4</span></p>
-                                </div>
-                                <p class="text-xs text-gray-600"></p>
-                            </div>
-
-                            <!-- Sub Info -->
-                            <div class="mt-0 flex justify-between items-center text-xs">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Amount</p>
-                                    <p class="font-medium text-gray-600">2,000/=</p>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Complete Date</p>
-                                    <p class="font-medium text-gray-600">3/25/2025</p>
-                                </div>
-                            </div>
-
-                        </div>
-
+                            @endif
+                        @endforeach
 
                     </div>
                 </div>
@@ -819,372 +728,87 @@
                 <!-- Installment Cards -->
                 <div class="w-full text-sm lg:text-xs p-4 m-0 pt-0 ">
                     <div class="grid grid-cols-1 gap-y-2">
-                        <!-- Main Card -->
-                        <div class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm">
-                            <!-- Header Row -->
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-sm text-gray-600">Installment # <span>7</span></p>
-                                    <button class="toggle-details-btn p-1 rounded hover:bg-sky-200">
-                                        <img src="{{ asset('assets/icons/CaretDown.svg') }}" alt="Toggle"
-                                            class="h-3 w-3 transform transition-transform">
-                                    </button>
-                                </div>
-                                <p class="text-xs text-gray-600">3/25/2025 - 10:55AM</p>
-                            </div>
 
-                            <!-- Sub Info -->
-                            <div class="mt-0 flex justify-between items-center text-xs">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Amount</p>
-                                    <p class="font-medium text-gray-600">2,000/=</p>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Pay in Date</p>
-                                    <p class="text-xs font-medium p-0.5 bg-yellow-500 rounded px-1">Pending</p>
-                                </div>
-                            </div>
-
-                            <!-- Collapsible Section -->
-                            <div class="installment-details mt-2 hidden border-t border-gray-600 pt-2">
-                                <div class="grid gap-3">
-                                    <!-- Amount -->
+                        @if ($member_details->loan->firstWhere('status', 'UNCOMPLETED'))
+                            @foreach (optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment as $installement)
+                                <div class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm">
+                                    <!-- Header Row -->
                                     <div class="flex justify-between items-center">
-                                        <label for="amount" class="block text-xs font-medium">Amount *</label>
-                                        <input type="number" name="amount" id="amount"
-                                            class="w-2/3 mt-1 px-3 py-1 border rounded-md">
-                                    </div>
-
-                                    <!-- Date and File -->
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                        <div>
-                                            <label for="payDate" class="block text-xs font-medium">Date *</label>
-                                            <input type="date" name="payDate" id="payDate"
-                                                class="w-full mt-1 px-3 py-1.5 border rounded-md">
+                                        <div class="flex items-center space-x-2">
+                                            <p class="text-sm text-gray-600">Installment #
+                                                <span>{{ $installement->installment_number }}</span>
+                                            </p>
+                                            <button class="toggle-details-btn p-1 rounded hover:bg-sky-200">
+                                                <img src="{{ asset('assets/icons/CaretDown.svg') }}" alt="Toggle"
+                                                    class="h-3 w-3 transform transition-transform">
+                                            </button>
                                         </div>
-                                        <div>
-                                            <label for="bill" class="block text-xs font-medium">Attach
-                                                Bill</label>
-                                            <input type="file" name="bill" id="bill"
-                                                class="w-full mt-1 px-2 py-1 border rounded-md text-sm bg-white">
+                                        <p class="text-xs text-gray-600">{{ $installement->payed_date }}</p>
+                                    </div>
+
+                                    <!-- Sub Info -->
+                                    <div class="mt-0 flex justify-between items-center text-xs">
+                                        <div class="flex items-center space-x-2">
+                                            <p class="text-gray-400">Amount</p>
+                                            <p class="font-medium text-gray-600">Rs.
+                                                {{ number_format($installement->amount, 2) }}</p>
                                         </div>
-                                    </div>
+                                        <div class="flex items-center space-x-2">
+                                            <p class="text-gray-400">Pay in Date</p>
+                                            @if ($installement->pay_in_date)
+                                                <p class="text-xs font-medium p-0.5 bg-green-500 rounded px-1">Yes</p>
+                                            @else
+                                                @if (\Carbon\Carbon::parse($installement->date_and_time)->lt(now()))
+                                                    <p class="text-xs font-medium p-0.5 bg-red-500 rounded px-1">No</p>
+                                                @else
+                                                    <p class="text-xs font-medium p-0.5 bg-yellow-500 rounded px-1">Pending
+                                                    </p>
+                                                @endif
+                                            @endif
 
-                                    <!-- Buttons -->
-                                    <div class="flex justify-end space-x-2 mt-3">
-                                        <button type="button"
-                                            class="cancel-btn bg-gray-300 text-black px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
-                                        <button type="submit"
-                                            class="save-btn bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Main Card -->
-                        <div class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm">
-                            <!-- Header Row -->
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-sm text-gray-600">Installment # <span>7</span></p>
-                                    <button class="toggle-details-btn p-1 rounded hover:bg-sky-200">
-                                        <img src="{{ asset('assets/icons/CaretDown.svg') }}" alt="Toggle"
-                                            class="h-3 w-3 transform transition-transform">
-                                    </button>
-                                </div>
-                                <p class="text-xs text-gray-600">3/25/2025 - 10:55AM</p>
-                            </div>
-
-                            <!-- Sub Info -->
-                            <div class="mt-0 flex justify-between items-center text-xs">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Amount</p>
-                                    <p class="font-medium text-gray-600">2,000/=</p>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Pay in Date</p>
-                                    <p class="text-xs font-medium p-0.5 bg-yellow-500 rounded px-1">Pending</p>
-                                </div>
-                            </div>
-
-                            <!-- Collapsible Section -->
-                            <div class="installment-details mt-2 hidden border-t border-gray-600 pt-2">
-                                <div class="grid gap-3">
-                                    <!-- Amount -->
-                                    <div class="flex justify-between items-center">
-                                        <label for="amount" class="block text-xs font-medium">Amount *</label>
-                                        <input type="number" name="amount" id="amount"
-                                            class="w-2/3 mt-1 px-3 py-1 border rounded-md">
-                                    </div>
-
-                                    <!-- Date and File -->
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                        <div>
-                                            <label for="payDate" class="block text-xs font-medium">Date *</label>
-                                            <input type="date" name="payDate" id="payDate"
-                                                class="w-full mt-1 px-3 py-1.5 border rounded-md">
-                                        </div>
-                                        <div>
-                                            <label for="bill" class="block text-xs font-medium">Attach
-                                                Bill</label>
-                                            <input type="file" name="bill" id="bill"
-                                                class="w-full mt-1 px-2 py-1 border rounded-md text-sm bg-white">
                                         </div>
                                     </div>
 
-                                    <!-- Buttons -->
-                                    <div class="flex justify-end space-x-2 mt-3">
-                                        <button type="button"
-                                            class="cancel-btn bg-gray-300 text-black px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
-                                        <button type="submit"
-                                            class="save-btn bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Main Card -->
-                        <div class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm">
-                            <!-- Header Row -->
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-sm text-gray-600">Installment # <span>7</span></p>
-                                    <button class="toggle-details-btn p-1 rounded hover:bg-sky-200">
-                                        <img src="{{ asset('assets/icons/CaretDown.svg') }}" alt="Toggle"
-                                            class="h-3 w-3 transform transition-transform">
-                                    </button>
-                                </div>
-                                <p class="text-xs text-gray-600">3/25/2025 - 10:55AM</p>
-                            </div>
+                                    <!-- Collapsible Section -->
+                                    <div class="installment-details mt-2 hidden border-t border-gray-600 pt-2">
+                                        <div class="grid gap-3">
+                                            <!-- Amount -->
+                                            <div class="flex justify-between items-center">
+                                                <label for="amount" class="block text-xs font-medium">Amount *</label>
+                                                @if ($installement->status=='PAYED')
+                                                    <p>Rs. {{ number_format($installement->amount, 2) }}</p>
+                                                @else
+                                                    <input type="text" name="amount" id="amount"
+                                                        class="w-2/3 mt-1 px-3 py-1 border rounded-md">
+                                                @endif
+                                            </div>
 
-                            <!-- Sub Info -->
-                            <div class="mt-0 flex justify-between items-center text-xs">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Amount</p>
-                                    <p class="font-medium text-gray-600">2,000/=</p>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Pay in Date</p>
-                                    <p class="text-xs font-medium p-0.5 bg-yellow-500 rounded px-1">Pending</p>
-                                </div>
-                            </div>
+                                            <!-- Date and File -->
+                                            <div class="flex justify-between items-center">
+                                                <label for="bill" class="block text-xs font-medium">Attach
+                                                    Bill</label>
+                                                @if ($installement->status=='PAYED')
+                                                    <p></p>
+                                                @else
+                                                    <input type="file" name="bill" id="bill"
+                                                        class="w-full mt-1 px-2 py-1 border rounded-md text-sm bg-white">
+                                                @endif
+                                            </div>
 
-                            <!-- Collapsible Section -->
-                            <div class="installment-details mt-2 hidden border-t border-gray-600 pt-2">
-                                <div class="grid gap-3">
-                                    <!-- Amount -->
-                                    <div class="flex justify-between items-center">
-                                        <label for="amount" class="block text-xs font-medium">Amount *</label>
-                                        <input type="number" name="amount" id="amount"
-                                            class="w-2/3 mt-1 px-3 py-1 border rounded-md">
-                                    </div>
-
-                                    <!-- Date and File -->
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                        <div>
-                                            <label for="payDate" class="block text-xs font-medium">Date *</label>
-                                            <input type="date" name="payDate" id="payDate"
-                                                class="w-full mt-1 px-3 py-1.5 border rounded-md">
-                                        </div>
-                                        <div>
-                                            <label for="bill" class="block text-xs font-medium">Attach
-                                                Bill</label>
-                                            <input type="file" name="bill" id="bill"
-                                                class="w-full mt-1 px-2 py-1 border rounded-md text-sm bg-white">
+                                            <!-- Buttons -->
+                                             @if ($installement->status=='UNPAYED')
+                                            <div class="flex justify-end space-x-2 mt-3">
+                                                <button type="button"
+                                                    class="cancel-btn bg-gray-300 text-black px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
+                                                <button type="submit"
+                                                    class="save-btn bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
+                                            </div>
+                                            @endif
                                         </div>
                                     </div>
-
-                                    <!-- Buttons -->
-                                    <div class="flex justify-end space-x-2 mt-3">
-                                        <button type="button"
-                                            class="cancel-btn bg-gray-300 text-black px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
-                                        <button type="submit"
-                                            class="save-btn bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
-                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <!-- Main Card -->
-                        <div class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm">
-                            <!-- Header Row -->
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-sm text-gray-600">Installment # <span>7</span></p>
-                                    <button class="toggle-details-btn p-1 rounded hover:bg-sky-200">
-                                        <img src="{{ asset('assets/icons/CaretDown.svg') }}" alt="Toggle"
-                                            class="h-3 w-3 transform transition-transform">
-                                    </button>
-                                </div>
-                                <p class="text-xs text-gray-600">3/25/2025 - 10:55AM</p>
-                            </div>
-
-                            <!-- Sub Info -->
-                            <div class="mt-0 flex justify-between items-center text-xs">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Amount</p>
-                                    <p class="font-medium text-gray-600">2,000/=</p>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Pay in Date</p>
-                                    <p class="text-xs font-medium p-0.5 bg-green-500 rounded px-1">Yes</p>
-                                </div>
-                            </div>
-
-                            <!-- Collapsible Section -->
-                            <div class="installment-details mt-2 hidden border-t border-gray-600 pt-2">
-                                <div class="grid gap-3">
-                                    <!-- Amount -->
-                                    <div class="flex justify-between items-center">
-                                        <label for="amount" class="block text-xs font-medium">Amount *</label>
-                                        <input type="number" name="amount" id="amount"
-                                            class="w-2/3 mt-1 px-3 py-1 border rounded-md">
-                                    </div>
-
-                                    <!-- Date and File -->
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                        <div>
-                                            <label for="payDate" class="block text-xs font-medium">Date *</label>
-                                            <input type="date" name="payDate" id="payDate"
-                                                class="w-full mt-1 px-3 py-1.5 border rounded-md">
-                                        </div>
-                                        <div>
-                                            <label for="bill" class="block text-xs font-medium">Attach
-                                                Bill</label>
-                                            <input type="file" name="bill" id="bill"
-                                                class="w-full mt-1 px-2 py-1 border rounded-md text-sm bg-white">
-                                        </div>
-                                    </div>
-
-                                    <!-- Buttons -->
-                                    <div class="flex justify-end space-x-2 mt-3">
-                                        <button type="button"
-                                            class="cancel-btn bg-gray-300 text-black px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
-                                        <button type="submit"
-                                            class="save-btn bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Main Card -->
-                        <div class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm">
-                            <!-- Header Row -->
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-sm text-gray-600">Installment # <span>7</span></p>
-                                    <button class="toggle-details-btn p-1 rounded hover:bg-sky-200">
-                                        <img src="{{ asset('assets/icons/CaretDown.svg') }}" alt="Toggle"
-                                            class="h-3 w-3 transform transition-transform">
-                                    </button>
-                                </div>
-                                <p class="text-xs text-gray-600">3/25/2025 - 10:55AM</p>
-                            </div>
-
-                            <!-- Sub Info -->
-                            <div class="mt-0 flex justify-between items-center text-xs">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Amount</p>
-                                    <p class="font-medium text-gray-600">2,000/=</p>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Pay in Date</p>
-                                    <p class="text-xs font-medium p-0.5 bg-red-500 rounded px-1">No</p>
-                                </div>
-                            </div>
-
-                            <!-- Collapsible Section -->
-                            <div class="installment-details mt-2 hidden border-t border-gray-600 pt-2">
-                                <div class="grid gap-3">
-                                    <!-- Amount -->
-                                    <div class="flex justify-between items-center">
-                                        <label for="amount" class="block text-xs font-medium">Amount *</label>
-                                        <input type="number" name="amount" id="amount"
-                                            class="w-2/3 mt-1 px-3 py-1 border rounded-md">
-                                    </div>
-
-                                    <!-- Date and File -->
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                        <div>
-                                            <label for="payDate" class="block text-xs font-medium">Date *</label>
-                                            <input type="date" name="payDate" id="payDate"
-                                                class="w-full mt-1 px-3 py-1.5 border rounded-md">
-                                        </div>
-                                        <div>
-                                            <label for="bill" class="block text-xs font-medium">Attach
-                                                Bill</label>
-                                            <input type="file" name="bill" id="bill"
-                                                class="w-full mt-1 px-2 py-1 border rounded-md text-sm bg-white">
-                                        </div>
-                                    </div>
-
-                                    <!-- Buttons -->
-                                    <div class="flex justify-end space-x-2 mt-3">
-                                        <button type="button"
-                                            class="cancel-btn bg-gray-300 text-black px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
-                                        <button type="submit"
-                                            class="save-btn bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Main Card -->
-                        <div class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm">
-                            <!-- Header Row -->
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-sm text-gray-600">Installment # <span>7</span></p>
-                                    <button class="toggle-details-btn p-1 rounded hover:bg-sky-200">
-                                        <img src="{{ asset('assets/icons/CaretDown.svg') }}" alt="Toggle"
-                                            class="h-3 w-3 transform transition-transform">
-                                    </button>
-                                </div>
-                                <p class="text-xs text-gray-600">3/25/2025 - 10:55AM</p>
-                            </div>
-
-                            <!-- Sub Info -->
-                            <div class="mt-0 flex justify-between items-center text-xs">
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Amount</p>
-                                    <p class="font-medium text-gray-600">2,000/=</p>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <p class="text-gray-400">Pay in Date</p>
-                                    <p class="text-xs font-medium p-0.5 bg-yellow-500 rounded px-1">Pending</p>
-                                </div>
-                            </div>
-
-                            <!-- Collapsible Section -->
-                            <div class="installment-details mt-2 hidden border-t border-gray-600 pt-2">
-                                <div class="grid gap-3">
-                                    <!-- Amount -->
-                                    <div class="flex justify-between items-center">
-                                        <label for="amount" class="block text-xs font-medium">Amount *</label>
-                                        <input type="number" name="amount" id="amount"
-                                            class="w-2/3 mt-1 px-3 py-1 border rounded-md">
-                                    </div>
-
-                                    <!-- Date and File -->
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                        <div>
-                                            <label for="payDate" class="block text-xs font-medium">Date *</label>
-                                            <input type="date" name="payDate" id="payDate"
-                                                class="w-full mt-1 px-3 py-1.5 border rounded-md">
-                                        </div>
-                                        <div>
-                                            <label for="bill" class="block text-xs font-medium">Attach
-                                                Bill</label>
-                                            <input type="file" name="bill" id="bill"
-                                                class="w-full mt-1 px-2 py-1 border rounded-md text-sm bg-white">
-                                        </div>
-                                    </div>
-
-                                    <!-- Buttons -->
-                                    <div class="flex justify-end space-x-2 mt-3">
-                                        <button type="button"
-                                            class="cancel-btn bg-gray-300 text-black px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
-                                        <button type="submit"
-                                            class="save-btn bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            @endforeach
+                        @endif
 
                     </div>
                 </div>
@@ -1307,36 +931,54 @@
                     RowDetails.classList.add('lg:flex');
 
                     // Update second column content with data from the row
-                    const memberName = row.getAttribute('data-member-name');
-                    const centerName = row.getAttribute('data-center');
+                    /*  const memberName = row.getAttribute('data-member-name');
+                     const branchName = row.getAttribute('data-branch');
+                     const groupName = row.getAttribute('data-group');
+                     const centerName = row.getAttribute('data-center');
+                     const memberObject = JSON.parse(row.getAttribute('data-memberObject')); */
                     // Mock data for demonstration (replace with actual data fetching if needed)
-                    const mockMemberData = {
-                        mobile_number_1: '0712345678',
-                        mobile_number_2: '0778765432',
-                        nic_number: '154782452v',
-                        address: '123, Main Street, Balangoda',
-                        group: {
-                            group_name: row.getAttribute('data-member-name')
-                        },
-                        branch_name: 'Balangoda'
-                    };
 
-                    document.getElementById('memberNameShow').textContent = memberName;
-                    document.getElementById('branchNameShow').textContent = mockMemberData
-                        .branch_name;
+                    /* document.getElementById('memberNameShow').textContent = memberName;
+                    document.getElementById('branchNameShow').textContent = branchName;
                     document.getElementById('centerNameShow').textContent = centerName;
-                    document.getElementById('groupNameShow').textContent = mockMemberData.group
-                        .group_name;
-                    document.getElementById('phonenum01').textContent = mockMemberData
-                        .mobile_number_1;
-                    document.getElementById('phonenum02').textContent = mockMemberData
-                        .mobile_number_2;
-                    document.getElementById('nicNumberShow').textContent = mockMemberData
-                        .nic_number;
-                    document.getElementById('memberAddressShow').textContent = mockMemberData
-                        .address;
+                    document.getElementById('groupNameShow').textContent = groupName;
+                    if (memberObject.status === 'INACTIVE') {
+                        document.getElementById('activeMemberStatus').classList.add('hidden');
+                        document.getElementById('inactiveMemberStatus').classList.remove('hidden');
+                    } */
                 });
             });
+            const viewPreviousLoanBtn = document.getElementById('ViewPreviousLoan');
+            viewPreviousLoanBtn.addEventListener('click', (e) => {
+
+                const RowDetails = document.getElementById('RowDetails');
+                const firstColumn = document.getElementById('firstColumn');
+
+                // Hide other columns and show RowDetails
+                hideAllSecondColumns();
+                RowDetails.classList.remove('hidden');
+                firstColumn.classList.remove('lg:w-full');
+                firstColumn.classList.add('lg:w-8/12');
+                RowDetails.classList.add('lg:flex');
+
+                // Update second column content with data from the row
+                /* const memberName = row.getAttribute('data-member-name');
+                const branchName = row.getAttribute('data-branch');
+                const groupName = row.getAttribute('data-group');
+                const centerName = row.getAttribute('data-center');
+                const memberObject = JSON.parse(row.getAttribute('data-memberObject')); */
+                // Mock data for demonstration (replace with actual data fetching if needed)
+
+                /*  document.getElementById('memberNameShow').textContent = memberName;
+                 document.getElementById('branchNameShow').textContent = branchName;
+                 document.getElementById('centerNameShow').textContent = centerName;
+                 document.getElementById('groupNameShow').textContent = groupName;
+                 if (memberObject.status === 'INACTIVE') {
+                     document.getElementById('activeMemberStatus').classList.add('hidden');
+                     document.getElementById('inactiveMemberStatus').classList.remove('hidden');
+                 } */
+            });
+
         });
 
         document.addEventListener('click', function(event) {
@@ -1392,31 +1034,31 @@
             }
         });
 
-         //Loan
-    document.getElementById('addLoanButton').addEventListener('click', () => {
-        if (window.innerWidth >= 1024) {
-            document.getElementById('addLoanModal').classList.remove('hidden');
-            document.getElementById('addLoanModal').classList.add('flex');
+        //Loan
+        document.getElementById('addLoanButton').addEventListener('click', () => {
+            if (window.innerWidth >= 1024) {
+                document.getElementById('addLoanModal').classList.remove('hidden');
+                document.getElementById('addLoanModal').classList.add('flex');
 
-            // Optional: Adjust layout if you're using side-by-side columns
-            const loansColumn = document.getElementById('loansColumn');
-            const firstColumn = document.getElementById('firstColumn');
-            if (loansColumn && firstColumn) {
-                loansColumn.classList.remove('hidden');
-                firstColumn.classList.remove('lg:w-full');
-                firstColumn.classList.add('lg:w-8/12');
-                loansColumn.classList.add('lg:flex');
+                // Optional: Adjust layout if you're using side-by-side columns
+                const loansColumn = document.getElementById('loansColumn');
+                const firstColumn = document.getElementById('firstColumn');
+                if (loansColumn && firstColumn) {
+                    loansColumn.classList.remove('hidden');
+                    firstColumn.classList.remove('lg:w-full');
+                    firstColumn.classList.add('lg:w-8/12');
+                    loansColumn.classList.add('lg:flex');
+                }
+            } else {
+                document.getElementById('addLoanModal').classList.remove('hidden');
+                document.getElementById('addLoanModal').classList.add('flex');
             }
-        } else {
-            document.getElementById('addLoanModal').classList.remove('hidden');
-            document.getElementById('addLoanModal').classList.add('flex');
-        }
-    });
+        });
 
-    document.getElementById('cancelLoan').addEventListener('click', () => {
-        document.getElementById('addLoanModal').classList.add('hidden');
-        document.getElementById('addLoanModal').classList.remove('flex');
-    });
+        document.getElementById('cancelLoan').addEventListener('click', () => {
+            document.getElementById('addLoanModal').classList.add('hidden');
+            document.getElementById('addLoanModal').classList.remove('flex');
+        });
     </script>
 
     <style>

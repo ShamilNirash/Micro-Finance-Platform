@@ -27,7 +27,8 @@ class Loan extends Model
         'interest_rate',
         'loan_amount',
         'status',
-        'member_id'
+        'member_id',
+        'completed_date'
     ];
     function member()
     {

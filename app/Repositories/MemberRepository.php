@@ -68,7 +68,7 @@ class MemberRepository
     public function get_all()
     {
         try {
-            return $this->members->where(['status' => 'ACTIVE'])->with('group.center.branch', 'loan.installment')->get();
+            return $this->members->whereIn('status', ['INACTIVE', 'ACTIVE'])->with('group.center.branch', 'loan.installment')->get();
         } catch (\Exception $e) {
             return $e;
         }
