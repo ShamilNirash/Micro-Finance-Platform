@@ -468,7 +468,16 @@
     <!-- Second Column: Row Details -->
     <div id="RowDetails" class="hidden h-full lg:w-4/12 flex-col justify-between transition-all duration-300">
         <div id="RowDetailsContent" class="border-b p-4">
-            <h1 id="memberNameSlideBar" class="text-md font-medium text-gray-800 mb-1">--</h1>
+            <div class="flex items-baseline space-x-2">
+                <h1 id="memberNameSlideBar" class="text-md font-medium text-gray-800 mb-1">--</h1>
+                <p id="activeMemberStatus" class="items-center">
+                    <span class="bg-green-400 p-0.5 px-1 rounded text-black text-xs">Active</span>
+                </p>
+                <p id="inactiveMemberStatus" class="items-center hidden">
+                    <span class="bg-red-400 p-0.5 px-1 rounded text-black text-xs">Inactive</span>
+                </p>
+            </div>
+
             <h1 id="memberName" class="text-xs text-gray-600 mb-4"><span id="branchNameSlideBar">--</span> > <span
                     id="centerNameSlideBar">--</span> >
                 <span id="groupNameSlideBar">--</span>
@@ -659,6 +668,18 @@
                 const memberObject = JSON.parse(row.getAttribute('data-member-object'));
                 console.log(memberObject.address);
                 select_member_id = memberObject.id;
+                if (memberObject.status === 'INACTIVE') {
+                    document.getElementById('activeMemberStatus').classList.add('hidden');
+                    document.getElementById('inactiveMemberStatus').classList.remove('hidden');
+                    document.getElementById('addLoanButton').classList.remove('hidden');
+
+                }
+                if (memberObject.status === 'ACTIVE') {
+                    document.getElementById('activeMemberStatus').classList.remove('hidden');
+                    document.getElementById('inactiveMemberStatus').classList.add('hidden');
+                    document.getElementById('addLoanButton').classList.add('hidden');
+                }
+
                 document.getElementById('memberNameSlideBar').textContent = member_name;
                 document
                     .getElementById('branchNameSlideBar').textContent = branch_name;
