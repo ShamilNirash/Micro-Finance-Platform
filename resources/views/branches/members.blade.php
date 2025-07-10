@@ -161,73 +161,80 @@
 
             </div>
 
-                    <!-- Add New Loan Modal -->
-        <div id="addLoanModal"
-            class="inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center lg:absolute z-50 fixed p-4 pb-0"
-            style="width: 100%; height: 100%;">
-            <div class="bg-white shadow-xl w-full max-w-3xl rounded-lg">
-                <h2 class="text-md bg-blue-100 rounded-t-lg p-4 font-">Add new Loan (Member Name)</h2>
-                <form action="#" method="POST" enctype="multipart/form-data">
-                    <div class="bg-white rounded-b-lg p-4 space-y-2 pb-0">
-                        <div class="grid grid-cols-1 gap-1">
-                            <div>
-                                <label class="block text-xs text-gray-500 mb-1 ml-1">Loan Amount*</label>
-                                <input type="number" placeholder="10 000" class="w-full p-2 border rounded-lg text-sm" required>
-                            </div>
-                            <div class="grid grid-cols-2 md:grid-cols-2 gap-2">
+            <!-- Add New Loan Modal -->
+            <div id="addLoanModal"
+                class="inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center lg:absolute z-50 fixed p-4 pb-0"
+                style="width: 100%; height: 100%;">
+                <div class="bg-white shadow-xl w-full max-w-3xl rounded-lg">
+                    <h2 class="text-md bg-blue-100 rounded-t-lg p-4 font-">Add new Loan (Member Name)</h2>
+                    <form action="#" method="POST" enctype="multipart/form-data">
+                        <div class="bg-white rounded-b-lg p-4 space-y-2 pb-0">
+                            <div class="grid grid-cols-1 gap-1">
                                 <div>
-                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Interest Rate*</label>
-                                    <input type="text" placeholder="10%" class="w-full p-2 border rounded-lg text-sm" required>
+                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Loan Amount*</label>
+                                    <input type="number" placeholder="10 000"
+                                        class="w-full p-2 border rounded-lg text-sm" required>
                                 </div>
-                                <div>
-                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Interest</label>
-                                    <input type="number" placeholder="1 000" class="w-full p-2 border rounded-lg text-sm">
+                                <div class="grid grid-cols-2 md:grid-cols-2 gap-2">
+                                    <div>
+                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Interest Rate*</label>
+                                        <input type="text" placeholder="10%"
+                                            class="w-full p-2 border rounded-lg text-sm" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Interest</label>
+                                        <input type="number" placeholder="1 000"
+                                            class="w-full p-2 border rounded-lg text-sm">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Terms*</label>
+                                        <input type="number" placeholder="18"
+                                            class="w-full p-2 border rounded-lg text-sm" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Installment*</label>
+                                        <input type="number" placeholder="12 000"
+                                            class="w-full p-2 border rounded-lg text-sm" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Issue Date*</label>
+                                        <input type="date" class="w-full p-2 border rounded-lg text-sm" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Document Charges*</label>
+                                        <input type="text" placeholder="Type"
+                                            class="w-full p-2 border rounded-lg text-sm" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Image*</label>
+                                        <input type="file" class="w-full p-2 border rounded-lg text-sm" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Image</label>
+                                        <input type="file" class="w-full p-2 border rounded-lg text-sm">
+                                    </div>
                                 </div>
-                                <div>
-                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Terms*</label>
-                                    <input type="number" placeholder="18" class="w-full p-2 border rounded-lg text-sm" required>
-                                </div>
-                                <div>
-                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Installment*</label>
-                                    <input type="number" placeholder="12 000" class="w-full p-2 border rounded-lg text-sm" required>
-                                </div>
-                                <div>
-                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Issue Date*</label>
-                                    <input type="date" class="w-full p-2 border rounded-lg text-sm" required>
-                                </div>
-                                <div>
-                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Document Charges*</label>
-                                    <input type="text" placeholder="Type" class="w-full p-2 border rounded-lg text-sm" required>
-                                </div>
-                                <div>
-                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Image*</label>
-                                    <input type="file" class="w-full p-2 border rounded-lg text-sm" required>
-                                </div>
-                                <div>
-                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Image</label>
-                                    <input type="file" class="w-full p-2 border rounded-lg text-sm">
-                                </div>
-                            </div>
 
-                            <div>
-                                <label class="block text-xs text-gray-500 mb-1 ml-1">Guarantor*</label>
-                                <input type="text" placeholder="Type" class="w-full p-2 border rounded-lg text-sm" required>
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1 ml-1">Guarantor*</label>
+                                    <input type="text" placeholder="Type" class="w-full p-2 border rounded-lg text-sm"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="flex justify-end space-x-4 pt-2">
+                                <button id="cancelLoan" type="button"
+                                    class="px-6 py-1 bg-gray-300 rounded-lg hover:bg-gray-400 focus:outline-none text-sm">
+                                    Cancel
+                                </button>
+                                <button type="submit"
+                                    class="px-6 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none text-sm">
+                                    Create
+                                </button>
                             </div>
                         </div>
-                        <div class="flex justify-end space-x-4 pt-2">
-                            <button id="cancelLoan" type="button"
-                                class="px-6 py-1 bg-gray-300 rounded-lg hover:bg-gray-400 focus:outline-none text-sm">
-                                Cancel
-                            </button>
-                            <button type="submit"
-                                class="px-6 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none text-sm">
-                                Create
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
 
 
             <!-- Tab Navigation -->
@@ -339,9 +346,9 @@
                                 <thead class="w-full text-gray-700 text-xs font-light bg-gray-100 sticky top-0">
                                     <tr class="uppercase w-full">
                                         <!--<th class="pl-2 text-left">
-                                                                                                                                                        <input type="checkbox" id="select-all"
-                                                                                                                                                            class="form-checkbox h-4 w-4 text-blue-400 m-1">
-                                                                                                                                                    </th>-->
+                                                                                                                                                            <input type="checkbox" id="select-all"
+                                                                                                                                                                class="form-checkbox h-4 w-4 text-blue-400 m-1">
+                                                                                                                                                        </th>-->
                                         <th class="py-2 text-center">#</th>
                                         <th class="py-2 text-left">Name</th>
                                         <th class="py-2 text-left">Center</th>
@@ -360,9 +367,9 @@
                                             data-member_id='{{ $member->nic_number }}' data-loan-balance="20000"
                                             data-member='@json($member)'>
                                             <!--<td class="pl-2 text-left">
-                                                                                                                                                            <input type="checkbox" name="selected_ids[]" value="1"
-                                                                                                                                                                class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                                                                                                                                        </td>-->
+                                                                                                                                                                <input type="checkbox" name="selected_ids[]" value="1"
+                                                                                                                                                                    class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                                                                                                                                                            </td>-->
                                             <td class="py-2 text-center">{{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
                                             </td>
                                             <td class="py-2 text-left">{{ capitalizeEachWord($member->full_name) }}</td>
@@ -817,6 +824,17 @@
                 document.getElementById('phonenum02').textContent = memberData.mobile_number_2;
                 document.getElementById('nicNumberShow').textContent = memberData.nic_number;
                 document.getElementById('memberAddressShow').textContent = memberData.address;
+
+                if (memberData.status === 'INACTIVE') {
+                    document.getElementById('activeMemberStatus').classList.add('hidden');
+                    document.getElementById('inactiveMemberStatus').classList.remove('hidden');
+
+                }
+                if (memberData.status === 'ACTIVE') {
+                    document.getElementById('activeMemberStatus').classList.remove('hidden');
+                    document.getElementById('inactiveMemberStatus').classList.add('hidden');
+
+                }
                 const uncompletedLoan = memberData.loan.find(loan => loan.status === 'UNCOMPLETED');
                 console.log(uncompletedLoan);
                 document.getElementById('LoanAmountSlideBar').textContent =
@@ -870,7 +888,7 @@
                             statusLabel =
                                 `<p class="text-xs font-medium p-0.5 bg-yellow-500 rounded px-1">Pending</p>`;
                         } else {
-                            if (installment.pay_in_time == 1) {
+                            if (installment.pay_in_date == 1) {
                                 statusLabel =
                                     `<p class="text-xs font-medium p-0.5 bg-green-500 rounded px-1">Yes</p>`;
                             } else {
@@ -1116,30 +1134,30 @@
         }
 
         //Loan
-    document.getElementById('addLoanButton').addEventListener('click', () => {
-        if (window.innerWidth >= 1024) {
-            document.getElementById('addLoanModal').classList.remove('hidden');
-            document.getElementById('addLoanModal').classList.add('flex');
+        document.getElementById('addLoanButton').addEventListener('click', () => {
+            if (window.innerWidth >= 1024) {
+                document.getElementById('addLoanModal').classList.remove('hidden');
+                document.getElementById('addLoanModal').classList.add('flex');
 
-            // Optional: Adjust layout if you're using side-by-side columns
-            const loansColumn = document.getElementById('loansColumn');
-            const firstColumn = document.getElementById('firstColumn');
-            if (loansColumn && firstColumn) {
-                loansColumn.classList.remove('hidden');
-                firstColumn.classList.remove('lg:w-full');
-                firstColumn.classList.add('lg:w-8/12');
-                loansColumn.classList.add('lg:flex');
+                // Optional: Adjust layout if you're using side-by-side columns
+                const loansColumn = document.getElementById('loansColumn');
+                const firstColumn = document.getElementById('firstColumn');
+                if (loansColumn && firstColumn) {
+                    loansColumn.classList.remove('hidden');
+                    firstColumn.classList.remove('lg:w-full');
+                    firstColumn.classList.add('lg:w-8/12');
+                    loansColumn.classList.add('lg:flex');
+                }
+            } else {
+                document.getElementById('addLoanModal').classList.remove('hidden');
+                document.getElementById('addLoanModal').classList.add('flex');
             }
-        } else {
-            document.getElementById('addLoanModal').classList.remove('hidden');
-            document.getElementById('addLoanModal').classList.add('flex');
-        }
-    });
+        });
 
-    document.getElementById('cancelLoan').addEventListener('click', () => {
-        document.getElementById('addLoanModal').classList.add('hidden');
-        document.getElementById('addLoanModal').classList.remove('flex');
-    });
+        document.getElementById('cancelLoan').addEventListener('click', () => {
+            document.getElementById('addLoanModal').classList.add('hidden');
+            document.getElementById('addLoanModal').classList.remove('flex');
+        });
     </script>
 
     <style>
