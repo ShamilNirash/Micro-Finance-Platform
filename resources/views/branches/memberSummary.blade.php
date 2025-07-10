@@ -17,48 +17,56 @@
                 class="inset-0 bg-gray-600 bg-opacity-50 hidden items- justify-center lg:absolute z-50  p-4 pb-0"
                 style="width: 100%; height: 100%;">
                 <div class="bg-white shadow-xl w-full max-w-2xl rounded-lg h-max">
-                    <h2 class="text-md bg-blue-100 rounded-t-lg p-4 font-">Add new Loan (Member Name)</h2>
-                    <form action="#" method="POST" enctype="multipart/form-data">
+                    <h2 class="text-md bg-blue-100 rounded-t-lg p-4 font-">Add new Loan
+                        ({{ capitalizeEachWord($member_details->full_name) }})</h2>
+                    <form action="{{ route('loans.createLoan', ['memberId' => $member_details->id]) }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
                         <div class="bg-white rounded-b-lg p-4 space-y-2 pb-0">
                             <div class="grid grid-cols-1 gap-1">
                                 <div>
                                     <label class="block text-xs text-gray-500 mb-1 ml-1">Loan Amount*</label>
-                                    <input type="number" placeholder="10 000" class="w-full p-2 border rounded-lg text-sm"
-                                        required>
+                                    <input type="number" id="newLoanAmount" name="loan_amount"
+                                        class="no-spinner w-full p-2 border rounded-lg text-sm" required step="0.01">
                                 </div>
                                 <div class="grid grid-cols-2 md:grid-cols-2 gap-2">
                                     <div>
-                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Interest Rate*</label>
-                                        <input type="text" placeholder="10%" class="w-full p-2 border rounded-lg text-sm"
+                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Interest Rate (%)*</label>
+                                        <input type="number" id="newLoanInterestRate" name="interest_rate"
+                                            class="no-spinner w-full p-2 border rounded-lg text-sm" step="0.01" disabled
                                             required>
                                     </div>
                                     <div>
                                         <label class="block text-xs text-gray-500 mb-1 ml-1">Interest</label>
-                                        <input type="number" placeholder="1 000"
-                                            class="w-full p-2 border rounded-lg text-sm">
-                                    </div>
-                                    <div>
-                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Terms*</label>
-                                        <input type="number" placeholder="18" class="w-full p-2 border rounded-lg text-sm"
+                                        <input type="number" id="newLoanInterestAmount" name="interest"
+                                            class="no-spinner w-full p-2 border rounded-lg text-sm" step="0.01" disabled
                                             required>
                                     </div>
                                     <div>
+                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Terms*</label>
+                                        <input type="number" id="newLoanTerm" name="terms"
+                                            class="no-spinner w-full p-2 border rounded-lg text-sm" required disabled>
+                                    </div>
+                                    <div>
                                         <label class="block text-xs text-gray-500 mb-1 ml-1">Installment*</label>
-                                        <input type="number" placeholder="12 000"
-                                            class="w-full p-2 border rounded-lg text-sm" required>
+                                        <input type="number" id="newLoanInstallment" name="installment_amount"
+                                            class="w-full p-2 border rounded-lg text-sm bg-gray-100 text-gray-500 cursor-not-allowed pointer-events-none no-spinner" step="0.01" required
+                                             readonly>
                                     </div>
                                     <div>
                                         <label class="block text-xs text-gray-500 mb-1 ml-1">Issue Date*</label>
-                                        <input type="date" class="w-full p-2 border rounded-lg text-sm" required>
-                                    </div>
-                                    <div>
-                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Document Charges*</label>
-                                        <input type="text" placeholder="Type"
+                                        <input type="date" id="newLoanIssueDate" name="issue_date"
                                             class="w-full p-2 border rounded-lg text-sm" required>
                                     </div>
                                     <div>
+                                        <label class="block text-xs text-gray-500 mb-1 ml-1">Document Charges*</label>
+                                        <input type="text" name="document_charges"
+                                            class="no-spinner w-full p-2 border rounded-lg text-sm" step="0.01">
+                                    </div>
+                                    <div>
                                         <label class="block text-xs text-gray-500 mb-1 ml-1">Image*</label>
-                                        <input type="file" class="w-full p-2 border rounded-lg text-sm" required>
+                                        <input type="file" name="image_1" class="w-full p-2 border rounded-lg text-sm"
+                                            required>
                                     </div>
                                     <div>
                                         <label class="block text-xs text-gray-500 mb-1 ml-1">Image</label>
@@ -68,7 +76,7 @@
 
                                 <div>
                                     <label class="block text-xs text-gray-500 mb-1 ml-1">Guarantor*</label>
-                                    <input type="text" placeholder="Type" class="w-full p-2 border rounded-lg text-sm"
+                                    <input type="text" name="guarantor_name" class="w-full p-2 border rounded-lg text-sm"
                                         required>
                                 </div>
                             </div>
@@ -775,7 +783,7 @@
                                             <!-- Amount -->
                                             <div class="flex justify-between items-center">
                                                 <label for="amount" class="block text-xs font-medium">Amount *</label>
-                                                @if ($installement->status=='PAYED')
+                                                @if ($installement->status == 'PAYED')
                                                     <p>Rs. {{ number_format($installement->amount, 2) }}</p>
                                                 @else
                                                     <input type="text" name="amount" id="amount"
@@ -787,7 +795,7 @@
                                             <div class="flex justify-between items-center">
                                                 <label for="bill" class="block text-xs font-medium">Attach
                                                     Bill</label>
-                                                @if ($installement->status=='PAYED')
+                                                @if ($installement->status == 'PAYED')
                                                     <p></p>
                                                 @else
                                                     <input type="file" name="bill" id="bill"
@@ -796,13 +804,13 @@
                                             </div>
 
                                             <!-- Buttons -->
-                                             @if ($installement->status=='UNPAYED')
-                                            <div class="flex justify-end space-x-2 mt-3">
-                                                <button type="button"
-                                                    class="cancel-btn bg-gray-300 text-black px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
-                                                <button type="submit"
-                                                    class="save-btn bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
-                                            </div>
+                                            @if ($installement->status == 'UNPAYED')
+                                                <div class="flex justify-end space-x-2 mt-3">
+                                                    <button type="button"
+                                                        class="cancel-btn bg-gray-300 text-black px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
+                                                    <button type="submit"
+                                                        class="save-btn bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
+                                                </div>
                                             @endif
                                         </div>
                                     </div>
@@ -1059,6 +1067,98 @@
             document.getElementById('addLoanModal').classList.add('hidden');
             document.getElementById('addLoanModal').classList.remove('flex');
         });
+
+
+        const loanInput = document.getElementById("newLoanAmount");
+        const interestRateInput = document.getElementById("newLoanInterestRate");
+        const interestAmountInput = document.getElementById("newLoanInterestAmount");
+        const loanTermInput = document.getElementById("newLoanTerm");
+        const installmentInput = document.getElementById("newLoanInstallment");
+
+        function enableFieldsIfLoanEntered() {
+            const loan = parseFloat(loanInput.value);
+            const validLoan = !isNaN(loan) && loan > 0;
+
+            interestRateInput.disabled = !validLoan;
+            interestAmountInput.disabled = !validLoan;
+
+            if (!validLoan) {
+                interestRateInput.value = "";
+                interestAmountInput.value = "";
+            }
+        }
+
+        function enableFieldsIfInterestEntered() {
+            const interest = parseFloat(interestRateInput.value);
+            const validInterest = !isNaN(interest) && interest > 0;
+
+            loanTermInput.disabled = !validInterest;
+
+            if (!validInterest) {
+                loanTermInput.value = "";
+                installmentInput.value = "";
+            }
+        }
+
+        function calculateInterestFromRate() {
+            const loan = parseFloat(loanInput.value);
+            const rate = parseFloat(interestRateInput.value.replace('%', ''));
+
+            if (!isNaN(loan) && !isNaN(rate)) {
+                const interest = (loan * rate) / 100;
+                interestAmountInput.value = interest.toFixed(2);
+            } else {
+                interestAmountInput.value = '';
+            }
+        }
+
+        function calculateRateFromInterest() {
+            const loan = parseFloat(loanInput.value);
+            const interest = parseFloat(interestAmountInput.value);
+
+            if (!isNaN(loan) && loan > 0 && !isNaN(interest)) {
+                const rate = (interest / loan) * 100;
+                interestRateInput.value = rate.toFixed(2);
+            } else {
+                interestRateInput.value = '';
+            }
+        }
+
+        function calculateInstallmentFromTerms() {
+            const loan = parseFloat(loanInput.value);
+            const interest = parseFloat(interestAmountInput.value);
+            const terms = parseInt(loanTermInput.value);
+            if (!isNaN(loan) && !isNaN(interest) && !isNaN(terms)) {
+                const installment = (loan + interest) / terms;
+                installmentInput.value = installment.toFixed(2);
+            } else {
+                installmentInput.value = '';
+            }
+        }
+        loanInput.addEventListener("input", () => {
+            enableFieldsIfLoanEntered();
+            calculateInterestFromRate();
+            interestRateInput.value = '';
+            interestAmountInput.value = '';
+            loanTermInput.value = '';
+            installmentInput.value = '';
+            loanTermInput.disabled = true;
+        });
+        interestRateInput.addEventListener("input", () => {
+            enableFieldsIfInterestEntered();
+            calculateInstallmentFromTerms();
+            loanTermInput.value = '';
+            installmentInput.value = '';
+        })
+        interestAmountInput.addEventListener("input", () => {
+            enableFieldsIfInterestEntered();
+            calculateInstallmentFromTerms();
+            loanTermInput.value = '';
+            installmentInput.value = '';
+        })
+        interestRateInput.addEventListener("input", calculateInterestFromRate);
+        interestAmountInput.addEventListener("input", calculateRateFromInterest);
+        loanTermInput.addEventListener("input", calculateInstallmentFromTerms);
     </script>
 
     <style>

@@ -4,6 +4,7 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CenterController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\LoanController;
 use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
 
@@ -51,18 +52,16 @@ Route::delete('/groups/delete/{centerId}', [GroupController::class, 'deleteGroup
 
 //members routes
 Route::get(
-    '/members',
-    [MemberController::class, 'viewAllMembers']
-)->name('members.viewblade');
-Route::post(
-    '/members/create',
-    [MemberController::class, 'createMember']
-)->name('members.create');
+    '/members',[MemberController::class, 'viewAllMembers'])->name('members.viewblade');
+Route::post('/members/create',[MemberController::class, 'createMember'])->name('members.create');
 Route::get('/unassignmembers/search',  [MemberController::class, 'unAssignMemberSearch']);
 Route::get('/memberSummery/{memberId}', [MemberController::class, 'viewMemberSummary'])->name('member.summary');
 Route::post('/members/update/{memberId}', [memberController::class, 'updateMember'])->name('members.updateMember');
 Route::delete('/members/delete/{memberId}', [MemberController::class, 'deleteMember']);
 
+
+//loans routes
+Route::post('/loans/create',[LoanController::class, 'createLoan'])->name('loans.createLoan');
 
 
 Route::get('/recentlyAdded', function () {
