@@ -339,16 +339,15 @@
 
                 <!-- member Grid Table format hidden for mobile screens -->
                 <div class="flex justify-start h-full pt-2">
-                    <div id="memberGridTable"
-                        class="w-full max-h-[calc(100vh-210px)]  hidden lg:block p-0 overflow-y-auto">
+                    <div class="w-full max-h-[calc(100vh-210px)]  hidden lg:block p-0 overflow-y-auto">
                         <div class="min-w-full ">
                             <table class="w-full min-w-max">
                                 <thead class="w-full text-gray-700 text-xs font-light bg-gray-100 sticky top-0">
                                     <tr class="uppercase w-full">
                                         <!--<th class="pl-2 text-left">
-                                                                                                                                                            <input type="checkbox" id="select-all"
-                                                                                                                                                                class="form-checkbox h-4 w-4 text-blue-400 m-1">
-                                                                                                                                                        </th>-->
+                                                                                                                                                                                                                    <input type="checkbox" id="select-all"
+                                                                                                                                                                                                                        class="form-checkbox h-4 w-4 text-blue-400 m-1">
+                                                                                                                                                                     </th>-->
                                         <th class="py-2 text-center">#</th>
                                         <th class="py-2 text-left">Name</th>
                                         <th class="py-2 text-left">Center</th>
@@ -357,44 +356,96 @@
                                         <th class="py-2 text-center">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody class="text-gray-800 text-xs font-light bg-white w-full">
+                                <tbody id="activeMemberTable" class="text-gray-800 text-xs font-light bg-white w-full">
                                     @foreach ($allActiveMembers as $member)
-                                        <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details"
-                                            data-member-id={{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
-                                            data-member-fullname='{{ capitalizeEachWord($member->full_name) }}'
-                                            data-branchname='{{ capitalizeEachWord($member->group->center->branch->branch_name) }}'
-                                            data-center-name='{{ capitalizeEachWord($member->group->center->center_name) }}'
-                                            data-member_id='{{ $member->nic_number }}' data-loan-balance="20000"
-                                            data-member='@json($member)'>
-                                            <!--<td class="pl-2 text-left">
-                                                                                                                                                                <input type="checkbox" name="selected_ids[]" value="1"
-                                                                                                                                                                    class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                                                                                                                                            </td>-->
-                                            <td class="py-2 text-center">{{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
-                                            </td>
-                                            <td class="py-2 text-left">{{ capitalizeEachWord($member->full_name) }}</td>
-                                            <td class="py-2 text-left">
-                                                {{ capitalizeEachWord($member->group->center->center_name) }}
-                                            </td>
-                                            <td class="py-2 text-left">{{ $member->nic_number }}</td>
-                                            <td class="py-2 text-left">2000</td>
-                                            <td class="py-2 text-center flex justify-center items-center gap-1">
-                                                <a href="{{ url('/memberSummery/' . $member->id) }}"
-                                                    class="border rounded hover:bg-green-500">
-                                                    <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
-                                                        class="h-3 w-3 m-1">
-                                                </a>
-                                                <a href="{{ url('/memberSummery/' . $member->id) }}"
-                                                    class="border rounded hover:bg-sky-500">
-                                                    <img src="{{ asset('assets/icons/PencilSimple.svg') }}"
-                                                        alt="Pencil" class="h-3 w-3 m-1">
-                                                </a>
-                                                <a href="#" class="border rounded hover:bg-lime-500">
-                                                    <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil"
-                                                        class="h-3 w-3 m-1">
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        @if ($member->status == 'ACTIVE')
+                                            <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details"
+                                                data-member-id={{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
+                                                data-member-fullname='{{ capitalizeEachWord($member->full_name) }}'
+                                                data-branchname='{{ capitalizeEachWord($member->group->center->branch->branch_name) }}'
+                                                data-center-name='{{ capitalizeEachWord($member->group->center->center_name) }}'
+                                                data-group-name='{{ capitalizeEachWord($member->group->group_name) }}'
+                                                data-member_id='{{ $member->nic_number }}' data-loan-balance="20000"
+                                                data-member='@json($member)'>
+                                                <!--<td class="pl-2 text-left">
+                                                                                                                                                                                                                        <input type="checkbox" name="selected_ids[]" value="1"
+                                                                                                                                                                                                                            class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                                                                                                                                                                                                                    </td>-->
+                                                <td class="py-2 text-center">
+                                                    {{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
+                                                </td>
+                                                <td class="py-2 text-left">{{ capitalizeEachWord($member->full_name) }}
+                                                </td>
+                                                <td class="py-2 text-left">
+                                                    {{ capitalizeEachWord($member->group->center->center_name) }}
+                                                </td>
+                                                <td class="py-2 text-left">{{ $member->nic_number }}</td>
+                                                <td class="py-2 text-left">2000</td>
+                                                <td class="py-2 text-center flex justify-center items-center gap-1">
+                                                    <a href="{{ url('/memberSummery/' . $member->id) }}"
+                                                        class="border rounded hover:bg-green-500">
+                                                        <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
+                                                            class="h-3 w-3 m-1">
+                                                    </a>
+                                                    <a href="{{ url('/memberSummery/' . $member->id) }}"
+                                                        class="border rounded hover:bg-sky-500">
+                                                        <img src="{{ asset('assets/icons/PencilSimple.svg') }}"
+                                                            alt="Pencil" class="h-3 w-3 m-1">
+                                                    </a>
+                                                    <a href="#" class="border rounded hover:bg-lime-500">
+                                                        <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil"
+                                                            class="h-3 w-3 m-1">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                    <!-- Add more rows as needed -->
+                                </tbody>
+                                <tbody id="inactiveMemberTable"
+                                    class="text-gray-800 text-xs font-light bg-white w-full hidden">
+                                    @foreach ($allActiveMembers as $member)
+                                        @if ($member->status == 'INACTIVE')
+                                            <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details"
+                                                data-member-id={{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
+                                                data-member-fullname='{{ capitalizeEachWord($member->full_name) }}'
+                                                data-branchname='{{ capitalizeEachWord($member->group->center->branch->branch_name) }}'
+                                                data-center-name='{{ capitalizeEachWord($member->group->center->center_name) }}'
+                                                data-group-name='{{ capitalizeEachWord($member->group->group_name) }}'
+                                                data-member_id='{{ $member->nic_number }}' data-loan-balance="20000"
+                                                data-member='@json($member)'>
+                                                <!--<td class="pl-2 text-left">
+                                                                                                                                                                                                                        <input type="checkbox" name="selected_ids[]" value="1"
+                                                                                                                                                                                                                            class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                                                                                                                                                                                                                    </td>-->
+                                                <td class="py-2 text-center">
+                                                    {{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
+                                                </td>
+                                                <td class="py-2 text-left">{{ capitalizeEachWord($member->full_name) }}
+                                                </td>
+                                                <td class="py-2 text-left">
+                                                    {{ capitalizeEachWord($member->group->center->center_name) }}
+                                                </td>
+                                                <td class="py-2 text-left">{{ $member->nic_number }}</td>
+                                                <td class="py-2 text-left">2000</td>
+                                                <td class="py-2 text-center flex justify-center items-center gap-1">
+                                                    <a href="{{ url('/memberSummery/' . $member->id) }}"
+                                                        class="border rounded hover:bg-green-500">
+                                                        <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
+                                                            class="h-3 w-3 m-1">
+                                                    </a>
+                                                    <a href="{{ url('/memberSummery/' . $member->id) }}"
+                                                        class="border rounded hover:bg-sky-500">
+                                                        <img src="{{ asset('assets/icons/PencilSimple.svg') }}"
+                                                            alt="Pencil" class="h-3 w-3 m-1">
+                                                    </a>
+                                                    <a href="#" class="border rounded hover:bg-lime-500">
+                                                        <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil"
+                                                            class="h-3 w-3 m-1">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endif
                                     @endforeach
                                     <!-- Add more rows as needed -->
                                 </tbody>
@@ -475,44 +526,6 @@
                     </div>
                 </div>
             </div>
-            <div class="inactiveMemberDetails hidden space-y-4 h-full ">
-                <div class="p-4 pt-2 border-b w-full">
-                    <h1 id="" class="text-sm font-medium text-gray-800 mb-1">Current Loan Details</h1>
-                    <div class="grid grid-cols-3 gap-y-2">
-                        <div>
-                            <p for="LoanAmount" class="text-xs text-gray-400">Loan Amount</p>
-                            <p id="LoanAmount" class="text-sm">10 000 00</p>
-                        </div>
-                        <div>
-                            <p for="Interest" class="text-xs text-gray-400">Interest</p>
-                            <p id="Interest" class="text-sm">15%</p>
-                        </div>
-                        <div>
-                            <p for="IssueDate" class="text-xs text-gray-400">Issue Date</p>
-                            <p id="IssueDate" class="text-sm">2025/06/12</p>
-                        </div>
-                        <div>
-                            <p for="Installment" class="text-xs text-gray-400">Installment</p>
-                            <p id="Installment" class="text-sm">10</p>
-                        </div>
-                        <div>
-                            <p for="Terms" class="text-xs text-gray-400">Terms</p>
-                            <p id="Terms" class="text-sm">Terms</p>
-                        </div>
-                        <div>
-                            <p for="DocumentChagers" class="text-xs text-gray-400">Document Chagers</p>
-                            <p id="DocumentChagers" class="text-sm">-</p>
-                        </div>
-
-                    </div>
-                    <div class="w-full text-sm lg:text-xs  pt-4">
-                        <button id="addLoanButton" value="add_new_loan"
-                            class="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 focus:outline-none">
-                            + Add Loan
-                        </button>
-                    </div>
-                </div>
-            </div>
             <div class="activeMemberDetails h-full overflow-y-auto max-h-[calc(100vh-350px)]">
                 <div class="p-4 pt-0 border-b w-full">
                     <h1 id="" class="text-sm font-medium text-gray-800 mb-1">Current Loan Details</h1>
@@ -554,6 +567,12 @@
                             <p id="LoanBalanceAmountSlideBar" class="text-sm"></p>
                         </div>
                     </div>
+                </div>
+                <div class="w-full text-sm lg:text-xs  pt-4 px-4 hidden" id="addLoanButtonDiv">
+                    <button id="addLoanButton" value="add_new_loan"
+                        class=" w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 focus:outline-none">
+                        + Add Loan
+                    </button>
                 </div>
                 <!-- Installment Cards -->
                 <div class="w-full text-sm lg:text-xs p-4 m-0">
@@ -813,27 +832,29 @@
                 const member_fullname = row.getAttribute('data-member-fullname');
                 const branch_name = row.getAttribute('data-branchname');
                 const center_name = row.getAttribute('data-center-name');
+                const group_name = row.getAttribute('data-group-name');
                 const member_id = row.getAttribute('data-member-id');
                 select_member_id = memberData.id;
                 console.log(memberData);
                 document.getElementById('memberNameShow').textContent = member_fullname;
                 document.getElementById('branchNameShow').textContent = branch_name;
                 document.getElementById('centerNameShow').textContent = center_name;
-                document.getElementById('groupNameShow').textContent = memberData.group.group_name;
+                document.getElementById('groupNameShow').textContent = group_name;
                 document.getElementById('phonenum01').textContent = memberData.mobile_number_1;
                 document.getElementById('phonenum02').textContent = memberData.mobile_number_2;
                 document.getElementById('nicNumberShow').textContent = memberData.nic_number;
                 document.getElementById('memberAddressShow').textContent = memberData.address;
+                const addLoanButtonDiv = document.getElementById('addLoanButtonDiv');
 
                 if (memberData.status === 'INACTIVE') {
                     document.getElementById('activeMemberStatus').classList.add('hidden');
                     document.getElementById('inactiveMemberStatus').classList.remove('hidden');
-
+                    addLoanButtonDiv.classList.remove('hidden');
                 }
                 if (memberData.status === 'ACTIVE') {
                     document.getElementById('activeMemberStatus').classList.remove('hidden');
                     document.getElementById('inactiveMemberStatus').classList.add('hidden');
-
+                    addLoanButtonDiv.classList.add('hidden');
                 }
                 const uncompletedLoan = memberData.loan.find(loan => loan.status === 'UNCOMPLETED');
                 console.log(uncompletedLoan);
@@ -1064,31 +1085,22 @@
             const activeTab = document.getElementById('activeTab');
             const inactiveTab = document.getElementById('inactiveTab');
             const activeMemberDetails = document.querySelector('.activeMemberDetails');
-            const inactiveMemberDetails = document.querySelector('.inactiveMemberDetails');
-            const activeMemberStatus = document.getElementById('activeMemberStatus');
-            const inactiveMemberStatus = document.getElementById('inactiveMemberStatus');
             const memberCount = document.getElementById('memberCount');
             const memberGrid = document.getElementById('memberGrid');
             const memberGridTable = document.getElementById('memberGridTable');
-
-            // Reset tab styles
+            const inactiveMemberTable = document.getElementById('inactiveMemberTable');
+            const activeMemberTable = document.getElementById('activeMemberTable');
             activeTab.className = 'border-black text-gray-400 hover:text-gray-700 cursor-pointer';
             inactiveTab.className = 'border-black text-gray-400 hover:text-gray-700 cursor-pointer';
 
-            // Toggle members based on tab
-            const allMobileMembers = memberGrid.querySelectorAll('div[data-member]');
-            const allTableRows = memberGridTable.querySelectorAll('tbody tr');
 
             if (tabType === 'active') {
                 // Style active tab
                 activeTab.className = 'border-b-2 pb-1 border-black cursor-pointer';
                 // Show active member details and status
                 activeMemberDetails.classList.remove('hidden');
-                inactiveMemberDetails.classList.add('hidden');
-                activeMemberStatus.classList.remove('hidden');
-                inactiveMemberStatus.classList.add('hidden');
-                RowDetails.classList.add('hidden');
-                firstColumn.classList.add('lg:w-full');
+                inactiveMemberTable.classList.add('hidden');
+                activeMemberTable.classList.remove('hidden');
                 // Update member count
                 if (memberCount) {
                     memberCount.textContent =
@@ -1102,28 +1114,19 @@
                     row.classList.toggle('hidden', row.classList.contains('inactive-member'));
                 });
             } else if (tabType === 'inactive') {
+                console.log("hello");
                 // Style inactive tab
                 inactiveTab.className = 'border-b-2 pb-1 border-black cursor-pointer';
-                // Show inactive member details and status
-                inactiveMemberDetails.classList.remove('hidden');
-                activeMemberDetails.classList.add('hidden');
-                activeMemberStatus.classList.add('hidden');
-                inactiveMemberStatus.classList.remove('hidden');
+                inactiveMemberTable.classList.remove('hidden');
+                activeMemberTable.classList.add('hidden');
 
-                RowDetails.classList.add('hidden');
+
                 firstColumn.classList.add('lg:w-full');
                 // Update member count
                 if (memberCount) {
                     memberCount.textContent =
                         `Total inactive members: ${memberGrid.querySelectorAll('div.inactive-member').length}`;
                 }
-                // Show inactive members, hide active
-                allMobileMembers.forEach(member => {
-                    member.classList.toggle('hidden', !member.classList.contains('inactive-member'));
-                });
-                allTableRows.forEach(row => {
-                    row.classList.toggle('hidden', !row.classList.contains('inactive-member'));
-                });
             }
 
             // Update RowDetails based on selected member (if any)
