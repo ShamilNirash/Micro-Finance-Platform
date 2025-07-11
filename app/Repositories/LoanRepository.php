@@ -27,14 +27,16 @@ class LoanRepository
         try {
             return $this->loans->create($center);
         } catch (\Exception $e) {
+            dd($e);
             return $e;
         }
     }
-    public function search_one($type, $value)
+    public function search_one($valuedArray)
     {
         try {
-            return $this->loans->where([$type => $value, 'status' => 'ACTIVE'])->first();
+            return $this->loans->where($valuedArray)->first();
         } catch (\Exception $e) {
+            dd($e);
             return $e;
         }
     }

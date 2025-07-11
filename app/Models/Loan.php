@@ -25,6 +25,7 @@ class Loan extends Model
         'interest',
         'terms',
         'interest_rate',
+        'installment_price',
         'loan_amount',
         'status',
         'member_id',

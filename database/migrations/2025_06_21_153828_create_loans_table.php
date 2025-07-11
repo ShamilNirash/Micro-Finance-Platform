@@ -16,10 +16,10 @@ class CreateLoansTable extends Migration
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
             $table->string('guarantor')->nullable(false);
-            $table->string('document_charges')->nullable(false);
+            $table->string('document_charges')->nullable(true);
             $table->string('loan_amount')->nullable(false);
             $table->string('image_1')->nullable(false);
-            $table->string('installment_price')->nullable(false);
+            $table->integer('installment_price')->nullable(false);
             $table->date('issue_date')->nullable(false);
             $table->date('completed_date')->nullable(true);
             $table->string('interest_rate')->nullable(false);

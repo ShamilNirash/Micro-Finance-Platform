@@ -345,9 +345,9 @@
                                 <thead class="w-full text-gray-700 text-xs font-light bg-gray-100 sticky top-0">
                                     <tr class="uppercase w-full">
                                         <!--<th class="pl-2 text-left">
-                                                                                                                                                                                                                    <input type="checkbox" id="select-all"
-                                                                                                                                                                                                                        class="form-checkbox h-4 w-4 text-blue-400 m-1">
-                                                                                                                                                                     </th>-->
+                                                                                                                                                                                                                            <input type="checkbox" id="select-all"
+                                                                                                                                                                                                                                class="form-checkbox h-4 w-4 text-blue-400 m-1">
+                                                                                                                                                                             </th>-->
                                         <th class="py-2 text-center">#</th>
                                         <th class="py-2 text-left">Name</th>
                                         <th class="py-2 text-left">Center</th>
@@ -368,9 +368,9 @@
                                                 data-member_id='{{ $member->nic_number }}' data-loan-balance="20000"
                                                 data-member='@json($member)'>
                                                 <!--<td class="pl-2 text-left">
-                                                                                                                                                                                                                        <input type="checkbox" name="selected_ids[]" value="1"
-                                                                                                                                                                                                                            class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                                                                                                                                                                                                    </td>-->
+                                                                                                                                                                                                                                <input type="checkbox" name="selected_ids[]" value="1"
+                                                                                                                                                                                                                                    class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                                                                                                                                                                                                                            </td>-->
                                                 <td class="py-2 text-center">
                                                     {{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
                                                 </td>
@@ -380,7 +380,19 @@
                                                     {{ capitalizeEachWord($member->group->center->center_name) }}
                                                 </td>
                                                 <td class="py-2 text-left">{{ $member->nic_number }}</td>
-                                                <td class="py-2 text-left">2000</td>
+                                                @php
+                                                    $total_paid_amount = collect(
+                                                        optional($member->loan->firstWhere('status', 'UNCOMPLETED'))
+                                                            ->installment,
+                                                    )->sum('amount');
+                                                    $total_balance =
+                                                        optional($member->loan->firstWhere('status', 'UNCOMPLETED'))
+                                                            ->loan_amount +
+                                                        optional($member->loan->firstWhere('status', 'UNCOMPLETED'))
+                                                            ->interest -
+                                                        $total_paid_amount;
+                                                @endphp
+                                                <td class="py-2 text-left">Rs. {{ number_format($total_balance, 2) }}</td>
                                                 <td class="py-2 text-center flex justify-center items-center gap-1">
                                                     <a href="{{ url('/memberSummery/' . $member->id) }}"
                                                         class="border rounded hover:bg-green-500">
@@ -415,9 +427,9 @@
                                                 data-member_id='{{ $member->nic_number }}' data-loan-balance="20000"
                                                 data-member='@json($member)'>
                                                 <!--<td class="pl-2 text-left">
-                                                                                                                                                                                                                        <input type="checkbox" name="selected_ids[]" value="1"
-                                                                                                                                                                                                                            class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                                                                                                                                                                                                    </td>-->
+                                                                                                                                                                                                                                <input type="checkbox" name="selected_ids[]" value="1"
+                                                                                                                                                                                                                                    class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                                                                                                                                                                                                                            </td>-->
                                                 <td class="py-2 text-center">
                                                     {{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
                                                 </td>
@@ -427,7 +439,19 @@
                                                     {{ capitalizeEachWord($member->group->center->center_name) }}
                                                 </td>
                                                 <td class="py-2 text-left">{{ $member->nic_number }}</td>
-                                                <td class="py-2 text-left">2000</td>
+                                                @php
+                                                    $total_paid_amount = collect(
+                                                        optional($member->loan->firstWhere('status', 'UNCOMPLETED'))
+                                                            ->installment,
+                                                    )->sum('amount');
+                                                    $total_balance =
+                                                        optional($member->loan->firstWhere('status', 'UNCOMPLETED'))
+                                                            ->loan_amount +
+                                                        optional($member->loan->firstWhere('status', 'UNCOMPLETED'))
+                                                            ->interest -
+                                                        $total_paid_amount;
+                                                @endphp
+                                                <td class="py-2 text-left">Rs. {{ number_format($total_balance, 2) }}</td>
                                                 <td class="py-2 text-center flex justify-center items-center gap-1">
                                                     <a href="{{ url('/memberSummery/' . $member->id) }}"
                                                         class="border rounded hover:bg-green-500">
@@ -901,7 +925,7 @@
                     uncompletedLoan.installment.forEach((installment, index) => {
                         const card = document.createElement('div');
                         card.className = "bg-gray-200 py-2 px-4 rounded-lg shadow-sm";
-                        const payedDate = new Date(installment.payed_date);
+                        const payedDate = new Date(installment.date_and_time);
                         const now = new Date();
                         let statusLabel = '';
 

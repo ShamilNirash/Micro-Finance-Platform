@@ -71,7 +71,7 @@ class MemberController extends Controller
                 'address' => $memberAddress,
                 'nic_number' => $request->memberNicNumber,
                 'group_id' => $request->group_id,
-                'status' => 'ACTIVE'
+                'status' => 'INACTIVE'
 
             ]);
             return redirect()->back()->with('success', 'Member created successfully.');

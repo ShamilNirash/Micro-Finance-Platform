@@ -61,7 +61,7 @@ Route::delete('/members/delete/{memberId}', [MemberController::class, 'deleteMem
 
 
 //loans routes
-Route::post('/loans/create',[LoanController::class, 'createLoan'])->name('loans.createLoan');
+Route::post('/loans/create/{memberId}',[LoanController::class, 'createLoan'])->name('loans.createLoan');
 
 
 Route::get('/recentlyAdded', function () {

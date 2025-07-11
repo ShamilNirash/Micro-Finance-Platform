@@ -417,7 +417,7 @@
                                 optional($member->loan->firstWhere('status', 'UNCOMPLETED'))->installment,
                             )->sum('amount');
                             $total_balance =
-                                optional($member->loan->firstWhere('status', 'UNCOMPLETED'))->loan_amount -
+                                optional($member->loan->firstWhere('status', 'UNCOMPLETED'))->loan_amount +optional($member->loan->firstWhere('status', 'UNCOMPLETED'))->interest -
                                 $total_paid_amount;
                         @endphp
                         <td class="py-2 text-left">Rs. {{ number_format($total_balance, 2) }}</td>

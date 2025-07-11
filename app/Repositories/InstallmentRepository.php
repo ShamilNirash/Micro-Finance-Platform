@@ -27,6 +27,7 @@ class InstallmentRepository
         try {
             return $this->installments->create($branch);
         } catch (\Exception $e) {
+            dd($e);
             return $e;
         }
     }

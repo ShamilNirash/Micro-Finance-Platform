@@ -50,8 +50,8 @@
                                     <div>
                                         <label class="block text-xs text-gray-500 mb-1 ml-1">Installment*</label>
                                         <input type="number" id="newLoanInstallment" name="installment_amount"
-                                            class="w-full p-2 border rounded-lg text-sm bg-gray-100 text-gray-500 cursor-not-allowed pointer-events-none no-spinner" step="0.01" required
-                                             readonly>
+                                            class="w-full p-2 border rounded-lg text-sm bg-gray-100 text-gray-500 cursor-not-allowed pointer-events-none no-spinner"
+                                            step="0.01" required readonly>
                                     </div>
                                     <div>
                                         <label class="block text-xs text-gray-500 mb-1 ml-1">Issue Date*</label>
@@ -60,7 +60,7 @@
                                     </div>
                                     <div>
                                         <label class="block text-xs text-gray-500 mb-1 ml-1">Document Charges*</label>
-                                        <input type="text" name="document_charges"
+                                        <input type="number" name="document_charges"
                                             class="no-spinner w-full p-2 border rounded-lg text-sm" step="0.01">
                                     </div>
                                     <div>
@@ -423,7 +423,8 @@
                                     optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment,
                                 )->sum('amount');
                                 $total_balance =
-                                    optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->loan_amount -
+                                    optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->loan_amount +
+                                    optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->interest -
                                     $total_paid_amount;
                             @endphp
                             <div
