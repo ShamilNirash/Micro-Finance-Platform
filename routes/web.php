@@ -67,6 +67,10 @@ Route::post('/loans/create/{memberId}',[LoanController::class, 'createLoan'])->n
 //installments routes
 Route::post('/installments/update/{installmentId}', [InstallmentController::class, 'updateInstallment'])->name('installments.updateInstallment');
 
+/*income*/
+Route::get('/income', [CenterController::class,'incomeView'])->name('centers.viewIncomeBlade');
+
+
 
 Route::get('/recentlyAdded', function () {
     return view('branches/recentlyAdded');
@@ -86,10 +90,7 @@ Route::get('/recentMembers', function () {
     return view('branches/recentlyAdded/members');
 });
 
-/*income*/
-Route::get('/income', function () {
-    return view('income/incomeReport');
-});
+
 Route::get('/collections', function () {
     return view('income/collections');
 });
