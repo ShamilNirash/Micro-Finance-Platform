@@ -500,7 +500,7 @@
                     <div id="InstallmentGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-4   ">
                         @if ($member_details->loan->firstWhere('status', 'UNCOMPLETED'))
                             <!--Card-->
-                            @foreach (optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment as $installement)
+                            @foreach (optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment->sortBy('installment_number') as $installement)
                                 <div class="rounded-lg shadow-sm flex flex-col w-full bg-gray-200 border hover:bg-gray-200 py-2 px-4"
                                     data-member-name="saman">
                                     <div class="flex justify-between items-center">
@@ -518,9 +518,10 @@
                                     <!-- Sub Info -->
                                     <div class="mt-0 flex justify-between items-center text-xs">
                                         <div class="flex items-center space-x-2">
-                                            <p class="text-gray-400">Amount</p>
+                                            <p class="text-gray-400">Payed Amount</p>
                                             <p class="font-medium text-gray-600">Rs.
-                                                {{ number_format($installement->amount, 2) }}</p>
+                                                {{ number_format($installement->amount, 2) }}({{ number_format($installement->installment_amount, 2) }})
+                                            </p>
                                         </div>
                                         <div class="flex items-center space-x-2">
                                             <p class="text-gray-400">Pay in Date</p>
@@ -542,7 +543,20 @@
                                     </div>
                                     <!-- Collapsible Section -->
                                     <div class="installment-details mt-2 hidden border-t border-gray-600 pt-2">
-                                        <form action="">
+                                       <form
+                                            action="{{ route('installments.updateInstallment', ['installmentId' => $installement->id]) }}"
+                                            method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            @if ($errors->any())
+                                                <div
+                                                    class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-2">
+                                                    <ul class="text-sm">
+                                                        @foreach ($errors->all() as $error)
+                                                            <li>• {{ $error }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            @endif
                                             <div class="grid gap-3">
 
                                                 <!-- Amount -->
@@ -600,7 +614,7 @@
                             <tbody class="text-gray-800 text-xs font-light bg-white">
                                 <!-- Row -->
                                 @if ($member_details->loan->firstWhere('status', 'UNCOMPLETED'))
-                                    @foreach (optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment as $installement)
+                                    @foreach (optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment->sortBy('installment_number') as $installement)
                                         <tr
                                             class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details">
                                             <td class="py-2 pl-4 text-left">Installment #
@@ -739,7 +753,7 @@
                     <div class="grid grid-cols-1 gap-y-2">
 
                         @if ($member_details->loan->firstWhere('status', 'UNCOMPLETED'))
-                            @foreach (optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment as $installement)
+                            @foreach (optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment->sortBy('installment_number') as $installement)
                                 <div class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm">
                                     <!-- Header Row -->
                                     <div class="flex justify-between items-center">
@@ -758,9 +772,10 @@
                                     <!-- Sub Info -->
                                     <div class="mt-0 flex justify-between items-center text-xs">
                                         <div class="flex items-center space-x-2">
-                                            <p class="text-gray-400">Amount</p>
+                                            <p class="text-gray-400">Payed Amount</p>
                                             <p class="font-medium text-gray-600">Rs.
-                                                {{ number_format($installement->amount, 2) }}</p>
+                                                {{ number_format($installement->amount, 2) }}({{ number_format($installement->installment_amount, 2) }})
+                                            </p>
                                         </div>
                                         <div class="flex items-center space-x-2">
                                             <p class="text-gray-400">Pay in Date</p>
@@ -780,40 +795,58 @@
 
                                     <!-- Collapsible Section -->
                                     <div class="installment-details mt-2 hidden border-t border-gray-600 pt-2">
-                                        <div class="grid gap-3">
-                                            <!-- Amount -->
-                                            <div class="flex justify-between items-center">
-                                                <label for="amount" class="block text-xs font-medium">Amount *</label>
-                                                @if ($installement->status == 'PAYED')
-                                                    <p>Rs. {{ number_format($installement->amount, 2) }}</p>
-                                                @else
-                                                    <input type="text" name="amount" id="amount"
-                                                        class="w-2/3 mt-1 px-3 py-1 border rounded-md">
-                                                @endif
-                                            </div>
-
-                                            <!-- Date and File -->
-                                            <div class="flex justify-between items-center">
-                                                <label for="bill" class="block text-xs font-medium">Attach
-                                                    Bill</label>
-                                                @if ($installement->status == 'PAYED')
-                                                    <p></p>
-                                                @else
-                                                    <input type="file" name="bill" id="bill"
-                                                        class="w-full mt-1 px-2 py-1 border rounded-md text-sm bg-white">
-                                                @endif
-                                            </div>
-
-                                            <!-- Buttons -->
-                                            @if ($installement->status == 'UNPAYED')
-                                                <div class="flex justify-end space-x-2 mt-3">
-                                                    <button type="button"
-                                                        class="cancel-btn bg-gray-300 text-black px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
-                                                    <button type="submit"
-                                                        class="save-btn bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
+                                        <form
+                                            action="{{ route('installments.updateInstallment', ['installmentId' => $installement->id]) }}"
+                                            method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            @if ($errors->any())
+                                                <div
+                                                    class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-2">
+                                                    <ul class="text-sm">
+                                                        @foreach ($errors->all() as $error)
+                                                            <li>• {{ $error }}</li>
+                                                        @endforeach
+                                                    </ul>
                                                 </div>
                                             @endif
-                                        </div>
+                                            <div class="grid gap-3">
+                                                <!-- Amount -->
+                                                <div class="flex justify-between items-center">
+                                                    <label for="amount" class="block text-xs font-medium">Amount
+                                                        *</label>
+                                                    @if ($installement->status == 'PAYED')
+                                                        <p>Rs. {{ number_format($installement->amount, 2) }}</p>
+                                                    @else
+                                                        <input type="number" name="amount" id="amount"
+                                                            value="{{ old('amount') }}"
+                                                            class="no-spinner w-2/3 mt-1 px-3 py-1 border rounded-md sp"
+                                                            required step="0.01">
+                                                    @endif
+                                                </div>
+                                                <!-- Date and File -->
+                                                <div class="flex justify-between items-center">
+                                                    <label for="bill" name="image_1"
+                                                        class="block text-xs font-medium">Attach
+                                                        Bill</label>
+                                                    @if ($installement->status == 'PAYED')
+                                                        <p></p>
+                                                    @else
+                                                        <input type="file" name="image_1" id="bill"
+                                                            class="w-full mt-1 px-2 py-1 border rounded-md text-sm bg-white">
+                                                    @endif
+                                                </div>
+
+                                                <!-- Buttons -->
+                                                @if ($installement->status == 'UNPAYED')
+                                                    <div class="flex justify-end space-x-2 mt-3">
+                                                        <button type="button"
+                                                            class="cancel-btn bg-gray-300 text-black px-4 py-1 rounded-md hover:bg-gray-400">Cancel</button>
+                                                        <button type="submit"
+                                                            class="save-btn bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700">Save</button>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             @endforeach

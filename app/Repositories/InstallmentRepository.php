@@ -34,8 +34,9 @@ class InstallmentRepository
     public function search_one($type, $value)
     {
         try {
-            return $this->installments->where([$type => $value, 'status' => 'ACTIVE'])->first();
+            return $this->installments->where([$type => $value])->first();
         } catch (\Exception $e) {
+            dd($e);
             return $e;
         }
     }

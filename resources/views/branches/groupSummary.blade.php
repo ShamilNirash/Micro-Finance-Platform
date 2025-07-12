@@ -389,6 +389,7 @@
                                     <tr class="uppercase w-full">
                                         <th class="py-2 text-center">#</th>
                                         <th class="py-2 text-left">Name</th>
+                                        <th class="py-2 text-left">Status</th>
                                         <th class="py-2 text-left">Center</th>
                                         <th class="py-2 text-left">NIC </th>
                                         <th class="py-2 text-left">Loan Balance</th>
@@ -410,6 +411,17 @@
                         </div>
                         </td>
                         <td class="py-2 text-left">{{ capitalizeEachWord($member->full_name) }}</td>
+                        @if ($member->status == 'ACTIVE')
+                            <td id="activeMemberStatus" class="items-center">
+                                <span class="bg-green-400 p-0.5 px-1 rounded text-black text-xs">Active</span>
+                            </td>
+                        @else
+                            <td id="inactiveMemberStatus" class="items-center ">
+                                <span class="bg-red-400 p-0.5 px-1 rounded text-black text-xs">Inactive</span>
+                            </td>
+                        @endif
+
+
                         <td class="py-2 text-left">{{ capitalizeFirstLetter($group_details->center->center_name) }}</td>
                         <td class="py-2 text-left"> {{ $member->nic_number }}</td>
                         @php
@@ -417,7 +429,8 @@
                                 optional($member->loan->firstWhere('status', 'UNCOMPLETED'))->installment,
                             )->sum('amount');
                             $total_balance =
-                                optional($member->loan->firstWhere('status', 'UNCOMPLETED'))->loan_amount +optional($member->loan->firstWhere('status', 'UNCOMPLETED'))->interest -
+                                optional($member->loan->firstWhere('status', 'UNCOMPLETED'))->loan_amount +
+                                optional($member->loan->firstWhere('status', 'UNCOMPLETED'))->interest -
                                 $total_paid_amount;
                         @endphp
                         <td class="py-2 text-left">Rs. {{ number_format($total_balance, 2) }}</td>
@@ -470,6 +483,7 @@
         <div id="RowDetailsContent" class="border-b p-4">
             <div class="flex items-baseline space-x-2">
                 <h1 id="memberNameSlideBar" class="text-md font-medium text-gray-800 mb-1">--</h1>
+                <h1 id="memberIdShow" class="text-md font-medium text-gray-800 hidden"></h1>
                 <p id="activeMemberStatus" class="items-center">
                     <span class="bg-green-400 p-0.5 px-1 rounded text-black text-xs">Active</span>
                 </p>
@@ -543,7 +557,7 @@
 
                 </div>
                 <div class="w-full text-sm lg:text-xs  pt-4">
-                    <button id="addLoanButton" value="add_new_loan"
+                    <button id="addLoanButton"
                         class="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 focus:outline-none">
                         + Add Loan
                     </button>
@@ -577,7 +591,13 @@
                 row.classList.add('hover:bg-sky-100');
             });
         });
-
+        document.getElementById('addLoanButton').addEventListener('click', function() {
+            console.log("hi")
+            const memberId = document.getElementById('memberIdShow').textContent;
+            const url = `{{ route('member.summary', ['memberId' => 'MEMBER_ID_PLACEHOLDER']) }}`.replace(
+                'MEMBER_ID_PLACEHOLDER', memberId);
+            window.location.href = url;
+        });
         // Search Filter for both mobile and web views
         document.getElementById('searchMember').addEventListener('input', function() {
             const searchTerm = this.value.toLowerCase();
@@ -695,7 +715,7 @@
                     'nicSlideBar').textContent = memberObject.nic_number;
                 document.getElementById(
                     'memberAddressSlideBar').textContent = memberObject.address;
-
+                document.getElementById('memberIdShow').textContent = memberObject.id;
                 const uncompletedLoan = memberObject.loan.find(loan => loan.status === 'UNCOMPLETED');
                 console.log(uncompletedLoan);
                 document.getElementById('LoanAmountSlideBar').textContent =

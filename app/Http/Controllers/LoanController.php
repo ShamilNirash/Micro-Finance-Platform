@@ -35,8 +35,7 @@ class LoanController extends Controller
         ]);
         try {
             $guarantorFullName = strtolower($request->input('guarantor_name'));
-            $image1Path = $request->file('image_1')->store("members/images/{$memberId}/loanDocument", 'public');
-
+            $image1Path = $request->file('image_1')->store("members/images/loanDocument/{$memberId}", 'public');
             $isCreateLoan =  $this->loanRepository->create([
                 'guarantor' => $guarantorFullName,
                 'document_charges' => $request->document_charges,
@@ -56,8 +55,8 @@ class LoanController extends Controller
                 $loanId =  $this->loanRepository->search_one(['status' => 'UNCOMPLETED', 'member_id' => $memberId])->id;
                 $startDate = Carbon::parse($request->issue_date);
                 $now = Carbon::now();
-                for ($i = $request->terms; $i >=1 ; $i--) {
-                    $installmentDate = $startDate->copy()->addDays(7 * ($i-1))->setTime($now->hour, $now->minute, $now->second);
+                for ($i =$request->terms ; $i >= 1; $i--) {
+                    $installmentDate = $startDate->copy()->addDays(7 * ($i))->setTime($now->hour, $now->minute, $now->second);
                     $this->installmentRepository->create([
                         'installment_number' => $i,
                         'date_and_time' => $installmentDate->toDateTimeString(),

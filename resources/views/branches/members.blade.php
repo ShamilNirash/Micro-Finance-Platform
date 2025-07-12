@@ -345,9 +345,9 @@
                                 <thead class="w-full text-gray-700 text-xs font-light bg-gray-100 sticky top-0">
                                     <tr class="uppercase w-full">
                                         <!--<th class="pl-2 text-left">
-                                                                                                                                                                                                                            <input type="checkbox" id="select-all"
-                                                                                                                                                                                                                                class="form-checkbox h-4 w-4 text-blue-400 m-1">
-                                                                                                                                                                             </th>-->
+                                                                                                                                                                                                                                                <input type="checkbox" id="select-all"
+                                                                                                                                                                                                                                                    class="form-checkbox h-4 w-4 text-blue-400 m-1">
+                                                                                                                                                                                                 </th>-->
                                         <th class="py-2 text-center">#</th>
                                         <th class="py-2 text-left">Name</th>
                                         <th class="py-2 text-left">Center</th>
@@ -368,9 +368,9 @@
                                                 data-member_id='{{ $member->nic_number }}' data-loan-balance="20000"
                                                 data-member='@json($member)'>
                                                 <!--<td class="pl-2 text-left">
-                                                                                                                                                                                                                                <input type="checkbox" name="selected_ids[]" value="1"
-                                                                                                                                                                                                                                    class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                                                                                                                                                                                                            </td>-->
+                                                                                                                                                                                                                                                    <input type="checkbox" name="selected_ids[]" value="1"
+                                                                                                                                                                                                                                                        class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                                                                                                                                                                                                                                                </td>-->
                                                 <td class="py-2 text-center">
                                                     {{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
                                                 </td>
@@ -427,9 +427,9 @@
                                                 data-member_id='{{ $member->nic_number }}' data-loan-balance="20000"
                                                 data-member='@json($member)'>
                                                 <!--<td class="pl-2 text-left">
-                                                                                                                                                                                                                                <input type="checkbox" name="selected_ids[]" value="1"
-                                                                                                                                                                                                                                    class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                                                                                                                                                                                                            </td>-->
+                                                                                                                                                                                                                                                    <input type="checkbox" name="selected_ids[]" value="1"
+                                                                                                                                                                                                                                                        class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                                                                                                                                                                                                                                                </td>-->
                                                 <td class="py-2 text-center">
                                                     {{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
                                                 </td>
@@ -508,6 +508,7 @@
             <div id="RowDetailsContent" class="border-b p-4">
                 <div class="flex items-baseline space-x-2">
                     <h1 id="memberNameShow" class="text-md font-medium text-gray-800 "></h1>
+                    <h1 id="memberIdShow" class="text-md font-medium text-gray-800 hidden"></h1>
                     <!--Member Status-->
                     <p id="activeMemberStatus" class="items-center">
                         <span class="bg-green-400 p-0.5 px-1 rounded text-black text-xs">Active</span>
@@ -593,8 +594,8 @@
                     </div>
                 </div>
                 <div class="w-full text-sm lg:text-xs  pt-4 px-4 hidden" id="addLoanButtonDiv">
-                    <button id="addLoanButton" value="add_new_loan"
-                        class=" w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 focus:outline-none">
+                    <button id="addLoanButton"
+                        class="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 focus:outline-none">
                         + Add Loan
                     </button>
                 </div>
@@ -633,6 +634,13 @@
                     icon.classList.toggle('rotate-180');
                 }
             }
+        });
+        document.getElementById('addLoanButton').addEventListener('click', function() {
+            console.log("hi")
+            const memberId = document.getElementById('memberIdShow').textContent;
+            const url = `{{ route('member.summary', ['memberId' => 'MEMBER_ID_PLACEHOLDER']) }}`.replace(
+                'MEMBER_ID_PLACEHOLDER', memberId);
+            window.location.href = url;
         });
         document.addEventListener('click', function(event) {
             const cancelButton = event.target.closest('.cancel-btn');
@@ -861,6 +869,7 @@
                 select_member_id = memberData.id;
                 console.log(memberData);
                 document.getElementById('memberNameShow').textContent = member_fullname;
+                document.getElementById('memberIdShow').textContent = member_id;
                 document.getElementById('branchNameShow').textContent = branch_name;
                 document.getElementById('centerNameShow').textContent = center_name;
                 document.getElementById('groupNameShow').textContent = group_name;
@@ -929,13 +938,20 @@
                         const now = new Date();
                         let statusLabel = '';
 
-                        if (payedDate > now) {
-                            statusLabel =
-                                `<p class="text-xs font-medium p-0.5 bg-yellow-500 rounded px-1">Pending</p>`;
-                        } else {
+                        if (installment.status === 'PAYED') {
                             if (installment.pay_in_date == 1) {
                                 statusLabel =
                                     `<p class="text-xs font-medium p-0.5 bg-green-500 rounded px-1">Yes</p>`;
+                            } else {
+                                statusLabel =
+                                    `<p class="text-xs font-medium p-0.5 bg-red-500 rounded px-1">No</p>`;
+                            }
+
+                        } else {
+
+                            if (payedDate > now) {
+                                statusLabel =
+                                    `<p class="text-xs font-medium p-0.5 bg-yellow-500 rounded px-1">Pending</p>`;
                             } else {
                                 statusLabel =
                                     `<p class="text-xs font-medium p-0.5 bg-red-500 rounded px-1">No</p>`;
@@ -989,7 +1005,7 @@
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-2">
                     <p class="text-sm text-gray-600">Installment # <span>${installment.installment_number}</span></p>
-                    <button class="toggle-details-btn p-1 rounded hover:bg-sky-200">
+                    <button class="toggle-details-btn p-1 hidden rounded hover:bg-sky-200">
                         <img src="/assets/icons/CaretDown.svg" alt="Toggle"
                             class="h-3 w-3 transform transition-transform">
                     </button>
@@ -999,15 +1015,14 @@
 
             <div class="mt-0 flex justify-between items-center text-xs">
                 <div class="flex items-center space-x-2">
-                    <p class="text-gray-400">Amount</p>
-                    <p class="font-medium text-gray-600"> Rs. ${parseFloat(installment.amount).toFixed(2)}</p>
+                    <p class="text-gray-400">Payed Amount</p>
+                    <p class="font-medium text-gray-600"> Rs. ${parseFloat(installment.amount).toFixed(2)}(${parseFloat(installment.installment_amount).toFixed(2)})</p>
                 </div>
                 <div class="flex items-center space-x-2">
                     <p class="text-gray-400">Pay in Date</p>
                     ${statusLabel}
                 </div>
             </div>
-
             <div class="installment-details mt-2 hidden border-t border-gray-600 pt-2">
                 <div class="grid gap-3">
                     ${amountInputHTML}
@@ -1161,7 +1176,7 @@
         }
 
         //Loan
-        document.getElementById('addLoanButton').addEventListener('click', () => {
+        /* document.getElementById('addLoanButton').addEventListener('click', () => {
             if (window.innerWidth >= 1024) {
                 document.getElementById('addLoanModal').classList.remove('hidden');
                 document.getElementById('addLoanModal').classList.add('flex');
@@ -1179,12 +1194,13 @@
                 document.getElementById('addLoanModal').classList.remove('hidden');
                 document.getElementById('addLoanModal').classList.add('flex');
             }
-        });
+        }); */
 
         document.getElementById('cancelLoan').addEventListener('click', () => {
             document.getElementById('addLoanModal').classList.add('hidden');
             document.getElementById('addLoanModal').classList.remove('flex');
         });
+
     </script>
 
     <style>
