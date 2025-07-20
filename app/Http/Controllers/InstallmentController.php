@@ -3,15 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\InstallmentRepository;
+use App\Repositories\LoanRepository;
+use App\Repositories\MemberRepository;
+use App\Repositories\UnderpaymentRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class InstallmentController extends Controller
 {
     protected $installmentRepository;
-    public function __construct(InstallmentRepository $installmentRepository)
+    protected $memberRepository;
+    protected $underpaymentRepository;
+    protected $loanRepository;
+    public function __construct(InstallmentRepository $installmentRepository, MemberRepository $memberRepository, UnderpaymentRepository $underpaymentRepository, LoanRepository $loanRepository)
     {
         $this->installmentRepository = $installmentRepository;
+        $this->memberRepository = $memberRepository;
+        $this->underpaymentRepository = $underpaymentRepository;
+        $this->loanRepository = $loanRepository;
     }
     public function updateInstallment($installmentId, Request $request)
     {
@@ -42,8 +51,19 @@ class InstallmentController extends Controller
                     $this->installmentRepository->update($installmentId, 'pay_in_date', true);
                 }
                 $this->installmentRepository->update($installmentId, 'payed_date', $now);
+                $this->loanRepository->update($relatedInstallment->loan->id, 'status', 'COMPLETED');
+                if ($relatedInstallment->loan->terms == $relatedInstallment->installment_number) {
+                    $this->memberRepository->update($relatedInstallment->loan->member->id, 'status', 'INACTIVE');
+                }
+            } else {
+                $now = now();
+                if ($request->file('image_1')) {
+                    $image1Path = $request->file('image_1')->store("members/images/underpaymentDocument/{$installmentId}/{$now}", 'public');
+                    $this->underpaymentRepository->create(['amount' => $request->amount, 'installment_id' => $installmentId, 'payed_date' => $now, 'bill_image' => $image1Path]);
+                } else {
+                    $this->underpaymentRepository->create(['amount' => $request->amount, 'installment_id' => $installmentId, 'payed_date' => $now]);
+                }
             }
-
             if ($request->file('image_1')) {
                 $image1Path = $request->file('image_1')->store("members/images/installmentDocument/{$installmentId}", 'public');
                 $this->installmentRepository->update($installmentId, 'bill_image', $image1Path);

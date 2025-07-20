@@ -80,6 +80,7 @@ class MemberRepository
         try {
             return $this->search_one('id', $id)->update([$type => $value]);
         } catch (\Exception $e) {
+            dd($e);
             return $e;
         }
     }

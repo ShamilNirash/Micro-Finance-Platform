@@ -62,8 +62,9 @@ class LoanRepository
     public function update($id, $type, $value)
     {
         try {
-            return $this->search_one('id', $id)->update([$type => $value]);
+            return $this->search_one(['id'=> $id])->update([$type => $value]);
         } catch (\Exception $e) {
+            dd($e);
             return $e;
         }
     }

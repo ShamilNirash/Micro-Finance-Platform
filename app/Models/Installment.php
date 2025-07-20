@@ -30,4 +30,8 @@ class Installment extends Model
     {
         return $this->belongsTo('App\Models\Loan', 'loan_id', 'id');
     }
+    function underpayment()
+    {
+        return $this->hasMany('App\Models\Underpayment', 'installment_id', 'id');
+    }
 }

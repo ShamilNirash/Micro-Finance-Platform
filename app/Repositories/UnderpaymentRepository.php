@@ -9,23 +9,23 @@
 
 namespace App\Repositories;
 
-use App\Models\Installment;
+use App\Models\Underpayment;
 use Exception;
 use Illuminate\Validation\ValidationException;
 
-class InstallmentRepository
+class UnderpaymentRepository
 {
-    protected $installments;
+    protected $underpayment;
 
-    public function __construct(Installment $installments)
+    public function __construct(Underpayment $underpayment)
     {
-        $this->installments = $installments;
+        $this->underpayment = $underpayment;
     }
 
-    public function create($branch)
+    public function create($underpayment)
     {
         try {
-            return $this->installments->create($branch);
+            return $this->underpayment->create($underpayment);
         } catch (\Exception $e) {
             dd($e);
             return $e;
@@ -34,9 +34,8 @@ class InstallmentRepository
     public function search_one($type, $value)
     {
         try {
-            return $this->installments->where([$type => $value])->with('loan.member')->first();
+            return $this->underpayment->where([$type => $value])->first();
         } catch (\Exception $e) {
-            dd($e);
             return $e;
         }
     }
@@ -44,7 +43,7 @@ class InstallmentRepository
     public function search_many($type, $value)
     {
         try {
-            return $this->installments->where([$type => $value, 'status' => 'ACTIVE'])->get();
+            return $this->underpayment->where([$type => $value])->get();
         } catch (\Exception $e) {
             return $e;
         }
@@ -52,7 +51,7 @@ class InstallmentRepository
     public function get_all()
     {
         try {
-            return $this->installments->where(['status' => 'ACTIVE'])->get();
+            return $this->underpayment->with('center.group')->get();
         } catch (\Exception $e) {
             return $e;
         }
