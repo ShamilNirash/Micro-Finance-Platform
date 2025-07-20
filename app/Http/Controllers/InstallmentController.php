@@ -51,9 +51,12 @@ class InstallmentController extends Controller
                     $this->installmentRepository->update($installmentId, 'pay_in_date', true);
                 }
                 $this->installmentRepository->update($installmentId, 'payed_date', $now);
-                $this->loanRepository->update($relatedInstallment->loan->id, 'status', 'COMPLETED');
+                if ($request->amount < $relatedInstallment->installment_amount) {
+                    $this->underpaymentRepository->create(['amount' => $request->amount, 'installment_id' => $installmentId, 'payed_date' => $now]);
+                }
                 if ($relatedInstallment->loan->terms == $relatedInstallment->installment_number) {
                     $this->memberRepository->update($relatedInstallment->loan->member->id, 'status', 'INACTIVE');
+                    $this->loanRepository->update($relatedInstallment->loan->id, 'status', 'COMPLETED');
                 }
             } else {
                 $now = now();
