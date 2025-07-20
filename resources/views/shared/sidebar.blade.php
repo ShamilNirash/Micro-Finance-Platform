@@ -95,7 +95,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/collections"
+                            <a href="/collection"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/CurrencyCircleDollar.svg') }}" alt="Collections Icon"
                                     class="h-4 w-4">

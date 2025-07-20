@@ -12,42 +12,43 @@
             <!---Cards-->
             <!--<div class="flex w-full lg:h-1/6">
 
-                                                                                                                <div id="topCards" class="grid grid-cols-1 lg:flex gap-2 lg:gap-08 w-full p-2 lg:p-0 lg:py- lg:pb-4">
+                                                                                                                            <div id="topCards" class="grid grid-cols-1 lg:flex gap-2 lg:gap-08 w-full p-2 lg:p-0 lg:py- lg:pb-4">
 
-                                                                                                                    <div id="totalLoan" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="balangoda">
-                                                                                                                        <div class="flex flex-col w-1/2 ">
-                                                                                                                            <h2 class="text-sm font-semibold text-gray-600">Total Loan</h2>
-                                                                                                                            <p class="text-sm text-gray-400">Balangoda</p>
-                                                                                                                        </div>
-                                                                                                                        <div class="flex flex-col justify-items-end items-end  w-1/2">
-                                                                                                                            <h1 class="text-xl md:text-lg  font-semibold text-right text-gray-600">05</h1>
-                                                                                                                        </div>
-                                                                                                                    </div>
+                                                                                                                                <div id="totalLoan" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="balangoda">
+                                                                                                                                    <div class="flex flex-col w-1/2 ">
+                                                                                                                                        <h2 class="text-sm font-semibold text-gray-600">Total Loan</h2>
+                                                                                                                                        <p class="text-sm text-gray-400">Balangoda</p>
+                                                                                                                                    </div>
+                                                                                                                                    <div class="flex flex-col justify-items-end items-end  w-1/2">
+                                                                                                                                        <h1 class="text-xl md:text-lg  font-semibold text-right text-gray-600">05</h1>
+                                                                                                                                    </div>
+                                                                                                                                </div>
 
-                                                                                                                    <div id="totalResived" class="bg-gray-100 px-4 py-2 lg:py-2 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="balangoda">
-                                                                                                                        <div class="flex flex-col  w-1/2 ">
-                                                                                                                            <h2 class="text-sm font-semibold text-gray-600 ">Total Resived</h2>
-                                                                                                                            <p class="text-xs text-gray-400 ">Balangoda</p>
-                                                                                                                        </div>
-                                                                                                                        <div class="flex flex-col justify-items-end items-end  w-1/2">
-                                                                                                                            <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">12000000/=</h1>
-                                                                                                                        </div>
-                                                                                                                    </div>
+                                                                                                                                <div id="totalResived" class="bg-gray-100 px-4 py-2 lg:py-2 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="balangoda">
+                                                                                                                                    <div class="flex flex-col  w-1/2 ">
+                                                                                                                                        <h2 class="text-sm font-semibold text-gray-600 ">Total Resived</h2>
+                                                                                                                                        <p class="text-xs text-gray-400 ">Balangoda</p>
+                                                                                                                                    </div>
+                                                                                                                                    <div class="flex flex-col justify-items-end items-end  w-1/2">
+                                                                                                                                        <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">12000000/=</h1>
+                                                                                                                                    </div>
+                                                                                                                                </div>
 
-                                                                                                                    <div id="totalIncome" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="ella">
-                                                                                                                        <div class="flex flex-col w-1/2 ">
-                                                                                                                            <h2 class="text-sm font-semibold text-gray-600">Total Income</h2>
-                                                                                                                            <p class="text-sm text-gray-400">Ella</p>
-                                                                                                                        </div>
-                                                                                                                        <div class="flex flex-col justify-items-end items-end  w-1/2">
-                                                                                                                            <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">180000/=</h1>
-                                                                                                                        </div>
-                                                                                                                    </div>
+                                                                                                                                <div id="totalIncome" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="ella">
+                                                                                                                                    <div class="flex flex-col w-1/2 ">
+                                                                                                                                        <h2 class="text-sm font-semibold text-gray-600">Total Income</h2>
+                                                                                                                                        <p class="text-sm text-gray-400">Ella</p>
+                                                                                                                                    </div>
+                                                                                                                                    <div class="flex flex-col justify-items-end items-end  w-1/2">
+                                                                                                                                        <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">180000/=</h1>
+                                                                                                                                    </div>
+                                                                                                                                </div>
 
-                                                                                                                </div>
-                                                                                                            </div>-->
+                                                                                                                            </div>
+                                                                                                                        </div>-->
 
             <!--Start Table and Card Vies-->
+
             <div class="p-0 border-0 lg:py-2 lg:bg-sky-50 lg:border rounded-lg flex flex-col justify-between lg:h-full">
                 <!--lg:h-5/6-->
                 <!-- Top Bar - Seach bar and filter option for both mobile and web -->
@@ -166,72 +167,254 @@
                 <!-------------CARD------------------------------------------------------------------------------------------------------------>
                 <!-- Centers Grid card format hidden for lg screens -->
                 <div id="centersGrid" class="grid grid-cols-1 sm:grid-cols-1 lg:hidden gap-4 p-2">
-                    <!-- Card for a center -->
-                    <div class="rounded-md shadow flex flex-col justify-between w-full bg-blue-200 hover:bg-blue-300"
-                        data-center="Malwaragoda" data-branch="balangoda">
-                        <div class="h-12 flex flex-col items-center justify-center bg-blue-100  rounded-t-md">
-                            <p class=" text-sm font-bold text-gray-800">Center Name</p>
-                            <div class="text-xs flex items-center space-x-1 ">
-                                <img src="{{ asset('assets/icons/Users.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
-                                <p class="text-gray-700">Dunura Rubasinghe</p>
+                    @foreach ($all_active_centers as $center)
+                        @php
+
+                            $filterStartDate = request()->startDate
+                                ? \Carbon\Carbon::parse(request()->startDate)
+                                : null;
+                            $filterEndDate = request()->endDate ? \Carbon\Carbon::parse(request()->endDate) : null;
+                            $totalActiveLoans = $center->group->sum(function ($group) use (
+                                $filterStartDate,
+                                $filterEndDate,
+                            ) {
+                                return $group->member->sum(function ($member) use ($filterStartDate, $filterEndDate) {
+                                    return $member->loan
+                                        ->filter(function ($loan) use ($filterStartDate, $filterEndDate) {
+                                            /* if ($loan->status !== 'UNCOMPLETED') {
+                                                                    return false;
+                                                                } */
+
+                                            // Loop through all installments of the loan
+                                            foreach ($loan->installment as $installment) {
+                                                // 1. Check underpayments for this installment
+                                                foreach ($installment->underpayment as $underpayment) {
+                                                    $underPayedDate = Carbon::parse($underpayment->payed_date);
+                                                    if (
+                                                        (!$filterStartDate || $underPayedDate >= $filterStartDate) &&
+                                                        (!$filterEndDate || $underPayedDate <= $filterEndDate)
+                                                    ) {
+                                                        return true;
+                                                    }
+                                                }
+                                                $installmentPayedDate = Carbon::parse($installment->payed_date);
+                                                if (
+                                                    (!$filterStartDate || $installmentPayedDate >= $filterStartDate) &&
+                                                    (!$filterEndDate || $installmentPayedDate <= $filterEndDate)
+                                                ) {
+                                                    return true;
+                                                }
+                                            }
+
+                                            return false; // No conditions met
+                                        })
+                                        ->count(); // Count each loan only once
+                                });
+                            });
+
+                            $totalReceived = $center->group->sum(function ($group) use (
+                                $filterStartDate,
+                                $filterEndDate,
+                            ) {
+                                return $group->member->sum(function ($member) use ($filterStartDate, $filterEndDate) {
+                                    return $member->loan->sum(function ($loan) use ($filterStartDate, $filterEndDate) {
+                                        return $loan->installment->sum(function ($installment) use (
+                                            $filterStartDate,
+                                            $filterEndDate,
+                                        ) {
+                                            // If installment has underpayments
+                                            if (
+                                                $installment->underpayment &&
+                                                $installment->underpayment->isNotEmpty()
+                                            ) {
+                                                return $installment->underpayment
+                                                    ->filter(function ($underpayment) use (
+                                                        $filterStartDate,
+                                                        $filterEndDate,
+                                                    ) {
+                                                        $payedDate = Carbon::parse($underpayment->payed_date);
+                                                        return (!$filterStartDate || $payedDate >= $filterStartDate) &&
+                                                            (!$filterEndDate || $payedDate <= $filterEndDate);
+                                                    })
+                                                    ->sum('amount'); // Sum filtered underpayments
+                                            }
+
+                                            $payedDate = Carbon::parse($installment->payed_date);
+                                            if (
+                                                (!$filterStartDate || $payedDate >= $filterStartDate) &&
+                                                (!$filterEndDate || $payedDate <= $filterEndDate)
+                                            ) {
+                                                return $installment->amount;
+                                            }
+
+                                            return 0; // No match
+                                        });
+                                    });
+                                });
+                            });
+
+                            $totalIncome = $center->group->sum(function ($group) use (
+                                $filterStartDate,
+                                $filterEndDate,
+                            ) {
+                                return $group->member->sum(function ($member) use ($filterStartDate, $filterEndDate) {
+                                    return $member->loan->sum(function ($loan) use ($filterStartDate, $filterEndDate) {
+                                        return $loan->installment
+                                            ->filter(function ($installment) use ($filterStartDate, $filterEndDate) {
+                                                $date = Carbon::parse($installment->date_and_time);
+                                                return (!$filterStartDate || $date >= $filterStartDate) &&
+                                                    (!$filterEndDate || $date <= $filterEndDate);
+                                            })
+                                            ->sum('installment_amount');
+                                    });
+                                });
+                            });
+
+                            $noPaid = $totalIncome - $totalReceived;
+
+                            $groupsInformation = $center->group->map(function ($group) use (
+                                $filterStartDate,
+                                $filterEndDate,
+                            ) {
+                                // --- Total Active Loans ---
+                                $totalActiveLoans = $group->member->sum(function ($member) use (
+                                    $filterStartDate,
+                                    $filterEndDate,
+                                ) {
+                                    return $member->loan
+                                        ->filter(function ($loan) use ($filterStartDate, $filterEndDate) {
+                                            foreach ($loan->installment as $installment) {
+                                                // Check underpayments
+                                                foreach ($installment->underpayment as $underpayment) {
+                                                    $underPayedDate = Carbon::parse($underpayment->payed_date);
+                                                    if (
+                                                        (!$filterStartDate || $underPayedDate >= $filterStartDate) &&
+                                                        (!$filterEndDate || $underPayedDate <= $filterEndDate)
+                                                    ) {
+                                                        return true;
+                                                    }
+                                                }
+
+                                                // Check installment payed_date
+                                                $installmentPayedDate = Carbon::parse($installment->payed_date);
+                                                if (
+                                                    (!$filterStartDate || $installmentPayedDate >= $filterStartDate) &&
+                                                    (!$filterEndDate || $installmentPayedDate <= $filterEndDate)
+                                                ) {
+                                                    return true;
+                                                }
+                                            }
+
+                                            return false;
+                                        })
+                                        ->count();
+                                });
+
+                                // --- Total Received ---
+                                $totalReceived = $group->member->sum(function ($member) use (
+                                    $filterStartDate,
+                                    $filterEndDate,
+                                ) {
+                                    return $member->loan->sum(function ($loan) use ($filterStartDate, $filterEndDate) {
+                                        return $loan->installment->sum(function ($installment) use (
+                                            $filterStartDate,
+                                            $filterEndDate,
+                                        ) {
+                                            // If installment has underpayments
+                                            if (
+                                                $installment->underpayment &&
+                                                $installment->underpayment->isNotEmpty()
+                                            ) {
+                                                return $installment->underpayment
+                                                    ->filter(function ($underpayment) use (
+                                                        $filterStartDate,
+                                                        $filterEndDate,
+                                                    ) {
+                                                        $payedDate = Carbon::parse($underpayment->payed_date);
+                                                        return (!$filterStartDate || $payedDate >= $filterStartDate) &&
+                                                            (!$filterEndDate || $payedDate <= $filterEndDate);
+                                                    })
+                                                    ->sum('amount');
+                                            }
+
+                                            $payedDate = Carbon::parse($installment->payed_date);
+                                            if (
+                                                (!$filterStartDate || $payedDate >= $filterStartDate) &&
+                                                (!$filterEndDate || $payedDate <= $filterEndDate)
+                                            ) {
+                                                return $installment->amount;
+                                            }
+
+                                            return 0;
+                                        });
+                                    });
+                                });
+
+                                $totalIncome = $group->member->sum(function ($member) use (
+                                    $filterStartDate,
+                                    $filterEndDate,
+                                ) {
+                                    return $member->loan->sum(function ($loan) use ($filterStartDate, $filterEndDate) {
+                                        return $loan->installment
+                                            ->filter(function ($installment) use ($filterStartDate, $filterEndDate) {
+                                                $date = Carbon::parse($installment->date_and_time);
+                                                return (!$filterStartDate || $date >= $filterStartDate) &&
+                                                    (!$filterEndDate || $date <= $filterEndDate);
+                                            })
+                                            ->sum('installment_amount');
+                                    });
+                                });
+
+                                return [
+                                    'group_id' => $group->id,
+                                    'group_name' => capitalizeFirstLetter($group->group_name),
+                                    'received' => number_format($totalReceived, 2),
+                                    'to_pay' => $totalIncome - $totalReceived,
+                                    'total' => $totalIncome,
+                                    'active_loans' => $totalActiveLoans,
+                                ];
+                            });
+
+                            // Optional: convert to array
+                            $groupsInformation = $groupsInformation->values()->toArray();
+                        @endphp
+                        <div class="rounded-md shadow flex flex-col justify-between w-full bg-blue-200 hover:bg-blue-300"
+                            data-center="Malwaragoda" data-branch="balangoda">
+                            <div class="h-12 flex flex-col items-center justify-center bg-blue-100  rounded-t-md">
+                                <p class=" text-sm font-bold text-gray-800">{{ capitalizeEachWord($center->center_name) }}
+                                </p>
+                                <div class="text-xs flex items-center space-x-1 ">
+                                    <img src="{{ asset('assets/icons/Users.svg') }}" alt="Dashboard Icon"
+                                        class="h-3 w-3">
+                                    <p class="text-gray-700">{{ capitalizeEachWord($center->manager_name) }}</p>
+                                </div>
+                            </div>
+                            <div class="h-max py-2 px-4 flex flex-col justify-between space-y-1">
+                                <div class="grid grid-cols-2 w-full">
+                                    <div class="text-xs flex items-center space-x-1 ">
+                                        <p class="">Groups Count :</p>
+                                        <p class="text-gray-700">
+                                            {{ str_pad($center->group->count(), 2, '0', STR_PAD_LEFT) }}</p>
+                                    </div>
+                                    <div class="text-xs flex items-center space-x-1 ">
+                                        <p class="">Total Loans :</p>
+                                        <p class="text-gray-700"> {{ str_pad($totalActiveLoans, 2, '0', STR_PAD_LEFT) }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 w-full">
+                                    <div class="text-xs flex items-center space-x-1 ">
+                                        <p class="">Recived :</p>
+                                        <p class="text-gray-700">Rs. {{ number_format($totalReceived, 2) }}</p>
+                                    </div>
+                                    <div class="text-xs flex items-center space-x-1 ">
+                                        <p class="">No Paid :</p>
+                                        <p class="text-gray-700">Rs. {{ number_format($noPaid, 2) }}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="h-max py-2 px-4 flex flex-col justify-between space-y-1">
-                            <div class="grid grid-cols-2 w-full">
-                                <div class="text-xs flex items-center space-x-1 ">
-                                    <p class="">Groups Count :</p>
-                                    <p class="text-gray-700">05</p>
-                                </div>
-                                <div class="text-xs flex items-center space-x-1 ">
-                                    <p class="">Total Loans :</p>
-                                    <p class="text-gray-700">10</p>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 w-full">
-                                <div class="text-xs flex items-center space-x-1 ">
-                                    <p class="">To Recived :</p>
-                                    <p class="text-gray-700">05</p>
-                                </div>
-                                <div class="text-xs flex items-center space-x-1 ">
-                                    <p class="">Today Income :</p>
-                                    <p class="text-gray-700">10</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Sample for a center -->
-                    <div class="rounded-md shadow flex flex-col justify-between w-full bg-blue-200 hover:bg-blue-200"
-                        data-center="Ella Center" data-branch="ella">
-                        <div class="h-12 flex flex-col items-center justify-center bg-blue-100  rounded-t-md">
-                            <p class=" text-sm font-bold text-gray-800">Ella Center</p>
-                            <div class="text-xs flex items-center space-x-1 ">
-                                <img src="{{ asset('assets/icons/Users.svg') }}" alt="Dashboard Icon" class="h-3 w-3">
-                                <p class="text-gray-700">Saman Perera</p>
-                            </div>
-                        </div>
-                        <div class="h-max py-2 px-4 flex flex-col justify-between space-y-1">
-                            <div class="grid grid-cols-2 w-full">
-                                <div class="text-xs flex items-center space-x-1 ">
-                                    <p class="">Groups Count :</p>
-                                    <p class="text-gray-700">03</p>
-                                </div>
-                                <div class="text-xs flex items-center space-x-1 ">
-                                    <p class="">Total Loans :</p>
-                                    <p class="text-gray-700">08</p>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 w-full">
-                                <div class="text-xs flex items-center space-x-1 ">
-                                    <p class="">To Recived :</p>
-                                    <p class="text-gray-700">03</p>
-                                </div>
-                                <div class="text-xs flex items-center space-x-1 ">
-                                    <p class="">Today Income :</p>
-                                    <p class="text-gray-700">15</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
                 <!-------------TABLE------------------------------------------------------------------------------------------------------------>
@@ -264,15 +447,16 @@
                                             data-center-id="{{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }}"
                                             data-branch-name="{{ capitalizeEachWord($center->branch->branch_name) }}"
                                             data-center-name="{{ capitalizeEachWord($center->center_name) }}"
-                                            data-manager="{{ capitalizeEachWord($center->manager_name) }}"
-                                            data-to-recive="2000" data-today-income="1000000" data-date="2025-06-01">
+                                            data-manager="{{ capitalizeEachWord($center->manager_name) }}">
                                             <td class="pl-2 text-left">
                                                 <input type="checkbox" name="selected_ids[]" value="1"
                                                     class="form-checkbox h-4 w-4 text-blue-600 m-1">
                                             </td>
-                                            <td class="py-2 text-left">{{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }}
+                                            <td class="py-2 text-left">
+                                                {{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }}
                                             </td>
-                                            <td class="py-2 text-left">{{ capitalizeFirstLetter($center->center_name) }}
+                                            <td class="py-2 text-left">
+                                                {{ capitalizeFirstLetter($center->center_name) }}
                                             </td>
                                             <td class="py-2 text-left">
                                                 {{ str_pad($center->group->count(), 2, '0', STR_PAD_LEFT) }}</td>
@@ -549,7 +733,7 @@
                                                     return [
                                                         'group_id' => $group->id,
                                                         'group_name' => capitalizeFirstLetter($group->group_name),
-                                                        'received' =>  number_format($totalReceived, 2),
+                                                        'received' => number_format($totalReceived, 2),
                                                         'to_pay' => $totalIncome - $totalReceived,
                                                         'total' => $totalIncome,
                                                         'active_loans' => $totalActiveLoans,
