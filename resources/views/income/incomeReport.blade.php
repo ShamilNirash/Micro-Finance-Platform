@@ -12,40 +12,40 @@
             <!---Cards-->
             <!--<div class="flex w-full lg:h-1/6">
 
-                                                                            <div id="topCards" class="grid grid-cols-1 lg:flex gap-2 lg:gap-08 w-full p-2 lg:p-0 lg:py- lg:pb-4">
+                                                                                        <div id="topCards" class="grid grid-cols-1 lg:flex gap-2 lg:gap-08 w-full p-2 lg:p-0 lg:py- lg:pb-4">
 
-                                                                                <div id="totalLoan" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="balangoda">
-                                                                                    <div class="flex flex-col w-1/2 ">
-                                                                                        <h2 class="text-sm font-semibold text-gray-600">Total Loan</h2>
-                                                                                        <p class="text-sm text-gray-400">Balangoda</p>
-                                                                                    </div>
-                                                                                    <div class="flex flex-col justify-items-end items-end  w-1/2">
-                                                                                        <h1 class="text-xl md:text-lg  font-semibold text-right text-gray-600">05</h1>
-                                                                                    </div>
-                                                                                </div>
+                                                                                            <div id="totalLoan" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="balangoda">
+                                                                                                <div class="flex flex-col w-1/2 ">
+                                                                                                    <h2 class="text-sm font-semibold text-gray-600">Total Loan</h2>
+                                                                                                    <p class="text-sm text-gray-400">Balangoda</p>
+                                                                                                </div>
+                                                                                                <div class="flex flex-col justify-items-end items-end  w-1/2">
+                                                                                                    <h1 class="text-xl md:text-lg  font-semibold text-right text-gray-600">05</h1>
+                                                                                                </div>
+                                                                                            </div>
 
-                                                                                <div id="totalResived" class="bg-gray-100 px-4 py-2 lg:py-2 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="balangoda">
-                                                                                    <div class="flex flex-col  w-1/2 ">
-                                                                                        <h2 class="text-sm font-semibold text-gray-600 ">Total Resived</h2>
-                                                                                        <p class="text-xs text-gray-400 ">Balangoda</p>
-                                                                                    </div>
-                                                                                    <div class="flex flex-col justify-items-end items-end  w-1/2">
-                                                                                        <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">12000000/=</h1>
-                                                                                    </div>
-                                                                                </div>
+                                                                                            <div id="totalResived" class="bg-gray-100 px-4 py-2 lg:py-2 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="balangoda">
+                                                                                                <div class="flex flex-col  w-1/2 ">
+                                                                                                    <h2 class="text-sm font-semibold text-gray-600 ">Total Resived</h2>
+                                                                                                    <p class="text-xs text-gray-400 ">Balangoda</p>
+                                                                                                </div>
+                                                                                                <div class="flex flex-col justify-items-end items-end  w-1/2">
+                                                                                                    <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">12000000/=</h1>
+                                                                                                </div>
+                                                                                            </div>
 
-                                                                                <div id="totalIncome" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="ella">
-                                                                                    <div class="flex flex-col w-1/2 ">
-                                                                                        <h2 class="text-sm font-semibold text-gray-600">Total Income</h2>
-                                                                                        <p class="text-sm text-gray-400">Ella</p>
-                                                                                    </div>
-                                                                                    <div class="flex flex-col justify-items-end items-end  w-1/2">
-                                                                                        <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">180000/=</h1>
-                                                                                    </div>
-                                                                                </div>
+                                                                                            <div id="totalIncome" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="ella">
+                                                                                                <div class="flex flex-col w-1/2 ">
+                                                                                                    <h2 class="text-sm font-semibold text-gray-600">Total Income</h2>
+                                                                                                    <p class="text-sm text-gray-400">Ella</p>
+                                                                                                </div>
+                                                                                                <div class="flex flex-col justify-items-end items-end  w-1/2">
+                                                                                                    <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">180000/=</h1>
+                                                                                                </div>
+                                                                                            </div>
 
-                                                                            </div>
-                                                                        </div>-->
+                                                                                        </div>
+                                                                                    </div>-->
 
             <!--Start Table and Card Vies-->
             <div class="p-0 border-0 lg:py-2 lg:bg-sky-50 lg:border rounded-lg flex flex-col justify-between lg:h-full">
@@ -261,8 +261,10 @@
                                 <tbody id="tableBody" class="text-gray-800 text-xs font-light bg-white">
                                     @foreach ($all_active_centers as $center)
                                         <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg  view-details"
-                                            data-center-id="1" data-branch-name="Balangoda"
-                                            data-center-name="Malwaragoda" data-manager="John Doe" data-loan-count="4"
+                                            data-center-id="{{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }}"
+                                            data-branch-name="{{ capitalizeEachWord($center->branch->branch_name) }}"
+                                            data-center-name="{{ capitalizeEachWord($center->center_name) }}"
+                                            data-manager="{{ capitalizeEachWord($center->manager_name) }}"
                                             data-to-recive="2000" data-today-income="1000000" data-date="2025-06-01">
                                             <td class="pl-2 text-left">
                                                 <input type="checkbox" name="selected_ids[]" value="1"
@@ -421,12 +423,14 @@
 
                                                 $noPaid = $totalIncome - $totalReceived;
                                             @endphp
-                                            <td class="py-2 text-left">
+                                            <td id="totalLoanCount" class="py-2 text-left">
                                                 {{ $totalActiveLoans }}
                                             </td>
 
-                                            <td class="py-2 text-left">Rs. {{ number_format($totalReceived, 2) }}</td>
-                                            <td class="py-2 text-left">Rs. {{ number_format($noPaid, 2) }}</td>
+                                            <td id="totalReceivedCount" class="py-2 text-left">Rs.
+                                                {{ number_format($totalReceived, 2) }}</td>
+                                            <td id="totalNoPaidCount" class="py-2 text-left">Rs.
+                                                {{ number_format($noPaid, 2) }}</td>
                                             <td class="py-2 text-left">Rs. {{ number_format($totalIncome, 2) }}</td>
 
                                             <td class="py-2 text-center flex justify-center items-center gap-1">
@@ -477,27 +481,27 @@
         <!-- Second Column: Side view of table view -->
         <div id="RowDetails" class="hidden h-full lg:w-4/12 flex-col transition-all duration-300 overflow-y-auto">
             <div id="RowDetailsContent" class="border-b p-4 h-2/8">
-                <h1 id="branchName" class="text-md font-medium text-gray-800 mb-4">Branch Name</h1>
+                <h1 id="branchNameSlideBar" class="text-md font-medium text-gray-800 mb-4"></h1>
                 <div class="grid grid-cols-2 gap-y-2">
                     <div>
                         <p for="Cname" class="text-xs text-gray-400">Center Name</p>
-                        <p id="Cname" class="text-sm">001 Center Name</p>
+                        <p id="CnameSlideBar" class="text-sm">001 Center Name</p>
                     </div>
                     <div>
                         <p for="Cmanager" class="text-xs text-gray-400">Center Manager</p>
-                        <p id="Cmanager" class="text-sm">Center Manager</p>
+                        <p id="CmanagerSlideBar" class="text-sm">Center Manager</p>
                     </div>
                     <div>
                         <p for="loanCount" class="text-xs text-gray-400">Loan Count</p>
-                        <p id="loanCount" class="text-sm">-</p>
+                        <p id="loanCountSlideBar" class="text-sm">-</p>
                     </div>
                     <div>
-                        <p for="toRecive" class="text-xs text-gray-400">To Recived</p>
-                        <p id="toRecive" class="text-sm mt-0">-</p>
+                        <p for="toRecive" class="text-xs text-gray-400">Recived</p>
+                        <p id="toReciveSlideBar" class="text-sm mt-0">-</p>
                     </div>
                     <div>
-                        <p for="todayIncome" class="text-xs text-gray-400">Today Income</p>
-                        <p id="todayIncome" class="text-sm mt-0">-</p>
+                        <p for="todayIncome" class="text-xs text-gray-400">No Paid</p>
+                        <p id="noPaidSlideBar" class="text-sm mt-0">-</p>
                     </div>
                 </div>
             </div>
@@ -673,24 +677,23 @@
                 firstColumn.classList.remove('lg:w-full');
                 firstColumn.classList.add('lg:w-8/12');
                 RowDetails.classList.add('lg:flex');
-                totalLoan.classList.add('lg:hidden');
-                topCards.classList.add('lg:grid-cols-2');
+
                 dateFilter.classList.add('lg:hidden');
                 filterRow.classList.remove('lg:w-1/2');
 
                 const branchName = row.getAttribute('data-branch-name');
                 const centerName = row.getAttribute('data-center-name');
                 const manager = row.getAttribute('data-manager');
-                const loanCount = row.getAttribute('data-loan-count');
-                const toRecive = row.getAttribute('data-to-recive');
-                const todayIncome = row.getAttribute('data-today-income');
+                const loanCount = document.getElementById('totalLoanCount').textContent;
+                const received = document.getElementById('totalReceivedCount').textContent;
+                const nopaid = document.getElementById('totalNoPaidCount').textContent;
 
-                document.getElementById('branchName').textContent = branchName;
-                document.getElementById('Cname').textContent = centerName;
-                document.getElementById('Cmanager').textContent = manager;
-                document.getElementById('loanCount').textContent = loanCount;
-                document.getElementById('toRecive').textContent = toRecive;
-                document.getElementById('todayIncome').textContent = todayIncome;
+                document.getElementById('branchNameSlideBar').textContent = branchName;
+                document.getElementById('CnameSlideBar').textContent = centerName;
+                document.getElementById('CmanagerSlideBar').textContent = manager;
+                document.getElementById('loanCountSlideBar').textContent = loanCount;
+                document.getElementById('toReciveSlideBar').textContent = received;
+                document.getElementById('noPaidSlideBar').textContent = nopaid;
             });
         });
     </script>
