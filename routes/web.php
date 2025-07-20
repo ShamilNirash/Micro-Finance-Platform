@@ -69,7 +69,9 @@ Route::post('/installments/update/{installmentId}', [InstallmentController::clas
 
 /*income*/
 Route::get('/income', [CenterController::class,'incomeView'])->name('centers.viewIncomeBlade');
-Route::get('/collection', [CenterController::class,'collectionView'])->name('centers.viewCollectionBlade');
+Route::get('/collection',  [CenterController::class,'collectionView'])->name('centers.viewCollectionBlade');
+Route::get('/underpayment', [CenterController::class,'underPaymentView'])->name('centers.viewUnderPaymentBlade');
+
 
 
 

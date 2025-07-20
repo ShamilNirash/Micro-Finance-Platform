@@ -12,40 +12,40 @@
             <!---Cards-->
             <!--<div class="flex w-full lg:h-1/6">
 
-                                                                                                                            <div id="topCards" class="grid grid-cols-1 lg:flex gap-2 lg:gap-08 w-full p-2 lg:p-0 lg:py- lg:pb-4">
+                                                                                                                                                        <div id="topCards" class="grid grid-cols-1 lg:flex gap-2 lg:gap-08 w-full p-2 lg:p-0 lg:py- lg:pb-4">
 
-                                                                                                                                <div id="totalLoan" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="balangoda">
-                                                                                                                                    <div class="flex flex-col w-1/2 ">
-                                                                                                                                        <h2 class="text-sm font-semibold text-gray-600">Total Loan</h2>
-                                                                                                                                        <p class="text-sm text-gray-400">Balangoda</p>
-                                                                                                                                    </div>
-                                                                                                                                    <div class="flex flex-col justify-items-end items-end  w-1/2">
-                                                                                                                                        <h1 class="text-xl md:text-lg  font-semibold text-right text-gray-600">05</h1>
-                                                                                                                                    </div>
-                                                                                                                                </div>
+                                                                                                                                                            <div id="totalLoan" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="balangoda">
+                                                                                                                                                                <div class="flex flex-col w-1/2 ">
+                                                                                                                                                                    <h2 class="text-sm font-semibold text-gray-600">Total Loan</h2>
+                                                                                                                                                                    <p class="text-sm text-gray-400">Balangoda</p>
+                                                                                                                                                                </div>
+                                                                                                                                                                <div class="flex flex-col justify-items-end items-end  w-1/2">
+                                                                                                                                                                    <h1 class="text-xl md:text-lg  font-semibold text-right text-gray-600">05</h1>
+                                                                                                                                                                </div>
+                                                                                                                                                            </div>
 
-                                                                                                                                <div id="totalResived" class="bg-gray-100 px-4 py-2 lg:py-2 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="balangoda">
-                                                                                                                                    <div class="flex flex-col  w-1/2 ">
-                                                                                                                                        <h2 class="text-sm font-semibold text-gray-600 ">Total Resived</h2>
-                                                                                                                                        <p class="text-xs text-gray-400 ">Balangoda</p>
-                                                                                                                                    </div>
-                                                                                                                                    <div class="flex flex-col justify-items-end items-end  w-1/2">
-                                                                                                                                        <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">12000000/=</h1>
-                                                                                                                                    </div>
-                                                                                                                                </div>
+                                                                                                                                                            <div id="totalResived" class="bg-gray-100 px-4 py-2 lg:py-2 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="balangoda">
+                                                                                                                                                                <div class="flex flex-col  w-1/2 ">
+                                                                                                                                                                    <h2 class="text-sm font-semibold text-gray-600 ">Total Resived</h2>
+                                                                                                                                                                    <p class="text-xs text-gray-400 ">Balangoda</p>
+                                                                                                                                                                </div>
+                                                                                                                                                                <div class="flex flex-col justify-items-end items-end  w-1/2">
+                                                                                                                                                                    <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">12000000/=</h1>
+                                                                                                                                                                </div>
+                                                                                                                                                            </div>
 
-                                                                                                                                <div id="totalIncome" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="ella">
-                                                                                                                                    <div class="flex flex-col w-1/2 ">
-                                                                                                                                        <h2 class="text-sm font-semibold text-gray-600">Total Income</h2>
-                                                                                                                                        <p class="text-sm text-gray-400">Ella</p>
-                                                                                                                                    </div>
-                                                                                                                                    <div class="flex flex-col justify-items-end items-end  w-1/2">
-                                                                                                                                        <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">180000/=</h1>
-                                                                                                                                    </div>
-                                                                                                                                </div>
+                                                                                                                                                            <div id="totalIncome" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="ella">
+                                                                                                                                                                <div class="flex flex-col w-1/2 ">
+                                                                                                                                                                    <h2 class="text-sm font-semibold text-gray-600">Total Income</h2>
+                                                                                                                                                                    <p class="text-sm text-gray-400">Ella</p>
+                                                                                                                                                                </div>
+                                                                                                                                                                <div class="flex flex-col justify-items-end items-end  w-1/2">
+                                                                                                                                                                    <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">180000/=</h1>
+                                                                                                                                                                </div>
+                                                                                                                                                            </div>
 
-                                                                                                                            </div>
-                                                                                                                        </div>-->
+                                                                                                                                                        </div>
+                                                                                                                                                    </div>-->
 
             <!--Start Table and Card Vies-->
 
@@ -174,6 +174,7 @@
                                 ? \Carbon\Carbon::parse(request()->startDate)
                                 : null;
                             $filterEndDate = request()->endDate ? \Carbon\Carbon::parse(request()->endDate) : null;
+
                             $totalActiveLoans = $center->group->sum(function ($group) use (
                                 $filterStartDate,
                                 $filterEndDate,
@@ -181,34 +182,76 @@
                                 return $group->member->sum(function ($member) use ($filterStartDate, $filterEndDate) {
                                     return $member->loan
                                         ->filter(function ($loan) use ($filterStartDate, $filterEndDate) {
-                                            /* if ($loan->status !== 'UNCOMPLETED') {
-                                                                    return false;
-                                                                } */
+                                            // ✅ 1. If any installment is unpaid (payed_date is null)
+                                            if (
+                                                $loan->installment->contains(function ($installment) {
+                                                    return $installment->status === 'UNPAYED';
+                                                })
+                                            ) {
+                                                return true;
+                                            }
 
-                                            // Loop through all installments of the loan
-                                            foreach ($loan->installment as $installment) {
-                                                // 1. Check underpayments for this installment
-                                                foreach ($installment->underpayment as $underpayment) {
-                                                    $underPayedDate = Carbon::parse($underpayment->payed_date);
-                                                    if (
-                                                        (!$filterStartDate || $underPayedDate >= $filterStartDate) &&
-                                                        (!$filterEndDate || $underPayedDate <= $filterEndDate)
-                                                    ) {
-                                                        return true;
+                                            // ✅ 2. If any installment payed_date is within selected range
+                                            if (
+                                                $loan->installment->contains(function ($installment) use (
+                                                    $filterStartDate,
+                                                    $filterEndDate,
+                                                ) {
+                                                    if (!$installment->payed_date) {
+                                                        return false;
                                                     }
-                                                }
-                                                $installmentPayedDate = Carbon::parse($installment->payed_date);
+                                                    $payedDate = Carbon::parse($installment->payed_date);
+                                                    return (!$filterStartDate || $payedDate >= $filterStartDate) &&
+                                                        (!$filterEndDate || $payedDate <= $filterEndDate);
+                                                })
+                                            ) {
+                                                return true;
+                                            }
+
+                                            // ✅ 3. If any underpayment payed_date is within selected range
+                                            foreach ($loan->installment as $installment) {
                                                 if (
-                                                    (!$filterStartDate || $installmentPayedDate >= $filterStartDate) &&
-                                                    (!$filterEndDate || $installmentPayedDate <= $filterEndDate)
+                                                    $installment->underpayment->contains(function ($underpayment) use (
+                                                        $filterStartDate,
+                                                        $filterEndDate,
+                                                    ) {
+                                                        if (!$underpayment->payed_date) {
+                                                            return false;
+                                                        }
+                                                        $underPayedDate = Carbon::parse($underpayment->payed_date);
+                                                        return (!$filterStartDate ||
+                                                            $underPayedDate >= $filterStartDate) &&
+                                                            (!$filterEndDate || $underPayedDate <= $filterEndDate);
+                                                    })
                                                 ) {
                                                     return true;
                                                 }
                                             }
 
-                                            return false; // No conditions met
+                                            // ✅ 4. If any installment was paid late, and due date is within range
+                                            if (
+                                                $loan->installment->contains(function ($installment) use (
+                                                    $filterStartDate,
+                                                    $filterEndDate,
+                                                ) {
+                                                    if (!$installment->payed_date || !$installment->date_and_time) {
+                                                        return false;
+                                                    }
+                                                    $payedDate = Carbon::parse($installment->payed_date);
+                                                    $dueDate = Carbon::parse($installment->date_and_time);
+
+                                                    return $dueDate < $payedDate &&
+                                                        (!$filterStartDate || $dueDate >= $filterStartDate) &&
+                                                        (!$filterEndDate || $dueDate <= $filterEndDate);
+                                                })
+                                            ) {
+                                                return true;
+                                            }
+
+                                            // ❌ Not active
+                                            return false;
                                         })
-                                        ->count(); // Count each loan only once
+                                        ->count(); // Count matched loans
                                 });
                             });
 
@@ -470,61 +513,6 @@
                                                 $filterEndDate = request()->endDate
                                                     ? \Carbon\Carbon::parse(request()->endDate)
                                                     : null;
-                                                $totalActiveLoans = $center->group->sum(function ($group) use (
-                                                    $filterStartDate,
-                                                    $filterEndDate,
-                                                ) {
-                                                    return $group->member->sum(function ($member) use (
-                                                        $filterStartDate,
-                                                        $filterEndDate,
-                                                    ) {
-                                                        return $member->loan
-                                                            ->filter(function ($loan) use (
-                                                                $filterStartDate,
-                                                                $filterEndDate,
-                                                            ) {
-                                                                /* if ($loan->status !== 'UNCOMPLETED') {
-                                                                    return false;
-                                                                } */
-
-                                                                // Loop through all installments of the loan
-                                                                foreach ($loan->installment as $installment) {
-                                                                    // 1. Check underpayments for this installment
-                                                                    foreach (
-                                                                        $installment->underpayment
-                                                                        as $underpayment
-                                                                    ) {
-                                                                        $underPayedDate = Carbon::parse(
-                                                                            $underpayment->payed_date,
-                                                                        );
-                                                                        if (
-                                                                            (!$filterStartDate ||
-                                                                                $underPayedDate >= $filterStartDate) &&
-                                                                            (!$filterEndDate ||
-                                                                                $underPayedDate <= $filterEndDate)
-                                                                        ) {
-                                                                            return true;
-                                                                        }
-                                                                    }
-                                                                    $installmentPayedDate = Carbon::parse(
-                                                                        $installment->payed_date,
-                                                                    );
-                                                                    if (
-                                                                        (!$filterStartDate ||
-                                                                            $installmentPayedDate >=
-                                                                                $filterStartDate) &&
-                                                                        (!$filterEndDate ||
-                                                                            $installmentPayedDate <= $filterEndDate)
-                                                                    ) {
-                                                                        return true;
-                                                                    }
-                                                                }
-
-                                                                return false; // No conditions met
-                                                            })
-                                                            ->count(); // Count each loan only once
-                                                    });
-                                                });
 
                                                 $totalReceived = $center->group->sum(function ($group) use (
                                                     $filterStartDate,
