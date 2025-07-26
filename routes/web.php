@@ -77,6 +77,8 @@ Route::get('/underpayment', [CenterController::class, 'underPaymentView'])->name
 
 //user routes
 Route::get('/userRole', [UserRoleController::class, 'userRolesView']);
+Route::post('/userRole/create', [UserRoleController::class, 'createUserRole'])->name('userRoles.create');
+
 Route::get('/userAccount', function () {
     return view('settings/userAccount');
 });

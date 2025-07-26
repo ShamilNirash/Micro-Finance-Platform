@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Repositories\UserRoleRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException as ValidationValidationException;
 
 class UserRoleController extends Controller
 {
@@ -18,9 +20,71 @@ class UserRoleController extends Controller
     public function userRolesView()
     {
         try {
-            return view('settings/userRole');
+            $all_active_user_roles = $this->userRoleRepository->get_all();
+            return view('settings/userRole', ['all_active_user_roles' => $all_active_user_roles]);
         } catch (\Exception $e) {
-            Log::error('Error getting active centers: ' . $e->getMessage());
+            Log::error('Error getting active user roles: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+    }
+    public function createUserRole(Request $request)
+    {
+        try {
+            $request->merge([
+                'role_name' => strtolower($request->input('role_name')),
+                'description' => strtolower($request->input('description'))
+            ]);
+
+            $permissions = $request->input('permissions'); // 👈 Collect permissions array
+
+            $request->validate([
+                'role_name' => [
+                    'required',
+                    'string',
+                    'max:255',
+                    Rule::unique('user_roles')->where(function ($query) {
+                        return $query->where('status', 'active');
+                    }),
+                ],
+                'description' => 'string',
+                'permissions.Dashboard' => 'required|numeric',
+                'permissions.Branch Creation' => 'required|numeric',
+                'permissions.User Accounts Creation ' => 'required|numeric',
+                'permissions.User Roles Creation ' => 'required|numeric',
+                'permissions.Centers' => 'required|numeric',
+                'permissions.Members' => 'required|numeric',
+                'permissions.Income' => 'required|numeric',
+                'permissions.Payments' => 'required|numeric',
+                'permissions.Reports' => 'required|numeric',
+            ]);
+
+            $this->userRoleRepository->create([
+                'role_name' => $request['role_name'],
+                'description' => $request['description'],
+                'branch_id' => $request['branch_id'],
+                'payment_date' => $request['payment_day'],
+                'status' => 'ACTIVE',
+
+                // Permissions
+                'dashboard' => $permissions['Dashboard'],
+                'branch_creation' => $permissions['Branch Creation'],
+                'user_accounts_creation' => $permissions['User Accounts Creation '],
+                'user_role_creation' => $permissions['User Roles Creation '],
+                'centers' => $permissions['Centers'],
+                'members' => $permissions['Members'],
+                'income' => $permissions['Income'],
+                'payments' => $permissions['Payments'],
+                'reports' => $permissions['Reports'],
+            ]);
+
+            return redirect()->back()->with('success', 'User Role created successfully.');
+        } catch (ValidationValidationException $e) {
+            return redirect()->back()
+                ->with('show_create_center_popup', true)
+                ->withInput()
+                ->withErrors($e->errors());
+        } catch (\Exception $e) {
+            Log::error('Error creating user role: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong.');
         }
     }
