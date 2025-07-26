@@ -74,8 +74,7 @@
                     <button
                         class="flex items-center justify-between p-2 px-4 w-full rounded-lg hover:bg-sky-100 active:bg-sky-200 sidebar-toggle space-x-2">
                         <div class="flex items-center space-x-2">
-                            <img src="{{ asset('assets/icons/CurrencyDollar.svg') }}" alt="Income Icon"
-                                class="h-4 w-4">
+                            <img src="{{ asset('assets/icons/CurrencyDollar.svg') }}" alt="Income Icon" class="h-4 w-4">
                             <span class="sidebar-text">Income</span>
                         </div>
                         <svg class="w-4 h-4 transform transition-transform duration-200 arrow sidebar-arrow"
@@ -122,8 +121,7 @@
                             <span class="sidebar-text">Payments</span>
                         </div>
                         <svg class="w-4 h-4 transform transition-transform duration-200 arrow sidebar-arrow"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
                         </svg>
@@ -133,8 +131,7 @@
                         <li>
                             <a href="/payments"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
-                                <img src="{{ asset('assets/icons/Money.svg') }}" alt="Payments Icon"
-                                    class="h-4 w-4">
+                                <img src="{{ asset('assets/icons/Money.svg') }}" alt="Payments Icon" class="h-4 w-4">
                                 <span class="sidebar-text-mini">Payments</span>
                             </a>
                         </li>
@@ -236,7 +233,7 @@
                     <!-- Submenu for Settings -->
                     <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-white w-44">
                         <li>
-                            <a href="#"
+                            <a href="/userAccount"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/UserSwitch.svg') }}" alt="User Account Icon"
                                     class="h-4 w-4">
@@ -244,7 +241,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="/userRole"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/GearSix.svg') }}" alt="Settings Icon"
                                     class="h-4 w-4">

@@ -7,6 +7,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\InstallmentController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\UserRoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,8 +54,10 @@ Route::delete('/groups/delete/{centerId}', [GroupController::class, 'deleteGroup
 
 //members routes
 Route::get(
-    '/members',[MemberController::class, 'viewAllMembers'])->name('members.viewblade');
-Route::post('/members/create',[MemberController::class, 'createMember'])->name('members.create');
+    '/members',
+    [MemberController::class, 'viewAllMembers']
+)->name('members.viewblade');
+Route::post('/members/create', [MemberController::class, 'createMember'])->name('members.create');
 Route::get('/unassignmembers/search',  [MemberController::class, 'unAssignMemberSearch']);
 Route::get('/memberSummery/{memberId}', [MemberController::class, 'viewMemberSummary'])->name('member.summary');
 Route::post('/members/update/{memberId}', [MemberController::class, 'updateMember'])->name('members.updateMember');
@@ -62,18 +65,24 @@ Route::delete('/members/delete/{memberId}', [MemberController::class, 'deleteMem
 
 
 //loans routes
-Route::post('/loans/create/{memberId}',[LoanController::class, 'createLoan'])->name('loans.createLoan');
+Route::post('/loans/create/{memberId}', [LoanController::class, 'createLoan'])->name('loans.createLoan');
 
 //installments routes
 Route::post('/installments/update/{installmentId}', [InstallmentController::class, 'updateInstallment'])->name('installments.updateInstallment');
 
 /*income*/
-Route::get('/income', [CenterController::class,'incomeView'])->name('centers.viewIncomeBlade');
-Route::get('/collection',  [CenterController::class,'collectionView'])->name('centers.viewCollectionBlade');
-Route::get('/underpayment', [CenterController::class,'underPaymentView'])->name('centers.viewUnderPaymentBlade');
+Route::get('/income', [CenterController::class, 'incomeView'])->name('centers.viewIncomeBlade');
+Route::get('/collection',  [CenterController::class, 'collectionView'])->name('centers.viewCollectionBlade');
+Route::get('/underpayment', [CenterController::class, 'underPaymentView'])->name('centers.viewUnderPaymentBlade');
 
-
-
+//user routes
+Route::get('/userRole', [UserRoleController::class, 'userRolesView']);
+Route::get('/userAccount', function () {
+    return view('settings/userAccount');
+});
+Route::get('/userLogs', function () {
+    return view('settings/userLogs');
+});
 
 
 Route::get('/recentlyAdded', function () {
@@ -134,12 +143,3 @@ Route::get('/membersReport', function () {
 });
 
 /*Settings*/
-Route::get('/userRole', function () {
-    return view('settings/userRole');
-});
-Route::get('/userAccount', function () {
-    return view('settings/userAccount');
-});
-Route::get('/userLogs', function () {
-    return view('settings/userLogs');
-});

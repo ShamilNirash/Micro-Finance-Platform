@@ -35,7 +35,7 @@ class MemberRepository
         try {
             return $this->members
                 ->where($type, $value)
-                ->whereIn('status', ['ACTIVE', 'INACTIVE'])->with('group.center.branch', 'loan.installment')
+                ->whereIn('status', ['ACTIVE', 'INACTIVE'])->with('group.center.branch', 'loan.installment.underpayment')
                 ->first();
         } catch (\Exception $e) {
             return $e;
@@ -59,7 +59,7 @@ class MemberRepository
         try {
             return $this->members
                 ->where($type, $value)
-                ->whereIn('status', ['ACTIVE', 'INACTIVE'])->with('loan.installment')
+                ->whereIn('status', ['ACTIVE', 'INACTIVE'])->with('loan.installment.underpayment')
                 ->first();
         } catch (\Exception $e) {
             return $e;
@@ -68,7 +68,7 @@ class MemberRepository
     public function get_all()
     {
         try {
-            return $this->members->whereIn('status', ['INACTIVE', 'ACTIVE'])->with('group.center.branch', 'loan.installment')->get();
+            return $this->members->whereIn('status', ['INACTIVE', 'ACTIVE'])->with('group.center.branch', 'loan.installment.underpayment')->get();
         } catch (\Exception $e) {
             return $e;
         }
