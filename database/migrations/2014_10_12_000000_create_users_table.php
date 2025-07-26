@@ -17,12 +17,15 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('first_name')->nullable(false);
             $table->string('last_name')->nullable(false);
-            $table->string('user_name')->nullable(false);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable(false);
+            $table->string('nic_number')->nullable(false); // ✅ NIC field
+            $table->string('mobile_number_1')->nullable(false); // ✅ Phone number field
             $table->integer('user_role_id')->nullable(false);
-            $table->enum('status',['ACTIVE','INACTIVE'])->default('ACTIVE');
+            $table->string('image')->nullable(); // ✅ Profile image path
+            $table->date('payment_date')->nullable(); // ✅ Payment day
+            $table->enum('status', ['ACTIVE', 'INACTIVE'])->default('ACTIVE');
             $table->rememberToken();
             $table->timestamps();
         });

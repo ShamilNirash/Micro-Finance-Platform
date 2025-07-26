@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\UserRoleRepository;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\ValidationException as ValidationValidationException;
+
 
 class UserRoleController extends Controller
 {
@@ -78,7 +79,7 @@ class UserRoleController extends Controller
             ]);
 
             return redirect()->back()->with('success', 'User Role created successfully.');
-        } catch (ValidationValidationException $e) {
+        } catch (ValidationException $e) {
             return redirect()->back()
                 ->with('show_create_center_popup', true)
                 ->withInput()

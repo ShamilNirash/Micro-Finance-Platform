@@ -7,6 +7,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\InstallmentController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserRoleController;
 use Illuminate\Support\Facades\Route;
 
@@ -79,9 +80,7 @@ Route::get('/underpayment', [CenterController::class, 'underPaymentView'])->name
 Route::get('/userRole', [UserRoleController::class, 'userRolesView']);
 Route::post('/userRole/create', [UserRoleController::class, 'createUserRole'])->name('userRoles.create');
 
-Route::get('/userAccount', function () {
-    return view('settings/userAccount');
-});
+Route::get('/userAccount', [UserController::class, 'usersView']);
 Route::get('/userLogs', function () {
     return view('settings/userLogs');
 });

@@ -136,81 +136,35 @@
                 <!-------------CARD------------------------------------------------------------------------------------------------------------>
                 <!-- User Grid card format hidden for lg screens -->
                 <div id="userGrid" class="grid grid-cols-1 sm:grid-cols-1 lg:hidden gap-4 p-2 pt-4">
-                    <!-- Card -->
-                    <div class="rounded-lg shadow-sm border border-gray-200 p-4 pt-2 bg-gray-100 w-full space-y-2 text-xs"
-                        data-role="Admin">
-                        <div class="flex justify-between items-center border-b pb-2">
-                            <div class="flex flex-col space-y-0">
-                                <p class="font-semibold text-gray-700 text-lg">Super Admin</p>
+                    @foreach ($all_active_user_roles as $user_role)
+                        <!-- Card -->
+                        <div class="rounded-lg shadow-sm border border-gray-200 p-4 pt-2 bg-gray-100 w-full space-y-2 text-xs"
+                            data-role="Admin">
+                            <div class="flex justify-between items-center border-b pb-2">
+                                <div class="flex flex-col space-y-0">
+                                    <p class="font-semibold text-gray-700 text-lg">
+                                        {{ capitalizeEachWord($user_role->role_name) }}
+                                    </p>
+                                </div>
+                                <div class="flex flex-col space-y-0">
+                                    <p class="font-semibold text-gray-700 text-lg bg-white px-2 rounded-md">05</p>
+                                </div>
                             </div>
-                            <div class="flex flex-col space-y-0">
-                                <p class="font-semibold text-gray-700 text-lg bg-white px-2 rounded-md">05</p>
-                            </div>
-                        </div>
-                        <!--Actions-->
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 w-full">
-                            <div class="flex justify-between items-center text-sm space-x-2 w-full">
-                                <a href="#"
-                                    class="border rounded-lg hover:bg-blue-700 bg-blue-600 flex-shrink-0 edit-user px-4 py-1 text-white w-1/2 text-center">
-                                    Edit
-                                </a>
-                                <a href="#"
-                                    class="border rounded-lg hover:bg-red-700 bg-red-600 flex-shrink-0 delete-user px-4 py-1 text-white w-1/2 text-center">
-                                    Delete
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Sample for a Card -->
-                    <div class="rounded-lg shadow-sm border border-gray-200 p-4 pt-2 bg-gray-100 w-full space-y-2 text-xs"
-                        data-role="Admin">
-                        <div class="flex justify-between items-center border-b pb-2">
-                            <div class="flex flex-col space-y-0">
-                                <p class="font-semibold text-gray-700 text-lg">Admin</p>
-                            </div>
-                            <div class="flex flex-col space-y-0">
-                                <p class="font-semibold text-gray-700 text-lg bg-white px-2 rounded-md">05</p>
+                            <!--Actions-->
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 w-full">
+                                <div class="flex justify-between items-center text-sm space-x-2 w-full">
+                                    <a href="#"
+                                        class="border rounded-lg hover:bg-blue-700 bg-blue-600 flex-shrink-0 edit-user px-4 py-1 text-white w-1/2 text-center">
+                                        Edit
+                                    </a>
+                                    <a href="#"
+                                        class="border rounded-lg hover:bg-red-700 bg-red-600 flex-shrink-0 delete-user px-4 py-1 text-white w-1/2 text-center">
+                                        Delete
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <!--Actions-->
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 w-full">
-                            <div class="flex justify-between items-center text-sm space-x-2 w-full">
-                                <a href="#"
-                                    class="border rounded-lg hover:bg-blue-700 bg-blue-600 flex-shrink-0 edit-user px-4 py-1 text-white w-1/2 text-center">
-                                    Edit
-                                </a>
-                                <a href="#"
-                                    class="border rounded-lg hover:bg-red-700 bg-red-600 flex-shrink-0 delete-user px-4 py-1 text-white w-1/2 text-center">
-                                    Delete
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Sample for a Card -->
-                    <div class="rounded-lg shadow-sm border border-gray-200 p-4 pt-2 bg-gray-100 w-full space-y-2 text-xs"
-                        data-role="Admin">
-                        <div class="flex justify-between items-center border-b pb-2">
-                            <div class="flex flex-col space-y-0">
-                                <p class="font-semibold text-gray-700 text-lg">Center Manager</p>
-                            </div>
-                            <div class="flex flex-col space-y-0">
-                                <p class="font-semibold text-gray-700 text-lg bg-white px-2 rounded-md">05</p>
-                            </div>
-                        </div>
-                        <!--Actions-->
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 w-full">
-                            <div class="flex justify-between items-center text-sm space-x-2 w-full">
-                                <a href="#"
-                                    class="border rounded-lg hover:bg-blue-700 bg-blue-600 flex-shrink-0 edit-user px-4 py-1 text-white w-1/2 text-center">
-                                    Edit
-                                </a>
-                                <a href="#"
-                                    class="border rounded-lg hover:bg-red-700 bg-red-600 flex-shrink-0 delete-user px-4 py-1 text-white w-1/2 text-center">
-                                    Delete
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
                 <!-------------TABLE------------------------------------------------------------------------------------------------------------>
