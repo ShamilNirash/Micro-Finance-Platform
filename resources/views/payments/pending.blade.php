@@ -113,59 +113,75 @@
                 <!--CARD SECTION-->
                 <div id="memberGrid" class="grid grid-cols-1 sm:grid-cols-1 lg:hidden gap-4 p-2">
                     <!-- Card for a center -->
-                    <div class="rounded-md shadow flex flex-col justify-between w-full border bg-gray-100 hover:bg-gray-300"
-                        data-member="Dunura" data-center="balangoda" data-loan-balance="85955200"
-                        data-pending-amount="2000">
-                        <div class="h-8 flex flex-col items-center justify-center rounded-t-md">
-                            <p class="text-sm font-bold text-gray-800">Dunura Rubasinghe</p>
-                        </div>
-                        <hr>
-                        <div class="h-max py-2 px-4 flex flex-col justify-between space-y-1 bg-gray-200 hover:bg-gray-300">
-                            <div class="grid grid-cols-2 w-full">
-                                <div class="text-xs flex items-center space-x-1">
-                                    <p class="">Center :</p>
-                                    <p class="text-gray-700">Balangoda</p>
+                    @foreach ($allActiveLoans as $loans)
+                        <div class="rounded-md shadow flex flex-col justify-between w-full border bg-gray-100 hover:bg-gray-300"
+                            data-member="Dunura" data-center="balangoda" data-loan-balance="85955200"
+                            data-pending-amount="2000">
+                            <div class="h-8 flex flex-col items-center justify-center rounded-t-md">
+                                <p class="text-sm font-bold text-gray-800">
+                                    {{ capitalizeEachWord($loans->member->full_name) }}</p>
+                            </div>
+                            <hr>
+                            @php
+                                $loanTotal = $loans->loan_amount + $loans->interest;
+                                $noPaidAmount = 0;
+                                $paidAmount = 0;
+                                $now = Carbon::now();
+                                if ($loans->installment) {
+                                    foreach ($loans->installment as $installment) {
+                                        if ($installment->date_and_time < $now) {
+                                            $expected = $installment->installment_amount;
+                                            $paid = $installment->amount;
+
+                                            if ($paid < $expected) {
+                                                $noPaidAmount += $expected - $paid;
+                                            }
+                                        }
+                                        $paidAmount += $installment->amount;
+                                    }
+                                }
+                                $pendingAmount = 0;
+                                if ($loans->installment) {
+                                    foreach ($loans->installment as $installment) {
+                                        // Check if installment is in the future
+                                        if ($installment->date_and_time > $now) {
+                                            $underpayments = $installment->underpayment;
+
+                                            if ($underpayments && $underpayments->count() > 0) {
+                                                $underpaidTotal = $underpayments->sum('amount');
+                                                $pendingAmount += max(
+                                                    0,
+                                                    $installment->installment_amount - $underpaidTotal,
+                                                ); // prevent negative
+                                            } else {
+                                                $pendingAmount += $installment->installment_amount;
+                                            }
+                                        }
+                                    }
+                                }
+                            @endphp
+                            <div
+                                class="h-max py-2 px-4 flex flex-col justify-between space-y-1 bg-gray-200 hover:bg-gray-300">
+                                <div class="grid grid-cols-2 w-full">
+                                    <div class="text-xs flex items-center space-x-1">
+                                        <p class="">Center :</p>
+                                        <p class="text-gray-700">
+                                            {{ capitalizeEachWord($loans->member->group->center->center_name) }}</p>
+                                    </div>
+                                    <div class="text-xs flex items-center space-x-1">
+                                        <p class="">Loan Balance :</p>
+                                        <p class="text-gray-700">Rs. {{ number_format($loanTotal- $paidAmount, 2) }}</p>
+                                    </div>
                                 </div>
-                                <div class="text-xs flex items-center space-x-1">
-                                    <p class="">Loan Balance :</p>
-                                    <p class="text-gray-700">85,955,200</p>
+                                <div class="grid grid-cols-2 w-full">
+                                    <div class="text-xs flex items-center space-x-1">
+                                        <p class="">Pending Amount :</p>
+                                        <p class="text-gray-700">Rs. {{ number_format($pendingAmount, 2) }}</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="grid grid-cols-2 w-full">
-                                <div class="text-xs flex items-center space-x-1">
-                                    <p class="">Pending Amount :</p>
-                                    <p class="text-gray-700">2,000</p>
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                    <!-- Sample card -->
-                    <div class="rounded-md shadow flex flex-col justify-between w-full border bg-gray-100 hover:bg-gray-300"
-                        data-member="Minura" data-center="balangoda" data-loan-balance="85500"
-                        data-pending-amount="2000">
-                        <div class="h-8 flex flex-col items-center justify-center rounded-t-md">
-                            <p class="text-sm font-bold text-gray-800">Minura</p>
-                        </div>
-                        <hr>
-                        <div class="h-max py-2 px-4 flex flex-col justify-between space-y-1 bg-gray-200 hover:bg-gray-300">
-                            <div class="grid grid-cols-2 w-full">
-                                <div class="text-xs flex items-center space-x-1">
-                                    <p class="">Center :</p>
-                                    <p class="text-gray-700">Balangoda</p>
-                                </div>
-                                <div class="text-xs flex items-center space-x-1">
-                                    <p class="">Loan Balance :</p>
-                                    <p class="text-gray-700">85,500</p>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 w-full">
-                                <div class="text-xs flex items-center space-x-1">
-                                    <p class="">Pending Amount :</p>
-                                    <p class="text-gray-700">2,000</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
                 <!--TABLE SECTION-->
@@ -193,7 +209,8 @@
                                             data-group-name="{{ capitalizeEachWord($loans->member->group->group_name) }}"
                                             data-address="{{ capitalizeEachWord($loans->member->address) }}"
                                             data-loan='@json($loans)'>
-                                            <td class="pl-4 py-2 text-left">{{ str_pad($loans->id, 3, '0', STR_PAD_LEFT) }}
+                                            <td class="pl-4 py-2 text-left">
+                                                {{ str_pad($loans->id, 3, '0', STR_PAD_LEFT) }}
                                             </td>
                                             <td class="py-2 text-left">{{ capitalizeEachWord($loans->member->full_name) }}
                                             </td>
@@ -222,7 +239,7 @@
                                                 }
                                             @endphp
                                             <td class="py-2 text-center">Rs.
-                                                {{ number_format($loanTotal, 2) }}</td>
+                                                {{ number_format($loanTotal- $paidAmount, 2) }}</td>
                                             <td class="py-2 text-center"><span class="bg-yellow-400 p-1 px-4 rounded">Rs.
                                                     {{ number_format($pendingAmount, 2) }}</span> </td>
                                             <td class="py-2 text-center flex justify-center items-center gap-1">

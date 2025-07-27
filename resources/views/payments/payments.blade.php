@@ -118,83 +118,55 @@
                 <!-- Centers Grid card format hidden for lg screens -->
                 <div id="memberGrid" class="grid grid-cols-1 sm:grid-cols-1 lg:hidden gap-4 p-2">
                     <!-- Card for a center -->
-                    <div class="rounded-md shadow flex flex-col justify-between w-full border bg-gray-100 hover:bg-gray-300"
-                        data-member="Dunura" data-center="balangoda">
-                        <div class="h-8 flex flex-col items-center justify-center  rounded-t-md">
-                            <p class=" text-sm font-bold text-gray-800">Dunura Rubasinghe</p>
-                        </div>
-                        <hr>
-                        <div class="h-max py-2 px-4 flex flex-col justify-between space-y-1 bg-gray-200 hover:bg-gray-300">
-                            <div class="grid grid-cols-2 w-full">
-                                <div class="text-xs flex items-center space-x-1 ">
-                                    <p class="">Center :</p>
-                                    <p class="text-gray-700">Balangoda</p>
-                                </div>
-                                <div class="text-xs flex items-center space-x-1 ">
-                                    <p class="">NIC :</p>
-                                    <p class="text-gray-700">5252525252V</p>
-                                </div>
+                    @foreach ($allActiveLoans as $loans)
+                        <div class="rounded-md shadow flex flex-col justify-between w-full border bg-gray-100 hover:bg-gray-300"
+                            data-member="Dunura" data-center="balangoda">
+                            <div class="h-8 flex flex-col items-center justify-center  rounded-t-md">
+                                <p class=" text-sm font-bold text-gray-800">
+                                    {{ capitalizeEachWord($loans->member->full_name) }}</p>
                             </div>
-                            <div class="grid grid-cols-2 w-full">
-                                <div class="text-xs flex items-center space-x-1 ">
-                                    <p class="">Loan Balance :</p>
-                                    <p class="text-gray-700">8595596262</p>
+                            <hr>
+                            @php
+                                $loanTotal = $loans->loan_amount + $loans->interest;
+                                $noPaidAmount = 0;
+                                $paidAmount = 0;
+                                $now = Carbon::now();
+                                if ($loans->installment) {
+                                    foreach ($loans->installment as $installment) {
+                                        if ($installment->date_and_time < $now) {
+                                            $expected = $installment->installment_amount;
+                                            $paid = $installment->amount;
+
+                                            if ($paid < $expected) {
+                                                $noPaidAmount += $expected - $paid;
+                                            }
+                                        }
+                                        $paidAmount += $installment->amount;
+                                    }
+                                }
+                            @endphp
+                            <div
+                                class="h-max py-2 px-4 flex flex-col justify-between space-y-1 bg-gray-200 hover:bg-gray-300">
+                                <div class="grid grid-cols-2 w-full">
+                                    <div class="text-xs flex items-center space-x-1 ">
+                                        <p class="">Center :</p>
+                                        <p class="text-gray-700">
+                                            {{ capitalizeEachWord($loans->member->group->center->center_name) }}</p>
+                                    </div>
+                                    <div class="text-xs flex items-center space-x-1 ">
+                                        <p class="">NIC :</p>
+                                        <p class="text-gray-700"> {{ $loans->member->nic_number }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Sample for a center -->
-                    <div class="rounded-md shadow flex flex-col justify-between w-full border bg-gray-100 hover:bg-gray-300"
-                        data-member="Minura" data-center="balangoda">
-                        <div class="h-8 flex flex-col items-center justify-center  rounded-t-md">
-                            <p class=" text-sm font-bold text-gray-800">Minura</p>
-                        </div>
-                        <hr>
-                        <div class="h-max py-2 px-4 flex flex-col justify-between space-y-1 bg-gray-200 hover:bg-gray-300">
-                            <div class="grid grid-cols-2 w-full">
-                                <div class="text-xs flex items-center space-x-1 ">
-                                    <p class="">Center :</p>
-                                    <p class="text-gray-700">Balangoda</p>
-                                </div>
-                                <div class="text-xs flex items-center space-x-1 ">
-                                    <p class="">NIC :</p>
-                                    <p class="text-gray-700">5252525252V</p>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 w-full">
-                                <div class="text-xs flex items-center space-x-1 ">
-                                    <p class="">Loan Balance :</p>
-                                    <p class="text-gray-700">8595596262</p>
+                                <div class="grid grid-cols-2 w-full">
+                                    <div class="text-xs flex items-center space-x-1 ">
+                                        <p class="">Loan Balance :</p>
+                                        <p class="text-gray-700">Rs. {{ number_format($loanTotal - $paidAmount, 2) }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!---->
-                    <div class="rounded-md shadow flex flex-col justify-between w-full border bg-gray-100 hover:bg-gray-300"
-                        data-member="Dunura" data-center="balangoda">
-                        <div class="h-8 flex flex-col items-center justify-center  rounded-t-md">
-                            <p class=" text-sm font-bold text-gray-800">Dunura Rubasinghe</p>
-                        </div>
-                        <hr>
-                        <div class="h-max py-2 px-4 flex flex-col justify-between space-y-1 bg-gray-200 hover:bg-gray-300">
-                            <div class="grid grid-cols-2 w-full">
-                                <div class="text-xs flex items-center space-x-1 ">
-                                    <p class="">Center :</p>
-                                    <p class="text-gray-700">Balangoda</p>
-                                </div>
-                                <div class="text-xs flex items-center space-x-1 ">
-                                    <p class="">NIC :</p>
-                                    <p class="text-gray-700">5252525252V</p>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 w-full">
-                                <div class="text-xs flex items-center space-x-1 ">
-                                    <p class="">Loan Balance :</p>
-                                    <p class="text-gray-700">8595596262</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
                 <!-------------TABLE------------------------------------------------------------------------------------------------------------>
@@ -225,19 +197,21 @@
                                             data-address="{{ capitalizeEachWord($loans->member->address) }}"
                                             data-loan='@json($loans)'>
 
-                                            <td class="pl-4 py-2 text-left">{{ str_pad($loans->id, 3, '0', STR_PAD_LEFT) }}
+                                            <td class="pl-4 py-2 text-left">
+                                                {{ str_pad($loans->id, 3, '0', STR_PAD_LEFT) }}
                                             </td>
                                             <td class="py-2 text-left">{{ capitalizeEachWord($loans->member->full_name) }}
                                             </td>
                                             <td class="py-2 text-left">
                                                 {{ capitalizeEachWord($loans->member->group->center->center_name) }}</td>
-                                            <td class="py-2 text-left">{{ capitalizeEachWord($loans->member->nic_number) }}
+                                            <td class="py-2 text-left">
+                                                {{ capitalizeEachWord($loans->member->nic_number) }}
                                             </td>
                                             @php
                                                 $loanTotal = $loans->loan_amount + $loans->interest;
                                             @endphp
-                                            <td class="py-2 text-left">Rs.
-                                                {{ number_format($loanTotal, 2) }}</td>
+                                            <td class="py-2 text-left">Rs. {{ number_format($loanTotal - $paidAmount, 2) }}
+                                            </td>
                                             <td class="py-2 text-center flex justify-center items-center gap-1">
                                                 <a href="#" class="border rounded hover:bg-green-500">
                                                     <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
@@ -665,12 +639,16 @@
                 document.getElementById('num02SlideBar').textContent = loanCount.member.mobile_number_2;
                 document.getElementById('NICSlideBar').textContent = loanCount.member.nic_number;
                 document.getElementById('memberAddressSlideBar').textContent = loanCount.member.address;
-                document.getElementById('LoanAmountSlideBar').textContent = 'Rs. ' + parseFloat(loanCount.loan_amount).toFixed(2);
-                                document.getElementById('InterestSlideBar').textContent = 'Rs. ' + parseFloat(loanCount.interest).toFixed(2);
+                document.getElementById('LoanAmountSlideBar').textContent = 'Rs. ' + parseFloat(loanCount
+                    .loan_amount).toFixed(2);
+                document.getElementById('InterestSlideBar').textContent = 'Rs. ' + parseFloat(loanCount
+                    .interest).toFixed(2);
                 document.getElementById('IssueDateSlideBar').textContent = loanCount.issue_date;
-                document.getElementById('InstallmentSlideBar').textContent = 'Rs. ' + parseFloat(loanCount.installment_price).toFixed(2);
+                document.getElementById('InstallmentSlideBar').textContent = 'Rs. ' + parseFloat(loanCount
+                    .installment_price).toFixed(2);
                 document.getElementById('TermsSlideBar').textContent = loanCount.terms;
-                document.getElementById('DocumentChagersSlideBar').textContent = 'Rs. ' + parseFloat(loanCount.document_charges).toFixed(2);
+                document.getElementById('DocumentChagersSlideBar').textContent = 'Rs. ' + parseFloat(
+                    loanCount.document_charges).toFixed(2);
 
             });
         });
