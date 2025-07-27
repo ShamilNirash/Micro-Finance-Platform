@@ -81,6 +81,8 @@ Route::get('/userRole', [UserRoleController::class, 'userRolesView']);
 Route::post('/userRole/create', [UserRoleController::class, 'createUserRole'])->name('userRoles.create');
 
 Route::get('/userAccount', [UserController::class, 'usersView']);
+Route::post('/userAccount/create', [UserController::class, 'createUser'])->name('user.create');
+Route::post('/userAccount/update', [UserController::class, 'updateUser'])->name('user.update');
 Route::get('/userLogs', function () {
     return view('settings/userLogs');
 });

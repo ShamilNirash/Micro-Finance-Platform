@@ -27,8 +27,8 @@ class UserController extends Controller
     {
         try {
             $request->merge([
-                'first_name' => strtolower($request->input('role_name')),
-                'last_name' => strtolower($request->input('role_name')),
+                'first_name' => strtolower($request->input('first_name')),
+                'last_name' => strtolower($request->input('last_name')),
             ]);
 
             $request->validate([
@@ -76,11 +76,61 @@ class UserController extends Controller
     public function usersView()
     {
         try {
+
             $all_active_users = $this->userRepository->get_all();
             $all_active_user_roles = $this->userRoleRepository->get_all();
             return view('settings/userAccount', ['all_active_users' => $all_active_users, 'all_active_user_roles' => $all_active_user_roles]);
         } catch (\Exception $e) {
             Log::error('Error getting active user roles: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+    }
+    public function updateUser(Request $request)
+    {
+        try {
+            $request->merge([
+                'first_name' => strtolower($request->input('first_name')),
+                'last_name' => strtolower($request->input('last_name')),
+            ]);
+            $request->validate([
+                'email' => [
+                    'required',
+                    'string',
+                    Rule::unique('users')->where(function ($query) {
+                        return $query->where('status', 'active');
+                    }),
+                ],
+                'first_name' => 'required|string',
+                'last_name' => 'required|string',
+                'password' => 'required|string|min:8',
+                'nic_number' => 'required|string',
+                'phoneNumber01' => 'required|string|regex:/^[0-9]+$/',
+                'role_id' => 'required|numeric',
+                'userImage01' => 'file|image|mimes:jpeg,png,jpg',
+            ]);
+
+            $user = Userfind($request->id);
+            $user->first_name = $request->first_name;
+            $user->last_name = $request->last_name;
+            $user->email = $request->email;
+            $user->nic = $request->nic;
+            $user->mobile = $request->mobile;
+            $user->role_id = $request->role_id;
+
+            if (!empty($request->password) && $request->password !== '********') {
+                $user->password = bcrypt($request->password);
+            }
+
+            $user->save();
+
+            return response()->json(['status' => 'success', 'message' => 'User updated successfully']);
+        } catch (ValidationException $e) {
+            return redirect()->back()
+                ->with('show_create_center_popup', true)
+                ->withInput()
+                ->withErrors($e->errors());
+        } catch (\Exception $e) {
+            Log::error('Error creating user: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong.');
         }
     }

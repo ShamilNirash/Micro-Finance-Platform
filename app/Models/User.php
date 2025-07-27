@@ -25,7 +25,6 @@ class User extends Authenticatable
         'nic_number',
         'mobile_number_1',
         'image',
-        'payment_date',
         'status',
         'user_role_id',
     ];

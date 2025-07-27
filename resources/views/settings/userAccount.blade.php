@@ -14,7 +14,9 @@
                 style="width: 100%; height: 100%;">
                 <div class="bg-white shadow-xl w-full max-w-lg rounded-lg border border-blue-400">
                     <h2 class="text-md bg-blue-100 rounded-t-lg p-4">Create New User</h2>
-                    <form id="addNewMemberForm" class="p-4 space-y-6">
+                    <form action="{{ route('user.create') }}" method="POST" id="addNewMemberForm" class="p-4 space-y-6"
+                        enctype="multipart/form-data">
+                        @csrf
                         <div class="flex justify-center mb-4">
                             <div class="relative">
                                 <img src="https://via.placeholder.com/100" alt="User Profile"
@@ -27,7 +29,8 @@
                                             d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                                     </svg>
                                 </label>
-                                <input type="file" id="newMemberImage" class="hidden" accept="image/*" />
+                                <input type="file" name="userImage01" id="newMemberImage" class="hidden"
+                                    accept="image/*" />
                             </div>
                         </div>
                         <div class="space-y-2">
@@ -35,8 +38,10 @@
                                 <label class="block text-xs text-gray-700 w-1/3">Name*</label>
                                 <div class="flex w-full space-x-2">
                                     <input type="text" name="first_name" id="newMemberFirstName" placeholder="1st name"
+                                        required
                                         class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-xs border-gray-300  hover:border-gray-400 ">
                                     <input type="text" name="last_name" id="newMemberLastName" placeholder="2nd name"
+                                        required
                                         class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-xs border-gray-300  hover:border-gray-400 ">
                                 </div>
                             </div>
@@ -100,7 +105,7 @@
                                 <label class="block text-xs text-gray-400 w-full text-center border-b pb-1"></label>
                                 <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0 w-full">
                                     <label class="block text-xs text-gray-700 sm:w-1/3">Role*</label>
-                                    <select id="newMemberRole" required
+                                    <select id="newMemberRole" required name="role_id"
                                         class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 border-gray-300 hover:border-gray-400 focus:ring-blue-500 text-xs">
                                         <option value="" disabled selected>Select a role</option>
                                         @foreach ($all_active_user_roles as $user_role)
@@ -130,6 +135,8 @@
                 <div class="bg-white shadow-xl w-full max-w-lg rounded-lg border border-blue-400">
                     <h2 class="text-md bg-blue-200 rounded-t-lg p-4">Edit User Details</h2>
                     <form id="editMemberForm" class="p-4 space-y-6">
+                        <meta name="csrf-token" content="{{ csrf_token() }}">
+
                         <input type="hidden" id="editMemberId">
                         <div class="flex justify-center mb-4">
                             <div class="relative">
@@ -167,7 +174,7 @@
                                 <div class="w-full flex items-center space-x-2">
                                     <input type="text" id="editMemberPassword"
                                         class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-xs border-gray-300 hover:border-gray-400"
-                                        readonly>
+                                        disabled>
                                     <button type="button" id="togglePasswordVisibility"
                                         class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none">
                                         <svg id="passwordEyeIcon" class="w-4 h-4" fill="none" stroke="currentColor"
@@ -199,7 +206,7 @@
                                             required>
                                     </div>
                                 </div>
-                                <div
+                                {{-- <div
                                     class="flex w-full lg:space-x-4 space-y-2 lg:space-y-0 items-center flex-col lg:flex-row">
                                     <!-- First file input -->
                                     <div class="lg:w-1/2 w-full">
@@ -227,7 +234,7 @@
                                             <input type="file" class="hidden">
                                         </label>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <label class="block text-xs text-gray-400 w-full text-center border-b pb-1"></label>
                                 <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0 w-full">
                                     <label class="block text-xs text-gray-700 sm:w-1/3">Role*</label>
@@ -356,190 +363,79 @@
                 <!-------------CARD------------------------------------------------------------------------------------------------------------>
                 <!-- User Grid card format hidden for lg screens -->
                 <div id="userGrid" class="grid grid-cols-1 sm:grid-cols-1 lg:hidden gap-4 p-2 pt-4">
-                    <!-- Card -->
-                    <div class="rounded-lg shadow-sm border border-gray-200 p-4 pt-2 bg-gray-100 w-full space-y-2 text-xs"
-                        data-name="John Doe" data-NIC="200123456789">
-                        <div class="flex justify-between items-center border-b pb-2">
-                            <div class="flex space-x-4 items-center">
-                                <div class="h-8 w-8 rounded-full bg-black"></div>
-                                <div class="flex flex-col space-y-0">
-                                    <p class="font-semibold text-gray-700 text-lg ">Dunura Hansaja</p>
-                                    <div class="flex space-x-1">
-                                        <p class="text-gray-600">2025-07-01 <span>07.23 AM</span></p>
+                    @foreach ($all_active_users as $user)
+                        <div class="rounded-lg shadow-sm border border-gray-200 p-4 pt-2 bg-gray-100 w-full space-y-2 text-xs"
+                            data-name="John Doe" data-NIC="200123456789">
+                            <div class="flex justify-between items-center border-b pb-2">
+                                <div class="flex space-x-4 items-center">
+                                    <div class="h-8 w-8 rounded-full bg-black"></div>
+                                    <div class="flex flex-col space-y-0">
+                                        <p class="font-semibold text-gray-700 text-lg ">
+                                            {{ capitalizeEachWord($user->first_name) }}
+                                            {{ capitalizeEachWord($user->last_name) }}</p>
+                                        <div class="flex space-x-1">
+                                            <p class="text-gray-600">2025-07-01 <span>07.23 AM</span></p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="flex space-x-4 items-center">
-                                <div class="flex justify-center">
-                                    <div class="toggle-switch" onclick="toggleActive(this)">
-                                        <div class="toggle-slider"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Second-->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pb-2">
-                            <div class="flex space-x-1">
-                                <p class="font-semibold text-gray-700">Email:</p>
-                                <p class="text-gray-600">john@example.com</p>
-                            </div>
+                                <div class="flex space-x-4 items-center">
+                                    @if ($user->status == 'ACTIVE')
+                                        <p id="activeMemberStatus" class="items-center">
+                                            <span class="bg-green-400 p-0.5 px-1 rounded text-black text-xs">Active</span>
+                                        </p>
+                                    @else
+                                        <p id="inactiveMemberStatus" class="items-center hidden">
+                                            <span class="bg-red-400 p-0.5 px-1 rounded text-black text-xs">Inactive</span>
+                                        </p>
+                                    @endif
 
-                            <div class="flex space-x-1">
-                                <p class="font-semibold text-gray-700">Phone:</p>
-                                <p class="text-gray-600">+94 712 345 678</p>
+                                </div>
                             </div>
-                            <div class="flex space-x-1">
-                                <p class="font-semibold text-gray-700">NIC:</p>
-                                <p class="text-gray-600">200123456789</p>
-                            </div>
-                            <div class="flex space-x-2 items-center">
-                                <p class="font-semibold text-gray-700">Role:</p>
-                                <p class="text-gray-600"><span
-                                        class="bg-yellow-600 p-0.5 px-2 rounded-md text-white text-xs inline-block text-center min-w-[100px] justify-items-center ">Super
-                                        Admin</span></p>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 border-t pt-4">
-                            <div class="flex justify-between items-center text-sm space-x-2">
-                                <a href="#"
-                                    class="border rounded-lg hover:bg-blue-700 bg-blue-600 flex-shrink-0 edit-user px-4 py-1 text-white">
-                                    Edit
-                                </a>
-                                <a href="#"
-                                    class="border rounded-lg hover:bg-red-700 bg-red-600 flex-shrink-0 delete-user px-4 py-1 text-white">
-                                    Delete
-                                </a>
-                                <a href="#"
-                                    class="border rounded-lg hover:bg-green-700 bg-green-600 flex-shrink-0 change-password px-4 py-1 text-white"
-                                    data-id="001">
-                                    Password Change
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                            <!--Second-->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pb-2">
+                                <div class="flex space-x-1">
+                                    <p class="font-semibold text-gray-700">Email:</p>
+                                    <p class="text-gray-600">{{ $user->email }}</p>
+                                </div>
 
-                    <!-- Sample for a center -->
-                    <div class="rounded-lg shadow-sm border border-gray-200 p-4 pt-2 bg-gray-100 w-full space-y-2 text-xs"
-                        data-name="John Doe" data-NIC="200123456789">
-                        <div class="flex justify-between items-center border-b pb-2">
-                            <div class="flex space-x-4 items-center">
-                                <div class="h-8 w-8 rounded-full bg-black"></div>
-                                <div class="flex flex-col space-y-0">
-                                    <p class="font-semibold text-gray-700 text-lg ">Minura Anuradha</p>
-                                    <div class="flex space-x-1">
-                                        <p class="text-gray-600">2025-07-01 <span>07.23 AM</span></p>
-                                    </div>
+                                <div class="flex space-x-1">
+                                    <p class="font-semibold text-gray-700">Phone:</p>
+                                    <p class="text-gray-600">{{ $user->mobile_number_1 }}</p>
+                                </div>
+                                <div class="flex space-x-1">
+                                    <p class="font-semibold text-gray-700">NIC:</p>
+                                    <p class="text-gray-600">{{ $user->nic_number }}</p>
+                                </div>
+                                @php
+                                    $selected_role =
+                                        $all_active_user_roles->firstWhere('id', $user->user_role_id)->role_name ?? '';
+                                @endphp
+                                <div class="flex space-x-2 items-center">
+                                    <p class="font-semibold text-gray-700">Role:</p>
+                                    <p class="text-gray-600"><span
+                                            class="bg-yellow-600 p-0.5 px-2 rounded-md text-white text-xs inline-block text-center min-w-[100px] justify-items-center ">
+                                            {{ capitalizeEachWord($selected_role) }}</span></p>
                                 </div>
                             </div>
-                            <div class="flex space-x-4 items-center">
-                                <div class="flex justify-center">
-                                    <div class="toggle-switch" onclick="toggleActive(this)">
-                                        <div class="toggle-slider"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Second-->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            <div class="flex space-x-1">
-                                <p class="font-semibold text-gray-700">Email:</p>
-                                <p class="text-gray-600">john@example.com</p>
-                            </div>
-
-                            <div class="flex space-x-1">
-                                <p class="font-semibold text-gray-700">Phone:</p>
-                                <p class="text-gray-600">+94 712 345 678</p>
-                            </div>
-                            <div class="flex space-x-1">
-                                <p class="font-semibold text-gray-700">NIC:</p>
-                                <p class="text-gray-600">200123456789</p>
-                            </div>
-                            <div class="flex space-x-2 items-center">
-                                <p class="font-semibold text-gray-700">Role:</p>
-                                <p class="text-gray-600"> <span
-                                        class="bg-green-600 p-0.5 px-2 rounded-md text-white text-xs inline-block text-center min-w-[100px]">Center
-                                        Manager</span></p>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 border-t pt-4">
-                            <div class="flex justify-between items-center text-sm space-x-2">
-                                <a href="#"
-                                    class="border rounded-lg hover:bg-blue-700 bg-blue-600 flex-shrink-0 edit-user px-4 py-1 text-white">
-                                    Edit
-                                </a>
-                                <a href="#"
-                                    class="border rounded-lg hover:bg-red-700 bg-red-600 flex-shrink-0 delete-user px-4 py-1 text-white"
-                                    data-id="001">
-                                    Delete
-                                </a>
-                                <a href="#"
-                                    class="border rounded-lg hover:bg-green-700 bg-green-600 flex-shrink-0 change-password px-4 py-1 text-white"
-                                    data-id="001">
-                                    Password Change
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Sample for a center -->
-                    <div class="rounded-lg shadow-sm border border-gray-200 p-4 pt-2 bg-gray-100 w-full space-y-2 text-xs"
-                        data-name="John Doe" data-NIC="200285966895">
-                        <div class="flex justify-between items-center border-b pb-2">
-                            <div class="flex space-x-4 items-center">
-                                <div class="h-8 w-8 rounded-full bg-black"></div>
-                                <div class="flex flex-col space-y-0">
-                                    <p class="font-semibold text-gray-700 text-lg ">Dunura Hansaja</p>
-                                    <div class="flex space-x-1">
-                                        <p class="text-gray-600">2025-07-01 <span>07.23 AM</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex space-x-4 items-center">
-                                <div class="flex justify-center">
-                                    <div class="toggle-switch" onclick="toggleActive(this)">
-                                        <div class="toggle-slider"></div>
-                                    </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 border-t pt-4">
+                                <div class="flex justify-between items-center text-sm space-x-2">
+                                    <a href="#"
+                                        class="border rounded-lg hover:bg-blue-700 bg-blue-600 flex-shrink-0 edit-user px-4 py-1 text-white">
+                                        Edit
+                                    </a>
+                                    <a href="#"
+                                        class="border rounded-lg hover:bg-red-700 bg-red-600 flex-shrink-0 delete-user px-4 py-1 text-white">
+                                        Delete
+                                    </a>
+                                    <a href="#"
+                                        class="border rounded-lg hover:bg-green-700 bg-green-600 flex-shrink-0 change-password px-4 py-1 text-white"
+                                        data-id="001">
+                                        Password Change
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <!--Second-->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            <div class="flex space-x-1">
-                                <p class="font-semibold text-gray-700">Email:</p>
-                                <p class="text-gray-600">john@example.com</p>
-                            </div>
-
-                            <div class="flex space-x-1">
-                                <p class="font-semibold text-gray-700">Phone:</p>
-                                <p class="text-gray-600">+94 712 345 678</p>
-                            </div>
-                            <div class="flex space-x-1">
-                                <p class="font-semibold text-gray-700">NIC:</p>
-                                <p class="text-gray-600">200123456789</p>
-                            </div>
-                            <div class="flex space-x-2 items-center">
-                                <p class="font-semibold text-gray-700">Role:</p>
-                                <p class="text-gray-600"><span
-                                        class="bg-blue-600 p-0.5 px-2 rounded-md text-white text-xs inline-block text-center min-w-[100px] justify-items-center ">Admin</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 border-t pt-4">
-                            <div class="flex justify-between items-center text-sm space-x-2">
-                                <a href="#"
-                                    class="border rounded-lg hover:bg-blue-700 bg-blue-600 flex-shrink-0 edit-user px-4 py-1 text-white">
-                                    Edit
-                                </a>
-                                <a href="#"
-                                    class="border rounded-lg hover:bg-red-700 bg-red-600 flex-shrink-0 delete-user px-4 py-1 text-white">
-                                    Delete
-                                </a>
-                                <a href="#"
-                                    class="border rounded-lg hover:bg-green-700 bg-green-600 flex-shrink-0 change-password px-4 py-1 text-white">
-                                    Password Change
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
                 <!-------------TABLE------------------------------------------------------------------------------------------------------------>
@@ -562,178 +458,88 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tableBody" class="text-gray-800 text-xs font-light bg-white">
-                                    <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details"
-                                        data-name="Dunura" data-NIC="20028596427">
-                                        <td class="py-2 text-center">001</td>
-                                        <td class="py-2 pl-2 text-left">
-                                            <div class="flex space-x-2 items-center">
-                                                <div class="bg-black rounded-full h-6 w-6 flex-shrink-0"></div>
-                                                <span class="truncate">Dunura Hansaja</span>
-                                            </div>
-                                        </td>
-                                        <td class="py-2 text-left">
-                                            <span class="truncate block">dunura@gmail.com</span>
-                                        </td>
-                                        <td class="py-2 text-left">
-                                            <div class="flex space-x-2 text-xs">
-                                                <span class="date">2025.08.07</span>
-                                                <span class="time text-gray-500">07.45 AM</span>
-                                            </div>
-                                        </td>
-                                        <td class="py-2 text-left">
-                                            <span class="truncate block">+94 71 6005874</span>
-                                        </td>
-                                        <td class="py-2 text-left">
-                                            <span class="truncate block">20028596427</span>
-                                        </td>
-                                        <td class="py-2 text-center">
-                                            <span
-                                                class="bg-blue-600 p-1 px-2 rounded-md text-white text-xs inline-block text-center min-w-[100px]">Admin</span>
-                                        </td>
-                                        <td class="py-2 text-center">
-                                            <div class="flex justify-center">
-                                                <div class="toggle-switch" onclick="toggleActive(this)">
-                                                    <div class="toggle-slider"></div>
+                                    @foreach ($all_active_users as $user)
+                                        <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details"
+                                            data-name="Dunura" data-NIC="20028596427">
+                                            <td class="py-2 text-center"> {{ str_pad($user->id, 3, '0', STR_PAD_LEFT) }}
+                                            </td>
+                                            <td class="py-2 pl-2 text-left">
+                                                <div class="flex space-x-2 items-center">
+                                                    <div class="bg-black rounded-full h-6 w-6 flex-shrink-0"></div>
+                                                    <span class="truncate">{{ capitalizeEachWord($user->first_name) }}
+                                                        {{ capitalizeEachWord($user->last_name) }}</span>
+                                                    <p class="hidden" id="lastNameHidden">
+                                                        {{ capitalizeEachWord($user->last_name) }}</p>
+                                                    <p class="hidden" id="firstNameHidden">
+                                                        {{ capitalizeEachWord($user->first_name) }}</p>
+                                                    <p class="hidden" id="userRoleIdHidden">
+                                                        {{ capitalizeEachWord($user->user_role_id) }}</p>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td class="py-2 text-center">
-                                            <div class="flex justify-center items-center gap-1">
-                                                <a href="#"
-                                                    class="border rounded hover:bg-blue-700 flex-shrink-0 edit-user"
-                                                    data-id="001">
-                                                    <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Edit"
-                                                        class="h-3 w-3 m-1">
-                                                </a>
-                                                <a href="#"
-                                                    class="border rounded hover:bg-red-500 flex-shrink-0 delete-user">
-                                                    <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Delete"
-                                                        class="h-3 w-3 m-1">
-                                                </a>
-                                                <a href="#"
-                                                    class="border rounded hover:bg-yellow-500 flex-shrink-0 change-password">
-                                                    <img src="{{ asset('assets/icons/Lock.svg') }}" alt="Change Password"
-                                                        class="h-3 w-3 m-1">
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <!--Extra-->
-                                    <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details"
-                                        data-name="John Doe" data-NIC="200285966895">
-                                        <td class="py-2 text-center">002</td>
-                                        <td class="py-2 pl-2 text-left">
-                                            <div class="flex space-x-2 items-center">
-                                                <div class="bg-black rounded-full h-6 w-6 flex-shrink-0"></div>
-                                                <span class="truncate">Dunura Hansaja</span>
-                                            </div>
-                                        </td>
-                                        <td class="py-2 text-left">
-                                            <span class="truncate block">minura@gmail.com</span>
-                                        </td>
-                                        <td class="py-2 text-left">
-                                            <div class="flex space-x-2 text-xs">
-                                                <span class="date">2025.08.09</span>
-                                                <span class="time text-gray-500">07.45 PM</span>
-                                            </div>
-                                        </td>
-                                        <td class="py-2 text-left">
-                                            <span class="truncate block">+94 71 6004874</span>
-                                        </td>
-                                        <td class="py-2 text-left">
-                                            <span class="truncate block">200285966895</span>
-                                        </td>
-                                        <td class="py-2 text-center">
-                                            <span
-                                                class="bg-yellow-600 p-1 px-2 rounded-md text-white text-xs inline-block text-center min-w-[100px]">Super
-                                                Admin</span>
-                                        </td>
-                                        <td class="py-2 text-center">
-                                            <div class="flex justify-center">
-                                                <div class="toggle-switch" onclick="toggleActive(this)">
-                                                    <div class="toggle-slider"></div>
+                                            </td>
+                                            <td class="py-2 text-left">
+                                                <span class="truncate block">{{ $user->email }}</span>
+                                            </td>
+                                            <td class="py-2 text-left">
+                                                <div class="flex space-x-2 text-xs">
+                                                    <span class="date">2025.08.07</span>
+                                                    <span class="time text-gray-500">07.45 AM</span>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td class="py-2 text-center">
-                                            <div class="flex justify-center items-center gap-1">
-                                                <a href="#"
-                                                    class="border rounded hover:bg-blue-700 flex-shrink-0 edit-user"
-                                                    data-id="001">
-                                                    <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Edit"
-                                                        class="h-3 w-3 m-1">
-                                                </a>
-                                                <a href="#"
-                                                    class="border rounded hover:bg-red-500 flex-shrink-0 delete-user">
-                                                    <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Delete"
-                                                        class="h-3 w-3 m-1">
-                                                </a>
-                                                <a href="#"
-                                                    class="border rounded hover:bg-yellow-500 flex-shrink-0 change-password">
-                                                    <img src="{{ asset('assets/icons/Lock.svg') }}" alt="Change Password"
-                                                        class="h-3 w-3 m-1">
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <!--Extra-->
-                                    <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details"
-                                        data-name="John Doe" data-NIC="200285966895">
-                                        <td class="py-2 text-center">002</td>
-                                        <td class="py-2 pl-2 text-left">
-                                            <div class="flex space-x-2 items-center">
-                                                <div class="bg-black rounded-full h-6 w-6 flex-shrink-0"></div>
-                                                <span class="truncate">Dunura Hansaja</span>
-                                            </div>
-                                        </td>
-                                        <td class="py-2 text-left">
-                                            <span class="truncate block">minura@gmail.com</span>
-                                        </td>
-                                        <td class="py-2 text-left">
-                                            <div class="flex space-x-2 text-xs">
-                                                <span class="date">2025.08.09</span>
-                                                <span class="time text-gray-500">07.45 PM</span>
-                                            </div>
-                                        </td>
-                                        <td class="py-2 text-left">
-                                            <span class="truncate block">+94 71 6004874</span>
-                                        </td>
-                                        <td class="py-2 text-left">
-                                            <span class="truncate block">200285966895</span>
-                                        </td>
-                                        <td class="py-2 text-center">
-                                            <span
-                                                class="bg-green-600 p-1 px-2 rounded-md text-white text-xs inline-block text-center min-w-[100px]">Center
-                                                Manager</span>
-                                        </td>
-                                        <td class="py-2 text-center">
-                                            <div class="flex justify-center">
-                                                <div class="toggle-switch" onclick="toggleActive(this)">
-                                                    <div class="toggle-slider"></div>
+                                            </td>
+                                            <td class="py-2 text-left">
+                                                <span class="truncate block">{{ $user->mobile_number_1 }}</span>
+                                            </td>
+                                            <td class="py-2 text-left">
+                                                <span class="truncate block">{{ $user->nic_number }}</span>
+                                            </td>
+                                            <td class="py-2 text-center">
+                                                @php
+                                                    $selected_role =
+                                                        $all_active_user_roles->firstWhere('id', $user->user_role_id)
+                                                            ->role_name ?? '';
+                                                @endphp
+
+                                                <span
+                                                    class="bg-blue-600 p-1 px-2 rounded-md text-white text-xs inline-block text-center min-w-[100px]">
+                                                    {{ capitalizeEachWord($selected_role) }}
+                                                </span>
+                                            </td>
+                                            <td class="py-2 text-center">
+                                                @if ($user->status == 'ACTIVE')
+                                                    <p id="activeMemberStatus" class="items-center">
+                                                        <span
+                                                            class="bg-green-400 p-0.5 px-1 rounded text-black text-xs">Active</span>
+                                                    </p>
+                                                @else
+                                                    <p id="inactiveMemberStatus" class="items-center hidden">
+                                                        <span
+                                                            class="bg-red-400 p-0.5 px-1 rounded text-black text-xs">Inactive</span>
+                                                    </p>
+                                                @endif
+
+
+                                            </td>
+                                            <td class="py-2 text-center">
+                                                <div class="flex justify-center items-center gap-1">
+                                                    <a href="#"
+                                                        class="border rounded hover:bg-blue-700 flex-shrink-0 edit-user"
+                                                        data-id="001">
+                                                        <img src="{{ asset('assets/icons/PencilSimple.svg') }}"
+                                                            alt="Edit" class="h-3 w-3 m-1">
+                                                    </a>
+                                                    <a href="#"
+                                                        class="border rounded hover:bg-red-500 flex-shrink-0 delete-user">
+                                                        <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Delete"
+                                                            class="h-3 w-3 m-1">
+                                                    </a>
+                                                    <a href="#"
+                                                        class="border rounded hover:bg-yellow-500 flex-shrink-0 change-password">
+                                                        <img src="{{ asset('assets/icons/Lock.svg') }}"
+                                                            alt="Change Password" class="h-3 w-3 m-1">
+                                                    </a>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td class="py-2 text-center">
-                                            <div class="flex justify-center items-center gap-1">
-                                                <a href="#"
-                                                    class="border rounded hover:bg-blue-700 flex-shrink-0 edit-user"
-                                                    data-id="001">
-                                                    <img src="{{ asset('assets/icons/PencilSimple.svg') }}"
-                                                        alt="Edit" class="h-3 w-3 m-1">
-                                                </a>
-                                                <a href="#"
-                                                    class="border rounded hover:bg-red-500 flex-shrink-0 delete-user">
-                                                    <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Delete"
-                                                        class="h-3 w-3 m-1">
-                                                </a>
-                                                <a href="#"
-                                                    class="border rounded hover:bg-yellow-500 flex-shrink-0 change-password">
-                                                    <img src="{{ asset('assets/icons/Lock.svg') }}" alt="Change Password"
-                                                        class="h-3 w-3 m-1">
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -886,11 +692,12 @@
             console.log('Edit button clicked, target:', target, 'container:', container, 'userId:', userId);
 
             if (container.tagName === 'TR') {
-                name = container.querySelector('td:nth-child(2) span').textContent.trim();
+                first_name = document.getElementById('firstNameHidden').textContent.trim();
+                last_name = document.getElementById('lastNameHidden').textContent.trim();
                 email = container.querySelector('td:nth-child(3) span').textContent.trim();
                 phone = container.querySelector('td:nth-child(5) span').textContent.trim();
                 nic = container.querySelector('td:nth-child(6) span').textContent.trim();
-                role = container.querySelector('td:nth-child(7) span').textContent.trim();
+                role = document.getElementById('userRoleIdHidden').textContent.trim();
                 password = target.dataset.password;
             } else if (container.tagName === 'DIV') {
                 name = container.querySelector('div:nth-child(1) div:nth-child(1) p:nth-child(2)').textContent
@@ -903,30 +710,29 @@
                 role = container.querySelector('div:nth-child(2) div:nth-child(4) span').textContent.trim();
                 password = '********'; // Placeholder, adjust as needed
             }
-
-            const [firstName, lastName] = name.split(' ');
+            console.log(role);
 
             // Populate edit modal fields
             document.getElementById('editMemberId').value = userId || '';
-            document.getElementById('editMemberFirstName').value = firstName || '';
-            document.getElementById('editMemberLastName').value = lastName || '';
+            document.getElementById('editMemberFirstName').value = first_name || '';
+            document.getElementById('editMemberLastName').value = last_name || '';
             document.getElementById('editMemberEmail').value = email || '';
             document.getElementById('editMemberNIC').value = nic || '';
             document.getElementById('editMemberMobile01').value = phone || '';
-            document.getElementById('editMemberRole').value = role === 'Super Admin' ? 'SuperAdmin' : role || '';
+            document.getElementById('editMemberRole').value = role || 0;
             document.getElementById('editMemberPassword').value = password || '********';
             document.getElementById('editMemberPassword').type = 'password';
 
-            console.log('Populating edit modal with:', {
-                userId,
-                firstName,
-                lastName,
-                email,
-                nic,
-                phone,
-                role,
-                password
-            });
+            /*  console.log('Populating edit modal with:', {
+                 userId,
+                 firstName,
+                 lastName,
+                 email,
+                 nic,
+                 phone,
+                 role,
+                 password
+             }); */
 
             // Show edit modal
             document.getElementById('editUserModal').classList.remove('hidden');
@@ -955,26 +761,49 @@
         });
 
         // Save edit modal form
-        document.getElementById('editMemberForm').addEventListener('submit', function(e) {
+        /* document.getElementById('editMemberForm').addEventListener('submit', function(e) {
             e.preventDefault();
+
             const userId = document.getElementById('editMemberId').value;
-            const formData = {
-                firstName: document.getElementById('editMemberFirstName').value,
-                lastName: document.getElementById('editMemberLastName').value,
-                email: document.getElementById('editMemberEmail').value,
-                password: document.getElementById('editMemberPassword').value,
-                nic: document.getElementById('editMemberNIC').value,
-                mobile: document.getElementById('editMemberMobile01').value,
-                role: document.getElementById('editMemberRole').value
-            };
+            const formData = new FormData();
+            formData.append('id', userId);
+            formData.append('first_name', document.getElementById('editMemberFirstName').value);
+            formData.append('last_name', document.getElementById('editMemberLastName').value);
+            formData.append('email', document.getElementById('editMemberEmail').value);
+            formData.append('password', document.getElementById('editMemberPassword').value);
+            formData.append('nic', document.getElementById('editMemberNIC').value);
+            formData.append('mobile', document.getElementById('editMemberMobile01').value);
+            formData.append('role_id', document.getElementById('editMemberRole').value);
 
-            console.log(`Updating user ${userId} with data:`, formData);
-            // Implement actual update logic here (e.g., API call)
+            // Optional: Add CSRF token if using fetch
+            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-            // Close modal after saving
-            document.getElementById('editUserModal').classList.add('hidden');
-            document.getElementById('editUserModal').classList.remove('flex');
-        });
+            try {
+                const response = await fetch("{{ route('user.update') }}", {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': token,
+                    },
+                    body: formData
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    console.log('User updated successfully:', result);
+
+                    // Optionally reload or update the table
+                    // Close modal
+                    document.getElementById('editUserModal').classList.add('hidden');
+                    document.getElementById('editUserModal').classList.remove('flex');
+                } else {
+                    console.error('Update failed:', result);
+                    alert('Error: ' + (result.message || 'Update failed'));
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                alert('Request failed.');
+            }
+        }); */
 
         // Change Password Modal
         document.addEventListener('click', function(e) {

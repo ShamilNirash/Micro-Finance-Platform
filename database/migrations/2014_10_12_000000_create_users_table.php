@@ -24,7 +24,6 @@ class CreateUsersTable extends Migration
             $table->string('mobile_number_1')->nullable(false); // ✅ Phone number field
             $table->integer('user_role_id')->nullable(false);
             $table->string('image')->nullable(); // ✅ Profile image path
-            $table->date('payment_date')->nullable(); // ✅ Payment day
             $table->enum('status', ['ACTIVE', 'INACTIVE'])->default('ACTIVE');
             $table->rememberToken();
             $table->timestamps();

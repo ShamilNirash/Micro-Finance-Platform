@@ -9,7 +9,7 @@
 
 namespace App\Repositories;
 
-use App\Models\Member;
+use App\Models\User;
 use Exception;
 use Illuminate\Validation\ValidationException;
 
@@ -17,7 +17,7 @@ class UserRepository
 {
     protected $users;
 
-    public function __construct(Member $users)
+    public function __construct(User $users)
     {
         $this->users = $users;
     }
@@ -27,6 +27,7 @@ class UserRepository
         try {
             return $this->users->create($branch);
         } catch (\Exception $e) {
+            dd($e);
             return $e;
         }
     }
