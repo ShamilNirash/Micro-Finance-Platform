@@ -20,6 +20,28 @@ class LoanController extends Controller
         $this->memberRepository = $memberRepository;
         $this->installmentRepository = $installmentRepository;
     }
+    public function viewUncompletedLoans()
+    {
+        $getActiveLoans = $this->loanRepository->search_many('status', 'UNCOMPLETED');
+        return view('payments/payments', [
+            'allActiveLoans' => $getActiveLoans
+        ]);
+    }
+    public function viewPendingLoans()
+    {
+        $getActiveLoans = $this->loanRepository->search_many('status', 'UNCOMPLETED');
+        return view('payments/pending', [
+            'allActiveLoans' => $getActiveLoans
+        ]);
+    }
+     public function viewNoPaidLoans()
+    {
+        $getActiveLoans = $this->loanRepository->search_many('status', 'UNCOMPLETED');
+        return view('payments/noPaid', [
+            'allActiveLoans' => $getActiveLoans
+        ]);
+    }
+
     public function createLoan($memberId, Request $request)
     {
         $request->validate([
@@ -55,7 +77,7 @@ class LoanController extends Controller
                 $loanId =  $this->loanRepository->search_one(['status' => 'UNCOMPLETED', 'member_id' => $memberId])->id;
                 $startDate = Carbon::parse($request->issue_date);
                 $now = Carbon::now();
-                for ($i =$request->terms ; $i >= 1; $i--) {
+                for ($i = $request->terms; $i >= 1; $i--) {
                     $installmentDate = $startDate->copy()->addDays(7 * ($i))->setTime($now->hour, $now->minute, $now->second);
                     $this->installmentRepository->create([
                         'installment_number' => $i,

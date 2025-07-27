@@ -44,7 +44,7 @@ class LoanRepository
     public function search_many($type, $value)
     {
         try {
-            return $this->loans->where([$type => $value, 'status' => 'ACTIVE'])->get();
+            return $this->loans->where([$type => $value])->with('installment.underpayment','member.group.center.branch')->get();
         } catch (\Exception $e) {
             return $e;
         }
@@ -52,7 +52,7 @@ class LoanRepository
     public function get_all()
     {
         try {
-            return $this->loans->where(['status' => 'ACTIVE'])->get();
+            return $this->loans->get();
         } catch (\Exception $e) {
             return $e;
         }

@@ -751,14 +751,16 @@
                 return $number . $ends[$number % 10];
             }
             $lastPayedIndex = -1;
-            foreach (
-                optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment->sortBy(
-                    'installment_number',
-                )
-                as $installment
-            ) {
-                if ($installment->status === 'PAYED') {
-                    $lastPayedIndex =$installement->installment_number ;
+            if ($member_details->loan->firstWhere('status', 'UNCOMPLETED')) {
+                foreach (
+                    optional($member_details->loan->firstWhere('status', 'UNCOMPLETED'))->installment->sortBy(
+                        'installment_number',
+                    )
+                    as $installment
+                ) {
+                    if ($installment->status === 'PAYED') {
+                        $lastPayedIndex = $installement->installment_number;
+                    }
                 }
             }
         @endphp
@@ -784,7 +786,7 @@
                                 @endphp
 
                                 <div
-                                    class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm  {{ $isCompleted ? 'bg-green-100' : ($isEnabled ? 'bg-white' : 'bg-gray-100 opacity-50 pointer-events-none') }}">
+                                    class="bg-gray-200 py-2 px-4 rounded-lg shadow-sm ">
                                     <div class="flex justify-between items-center">
                                         <div class="flex items-center space-x-2">
                                             <p class="text-sm text-gray-600">Installment #

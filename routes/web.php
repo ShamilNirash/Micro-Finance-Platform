@@ -113,15 +113,9 @@ Route::get('/underPayments', function () {
 });
 
 /*Payments*/
-Route::get('/payments', function () {
-    return view('payments/payments');
-});
-Route::get('/pending', function () {
-    return view('payments/pending');
-});
-Route::get('/nopaid', function () {
-    return view('payments/nopaid');
-});
+Route::get('/payments', [LoanController::class, 'viewUncompletedLoans']);
+Route::get('/pending', [LoanController::class, 'viewPendingLoans']);
+Route::get('/nopaid', [LoanController::class, 'viewNoPaidLoans']);
 Route::get('/paymentsSummery', function () {
     return view('payments/paymentsSummery');
 });

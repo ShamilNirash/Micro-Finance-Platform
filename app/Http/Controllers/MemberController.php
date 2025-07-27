@@ -40,7 +40,7 @@ class MemberController extends Controller
         $members = $this->memberRepository->un_assign_member_search($query);
         return response()->json($members);
     }
-
+   
     public function createMember(Request $request)
     {
         try {
