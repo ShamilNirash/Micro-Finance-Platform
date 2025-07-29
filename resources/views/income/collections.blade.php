@@ -10,30 +10,30 @@
         <div id="firstColumn" class="w-full h-full p-2 lg:border-r lg:p-4 transition-all duration-300 lg:relative lg:py-4">
             <!---Cards-->
             <!--<div class="flex w-full lg:h-1/6">
-                                                                     Mobile View: Cards for each center
-                                                                    <div id="topCards" class="grid grid-cols-1 lg:flex gap-2 lg:gap-08 w-full p-2 lg:p-0 lg:pb-4">
+                                                                         Mobile View: Cards for each center
+                                                                        <div id="topCards" class="grid grid-cols-1 lg:flex gap-2 lg:gap-08 w-full p-2 lg:p-0 lg:pb-4">
 
-                                                                        <div id="totalLoan" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="balangoda">
-                                                                            <div class="flex flex-col w-1/2">
-                                                                                <h2 class="text-sm font-semibold text-gray-600">Total Loans</h2>
-                                                                                <p class="text-sm text-gray-400">Balangoda</p>
+                                                                            <div id="totalLoan" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="balangoda">
+                                                                                <div class="flex flex-col w-1/2">
+                                                                                    <h2 class="text-sm font-semibold text-gray-600">Total Loans</h2>
+                                                                                    <p class="text-sm text-gray-400">Balangoda</p>
+                                                                                </div>
+                                                                                <div class="flex flex-col justify-items-end items-end w-1/2">
+                                                                                    <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">05</h1>
+                                                                                </div>
                                                                             </div>
-                                                                            <div class="flex flex-col justify-items-end items-end w-1/2">
-                                                                                <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">05</h1>
+
+                                                                            <div id="totalIncome" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="ella">
+                                                                                <div class="flex flex-col w-1/2">
+                                                                                    <h2 class="text-sm font-semibold text-gray-600">Today Income</h2>
+                                                                                    <p class="text-sm text-gray-400">Ella</p>
+                                                                                </div>
+                                                                                <div class="flex flex-col justify-items-end items-end w-1/2">
+                                                                                    <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">180000/=</h1>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-
-                                                                        <div id="totalIncome" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="ella">
-                                                                            <div class="flex flex-col w-1/2">
-                                                                                <h2 class="text-sm font-semibold text-gray-600">Today Income</h2>
-                                                                                <p class="text-sm text-gray-400">Ella</p>
-                                                                            </div>
-                                                                            <div class="flex flex-col justify-items-end items-end w-1/2">
-                                                                                <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">180000/=</h1>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>-->
+                                                                    </div>-->
 
             <!--Start Table and Card Views-->
             <div class="p-0 border-0 lg:py-2 lg:bg-sky-50 lg:border rounded-lg flex flex-col justify-between lg:h-full">
@@ -285,87 +285,94 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tableBody" class="text-gray-800 text-xs font-light bg-white">
-                                    @foreach ($all_active_centers as $center)
-                                        @php
+                                    @php
+                                        $groupsInformation = [];
+                                    @endphp
+                                    @if ($all_active_centers)
+                                        @foreach ($all_active_centers as $center)
+                                            @php
 
-                                            $today = Carbon::today();
-                                            $totalActiveLoans = $center->group->sum(function ($group) {
-                                                return $group->member->sum(function ($member) {
-                                                    return $member->loan->where('status', 'UNCOMPLETED')->count();
+                                                $today = Carbon::today();
+                                                $totalActiveLoans = $center->group->sum(function ($group) {
+                                                    return $group->member->sum(function ($member) {
+                                                        return $member->loan->where('status', 'UNCOMPLETED')->count();
+                                                    });
                                                 });
-                                            });
-                                            $totalReceived = $center->group->sum(function ($group) use ($today) {
-                                                return $group->member->sum(function ($member) use ($today) {
-                                                    return $member->loan->sum(function ($loan) use ($today) {
-                                                        return $loan->installment->sum(function ($installment) use (
-                                                            $today,
-                                                        ) {
-                                                            // Handle underpayments for today
-                                                            if (
-                                                                $installment->underpayment &&
-                                                                $installment->underpayment->isNotEmpty()
+                                                $totalReceived = $center->group->sum(function ($group) use ($today) {
+                                                    return $group->member->sum(function ($member) use ($today) {
+                                                        return $member->loan->sum(function ($loan) use ($today) {
+                                                            return $loan->installment->sum(function ($installment) use (
+                                                                $today,
                                                             ) {
-                                                                return $installment->underpayment
-                                                                    ->filter(function ($underpayment) use ($today) {
-                                                                        return $underpayment->payed_date &&
-                                                                            Carbon::parse(
-                                                                                $underpayment->payed_date,
-                                                                            )->isSameDay($today);
-                                                                    })
-                                                                    ->sum('amount');
-                                                            }
+                                                                // Handle underpayments for today
+                                                                if (
+                                                                    $installment->underpayment &&
+                                                                    $installment->underpayment->isNotEmpty()
+                                                                ) {
+                                                                    return $installment->underpayment
+                                                                        ->filter(function ($underpayment) use ($today) {
+                                                                            return $underpayment->payed_date &&
+                                                                                Carbon::parse(
+                                                                                    $underpayment->payed_date,
+                                                                                )->isSameDay($today);
+                                                                        })
+                                                                        ->sum('amount');
+                                                                }
 
-                                                            // If no underpayment, check if installment itself was paid today
-                                                            if (
-                                                                $installment->payed_date &&
-                                                                Carbon::parse($installment->payed_date)->isSameDay(
-                                                                    $today,
-                                                                )
-                                                            ) {
-                                                                return $installment->amount;
-                                                            }
+                                                                // If no underpayment, check if installment itself was paid today
+                                                                if (
+                                                                    $installment->payed_date &&
+                                                                    Carbon::parse($installment->payed_date)->isSameDay(
+                                                                        $today,
+                                                                    )
+                                                                ) {
+                                                                    return $installment->amount;
+                                                                }
 
-                                                            return 0;
+                                                                return 0;
+                                                            });
                                                         });
                                                     });
                                                 });
-                                            });
 
-                                        @endphp
-                                        <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details"
-                                            data-center-id="{{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }}"
-                                            data-branch-name="{{ capitalizeEachWord($center->branch->branch_name) }}"
-                                            data-center-name="{{ capitalizeEachWord($center->center_name) }}"
-                                            data-manager="{{ capitalizeEachWord($center->manager_name) }}">
-                                            <td class="pl-2 text-left">
-                                                <input type="checkbox" name="selected_ids[]" value="1"
-                                                    class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                            </td>
-                                            <td class="py-2 text-left"> {{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }}
-                                            </td>
-                                            <td class="py-2 text-left"> {{ capitalizeFirstLetter($center->center_name) }}
-                                            </td>
-                                            <td class="py-2 text-left">{{ capitalizeEachWord($center->manager_name) }}
-                                            </td>
-                                            <td class="py-2 text-left">
-                                                {{ str_pad($center->group->count(), 2, '0', STR_PAD_LEFT) }}</td>
+                                            @endphp
+                                            <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details"
+                                                data-center-id="{{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }}"
+                                                data-branch-name="{{ capitalizeEachWord($center->branch->branch_name) }}"
+                                                data-center-name="{{ capitalizeEachWord($center->center_name) }}"
+                                                data-manager="{{ capitalizeEachWord($center->manager_name) }}">
+                                                <td class="pl-2 text-left">
+                                                    <input type="checkbox" name="selected_ids[]" value="1"
+                                                        class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                                                </td>
+                                                <td class="py-2 text-left">
+                                                    {{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }}
+                                                </td>
+                                                <td class="py-2 text-left">
+                                                    {{ capitalizeFirstLetter($center->center_name) }}
+                                                </td>
+                                                <td class="py-2 text-left">{{ capitalizeEachWord($center->manager_name) }}
+                                                </td>
+                                                <td class="py-2 text-left">
+                                                    {{ str_pad($center->group->count(), 2, '0', STR_PAD_LEFT) }}</td>
 
-                                            <td id="activeLoansCount" class="py-2 text-left">
-                                                {{ str_pad($totalActiveLoans, 2, '0', STR_PAD_LEFT) }}</td>
-                                            <td id="receivedSlideBar" class="py-2 text-left">Rs.
-                                                {{ number_format($totalReceived, 2) }}</td>
-                                            <td class="py-2 text-center flex justify-center items-center gap-1">
-                                                <a href="#" class="border rounded hover:bg-green-500">
-                                                    <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
-                                                        class="h-3 w-3 m-1">
-                                                </a>
-                                                <a href="#" class="border rounded hover:bg-sky-500">
-                                                    <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}"
-                                                        alt="Pencil" class="h-3 w-3 m-1">
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                                <td id="activeLoansCount" class="py-2 text-left">
+                                                    {{ str_pad($totalActiveLoans, 2, '0', STR_PAD_LEFT) }}</td>
+                                                <td id="receivedSlideBar" class="py-2 text-left">Rs.
+                                                    {{ number_format($totalReceived, 2) }}</td>
+                                                <td class="py-2 text-center flex justify-center items-center gap-1">
+                                                    <a href="#" class="border rounded hover:bg-green-500">
+                                                        <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
+                                                            class="h-3 w-3 m-1">
+                                                    </a>
+                                                    <a href="#" class="border rounded hover:bg-sky-500">
+                                                        <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}"
+                                                            alt="Pencil" class="h-3 w-3 m-1">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -421,7 +428,7 @@
                 </div>
             </div>
             <!--Group List-->
-            <div id="groupListContainer"   class="p-4 overflow-auto h-5/8 max-h-[calc(100vh-250px)] space-y-2">
+            <div id="groupListContainer" class="p-4 overflow-auto h-5/8 max-h-[calc(100vh-250px)] space-y-2">
                 <h1 class="text-md font-medium text-gray-800 mb-4">Group List</h1>
 
             </div>

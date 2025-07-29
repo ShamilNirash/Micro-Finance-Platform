@@ -11,28 +11,28 @@
             <!---Cards-->
             <!--<div class="flex w-full lg:h-1/6">
 
-                                                                                <div id="topCards" class="grid grid-cols-1 lg:flex gap-2 lg:gap-08 w-full p-2 lg:p-0 lg:pb-4">
+                                                                                        <div id="topCards" class="grid grid-cols-1 lg:flex gap-2 lg:gap-08 w-full p-2 lg:p-0 lg:pb-4">
 
-                                                                                    <div id="totalLoan" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="balangoda">
-                                                                                        <div class="flex flex-col w-1/2">
-                                                                                            <h2 class="text-sm font-semibold text-gray-600">Total Loans</h2>
-                                                                                            <p class="text-sm text-gray-400">Balangoda</p>
-                                                                                        </div>
-                                                                                        <div class="flex flex-col justify-items-end items-end w-1/2">
-                                                                                            <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">05</h1>
-                                                                                        </div>
+                                                                                            <div id="totalLoan" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="balangoda">
+                                                                                                <div class="flex flex-col w-1/2">
+                                                                                                    <h2 class="text-sm font-semibold text-gray-600">Total Loans</h2>
+                                                                                                    <p class="text-sm text-gray-400">Balangoda</p>
+                                                                                                </div>
+                                                                                                <div class="flex flex-col justify-items-end items-end w-1/2">
+                                                                                                    <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">05</h1>
+                                                                                                </div>
 
-                                                                                    <div id="totalToReceive" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="ella">
-                                                                                        <div class="flex flex-col w-1/2">
-                                                                                            <h2 class="text-sm font-semibold text-gray-600">To Receive</h2>
-                                                                                            <p class="text-sm text-gray-400">Ella</p>
+                                                                                            <div id="totalToReceive" class="bg-gray-100 px-4 py-2 lg:py-1 rounded-lg shadow-sm flex justify-between items-center w-full border" data-branch="ella">
+                                                                                                <div class="flex flex-col w-1/2">
+                                                                                                    <h2 class="text-sm font-semibold text-gray-600">To Receive</h2>
+                                                                                                    <p class="text-sm text-gray-400">Ella</p>
+                                                                                                </div>
+                                                                                                <div class="flex flex-col justify-items-end items-end w-1/2">
+                                                                                                    <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">180000/=</h1>
+                                                                                                </div>
+                                                                                            </div>
                                                                                         </div>
-                                                                                        <div class="flex flex-col justify-items-end items-end w-1/2">
-                                                                                            <h1 class="text-xl md:text-lg font-semibold text-right text-gray-600">180000/=</h1>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>-->
+                                                                                    </div>-->
 
             <!--Start Table and Card Views-->
             <div class="p-0 border-0 lg:py-2 lg:bg-sky-50 lg:border rounded-lg flex flex-col justify-between lg:h-full">
@@ -329,244 +329,255 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tableBody" class="text-gray-800 text-xs font-light bg-white">
-                                    @foreach ($all_active_centers as $center)
-                                        <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details"
-                                            data-center-id="{{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }}"
-                                            data-branch-name="{{ capitalizeEachWord($center->branch->branch_name) }}"
-                                            data-center-name="{{ capitalizeEachWord($center->center_name) }}"
-                                            data-manager="{{ capitalizeEachWord($center->manager_name) }}">
-                                            <td class="pl-2 text-left">
-                                                <input type="checkbox" name="selected_ids[]" value="1"
-                                                    class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                            </td>
-                                            <td class="py-2 text-left"> {{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }}
-                                            </td>
-                                            <td class="py-2 text-left"> {{ capitalizeFirstLetter($center->center_name) }}
-                                            </td>
-                                            <td class="py-2 text-left">{{ capitalizeEachWord($center->manager_name) }}
-                                            </td>
-                                            <td class="py-2 text-left">
-                                                {{ str_pad($center->group->count(), 2, '0', STR_PAD_LEFT) }}</td>
-                                            @php
+                                    @php
+                                        $groupsInformation = [];
+                                    @endphp
+                                    @if ($all_active_centers)
+                                        @foreach ($all_active_centers as $center)
+                                            <tr class="border-b border-gray-200 hover:bg-sky-100 cursor-pointer rounded-lg view-details"
+                                                data-center-id="{{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }}"
+                                                data-branch-name="{{ capitalizeEachWord($center->branch->branch_name) }}"
+                                                data-center-name="{{ capitalizeEachWord($center->center_name) }}"
+                                                data-manager="{{ capitalizeEachWord($center->manager_name) }}">
+                                                <td class="pl-2 text-left">
+                                                    <input type="checkbox" name="selected_ids[]" value="1"
+                                                        class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                                                </td>
+                                                <td class="py-2 text-left">
+                                                    {{ str_pad($center->id, 3, '0', STR_PAD_LEFT) }}
+                                                </td>
+                                                <td class="py-2 text-left">
+                                                    {{ capitalizeFirstLetter($center->center_name) }}
+                                                </td>
+                                                <td class="py-2 text-left">{{ capitalizeEachWord($center->manager_name) }}
+                                                </td>
+                                                <td class="py-2 text-left">
+                                                    {{ str_pad($center->group->count(), 2, '0', STR_PAD_LEFT) }}</td>
+                                                @php
 
-                                                $filterStartDate = request()->startDate
-                                                    ? \Carbon\Carbon::parse(request()->startDate)
-                                                    : null;
-                                                $filterEndDate = request()->endDate
-                                                    ? \Carbon\Carbon::parse(request()->endDate)
-                                                    : null;
-                                                $totalActiveLoans = $center->group->sum(function ($group) use (
-                                                    $filterStartDate,
-                                                    $filterEndDate,
-                                                ) {
-                                                    return $group->member->sum(function ($member) use (
+                                                    $filterStartDate = request()->startDate
+                                                        ? \Carbon\Carbon::parse(request()->startDate)
+                                                        : null;
+                                                    $filterEndDate = request()->endDate
+                                                        ? \Carbon\Carbon::parse(request()->endDate)
+                                                        : null;
+                                                    $totalActiveLoans = $center->group->sum(function ($group) use (
                                                         $filterStartDate,
                                                         $filterEndDate,
                                                     ) {
-                                                        return $member->loan
-                                                            ->filter(function ($loan) use (
-                                                                $filterStartDate,
-                                                                $filterEndDate,
-                                                            ) {
-                                                                // ✅ 1. If any installment is unpaid (payed_date is null)
-                                                                if (
-                                                                    $loan->installment->contains(function (
-                                                                        $installment,
-                                                                    ) {
-                                                                        return $installment->status === 'UNPAYED';
-                                                                    })
+                                                        return $group->member->sum(function ($member) use (
+                                                            $filterStartDate,
+                                                            $filterEndDate,
+                                                        ) {
+                                                            return $member->loan
+                                                                ->filter(function ($loan) use (
+                                                                    $filterStartDate,
+                                                                    $filterEndDate,
                                                                 ) {
-                                                                    return true;
-                                                                }
-
-                                                                // ✅ 2. If any installment payed_date is within selected range
-                                                                if (
-                                                                    $loan->installment->contains(function (
-                                                                        $installment,
-                                                                    ) use ($filterStartDate, $filterEndDate) {
-                                                                        if (!$installment->payed_date) {
-                                                                            return false;
-                                                                        }
-                                                                        $payedDate = Carbon::parse(
-                                                                            $installment->payed_date,
-                                                                        );
-                                                                        return (!$filterStartDate ||
-                                                                            $payedDate >= $filterStartDate) &&
-                                                                            (!$filterEndDate ||
-                                                                                $payedDate <= $filterEndDate);
-                                                                    })
-                                                                ) {
-                                                                    return true;
-                                                                }
-
-                                                                // ✅ 3. If any underpayment payed_date is within selected range
-                                                                foreach ($loan->installment as $installment) {
+                                                                    // ✅ 1. If any installment is unpaid (payed_date is null)
                                                                     if (
-                                                                        $installment->underpayment->contains(function (
-                                                                            $underpayment,
-                                                                        ) use ($filterStartDate, $filterEndDate) {
-                                                                            if (!$underpayment->payed_date) {
-                                                                                return false;
-                                                                            }
-                                                                            $underPayedDate = Carbon::parse(
-                                                                                $underpayment->payed_date,
-                                                                            );
-                                                                            return (!$filterStartDate ||
-                                                                                $underPayedDate >= $filterStartDate) &&
-                                                                                (!$filterEndDate ||
-                                                                                    $underPayedDate <= $filterEndDate);
+                                                                        $loan->installment->contains(function (
+                                                                            $installment,
+                                                                        ) {
+                                                                            return $installment->status === 'UNPAYED';
                                                                         })
                                                                     ) {
                                                                         return true;
                                                                     }
-                                                                }
 
-                                                                // ✅ 4. If any installment was paid late, and due date is within range
-                                                                if (
-                                                                    $loan->installment->contains(function (
-                                                                        $installment,
-                                                                    ) use ($filterStartDate, $filterEndDate) {
+                                                                    // ✅ 2. If any installment payed_date is within selected range
+                                                                    if (
+                                                                        $loan->installment->contains(function (
+                                                                            $installment,
+                                                                        ) use ($filterStartDate, $filterEndDate) {
+                                                                            if (!$installment->payed_date) {
+                                                                                return false;
+                                                                            }
+                                                                            $payedDate = Carbon::parse(
+                                                                                $installment->payed_date,
+                                                                            );
+                                                                            return (!$filterStartDate ||
+                                                                                $payedDate >= $filterStartDate) &&
+                                                                                (!$filterEndDate ||
+                                                                                    $payedDate <= $filterEndDate);
+                                                                        })
+                                                                    ) {
+                                                                        return true;
+                                                                    }
+
+                                                                    // ✅ 3. If any underpayment payed_date is within selected range
+                                                                    foreach ($loan->installment as $installment) {
                                                                         if (
-                                                                            !$installment->payed_date ||
-                                                                            !$installment->date_and_time
+                                                                            $installment->underpayment->contains(
+                                                                                function ($underpayment) use (
+                                                                                    $filterStartDate,
+                                                                                    $filterEndDate,
+                                                                                ) {
+                                                                                    if (!$underpayment->payed_date) {
+                                                                                        return false;
+                                                                                    }
+                                                                                    $underPayedDate = Carbon::parse(
+                                                                                        $underpayment->payed_date,
+                                                                                    );
+                                                                                    return (!$filterStartDate ||
+                                                                                        $underPayedDate >=
+                                                                                            $filterStartDate) &&
+                                                                                        (!$filterEndDate ||
+                                                                                            $underPayedDate <=
+                                                                                                $filterEndDate);
+                                                                                },
+                                                                            )
                                                                         ) {
-                                                                            return false;
+                                                                            return true;
                                                                         }
-                                                                        $payedDate = Carbon::parse(
-                                                                            $installment->payed_date,
-                                                                        );
-                                                                        $dueDate = Carbon::parse(
-                                                                            $installment->date_and_time,
-                                                                        );
+                                                                    }
 
-                                                                        return $dueDate < $payedDate &&
-                                                                            (!$filterStartDate ||
-                                                                                $dueDate >= $filterStartDate) &&
-                                                                            (!$filterEndDate ||
-                                                                                $dueDate <= $filterEndDate);
-                                                                    })
-                                                                ) {
-                                                                    return true;
-                                                                }
-
-                                                                // ❌ Not active
-                                                                return false;
-                                                            })
-                                                            ->count(); // Count matched loans
-                                                    });
-                                                });
-
-                                                $totalReceived = $center->group->sum(function ($group) use (
-                                                    $filterStartDate,
-                                                    $filterEndDate,
-                                                ) {
-                                                    return $group->member->sum(function ($member) use (
-                                                        $filterStartDate,
-                                                        $filterEndDate,
-                                                    ) {
-                                                        return $member->loan->sum(function ($loan) use (
-                                                            $filterStartDate,
-                                                            $filterEndDate,
-                                                        ) {
-                                                            return $loan->installment->sum(function ($installment) use (
-                                                                $filterStartDate,
-                                                                $filterEndDate,
-                                                            ) {
-                                                                // Only consider underpayments
-                                                                if (
-                                                                    $installment->underpayment &&
-                                                                    $installment->underpayment->isNotEmpty()
-                                                                ) {
-                                                                    return $installment->underpayment
-                                                                        ->filter(function ($underpayment) use (
-                                                                            $filterStartDate,
-                                                                            $filterEndDate,
-                                                                        ) {
+                                                                    // ✅ 4. If any installment was paid late, and due date is within range
+                                                                    if (
+                                                                        $loan->installment->contains(function (
+                                                                            $installment,
+                                                                        ) use ($filterStartDate, $filterEndDate) {
+                                                                            if (
+                                                                                !$installment->payed_date ||
+                                                                                !$installment->date_and_time
+                                                                            ) {
+                                                                                return false;
+                                                                            }
                                                                             $payedDate = Carbon::parse(
-                                                                                $underpayment->payed_date,
+                                                                                $installment->payed_date,
                                                                             );
-                                                                            return (!$filterStartDate ||
-                                                                                $payedDate >= $filterStartDate) &&
-                                                                                (!$filterEndDate ||
-                                                                                    $payedDate <= $filterEndDate);
-                                                                        })
-                                                                        ->sum('amount');
-                                                                }
+                                                                            $dueDate = Carbon::parse(
+                                                                                $installment->date_and_time,
+                                                                            );
 
-                                                                return 0; // No underpayments = no received amount
-                                                            });
+                                                                            return $dueDate < $payedDate &&
+                                                                                (!$filterStartDate ||
+                                                                                    $dueDate >= $filterStartDate) &&
+                                                                                (!$filterEndDate ||
+                                                                                    $dueDate <= $filterEndDate);
+                                                                        })
+                                                                    ) {
+                                                                        return true;
+                                                                    }
+
+                                                                    // ❌ Not active
+                                                                    return false;
+                                                                })
+                                                                ->count(); // Count matched loans
                                                         });
                                                     });
-                                                });
 
-                                                $groupsInformation = $center->group->map(function ($group) use (
-                                                    $filterStartDate,
-                                                    $filterEndDate,
-                                                ) {
-                                                    $totalReceived = $group->member->sum(function ($member) use (
+                                                    $totalReceived = $center->group->sum(function ($group) use (
                                                         $filterStartDate,
                                                         $filterEndDate,
                                                     ) {
-                                                        return $member->loan->sum(function ($loan) use (
+                                                        return $group->member->sum(function ($member) use (
                                                             $filterStartDate,
                                                             $filterEndDate,
                                                         ) {
-                                                            return $loan->installment->sum(function ($installment) use (
+                                                            return $member->loan->sum(function ($loan) use (
                                                                 $filterStartDate,
                                                                 $filterEndDate,
                                                             ) {
-                                                                // Only consider underpayments that fall within the date range
-                                                                if (
-                                                                    $installment->underpayment &&
-                                                                    $installment->underpayment->isNotEmpty()
-                                                                ) {
-                                                                    return $installment->underpayment
-                                                                        ->filter(function ($underpayment) use (
-                                                                            $filterStartDate,
-                                                                            $filterEndDate,
-                                                                        ) {
-                                                                            $payedDate = Carbon::parse(
-                                                                                $underpayment->payed_date,
-                                                                            );
-                                                                            return (!$filterStartDate ||
-                                                                                $payedDate >= $filterStartDate) &&
-                                                                                (!$filterEndDate ||
-                                                                                    $payedDate <= $filterEndDate);
-                                                                        })
-                                                                        ->sum('amount');
-                                                                }
+                                                                return $loan->installment->sum(function (
+                                                                    $installment,
+                                                                ) use ($filterStartDate, $filterEndDate) {
+                                                                    // Only consider underpayments
+                                                                    if (
+                                                                        $installment->underpayment &&
+                                                                        $installment->underpayment->isNotEmpty()
+                                                                    ) {
+                                                                        return $installment->underpayment
+                                                                            ->filter(function ($underpayment) use (
+                                                                                $filterStartDate,
+                                                                                $filterEndDate,
+                                                                            ) {
+                                                                                $payedDate = Carbon::parse(
+                                                                                    $underpayment->payed_date,
+                                                                                );
+                                                                                return (!$filterStartDate ||
+                                                                                    $payedDate >= $filterStartDate) &&
+                                                                                    (!$filterEndDate ||
+                                                                                        $payedDate <= $filterEndDate);
+                                                                            })
+                                                                            ->sum('amount');
+                                                                    }
 
-                                                                // If no underpayment, return 0
-                                                                return 0;
+                                                                    return 0; // No underpayments = no received amount
+                                                                });
                                                             });
                                                         });
                                                     });
 
-                                                    return [
-                                                        'group_id' => $group->id,
-                                                        'group_name' => capitalizeFirstLetter($group->group_name),
-                                                        'received' => number_format($totalReceived, 2),
-                                                    ];
-                                                });
+                                                    $groupsInformation = $center->group->map(function ($group) use (
+                                                        $filterStartDate,
+                                                        $filterEndDate,
+                                                    ) {
+                                                        $totalReceived = $group->member->sum(function ($member) use (
+                                                            $filterStartDate,
+                                                            $filterEndDate,
+                                                        ) {
+                                                            return $member->loan->sum(function ($loan) use (
+                                                                $filterStartDate,
+                                                                $filterEndDate,
+                                                            ) {
+                                                                return $loan->installment->sum(function (
+                                                                    $installment,
+                                                                ) use ($filterStartDate, $filterEndDate) {
+                                                                    // Only consider underpayments that fall within the date range
+                                                                    if (
+                                                                        $installment->underpayment &&
+                                                                        $installment->underpayment->isNotEmpty()
+                                                                    ) {
+                                                                        return $installment->underpayment
+                                                                            ->filter(function ($underpayment) use (
+                                                                                $filterStartDate,
+                                                                                $filterEndDate,
+                                                                            ) {
+                                                                                $payedDate = Carbon::parse(
+                                                                                    $underpayment->payed_date,
+                                                                                );
+                                                                                return (!$filterStartDate ||
+                                                                                    $payedDate >= $filterStartDate) &&
+                                                                                    (!$filterEndDate ||
+                                                                                        $payedDate <= $filterEndDate);
+                                                                            })
+                                                                            ->sum('amount');
+                                                                    }
 
-                                                // Optional: convert to array
-                                                $groupsInformation = $groupsInformation->values()->toArray();
-                                            @endphp
-                                            <td id="totalLoanCount" class="py-2 text-left">{{ $totalActiveLoans }}</td>
-                                            <td id="totalReceivedCount" class="py-2 text-left">Rs.
-                                                {{ number_format($totalReceived, 2) }}</td>
-                                            <td class="py-2 text-center flex justify-center items-center gap-1">
-                                                <a href="#" class="border rounded hover:bg-green-500">
-                                                    <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
-                                                        class="h-3 w-3 m-1">
-                                                </a>
-                                                <a href="#" class="border rounded hover:bg-sky-500">
-                                                    <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}"
-                                                        alt="Pencil" class="h-3 w-3 m-1">
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                                                    // If no underpayment, return 0
+                                                                    return 0;
+                                                                });
+                                                            });
+                                                        });
+
+                                                        return [
+                                                            'group_id' => $group->id,
+                                                            'group_name' => capitalizeFirstLetter($group->group_name),
+                                                            'received' => number_format($totalReceived, 2),
+                                                        ];
+                                                    });
+
+                                                    // Optional: convert to array
+                                                    $groupsInformation = $groupsInformation->values()->toArray();
+                                                @endphp
+                                                <td id="totalLoanCount" class="py-2 text-left">{{ $totalActiveLoans }}
+                                                </td>
+                                                <td id="totalReceivedCount" class="py-2 text-left">Rs.
+                                                    {{ number_format($totalReceived, 2) }}</td>
+                                                <td class="py-2 text-center flex justify-center items-center gap-1">
+                                                    <a href="#" class="border rounded hover:bg-green-500">
+                                                        <img src="{{ asset('assets/icons/Eye.svg') }}" alt="Eye"
+                                                            class="h-3 w-3 m-1">
+                                                    </a>
+                                                    <a href="#" class="border rounded hover:bg-sky-500">
+                                                        <img src="{{ asset('assets/icons/ArrowLineDown.svg') }}"
+                                                            alt="Pencil" class="h-3 w-3 m-1">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
