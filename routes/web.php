@@ -76,16 +76,19 @@ Route::get('/income', [CenterController::class, 'incomeView'])->name('centers.vi
 Route::get('/collection',  [CenterController::class, 'collectionView'])->name('centers.viewCollectionBlade');
 Route::get('/underpayment', [CenterController::class, 'underPaymentView'])->name('centers.viewUnderPaymentBlade');
 
-//user routes
+//user roles routes
 Route::get('/userRole', [UserRoleController::class, 'userRolesView']);
 Route::post('/userRole/create', [UserRoleController::class, 'createUserRole'])->name('userRoles.create');
 
-Route::get('/userAccount', [UserController::class, 'usersView']);
+//user routes
+Route::get('/userAccount', [UserController::class, 'usersView'])->name('user.viewblade');
 Route::post('/userAccount/create', [UserController::class, 'createUser'])->name('user.create');
 Route::post('/userAccount/update', [UserController::class, 'updateUser'])->name('user.update');
 Route::get('/userLogs', function () {
     return view('settings/userLogs');
 });
+Route::delete('/userAccount/delete/{userId}', [UserController::class, 'deleteUser']);
+
 
 
 Route::get('/recentlyAdded', function () {

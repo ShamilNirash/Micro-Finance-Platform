@@ -4,6 +4,7 @@
     require_once resource_path('libs\every_word_first_letter_capitalization.php');
 @endphp
 @section('contents')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <div id="mainContent" class="flex lg:h-full">
         <!--Mobile Cards and table View-->
         <div id="firstColumn" class="w-full h-full p-2 lg:border-r lg:p-4 transition-all duration-300 lg:relative lg:py-4">
@@ -477,6 +478,7 @@
                                                 </div>
                                             </td>
                                             <td class="py-2 text-left">
+                                                <span class="hidden" id="user_id_span">{{ $user->id }}</span>
                                                 <span class="truncate block">{{ $user->email }}</span>
                                             </td>
                                             <td class="py-2 text-left">
@@ -759,7 +761,32 @@
             document.getElementById('editUserModal').classList.add('hidden');
             document.getElementById('editUserModal').classList.remove('flex');
         });
+        const userId = document.getElementById('user_id_span').innerText.trim();
 
+        const confirmDelete = document.getElementById('confirmDeleteUser');
+        confirmDelete.addEventListener(
+            'click', () => {
+                fetch(`/userAccount/delete/${userId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('deleteUserModal').classList.add('hidden');
+                        document.getElementById('deleteUserModal').classList.remove('flex');
+                        alert(data.message);
+                        const viewCenterBladeUrl = "{{ route('user.viewblade') }}";
+                        window.location.href = viewCenterBladeUrl;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert(error);
+
+                    });
+            });
         // Save edit modal form
         /* document.getElementById('editMemberForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -873,24 +900,6 @@
         document.getElementById('cancelDeleteUser').addEventListener('click', function() {
             document.getElementById('deleteUserModal').classList.add('hidden');
             document.getElementById('deleteUserModal').classList.remove('flex');
-        });
-
-        document.getElementById('confirmDeleteUser').addEventListener('click', function() {
-            const userId = document.getElementById('deleteUserId').value;
-
-            console.log('Deleting user with ID:', userId);
-            // Implement actual delete logic here (e.g., API call)
-
-            // Close modal after deletion
-            document.getElementById('deleteUserModal').classList.add('hidden');
-            document.getElementById('deleteUserModal').classList.remove('flex');
-
-            // Optionally remove the row from the table or card
-            const row = document.querySelector(`#userTable tbody tr td:first-child:contains(${userId})`)?.closest(
-                'tr');
-            if (row) row.remove();
-            const card = document.querySelector(`#userGrid div[data-NIC][data-name*="${userId}"]`);
-            if (card) card.remove();
         });
     </script>
     <style>

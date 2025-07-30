@@ -35,9 +35,7 @@ class UserController extends Controller
                 'email' => [
                     'required',
                     'string',
-                    Rule::unique('users')->where(function ($query) {
-                        return $query->where('status', 'active');
-                    }),
+                    Rule::unique('users')
                 ],
                 'first_name' => 'required|string',
                 'last_name' => 'required|string',
@@ -132,6 +130,16 @@ class UserController extends Controller
         } catch (\Exception $e) {
             Log::error('Error creating user: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong.');
+        }
+    }
+    public function deleteUser($userId)
+    {
+        try {
+            $this->userRepository->update($userId, 'status', 'INACTIVE');
+            return response()->json(['message' => 'User Delete successfully.']);
+        } catch (\Exception $e) {
+            Log::error('Error delete user: ' . $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 }

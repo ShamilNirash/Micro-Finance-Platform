@@ -262,45 +262,11 @@
                 <div class="px-4 w-full h-1/8 overflow-y-auto">
                     <div class="flex justify-between items-center">
                         <h1 class="text-sm font-medium text-gray-700 py-2">Users</h1>
-                        <h1 class="text-sm font-medium text-gray-700 rounded-md bg-gray-100 p-1 px-8 border">03</h1>
+                        <h1 id="usersCount"
+                            class="text-sm font-medium text-gray-700 rounded-md bg-gray-100 p-1 px-8 border"></h1>
                     </div>
-                    <div class="grid grid-cols-1 gap-y-2 pt-2">
-                        <!--Card-->
-                        <div
-                            class="w-full bg-gray-100 border flex justify-start items-center py-1.5 px-4 rounded-md space-x-2 h-10">
-                            <div class="bg-black rounded-full h-6 w-6 flex-shrink-0"></div>
-                            <span class="truncate text-xs text-gray-700">Dunura Hansaja</span>
-                        </div>
-                        <!--Card-->
-                        <div
-                            class="w-full bg-gray-100 border flex justify-start items-center py-1.5 px-4 rounded-md space-x-2 h-10">
-                            <div class="bg-black rounded-full h-6 w-6 flex-shrink-0"></div>
-                            <span class="truncate text-xs text-gray-700">Dunura Hansaja</span>
-                        </div>
-                        <!--Card-->
-                        <div
-                            class="w-full bg-gray-100 border flex justify-start items-center py-1.5 px-4 rounded-md space-x-2 h-10">
-                            <div class="bg-black rounded-full h-6 w-6 flex-shrink-0"></div>
-                            <span class="truncate text-xs text-gray-700">Dunura Hansaja</span>
-                        </div>
-                        <!--Card-->
-                        <div
-                            class="w-full bg-gray-100 border flex justify-start items-center py-1.5 px-4 rounded-md space-x-2 h-10">
-                            <div class="bg-black rounded-full h-6 w-6 flex-shrink-0"></div>
-                            <span class="truncate text-xs text-gray-700">Dunura Hansaja</span>
-                        </div>
-                        <!--Card-->
-                        <div
-                            class="w-full bg-gray-100 border flex justify-start items-center py-1.5 px-4 rounded-md space-x-2 h-10">
-                            <div class="bg-black rounded-full h-6 w-6 flex-shrink-0"></div>
-                            <span class="truncate text-xs text-gray-700">Dunura Hansaja</span>
-                        </div>
-                        <!--Card-->
-                        <div
-                            class="w-full bg-gray-100 border flex justify-start items-center py-1.5 px-4 rounded-md space-x-2 h-10">
-                            <div class="bg-black rounded-full h-6 w-6 flex-shrink-0"></div>
-                            <span class="truncate text-xs text-gray-700">Dunura Hansaja final</span>
-                        </div>
+                    <div id="usersList" class="grid grid-cols-1 gap-y-2 pt-2">
+
                     </div>
                 </div>
             </div>
@@ -345,10 +311,13 @@
                 const userRoleName = row.getAttribute('data-role-name');
                 const RowDetails = document.getElementById('RowDetails');
                 const firstColumn = document.getElementById('firstColumn');
-                console.log(userRoleName);
+                const usersCount = document.getElementById('usersCount');
+                console.log(userRole);
                 // Show second column
                 document.getElementById('RoleNameSlideBar').textContent = userRoleName;
                 const userRoleList = document.getElementById('userRoleList');
+                const usersList = document.getElementById('usersList');
+                usersList.innerHTML = '';
                 userRoleList.innerHTML = '';
                 const binaryPermissions = [
                     'dashboard',
@@ -377,6 +346,18 @@
                     2: 'View+Edit',
                     3: 'View+Edit+Delete'
                 };
+                usersCount.textContent = userRole.users.length ?? 00;
+                if (userRole.users.length > 0) {
+                    userRole.users.forEach((user) => {
+                        const html = ` <div
+                            class="w-full bg-gray-100 border flex justify-start items-center py-1.5 px-4 rounded-md space-x-2 h-10">
+                            <div class="bg-black rounded-full h-6 w-6 flex-shrink-0"></div>
+                            <span class="truncate text-xs text-gray-700">${user.first_name} ${user.last_name}</span>
+                        </div>`;
+                        usersList.insertAdjacentHTML('beforeend', html);
+                    })
+                }
+
 
                 // Render binary permission cards
                 binaryPermissions.forEach((key) => {
