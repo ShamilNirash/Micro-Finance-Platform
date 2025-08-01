@@ -188,7 +188,16 @@
                                             <td class="py-2 pl-8 text-left">
                                                 {{ capitalizeEachWord($user_role->role_name) }}
                                             </td>
-                                            <td class="py-2 text-center">03</td>
+                                            <td class="py-2 text-center">
+                                                {{ str_pad(
+                                                    $user_role->users->filter(function ($user) {
+                                                            return $user->status === 'ACTIVE';
+                                                        })->count(),
+                                                    2,
+                                                    '0',
+                                                    STR_PAD_LEFT,
+                                                ) }}
+                                            </td>
                                             <td class="py-2 text-center">
                                                 <div class="flex justify-center items-center gap-1">
                                                     <a href="#"
@@ -346,9 +355,10 @@
                     2: 'View+Edit',
                     3: 'View+Edit+Delete'
                 };
-                usersCount.textContent = userRole.users.length ?? 00;
+                usersCount.textContent = userRole.users.filter(user => user.status === 'ACTIVE').length ??
+                    00;
                 if (userRole.users.length > 0) {
-                    userRole.users.forEach((user) => {
+                    userRole.users.filter(user => user.status === 'ACTIVE').forEach((user) => {
                         const html = ` <div
                             class="w-full bg-gray-100 border flex justify-start items-center py-1.5 px-4 rounded-md space-x-2 h-10">
                             <div class="bg-black rounded-full h-6 w-6 flex-shrink-0"></div>

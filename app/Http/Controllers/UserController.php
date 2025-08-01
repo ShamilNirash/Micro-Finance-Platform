@@ -107,7 +107,7 @@ class UserController extends Controller
                 'userImage01' => 'file|image|mimes:jpeg,png,jpg',
             ]);
 
-            $user = Userfind($request->id);
+           /*  $user = Userfind($request->id);
             $user->first_name = $request->first_name;
             $user->last_name = $request->last_name;
             $user->email = $request->email;
@@ -119,7 +119,7 @@ class UserController extends Controller
                 $user->password = bcrypt($request->password);
             }
 
-            $user->save();
+            $user->save(); */
 
             return response()->json(['status' => 'success', 'message' => 'User updated successfully']);
         } catch (ValidationException $e) {
