@@ -138,7 +138,6 @@
                     <form id="editMemberForm" class="p-4 space-y-6">
                         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-                        <input type="hidden" id="editMemberId">
                         <div class="flex justify-center mb-4">
                             <div class="relative">
                                 <img id="editMemberProfileImage" src="https://via.placeholder.com/100" alt="User Profile"
@@ -162,6 +161,8 @@
                                         class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-xs border-gray-300 hover:border-gray-400">
                                     <input type="text" id="editMemberLastName" placeholder="2nd name"
                                         class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-xs border-gray-300 hover:border-gray-400">
+                                    <input class="hidden" type="text" id="editMemberId">
+
                                 </div>
                             </div>
                             <div class="flex space-x-4 items-center">
@@ -429,8 +430,7 @@
                                         Delete
                                     </a>
                                     <a href="#"
-                                        class="border rounded-lg hover:bg-green-700 bg-green-600 flex-shrink-0 change-password px-4 py-1 text-white"
-                                        data-id="001">
+                                        class="border rounded-lg hover:bg-green-700 bg-green-600 flex-shrink-0 change-password px-4 py-1 text-white">
                                         Password Change
                                     </a>
                                 </div>
@@ -469,17 +469,19 @@
                                                     <div class="bg-black rounded-full h-6 w-6 flex-shrink-0"></div>
                                                     <span class="truncate">{{ capitalizeEachWord($user->first_name) }}
                                                         {{ capitalizeEachWord($user->last_name) }}</span>
-                                                    <p class="hidden" id="lastNameHidden">
+                                                    <p  class="hidden lastNameHidden">
                                                         {{ capitalizeEachWord($user->last_name) }}</p>
-                                                    <p class="hidden" id="firstNameHidden">
+                                                    <p class="hidden firstNameHidden" >
                                                         {{ capitalizeEachWord($user->first_name) }}</p>
-                                                    <p class="hidden" id="userRoleIdHidden">
+                                                    <p class="hidden userRoleIdHidden" >
                                                         {{ capitalizeEachWord($user->user_role_id) }}</p>
+                                                    <p class="hidden userIdHidden" >
+                                                        {{ $user->id }}</p>
                                                 </div>
                                             </td>
                                             <td class="py-2 text-left">
                                                 <span class="hidden" id="user_id_span">{{ $user->id }}</span>
-                                                <span class="truncate block">{{ $user->email }}</span>
+                                                <span  class="truncate block emailHidden">{{ $user->email }}</span>
                                             </td>
                                             <td class="py-2 text-left">
                                                 <div class="flex space-x-2 text-xs">
@@ -523,8 +525,7 @@
                                             <td class="py-2 text-center">
                                                 <div class="flex justify-center items-center gap-1">
                                                     <a href="#"
-                                                        class="border rounded hover:bg-blue-700 flex-shrink-0 edit-user"
-                                                        data-id="001">
+                                                        class="border rounded hover:bg-blue-700 flex-shrink-0 edit-user">
                                                         <img src="{{ asset('assets/icons/PencilSimple.svg') }}"
                                                             alt="Edit" class="h-3 w-3 m-1">
                                                     </a>
@@ -688,18 +689,18 @@
 
             e.preventDefault();
             const container = target.closest('tr') || target.closest('div');
-            const userId = target.getAttribute('data-id');
-            let name, email, phone, nic, role, password;
 
-            console.log('Edit button clicked, target:', target, 'container:', container, 'userId:', userId);
+            let name, email, phone, nic, role, password, id;
 
+            console.log("hi");
             if (container.tagName === 'TR') {
-                first_name = document.getElementById('firstNameHidden').textContent.trim();
-                last_name = document.getElementById('lastNameHidden').textContent.trim();
-                email = container.querySelector('td:nth-child(3) span').textContent.trim();
+                first_name = container.querySelector('.firstNameHidden').textContent.trim();
+                last_name = container.querySelector('.lastNameHidden').textContent.trim();
+                id = container.querySelector('.userIdHidden').textContent.trim();
+                email = container.querySelector('.emailHidden').textContent.trim();
                 phone = container.querySelector('td:nth-child(5) span').textContent.trim();
                 nic = container.querySelector('td:nth-child(6) span').textContent.trim();
-                role = document.getElementById('userRoleIdHidden').textContent.trim();
+                role = container.querySelector('.userRoleIdHidden').textContent.trim();
                 password = target.dataset.password;
             } else if (container.tagName === 'DIV') {
                 name = container.querySelector('div:nth-child(1) div:nth-child(1) p:nth-child(2)').textContent
@@ -715,7 +716,7 @@
             console.log(role);
 
             // Populate edit modal fields
-            document.getElementById('editMemberId').value = userId || '';
+            document.getElementById('editMemberId').value = id || '';
             document.getElementById('editMemberFirstName').value = first_name || '';
             document.getElementById('editMemberLastName').value = last_name || '';
             document.getElementById('editMemberEmail').value = email || '';
@@ -788,12 +789,10 @@
                     });
             });
         // Save edit modal form
-        /* document.getElementById('editMemberForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        document.getElementById('editMemberForm').addEventListener('submit', function(e) {
 
-            const userId = document.getElementById('editMemberId').value;
             const formData = new FormData();
-            formData.append('id', userId);
+            formData.append('id', document.getElementById('editMemberId').value);
             formData.append('first_name', document.getElementById('editMemberFirstName').value);
             formData.append('last_name', document.getElementById('editMemberLastName').value);
             formData.append('email', document.getElementById('editMemberEmail').value);
@@ -801,36 +800,48 @@
             formData.append('nic', document.getElementById('editMemberNIC').value);
             formData.append('mobile', document.getElementById('editMemberMobile01').value);
             formData.append('role_id', document.getElementById('editMemberRole').value);
+            const imageFile = document.getElementById('editMemberImage').files[0];
+            if (imageFile) {
+                formData.append('userImage01', imageFile); // Must match the name used in your Laravel controller
+            }
 
-            // Optional: Add CSRF token if using fetch
             const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-            try {
-                const response = await fetch("{{ route('user.update') }}", {
+            fetch("{{ route('user.update') }}", {
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': token,
                     },
                     body: formData
+                })
+                .then(response => response.json().then(data => ({
+                    status: response.status,
+                    body: data
+                })))
+                .then(({
+                    status,
+                    body
+                }) => {
+                    if (status >= 200 && status < 300) {
+                        console.log('User updated successfully:', body);
+                        document.getElementById('editUserModal').classList.add('hidden');
+                        document.getElementById('editUserModal').classList.remove('flex');
+                        alert(body.message || 'User updated successfully');
+
+                        // Optional: redirect or reload
+                        const viewBladeUrl = "{{ route('user.viewblade') }}";
+                        window.location.href = viewBladeUrl;
+                    } else {
+                        console.error('Update failed:', body);
+                        alert('Error: ' + (body.message || 'Update failed'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                    alert('An unexpected error occurred');
                 });
+        });
 
-                const result = await response.json();
-                if (response.ok) {
-                    console.log('User updated successfully:', result);
-
-                    // Optionally reload or update the table
-                    // Close modal
-                    document.getElementById('editUserModal').classList.add('hidden');
-                    document.getElementById('editUserModal').classList.remove('flex');
-                } else {
-                    console.error('Update failed:', result);
-                    alert('Error: ' + (result.message || 'Update failed'));
-                }
-            } catch (error) {
-                console.error('Fetch error:', error);
-                alert('Request failed.');
-            }
-        }); */
 
         // Change Password Modal
         document.addEventListener('click', function(e) {

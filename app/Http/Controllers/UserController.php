@@ -45,28 +45,45 @@ class UserController extends Controller
                 'role_id' => 'required|numeric',
                 'userImage01' => 'file|image|mimes:jpeg,png,jpg',
             ]);
-            $image1Path = $request->file('userImage01')->store('users/ppImages', 'public');
+            if ($request->file('userImage01')) {
+                $image1Path = $request->file('userImage01')->store('users/ppImages', 'public');
+                $this->userRepository->create([
+                    'first_name' => $request['first_name'],
+                    'last_name' => $request['last_name'],
+                    'email' => $request['email'],
+                    'password' => Hash::make($request['password']),
+                    'nic_number' => $request['nic_number'],
+                    'mobile_number_1' => $request['phoneNumber01'],
+                    'user_role_id' => $request['role_id'],
+                    'payment_date' => $request['payment_day'],
+                    'image' => $image1Path,
+                    'status' => 'ACTIVE',
+                ]);
+            } else {
+                $this->userRepository->create([
+                    'first_name' => $request['first_name'],
+                    'last_name' => $request['last_name'],
+                    'email' => $request['email'],
+                    'password' => Hash::make($request['password']),
+                    'nic_number' => $request['nic_number'],
+                    'mobile_number_1' => $request['phoneNumber01'],
+                    'user_role_id' => $request['role_id'],
+                    'payment_date' => $request['payment_day'],
+                    'status' => 'ACTIVE',
+                ]);
+            }
 
-            $this->userRepository->create([
-                'first_name' => $request['first_name'],
-                'last_name' => $request['last_name'],
-                'email' => $request['email'],
-                'password' => Hash::make($request['password']),
-                'nic_number' => $request['nic_number'],
-                'mobile_number_1' => $request['phoneNumber01'],
-                'user_role_id' => $request['role_id'],
-                'payment_date' => $request['payment_day'],
-                'image' => $image1Path,
-                'status' => 'ACTIVE',
-            ]);
 
             return redirect()->back()->with('success', 'User created successfully.');
         } catch (ValidationException $e) {
+            dd($e);
             return redirect()->back()
                 ->with('show_create_center_popup', true)
                 ->withInput()
                 ->withErrors($e->errors());
         } catch (\Exception $e) {
+            dd($e);
+
             Log::error('Error creating user: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong.');
         }
@@ -94,33 +111,34 @@ class UserController extends Controller
                 'email' => [
                     'required',
                     'string',
-                    Rule::unique('users')->where(function ($query) {
-                        return $query->where('status', 'active');
-                    }),
+                    Rule::unique('users')
+                        ->ignore($request->id) // Ignore the current user's ID
+                        ->where(function ($query) {
+                            return $query->where('status', 'active');
+                        }),
                 ],
                 'first_name' => 'required|string',
                 'last_name' => 'required|string',
-                'password' => 'required|string|min:8',
-                'nic_number' => 'required|string',
-                'phoneNumber01' => 'required|string|regex:/^[0-9]+$/',
+                'nic' => 'required|string',
+                'mobile' => 'required|string|regex:/^[0-9]+$/',
                 'role_id' => 'required|numeric',
                 'userImage01' => 'file|image|mimes:jpeg,png,jpg',
+
             ]);
 
-           /*  $user = Userfind($request->id);
+
+            $user = $this->userRepository->search_one('id', $request->id);
+            if ($request->file('userImage01')) {
+                $image1Path = $request->file('userImage01')->store('users/ppImages', 'public');
+                $user->image = $image1Path;
+            }
             $user->first_name = $request->first_name;
             $user->last_name = $request->last_name;
             $user->email = $request->email;
-            $user->nic = $request->nic;
-            $user->mobile = $request->mobile;
-            $user->role_id = $request->role_id;
-
-            if (!empty($request->password) && $request->password !== '********') {
-                $user->password = bcrypt($request->password);
-            }
-
-            $user->save(); */
-
+            $user->nic_number = $request->nic;
+            $user->mobile_number_1 = $request->mobile;
+            $user->user_role_id = $request->role_id;
+            $user->save();
             return response()->json(['status' => 'success', 'message' => 'User updated successfully']);
         } catch (ValidationException $e) {
             return redirect()->back()
