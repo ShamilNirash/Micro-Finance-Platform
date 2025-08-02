@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\InstallmentController;
 use App\Http\Controllers\LoanController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserRoleController;
@@ -79,6 +80,7 @@ Route::get('/underpayment', [CenterController::class, 'underPaymentView'])->name
 //user roles routes
 Route::get('/userRole', [UserRoleController::class, 'userRolesView']);
 Route::post('/userRole/create', [UserRoleController::class, 'createUserRole'])->name('userRoles.create');
+Route::post('/userRole/update', [UserRoleController::class, 'updateUserRole'])->name('userRoles.update');
 
 //user routes
 Route::get('/userAccount', [UserController::class, 'usersView'])->name('user.viewblade');
@@ -89,6 +91,8 @@ Route::get('/userLogs', function () {
 });
 Route::delete('/userAccount/delete/{userId}', [UserController::class, 'deleteUser']);
 
+//logs
+Route::get('/userLogs', [LogController::class, 'logsView'])->name('log.viewblade');
 
 
 Route::get('/recentlyAdded', function () {

@@ -5,8 +5,7 @@
 @endphp
 @section('contents')
     <div id="mainContent" class="flex h-screen">
-
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <!--Mobile Cards and Table View-->
         <div id="firstColumn" class="w-full h-full p-2 lg:border-r lg:p-4 transition-all duration-300 lg:relative lg:py-4">
 
@@ -206,11 +205,11 @@
                                                         <img src="{{ asset('assets/icons/PencilSimple.svg') }}"
                                                             alt="Edit" class="h-3 w-3 m-1">
                                                     </a>
-                                                    <a href="#"
+                                                    {{-- <a href="#"
                                                         class="border rounded hover:bg-red-500 flex-shrink-0 delete-user">
                                                         <img src="{{ asset('assets/icons/Trash.svg') }}" alt="Delete"
                                                             class="h-3 w-3 m-1">
-                                                    </a>
+                                                    </a> --}}
                                                 </div>
                                             </td>
                                         </tr>
@@ -254,6 +253,7 @@
             <div class="bg h-1/6 border-b p-4 overflow-y-scroll">
                 <div class="flex space-x-2 items-center">
                     <h1 id="RoleNameSlideBar" class="text-lg font-medium text-gray-800"></h1>
+                    <h1 id="RoleNameIdSlideBar" class="hiddem"></h1>
                     <!--Pencil-->
                     <a href="#" class="border rounded hover:bg-green-500">
                         <img src="{{ asset('assets/icons/PencilSimple.svg') }}" alt="Eye" class="h-3 w-3 m-1">
@@ -324,6 +324,7 @@
                 console.log(userRole);
                 // Show second column
                 document.getElementById('RoleNameSlideBar').textContent = userRoleName;
+                document.getElementById('RoleNameIdSlideBar').textContent = userRole.id;
                 const userRoleList = document.getElementById('userRoleList');
                 const usersList = document.getElementById('usersList');
                 usersList.innerHTML = '';
@@ -375,15 +376,19 @@
                     const label = binaryLabels[value] ?? 'Unknown';
 
                     const html = `
-                <div class="w-full bg-gray-100 border flex justify-between items-center py-1.5 px-4 rounded-md space-x-2 h-10">
-                    <span class="truncate text-xs text-gray-700 w-1/3 capitalize">${key.replace(/_/g, ' ')}</span>
-                    <div class="relative w-2/3 h-full">
-                        <button class="bg-gray-800 rounded-md h-full w-full flex justify-between items-center px-3 py-1 cursor-default" disabled>
-                            <span class="text-xs text-white">${label}</span>
-                        </button>
-                    </div>
-                </div>
-            `;
+  <div class="w-full bg-gray-100 border flex justify-between items-center py-1.5 px-4 rounded-md space-x-2 h-10">
+    <span class="truncate text-xs text-gray-700 w-1/3 capitalize">${key.replace(/_/g, ' ')}</span>
+    <div class="relative w-2/3 h-full">
+      <select name="${key}" data-key="${key}" class="permission-select w-full h-full px-3 py-1 text-xs rounded-md bg-white border focus:outline-none">
+        ${Object.entries(binaryLabels).map(([k, v]) => `
+                          <option value="${k}" ${parseInt(value) === parseInt(k) ? 'selected' : ''}>${v}</option>
+                        `).join('')}
+      </select>
+    </div>
+  </div>
+`;
+
+
                     userRoleList.insertAdjacentHTML('beforeend', html);
                 });
 
@@ -393,15 +398,19 @@
                     const label = multiLabels[value] ?? 'Unknown';
 
                     const html = `
-                <div class="w-full bg-gray-100 border flex justify-between items-center py-1.5 px-4 rounded-md space-x-2 h-10">
-                    <span class="truncate text-xs text-gray-700 w-1/3 capitalize">${key.replace(/_/g, ' ')}</span>
-                    <div class="relative w-2/3 h-full">
-                        <button class="bg-gray-800 rounded-md h-full w-full flex justify-between items-center px-3 py-1 cursor-default" disabled>
-                            <span class="text-xs text-white">${label}</span>
-                        </button>
-                    </div>
-                </div>
-            `;
+  <div class="w-full bg-gray-100 border flex justify-between items-center py-1.5 px-4 rounded-md space-x-2 h-10">
+    <span class="truncate text-xs text-gray-700 w-1/3 capitalize">${key.replace(/_/g, ' ')}</span>
+    <div class="relative w-2/3 h-full">
+      <select name="${key}" data-key="${key}" class="permission-select w-full h-full px-3 py-1 text-xs rounded-md bg-white border focus:outline-none">
+        ${Object.entries(multiLabels).map(([k, v]) => `
+                          <option value="${k}" ${parseInt(value) === parseInt(k) ? 'selected' : ''}>${v}</option>
+                        `).join('')}
+      </select>
+    </div>
+  </div>
+`;
+
+
                     userRoleList.insertAdjacentHTML('beforeend', html);
                 });
 
@@ -434,6 +443,45 @@
             document.getElementById(dropdownId).classList.add('hidden');
             console.log('Selected option:', value, 'with background:', bgColor, 'for dropdown:', dropdownId);
         }
+        document.getElementById('ViewFullDetail').addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            const roleName = document.getElementById('RoleNameSlideBar').textContent;
+            const id = document.getElementById('RoleNameIdSlideBar').textContent;
+            const selects = document.querySelectorAll('.permission-select');
+
+            const data = {};
+            selects.forEach(select => {
+                const key = select.getAttribute('data-key');
+                const value = select.value;
+                data[key] = value;
+            });
+
+            // Include role name or role ID if needed
+            data['role_name'] = roleName;
+            data['id'] = id;
+            try {
+                const response = await fetch('/userRole/update', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                            'content'),
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                if (result.status === 'success') {
+                    alert('Permissions updated successfully!');
+                } else {
+                    alert('Update failed.');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('An error occurred.');
+            }
+        });
 
         //Modle
         document.getElementById('addRoleButton').addEventListener('click', () => {

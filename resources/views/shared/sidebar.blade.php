@@ -249,7 +249,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="/userLogs"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/UserList.svg') }}" alt="User Logs Icon"
                                     class="h-4 w-4">

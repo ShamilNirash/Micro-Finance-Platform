@@ -114,7 +114,7 @@ class UserController extends Controller
                     Rule::unique('users')
                         ->ignore($request->id) // Ignore the current user's ID
                         ->where(function ($query) {
-                            return $query->where('status', 'active');
+                            return $query->where('status', 'ACTIVE');
                         }),
                 ],
                 'first_name' => 'required|string',

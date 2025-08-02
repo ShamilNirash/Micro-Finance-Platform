@@ -85,6 +85,58 @@ class UserRoleController extends Controller
                 ->withInput()
                 ->withErrors($e->errors());
         } catch (\Exception $e) {
+
+            Log::error('Error creating user role: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+    }
+    public function updateUserRole(Request $request)
+    {
+        try {
+            $request->validate([
+                'role_name' => [
+                    'required',
+                    'string',
+                    'max:255',
+                    Rule::unique('user_roles')
+                        ->ignore($request->id) // Exclude current record by ID
+                        ->where(function ($query) {
+                            return $query->where('status', 'ACTIVE');
+                        }),
+                ],
+                'dashboard' => 'required|numeric',
+                'branch_creation' => 'required|numeric',
+                'user_accounts_creation' => 'required|numeric',
+                'user_role_creation' => 'required|numeric',
+                'centers' => 'required|numeric',
+                'members' => 'required|numeric',
+                'income' => 'required|numeric',
+                'payments' => 'required|numeric',
+                'reports' => 'required|numeric',
+            ]);
+
+            $userRole = $this->userRoleRepository->search_one('id', $request->id);
+            if ($userRole) {
+                $userRole->dashboard = $request->dashboard;
+                $userRole->branch_creation = $request->branch_creation;
+                $userRole->user_accounts_creation = $request->user_accounts_creation;
+                $userRole->user_role_creation = $request->user_role_creation;
+                $userRole->centers = $request->centers;
+                $userRole->members = $request->members;
+                $userRole->income = $request->income;
+                $userRole->payments = $request->payments;
+                $userRole->reports = $request->reports;
+                $userRole->save();
+                return response()->json(['status' => 'success', 'message' => 'Permissions updated']);
+            }
+        } catch (ValidationException $e) {
+             dd($e);
+            return redirect()->back()
+                ->with('show_create_center_popup', true)
+                ->withInput()
+                ->withErrors($e->errors());
+        } catch (\Exception $e) {
+             dd($e);
             Log::error('Error creating user role: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong.');
         }
