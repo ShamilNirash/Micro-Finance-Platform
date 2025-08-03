@@ -263,11 +263,12 @@
         </nav>
         <!-- User Avatar -->
         <div class="h-12 px-2 content-end sidebar-toggle">
-            <div class="flex items-center space-x-2 border border-blue-300 rounded-full text-small username ">
+            <a href="/profile" class="flex items-center space-x-2 border border-blue-300 rounded-full text-small username ">
                 <img src="{{ asset('icons/Users.png') }}" alt="User Avatar"
                     class=" h-6 w-6 rounded-full bg-blue-800 border border-blue-300">
-                <span class="text-xs sidebar-text">Dunura Hansaja</span>
-            </div>
+                <span class="text-xs sidebar-text">
+                    {{ Auth::check() ? Auth::user()->first_name . ' ' . Auth::user()->last_name : 'Guest' }}</span>
+            </a>
         </div>
     </div>
 </aside>

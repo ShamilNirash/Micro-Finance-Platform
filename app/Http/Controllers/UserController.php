@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Repositories\UserRepository;
 use App\Repositories\UserRoleRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
@@ -192,5 +193,57 @@ class UserController extends Controller
             Log::error('Error changing password: ' . $e->getMessage());
             return response()->json(['message' => 'Something went wrong.'], 500);
         }
+    }
+    public function login(Request $request)
+    {
+        try {
+            // Validate the form data
+            $request->validate([
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
+
+            // Attempt to log the user in
+            if (Auth::attempt([
+                'email' => $request->email,
+                'password' => $request->password
+            ])) {
+                $request->session()->regenerate(); // Prevent session fixation
+
+                return response()->json([
+                    'status' => 'success',
+                    'redirect_to' => route('dashboard')
+                ]);
+            }
+
+            // If login failed
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Invalid email or password.'
+            ], 401);
+        } catch (ValidationException $e) {
+            // Return validation errors
+            return response()->json([
+                'status' => 'error',
+                'errors' => $e->errors()
+            ], 422);
+        } catch (\Exception $e) {
+            // Log and return a generic error
+            Log::error('Login error: ' . $e->getMessage());
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Something went wrong. Please try again later.'
+            ], 500);
+        }
+    }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }

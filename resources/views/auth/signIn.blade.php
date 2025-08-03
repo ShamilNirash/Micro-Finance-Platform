@@ -1,6 +1,7 @@
 @extends('layouts/mainLayout')
 
 @section('content')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="flex h-screen w-screen bg-gray-900 items-center justify-center "
         style="background-image: url('assets/images/bg.png')">
 
@@ -33,16 +34,7 @@
                     <h3 class="lg:hidden  text-md   mb-2 text-center md:text-left text-gray-500">Sign in to Continue</h3>
 
                     <!-- Error Message Container -->
-                    <div id="loginErrorBox" class="hidden my-2">
-                        <div class="flex items-center bg-red-50 border border-red-200 text-red-700 px-3 py-2 rounded-md text-sm"
-                            role="alert">
-                            <svg class="fill-current w-4 h-4 mr-2 flex-shrink-0" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20">
-                                <path d="M10 15a1.5 1.5 0 100 3 1.5 1.5 0 000-3zM9 2h2l.35 7.03a.65.65 0 01-1.3 0L9 2z" />
-                            </svg>
-                            <span id="loginErrorText">Invalid email or password</span>
-                        </div>
-                    </div>
+                    <p id="loginError" class="text-red-500 text-sm mt-2"></p>
 
                     <form class="mt-2" id="signinForm">
                         <div class="relative my-2 text-sm mb-2">
@@ -77,10 +69,10 @@
                     </form>
                 </div>
                 <!--
-                    <p class="text-center text-xs text-gray-500 ">
-                        Don't have an account? <a href="#" class="text-blue-600 font-medium">Register</a>
-                    </p>
-        -->
+                                    <p class="text-center text-xs text-gray-500 ">
+                                        Don't have an account? <a href="#" class="text-blue-600 font-medium">Register</a>
+                                    </p>
+                        -->
             </div>
             <div class="lg:hidden flex   items-center lg:justify-left justify-center w-full lg:pl-8  h-1/6">
                 <p class="lg:text-blue-900 text-xs text-gray-400">Powered By <a href="#"
@@ -108,23 +100,51 @@
         const loginErrorText = document.getElementById('loginErrorText');
         const submitBtn = document.getElementById('test');
 
-        submitBtn.addEventListener('click', function(e) {
+        document.getElementById('signinForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            console.log('hi');
-            /* const email = document.getElementById('email').value.trim();
-            const password = passwordInput.value.trim(); */
-            window.location.href = '/dashboard';
-            /* const validUserEmail = 'user@example.com';
-            const validPassword = 'password123'; */
 
-            /* if (email !== validUserEmail || password !== validPassword) {
-                loginErrorText.textContent = 'Invalid email or password.';
-                loginErrorBox.classList.remove('hidden');
-            } else {
-                loginErrorBox.classList.add('hidden');
-                // Submit or redirect if login successful
-                form.submit();
-            } */
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorContainer = document.getElementById('loginError');
+            errorContainer.innerHTML = ''; // Clear previous errors
+
+            try {
+                const response = await fetch('user/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                            'content')
+                    },
+                    body: JSON.stringify({
+                        email,
+                        password
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    window.location.href = data.redirect_to;
+                } else if (response.status === 422 && data.errors) {
+                    // Show validation errors
+                    for (const field in data.errors) {
+                        data.errors[field].forEach(msg => {
+                            const p = document.createElement('p');
+                            p.classList.add('text-red-500', 'text-sm');
+                            p.textContent = msg;
+                            errorContainer.appendChild(p);
+                        });
+                    }
+                } else {
+                    // General error (e.g., wrong credentials)
+                    errorContainer.textContent = data.message || 'Login failed.';
+                }
+            } catch (err) {
+                console.error('Error:', err);
+                errorContainer.textContent = 'Server error. Please try again later.';
+            }
         });
     </script>
 @endsection

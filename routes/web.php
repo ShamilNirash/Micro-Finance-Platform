@@ -25,126 +25,130 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('auth.signIn');
-});
+})->name('login');
 Route::get('/signup', function () {
     return view('auth.signUp');
 });
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::post('user/login', [UserController::class, 'login']);
 
-//branches routes
-Route::post('/branches/create',  [BranchController::class, 'create_branch'])->name('branches.createbranch');
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 
-//centers routes
-Route::get('/centers', [CenterController::class, 'getAllActiveCenters'])->name('centers.viewblade');
-Route::post('/centers/create',  [CenterController::class, 'createCenter'])->name('centers.createcenter');
-Route::get('/centers/{branchId}', [CenterController::class, 'getCentersByBranch']);
-Route::get('/centerSummary/{centerId}', [CenterController::class, 'viewCenterSummary'])->name('center.summary');
-Route::delete('/centers/delete/{centerId}', [CenterController::class, 'deleteCenter']);
-Route::post('/centers/update/{centerId}', [CenterController::class, 'updateCenter'])->name('centers.updateCenter');
+    //branches routes
+    Route::post('/branches/create',  [BranchController::class, 'create_branch'])->name('branches.createbranch');
 
-
-//group route
-Route::get('/groupSummary/{groupId}', [GroupController::class, 'viewGroupSummary'])->name('group.summary');
-Route::get('/groups/{centerId}', [GroupController::class, 'getGroupsByCenter']);
-Route::post('/group/create', [GroupController::class, 'createGroup'])->name('groups.creategroup');
-Route::post('/groups/update/{groupId}', [GroupController::class, 'updateGroup'])->name('groups.updateGroup');
-Route::delete('/groups/delete/{centerId}', [GroupController::class, 'deleteGroup']);
+    //centers routes
+    Route::get('/centers', [CenterController::class, 'getAllActiveCenters'])->name('centers.viewblade');
+    Route::post('/centers/create',  [CenterController::class, 'createCenter'])->name('centers.createcenter');
+    Route::get('/centers/{branchId}', [CenterController::class, 'getCentersByBranch']);
+    Route::get('/centerSummary/{centerId}', [CenterController::class, 'viewCenterSummary'])->name('center.summary');
+    Route::delete('/centers/delete/{centerId}', [CenterController::class, 'deleteCenter']);
+    Route::post('/centers/update/{centerId}', [CenterController::class, 'updateCenter'])->name('centers.updateCenter');
 
 
-
-//members routes
-Route::get(
-    '/members',
-    [MemberController::class, 'viewAllMembers']
-)->name('members.viewblade');
-Route::post('/members/create', [MemberController::class, 'createMember'])->name('members.create');
-Route::get('/unassignmembers/search',  [MemberController::class, 'unAssignMemberSearch']);
-Route::get('/memberSummery/{memberId}', [MemberController::class, 'viewMemberSummary'])->name('member.summary');
-Route::post('/members/update/{memberId}', [MemberController::class, 'updateMember'])->name('members.updateMember');
-Route::delete('/members/delete/{memberId}', [MemberController::class, 'deleteMember']);
+    //group route
+    Route::get('/groupSummary/{groupId}', [GroupController::class, 'viewGroupSummary'])->name('group.summary');
+    Route::get('/groups/{centerId}', [GroupController::class, 'getGroupsByCenter']);
+    Route::post('/group/create', [GroupController::class, 'createGroup'])->name('groups.creategroup');
+    Route::post('/groups/update/{groupId}', [GroupController::class, 'updateGroup'])->name('groups.updateGroup');
+    Route::delete('/groups/delete/{centerId}', [GroupController::class, 'deleteGroup']);
 
 
-//loans routes
-Route::post('/loans/create/{memberId}', [LoanController::class, 'createLoan'])->name('loans.createLoan');
 
-//installments routes
-Route::post('/installments/update/{installmentId}', [InstallmentController::class, 'updateInstallment'])->name('installments.updateInstallment');
+    //members routes
+    Route::get(
+        '/members',
+        [MemberController::class, 'viewAllMembers']
+    )->name('members.viewblade');
+    Route::post('/members/create', [MemberController::class, 'createMember'])->name('members.create');
+    Route::get('/unassignmembers/search',  [MemberController::class, 'unAssignMemberSearch']);
+    Route::get('/memberSummery/{memberId}', [MemberController::class, 'viewMemberSummary'])->name('member.summary');
+    Route::post('/members/update/{memberId}', [MemberController::class, 'updateMember'])->name('members.updateMember');
+    Route::delete('/members/delete/{memberId}', [MemberController::class, 'deleteMember']);
 
-/*income*/
-Route::get('/income', [CenterController::class, 'incomeView'])->name('centers.viewIncomeBlade');
-Route::get('/collection',  [CenterController::class, 'collectionView'])->name('centers.viewCollectionBlade');
-Route::get('/underpayment', [CenterController::class, 'underPaymentView'])->name('centers.viewUnderPaymentBlade');
 
-//user roles routes
-Route::get('/userRole', [UserRoleController::class, 'userRolesView']);
-Route::post('/userRole/create', [UserRoleController::class, 'createUserRole'])->name('userRoles.create');
-Route::post('/userRole/update', [UserRoleController::class, 'updateUserRole'])->name('userRoles.update');
+    //loans routes
+    Route::post('/loans/create/{memberId}', [LoanController::class, 'createLoan'])->name('loans.createLoan');
 
-//user routes
-Route::get('/userAccount', [UserController::class, 'usersView'])->name('user.viewblade');
-Route::post('/userAccount/create', [UserController::class, 'createUser'])->name('user.create');
-Route::post('/userAccount/update', [UserController::class, 'updateUser'])->name('user.update');
-Route::post('/userAccount/updatepw', [UserController::class, 'updatePwUser'])->name('user.updatePw');
-Route::get('/userLogs', function () {
-    return view('settings/userLogs');
+    //installments routes
+    Route::post('/installments/update/{installmentId}', [InstallmentController::class, 'updateInstallment'])->name('installments.updateInstallment');
+
+    /*income*/
+    Route::get('/income', [CenterController::class, 'incomeView'])->name('centers.viewIncomeBlade');
+    Route::get('/collection',  [CenterController::class, 'collectionView'])->name('centers.viewCollectionBlade');
+    Route::get('/underpayment', [CenterController::class, 'underPaymentView'])->name('centers.viewUnderPaymentBlade');
+
+    //user roles routes
+    Route::get('/userRole', [UserRoleController::class, 'userRolesView']);
+    Route::post('/userRole/create', [UserRoleController::class, 'createUserRole'])->name('userRoles.create');
+    Route::post('/userRole/update', [UserRoleController::class, 'updateUserRole'])->name('userRoles.update');
+
+    //user routes
+    Route::get('/userAccount', [UserController::class, 'usersView'])->name('user.viewblade');
+    Route::post('/userAccount/create', [UserController::class, 'createUser'])->name('user.create');
+    Route::post('/userAccount/update', [UserController::class, 'updateUser'])->name('user.update');
+    Route::post('/userAccount/updatepw', [UserController::class, 'updatePwUser'])->name('user.updatePw');
+    Route::get('user/logout', [UserController::class, 'logout'])->name('user.logout');
+    Route::get('/userLogs', function () {
+        return view('settings/userLogs');
+    });
+    Route::delete('/userAccount/delete/{userId}', [UserController::class, 'deleteUser']);
+
+    //logs
+    Route::get('/userLogs', [LogController::class, 'logsView'])->name('log.viewblade');
+
+
+    Route::get('/recentlyAdded', function () {
+        return view('branches/recentlyAdded');
+    });
+
+    /*Branches/Recently*/
+    Route::get('/recentCenters', function () {
+        return view('branches/recentlyAdded/centers');
+    });
+    Route::get('/recentGroups', function () {
+        return view('branches/recentlyAdded/groups');
+    });
+    Route::get('/recentLoans', function () {
+        return view('branches/recentlyAdded/loans');
+    });
+    Route::get('/recentMembers', function () {
+        return view('branches/recentlyAdded/members');
+    });
+
+
+
+    Route::get('/underPayments', function () {
+        return view('income/underPayments');
+    });
+
+    /*Payments*/
+    Route::get('/payments', [LoanController::class, 'viewUncompletedLoans']);
+    Route::get('/pending', [LoanController::class, 'viewPendingLoans']);
+    Route::get('/nopaid', [LoanController::class, 'viewNoPaidLoans']);
+    Route::get('/paymentsSummery', function () {
+        return view('payments/paymentsSummery');
+    });
+
+    /*Profile View*/
+    Route::get('/profile', function () {
+        return view('profile/profile');
+    });
+
+    /*Reports*/
+    Route::get('/loneIssue', function () {
+        return view('reports/loneIssue');
+    });
+    Route::get('/incomeReports', function () {
+        return view('reports/incomeReports');
+    });
+    Route::get('/pendingPaymentsReport', function () {
+        return view('reports/pendingPaymentsReport');
+    });
+    Route::get('/membersReport', function () {
+        return view('reports/membersReport');
+    });
 });
-Route::delete('/userAccount/delete/{userId}', [UserController::class, 'deleteUser']);
-
-//logs
-Route::get('/userLogs', [LogController::class, 'logsView'])->name('log.viewblade');
-
-
-Route::get('/recentlyAdded', function () {
-    return view('branches/recentlyAdded');
-});
-
-/*Branches/Recently*/
-Route::get('/recentCenters', function () {
-    return view('branches/recentlyAdded/centers');
-});
-Route::get('/recentGroups', function () {
-    return view('branches/recentlyAdded/groups');
-});
-Route::get('/recentLoans', function () {
-    return view('branches/recentlyAdded/loans');
-});
-Route::get('/recentMembers', function () {
-    return view('branches/recentlyAdded/members');
-});
-
-
-
-Route::get('/underPayments', function () {
-    return view('income/underPayments');
-});
-
-/*Payments*/
-Route::get('/payments', [LoanController::class, 'viewUncompletedLoans']);
-Route::get('/pending', [LoanController::class, 'viewPendingLoans']);
-Route::get('/nopaid', [LoanController::class, 'viewNoPaidLoans']);
-Route::get('/paymentsSummery', function () {
-    return view('payments/paymentsSummery');
-});
-
-/*Profile View*/
-Route::get('/profile', function () {
-    return view('profile/profile');
-});
-
-/*Reports*/
-Route::get('/loneIssue', function () {
-    return view('reports/loneIssue');
-});
-Route::get('/incomeReports', function () {
-    return view('reports/incomeReports');
-});
-Route::get('/pendingPaymentsReport', function () {
-    return view('reports/pendingPaymentsReport');
-});
-Route::get('/membersReport', function () {
-    return view('reports/membersReport');
-});
-
 /*Settings*/
