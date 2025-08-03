@@ -86,6 +86,7 @@ Route::post('/userRole/update', [UserRoleController::class, 'updateUserRole'])->
 Route::get('/userAccount', [UserController::class, 'usersView'])->name('user.viewblade');
 Route::post('/userAccount/create', [UserController::class, 'createUser'])->name('user.create');
 Route::post('/userAccount/update', [UserController::class, 'updateUser'])->name('user.update');
+Route::post('/userAccount/updatepw', [UserController::class, 'updatePwUser'])->name('user.updatePw');
 Route::get('/userLogs', function () {
     return view('settings/userLogs');
 });

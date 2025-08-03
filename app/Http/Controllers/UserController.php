@@ -160,4 +160,37 @@ class UserController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
+    public function  updatePwUser(Request $request)
+    {
+        try {
+            $request->validate([
+                'current_password' => 'required|string',
+                'new_password' => 'required|string|min:8',
+                'user_id' => 'required|exists:users,id',
+            ]);
+
+            $user = $this->userRepository->search_one('id', $request->user_id);
+            if (!$user) {
+                return response()->json(['status' => 'failed', 'message' => 'User not found'], 404);
+            }
+
+            if (!Hash::check($request->current_password, $user->password)) {
+                return response()->json(['message' => 'Current password is incorrect.'], 422);
+            }
+
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+
+            return response()->json(['status' => 'success', 'message' => 'Password changed successfully']);
+        } catch (ValidationException $e) {
+            if ($request->expectsJson()) {
+                return response()->json(['errors' => $e->errors()], 422);
+            }
+            return redirect()->back()->withErrors($e->errors())->withInput();
+        } catch (\Exception $e) {
+            Log::error('Error changing password: ' . $e->getMessage());
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
+    }
 }

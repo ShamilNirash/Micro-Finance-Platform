@@ -289,7 +289,8 @@
                 <div class="bg-white shadow-xl w-full max-w-lg rounded-lg border border-blue-400">
                     <h2 class="text-md bg-blue-200 rounded-t-lg p-4">Change Password</h2>
                     <form id="changePasswordForm" class="p-4 space-y-6">
-                        <input type="hidden" id="changePasswordUserId">
+                        <p id="passwordChangeError" class="text-red-500 text-xs"></p>
+                        <input type="text" class="hidden" id="changePasswordUserId">
                         <div class="space-y-2">
                             <div class="flex space-x-4 items-center">
                                 <label class="block text-xs text-gray-700 w-1/3">Current Password*</label>
@@ -469,19 +470,19 @@
                                                     <div class="bg-black rounded-full h-6 w-6 flex-shrink-0"></div>
                                                     <span class="truncate">{{ capitalizeEachWord($user->first_name) }}
                                                         {{ capitalizeEachWord($user->last_name) }}</span>
-                                                    <p  class="hidden lastNameHidden">
+                                                    <p class="hidden lastNameHidden">
                                                         {{ capitalizeEachWord($user->last_name) }}</p>
-                                                    <p class="hidden firstNameHidden" >
+                                                    <p class="hidden firstNameHidden">
                                                         {{ capitalizeEachWord($user->first_name) }}</p>
-                                                    <p class="hidden userRoleIdHidden" >
+                                                    <p class="hidden userRoleIdHidden">
                                                         {{ capitalizeEachWord($user->user_role_id) }}</p>
-                                                    <p class="hidden userIdHidden" >
+                                                    <p class="hidden userIdHidden">
                                                         {{ $user->id }}</p>
                                                 </div>
                                             </td>
                                             <td class="py-2 text-left">
                                                 <span class="hidden" id="user_id_span">{{ $user->id }}</span>
-                                                <span  class="truncate block emailHidden">{{ $user->email }}</span>
+                                                <span class="truncate block emailHidden">{{ $user->email }}</span>
                                             </td>
                                             <td class="py-2 text-left">
                                                 <div class="flex space-x-2 text-xs">
@@ -850,7 +851,7 @@
 
             e.preventDefault();
             const container = target.closest('tr') || target.closest('div');
-            const userId = target.getAttribute('data-id');
+            const userId = container.querySelector('.userIdHidden').textContent.trim();
 
             // Populate change password modal with user ID
             document.getElementById('changePasswordUserId').value = userId;
@@ -865,31 +866,67 @@
             document.getElementById('changePasswordModal').classList.remove('flex');
         });
 
-        document.getElementById('saveChangePassword').addEventListener('click', function(e) {
+        document.getElementById('changePasswordForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const userId = document.getElementById('changePasswordUserId').value;
-            const currentPassword = document.getElementById('currentPassword').value;
-            const newPassword = document.getElementById('newPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
 
-            if (newPassword !== confirmPassword) {
-                alert('New password and confirm password do not match.');
+            const errorContainer = document.getElementById('passwordChangeError');
+            errorContainer.textContent = '';
+
+            const userId = document.getElementById('changePasswordUserId').value.trim();
+            const currentPassword = document.getElementById('currentPassword').value.trim();
+            const newPassword = document.getElementById('newPassword').value.trim();
+            const confirmPassword = document.getElementById('confirmPassword').value.trim();
+
+            if (!userId || !currentPassword || !newPassword || !confirmPassword) {
+                errorContainer.textContent = 'All fields are required.';
                 return;
             }
 
-            const formData = {
-                userId: userId,
-                currentPassword: currentPassword,
-                newPassword: newPassword
-            };
+            if (newPassword !== confirmPassword) {
+                errorContainer.textContent = 'New password and confirm password do not match.';
+                return;
+            }
 
-            console.log('Changing password for user:', formData);
-            // Implement actual password change logic here (e.g., API call)
+            try {
+                const response = await fetch('/userAccount/updatepw', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                            'content')
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        current_password: currentPassword,
+                        new_password: newPassword
+                    })
+                });
 
-            // Close modal after saving
-            document.getElementById('changePasswordModal').classList.add('hidden');
-            document.getElementById('changePasswordModal').classList.remove('flex');
+                const data = await response.json();
+
+                if (!response.ok) {
+                    if (data.errors) {
+                        const firstErrorKey = Object.keys(data.errors)[0];
+                        const firstErrorMessage = data.errors[firstErrorKey][0];
+                        errorContainer.textContent = firstErrorMessage;
+                    } else {
+                        errorContainer.textContent = data.message || 'Something went wrong.';
+                    }
+                    return;
+                }
+
+                alert(data.message || 'Password changed successfully!');
+                document.getElementById('changePasswordModal').classList.add('hidden');
+                document.getElementById('changePasswordModal').classList.remove('flex');
+                document.getElementById('changePasswordForm').reset();
+
+            } catch (err) {
+                console.error('Error:', err);
+                errorContainer.textContent = err.message || 'Server error. Please try again.';
+            }
         });
+
 
         // Delete User Modal
         document.addEventListener('click', function(e) {
