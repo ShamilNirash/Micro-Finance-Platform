@@ -18,10 +18,17 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'nic_number',
+        'mobile_number_1',
+        'image',
+        'status',
+        'user_role_id',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -41,4 +48,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    function user_role()
+    {
+        return $this->belongsTo('App\Models\UserRole', 'user_role_id', 'id');
+    }
 }
