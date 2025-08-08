@@ -254,7 +254,7 @@
                 class="p-0 border-0 lg:py-2 lg:bg-sky-50 lg:border rounded-lg flex flex-col justify-between h-[calc(100vh-115px)]">
                 <!-- Top Bar -->
                 <div
-                    class="flex flex-col w-full space-y-2 p-2 lg:px-2 text-md lg:flex lg:flex-row lg:space-y-0 lg:justify-between lg:items-center lg:p-1">
+                    class="flex flex-col w-full space-y-2 p-2 lg:px-2 text-md lg:flex lg:flex-row lg:space-y-0 lg:justify-between lg:items-center lg:p-1 gap-2">
                     <!-- Filter Button -->
                     <div class="hidden lg:flex text-sm">
                         <button value="" class="bg-white p-2 rounded-lg focus:outline-none border w-8">
@@ -295,6 +295,40 @@
                                         <li class="px-4 py-2 text-sm text-center hover:bg-gray-100 cursor-pointer border-b lg:text-xs"
                                             data-value="balangoda">{{ capitalizeFirstLetter($branch->branch_name) }}</li>
                                     @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Center Filter -->
+                    <div
+                        class="flex flex-col lg:flex-row justify-between items-center w-full lg:justify-normal lg:items-baseline lg:w-3/12">
+                        <div class="w-full lg:mb-0 relative text-sm">
+                            <select id="centerSelect" name="branch"
+                                class="w-full absolute p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white appearance-none hidden text-sm lg:text-xs">
+                                <option class="text-sm" value="">Select Center</option>
+
+                                    <option value="add_new"></option>
+
+                            </select>
+                            <!-- Custom dropdown trigger -->
+                            <div id="dropdownTriggerCenter"
+                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white cursor-pointer flex items-center justify-between lg:text-xs"
+                                onclick="toggleDropdownCenter()">
+                                <span id="selectedOptionCenter">Select Center</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7">
+                                    </path>
+                                </svg>
+                            </div>
+
+                            <!-- Custom dropdown menu fro centers-->
+                            <div id="dropdownMenuCenters"
+                                class="hidden absolute z-10 w-full bg-white border rounded-lg mt-1 shadow-lg lg:text-xs">
+                                <ul class="py-1 px-8 lg:px-4 lg:text-xs">
+                                        <li class="px-4 py-2 text-sm text-center hover:bg-gray-100 cursor-pointer border-b lg:text-xs"
+                                            data-value-center="balangoda">Center 01</li>
                                 </ul>
                             </div>
                         </div>
@@ -763,6 +797,7 @@
         });
 
 
+        //Branches----------------
         //Coustom dropdown
         function toggleDropdown() {
             const dropdownMenu = document.getElementById('dropdownMenu');
@@ -793,11 +828,31 @@
             }
         });
 
-        // Toggle dropdown menu
-        function toggleDropdown() {
-            const dropdownMenu = document.getElementById('dropdownMenu');
+        //centers---------------
+        // Toggle dropdown menu centers
+        function toggleDropdownCenter() {
+            const dropdownMenu = document.getElementById('dropdownMenuCenters');
             dropdownMenu.classList.toggle('hidden');
         }
+
+        document.querySelectorAll('#dropdownMenuCenters li').forEach(item => {
+            item.addEventListener('click', function() {
+                const value = this.getAttribute('data-value-center');
+                const selectedOptionCenter = document.getElementById('selectedOptionCenter');
+                selectedOptionCenter.textContent = this.textContent;
+                document.getElementById('centerSelect').value = value;
+                document.getElementById('dropdownMenuCenters').classList.add('hidden');
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('dropdownMenuCenters');
+            const trigger = document.getElementById('dropdownTriggerCenter');
+            if (!trigger.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
 
         // Handle dropdown selection
         document.querySelectorAll('#dropdownMenu li').forEach(item => {
