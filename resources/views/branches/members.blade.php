@@ -161,6 +161,52 @@
 
             </div>
 
+            <div id="addNewPaymentModal"
+                class="inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50 lg:absolute fixed p-4"
+                style="width: 100%; height: 100%;">
+                <div class="bg-white shadow-xl w-full max-w-lg rounded-lg max-h-[90vh] overflow-y-auto">
+                    <h2 class="text-md bg-blue-100 rounded-t-lg p-4">Add installment (Name)</h2>
+                    <form id="addNewPaymentForm" method="POST" action=""
+                        enctype="multipart/form-data">
+
+                        <div class="bg-white rounded-b-lg p-4 space-y-2">
+
+                            <div class="flex items-center space-x-4">
+                                <label for="Amount" class="block text-xs text-gray-400 mb-0 ml-2 w-36">
+                                    Amount*</label>
+                                <input type="text" name="memberFullName" id="Amount" placeholder="10 000"
+                                    value=""
+                                    class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                                    required />
+                            </div>
+                            
+                            <p class="p-0 text-gray-400 px-4 text-right py-0" style="font-size: 6px;">Needed Amount : 10000</p>
+
+                            <div class="flex items-center space-x-4">
+                                <label for="newMemberAddress"
+                                    class="block text-xs text-gray-400 mb-0 ml-2 w-36">Date</label>
+                                <input type="date" name="date" id="date" placeholder=""
+                                    value=""
+                                    class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                            </div>
+
+                            <div class="flex justify-end space-x-4 mt-2 pt-4">
+                                <button type="button" id="cancelNewPayment"
+                                    class="px-6 py-1 bg-gray-300 rounded-lg hover:bg-gray-400 focus:outline-none text-sm">
+                                    Cancel
+                                </button>
+                                <button type="submit"
+                                    class="px-6 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none text-sm">
+                                    Create
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+
             <!-- Add New Loan Modal -->
             <div id="addLoanModal"
                 class="inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center lg:absolute z-50 fixed p-4 pb-0"
@@ -438,8 +484,8 @@
                                                         <img src="{{ asset('assets/icons/PencilSimple.svg') }}"
                                                             alt="Pencil" class="h-3 w-3 m-1">
                                                     </a>
-                                                    <a href="#" class="border rounded hover:bg-lime-500">
-                                                        <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil"
+                                                    <a href="#" class="border rounded hover:bg-lime-500 addNewPaymentModalButton">
+                                                        <img src="{{ asset('assets/icons/Plus.svg') }}" alt="Pencil"
                                                             class="h-3 w-3 m-1">
                                                     </a>
                                                 </td>
@@ -497,8 +543,8 @@
                                                         <img src="{{ asset('assets/icons/PencilSimple.svg') }}"
                                                             alt="Pencil" class="h-3 w-3 m-1">
                                                     </a>
-                                                    <a href="#" class="border rounded hover:bg-lime-500">
-                                                        <img src="{{ asset('assets/icons/Money.svg') }}" alt="Pencil"
+                                                    <a href="#" class="border rounded hover:bg-lime-500 addNewPaymentModalButton">
+                                                        <img src="{{ asset('assets/icons/Plus.svg') }}" alt="Pencil"
                                                             class="h-3 w-3 m-1">
                                                     </a>
                                                 </td>
@@ -904,6 +950,11 @@
         // Row Summey
         document.querySelectorAll('.view-details').forEach(button => {
             button.addEventListener('click', (e) => {
+                // Check if the clicked element is the payment button
+                if (e.target.closest('.addNewPaymentModalButton')) {
+                    return; // Do nothing, let the payment button's event listener handle it
+                }
+                
                 const row = button.closest('tr');
                 const RowDetails = document.getElementById('RowDetails');
                 const firstColumn = document.getElementById('firstColumn');
@@ -1255,6 +1306,28 @@
             document.getElementById('addLoanModal').classList.add('hidden');
             document.getElementById('addLoanModal').classList.remove('flex');
         });
+// Payment Modal Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const paymentModal = document.getElementById('addNewPaymentModal');
+    
+    // Open payment modal when button with class addNewPaymentModalButton is clicked
+    const paymentButtons = document.querySelectorAll('.addNewPaymentModalButton');
+    paymentButtons.forEach(function(button) {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation(); // Prevent event from bubbling up to the parent row
+            paymentModal.classList.remove('hidden');
+            paymentModal.classList.add('flex');
+        });
+    });
+    
+    // Close payment modal when cancel button is clicked
+    document.getElementById('cancelNewPayment').addEventListener('click', function() {
+        paymentModal.classList.add('hidden');
+        paymentModal.classList.remove('flex');
+        document.getElementById('addNewPaymentForm').reset();
+    });
+});
 
     </script>
 
