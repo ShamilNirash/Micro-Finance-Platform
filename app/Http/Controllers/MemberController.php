@@ -34,13 +34,24 @@ class MemberController extends Controller
             'allBranches' => $getAllBranches
         ]);
     }
+     public function viewAllMembersForReports()
+    {
+        $getActiveMembers = $this->memberRepository->get_all();
+        $getAllBranches = $this->branchRepository->get_all();
+
+        return view('reports.membersReport', [
+            'allActiveMembers' => $getActiveMembers,
+            'allBranches' => $getAllBranches
+        ]);
+    }
+
     public function unAssignMemberSearch(Request $request)
     {
         $query = $request->input('q');
         $members = $this->memberRepository->un_assign_member_search($query);
         return response()->json($members);
     }
-   
+
     public function createMember(Request $request)
     {
         try {

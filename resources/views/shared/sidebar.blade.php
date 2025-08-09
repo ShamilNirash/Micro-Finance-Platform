@@ -173,7 +173,7 @@
                     <!-- Submenu for Reports -->
                     <ul class="space-y-2 submenu hidden pl-4 mt-2 bg-white w-44">
                         <li>
-                            <a href="#"
+                            <a href="/loneIssue"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/ChartBarHorizontal.svg') }}" alt="Lone Issue Icon"
                                     class="h-4 w-4">
@@ -181,7 +181,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="/incomeReports"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/ChartLineUp.svg') }}" alt="Income Icon"
                                     class="h-4 w-4">
@@ -189,23 +189,23 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="/pendingPaymentsReport"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/HourglassHigh.svg') }}" alt="Pending Payments Icon"
                                     class="h-4 w-4">
                                 <span class="sidebar-text-mini">Pending Payments</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#"
+                        {{-- <li>
+                            <a href=""
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/Lockers.svg') }}" alt="Center Managers Icon"
                                     class="h-4 w-4">
                                 <span class="sidebar-text-mini">Center Managers</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li>
-                            <a href="#"
+                            <a href="/membersReport"
                                 class="flex items-center p-1 px-4 rounded-md space-x-2 hover:bg-sky-100 active:bg-sky-200">
                                 <img src="{{ asset('assets/icons/UserGear.svg') }}" alt="Member Managers Icon"
                                     class="h-4 w-4">

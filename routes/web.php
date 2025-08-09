@@ -100,12 +100,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/userLogs', [LogController::class, 'logsView'])->name('log.viewblade');
 
 
-    Route::get('/recentlyAdded', function () {
+    /* Route::get('/recentlyAdded', function () {
         return view('branches/recentlyAdded');
-    });
+    }); */
 
     /*Branches/Recently*/
-    Route::get('/recentCenters', function () {
+    /*  Route::get('/recentCenters', function () {
         return view('branches/recentlyAdded/centers');
     });
     Route::get('/recentGroups', function () {
@@ -116,13 +116,9 @@ Route::middleware('auth')->group(function () {
     });
     Route::get('/recentMembers', function () {
         return view('branches/recentlyAdded/members');
-    });
+    }); */
 
 
-
-    Route::get('/underPayments', function () {
-        return view('income/underPayments');
-    });
 
     /*Payments*/
     Route::get('/payments', [LoanController::class, 'viewUncompletedLoans']);
@@ -147,8 +143,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/pendingPaymentsReport', function () {
         return view('reports/pendingPaymentsReport');
     });
-    Route::get('/membersReport', function () {
-        return view('reports/membersReport');
-    });
+    Route::get('/membersReport', [MemberController::class, 'viewAllMembersForReports']);
 });
 /*Settings*/

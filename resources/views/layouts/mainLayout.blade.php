@@ -9,11 +9,16 @@
 
     <!-- Include compiled Tailwind CSS -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.0/jspdf.plugin.autotable.min.js"></script>
+
 </head>
+
 
 <body class="h-screen w-screen font-sans leading-normal tracking-normal ">
 
-        @yield('content') 
+    @yield('content')
 
 </body>
 

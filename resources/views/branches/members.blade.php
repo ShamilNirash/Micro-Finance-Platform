@@ -166,8 +166,7 @@
                 style="width: 100%; height: 100%;">
                 <div class="bg-white shadow-xl w-full max-w-lg rounded-lg max-h-[90vh] overflow-y-auto">
                     <h2 class="text-md bg-blue-100 rounded-t-lg p-4">Add installment (Name)</h2>
-                    <form id="addNewPaymentForm" method="POST" action=""
-                        enctype="multipart/form-data">
+                    <form id="addNewPaymentForm" method="POST" action="" enctype="multipart/form-data">
 
                         <div class="bg-white rounded-b-lg p-4 space-y-2">
 
@@ -179,14 +178,14 @@
                                     class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                                     required />
                             </div>
-                            
-                            <p class="p-0 text-gray-400 px-4 text-right py-0" style="font-size: 6px;">Needed Amount : 10000</p>
+
+                            <p class="p-0 text-gray-400 px-4 text-right py-0" style="font-size: 6px;">Needed Amount :
+                                10000</p>
 
                             <div class="flex items-center space-x-4">
                                 <label for="newMemberAddress"
                                     class="block text-xs text-gray-400 mb-0 ml-2 w-36">Date</label>
-                                <input type="date" name="date" id="date" placeholder=""
-                                    value=""
+                                <input type="date" name="date" id="date" placeholder="" value=""
                                     class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                             </div>
 
@@ -353,7 +352,7 @@
                                 class="w-full absolute p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white appearance-none hidden text-sm lg:text-xs">
                                 <option class="text-sm" value="">Select Center</option>
 
-                                    <option value="add_new"></option>
+                                <option value="add_new"></option>
 
                             </select>
                             <!-- Custom dropdown trigger -->
@@ -373,8 +372,8 @@
                             <div id="dropdownMenuCenters"
                                 class="hidden absolute z-10 w-full bg-white border rounded-lg mt-1 shadow-lg lg:text-xs">
                                 <ul class="py-1 px-8 lg:px-4 lg:text-xs">
-                                        <li class="px-4 py-2 text-sm text-center hover:bg-gray-100 cursor-pointer border-b lg:text-xs"
-                                            data-value-center="balangoda">Center 01</li>
+                                    <li class="px-4 py-2 text-sm text-center hover:bg-gray-100 cursor-pointer border-b lg:text-xs"
+                                        data-value-center="balangoda">Center 01</li>
                                 </ul>
                             </div>
                         </div>
@@ -425,9 +424,9 @@
                                 <thead class="w-full text-gray-700 text-xs font-light bg-gray-100 sticky top-0">
                                     <tr class="uppercase w-full">
                                         <!--<th class="pl-2 text-left">
-                                                                                                                                                                                                                                                <input type="checkbox" id="select-all"
-                                                                                                                                                                                                                                                    class="form-checkbox h-4 w-4 text-blue-400 m-1">
-                                                                                                                                                                                                 </th>-->
+                                                                                                                                                                                                                                                    <input type="checkbox" id="select-all"
+                                                                                                                                                                                                                                                        class="form-checkbox h-4 w-4 text-blue-400 m-1">
+                                                                                                                                                             </th>-->
                                         <th class="py-2 text-center">#</th>
                                         <th class="py-2 text-left">Name</th>
                                         <th class="py-2 text-left">Center</th>
@@ -448,9 +447,9 @@
                                                 data-member_id='{{ $member->nic_number }}' data-loan-balance="20000"
                                                 data-member='@json($member)'>
                                                 <!--<td class="pl-2 text-left">
-                                                                                                                                                                                                                                                    <input type="checkbox" name="selected_ids[]" value="1"
-                                                                                                                                                                                                                                                        class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                                                                                                                                                                                                                                </td>-->
+                                                                                                                                                                                                                                                        <input type="checkbox" name="selected_ids[]" value="1"
+                                                                                                                                                                                                                                                            class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                                                                                                                                                                                                                                                    </td>-->
                                                 <td class="py-2 text-center">
                                                     {{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
                                                 </td>
@@ -484,7 +483,8 @@
                                                         <img src="{{ asset('assets/icons/PencilSimple.svg') }}"
                                                             alt="Pencil" class="h-3 w-3 m-1">
                                                     </a>
-                                                    <a href="#" class="border rounded hover:bg-lime-500 addNewPaymentModalButton">
+                                                    <a href="#"
+                                                        class="border rounded hover:bg-lime-500 addNewPaymentModalButton">
                                                         <img src="{{ asset('assets/icons/Plus.svg') }}" alt="Pencil"
                                                             class="h-3 w-3 m-1">
                                                     </a>
@@ -507,9 +507,9 @@
                                                 data-member_id='{{ $member->nic_number }}' data-loan-balance="20000"
                                                 data-member='@json($member)'>
                                                 <!--<td class="pl-2 text-left">
-                                                                                                                                                                                                                                                    <input type="checkbox" name="selected_ids[]" value="1"
-                                                                                                                                                                                                                                                        class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                                                                                                                                                                                                                                </td>-->
+                                                                                                                                                                                                                                                        <input type="checkbox" name="selected_ids[]" value="1"
+                                                                                                                                                                                                                                                            class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                                                                                                                                                                                                                                                    </td>-->
                                                 <td class="py-2 text-center">
                                                     {{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
                                                 </td>
@@ -543,7 +543,8 @@
                                                         <img src="{{ asset('assets/icons/PencilSimple.svg') }}"
                                                             alt="Pencil" class="h-3 w-3 m-1">
                                                     </a>
-                                                    <a href="#" class="border rounded hover:bg-lime-500 addNewPaymentModalButton">
+                                                    <a href="#"
+                                                        class="border rounded hover:bg-lime-500 addNewPaymentModalButton">
                                                         <img src="{{ asset('assets/icons/Plus.svg') }}" alt="Pencil"
                                                             class="h-3 w-3 m-1">
                                                     </a>
@@ -954,7 +955,7 @@
                 if (e.target.closest('.addNewPaymentModalButton')) {
                     return; // Do nothing, let the payment button's event listener handle it
                 }
-                
+
                 const row = button.closest('tr');
                 const RowDetails = document.getElementById('RowDetails');
                 const firstColumn = document.getElementById('firstColumn');
@@ -1306,29 +1307,28 @@
             document.getElementById('addLoanModal').classList.add('hidden');
             document.getElementById('addLoanModal').classList.remove('flex');
         });
-// Payment Modal Functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const paymentModal = document.getElementById('addNewPaymentModal');
-    
-    // Open payment modal when button with class addNewPaymentModalButton is clicked
-    const paymentButtons = document.querySelectorAll('.addNewPaymentModalButton');
-    paymentButtons.forEach(function(button) {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation(); // Prevent event from bubbling up to the parent row
-            paymentModal.classList.remove('hidden');
-            paymentModal.classList.add('flex');
-        });
-    });
-    
-    // Close payment modal when cancel button is clicked
-    document.getElementById('cancelNewPayment').addEventListener('click', function() {
-        paymentModal.classList.add('hidden');
-        paymentModal.classList.remove('flex');
-        document.getElementById('addNewPaymentForm').reset();
-    });
-});
+        // Payment Modal Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const paymentModal = document.getElementById('addNewPaymentModal');
 
+            // Open payment modal when button with class addNewPaymentModalButton is clicked
+            const paymentButtons = document.querySelectorAll('.addNewPaymentModalButton');
+            paymentButtons.forEach(function(button) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation(); // Prevent event from bubbling up to the parent row
+                    paymentModal.classList.remove('hidden');
+                    paymentModal.classList.add('flex');
+                });
+            });
+
+            // Close payment modal when cancel button is clicked
+            document.getElementById('cancelNewPayment').addEventListener('click', function() {
+                paymentModal.classList.add('hidden');
+                paymentModal.classList.remove('flex');
+                document.getElementById('addNewPaymentForm').reset();
+            });
+        });
     </script>
 
     <style>
