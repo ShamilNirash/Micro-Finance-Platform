@@ -18,7 +18,9 @@
                             <h2 class="text-sm font-semibold text-gray-600">Active Members</h2>
                         </div>
                         <div class="flex flex-col justify-items-end items-end w-1/2">
-                            <h1 class="text-xl md:text-xl font-bold text-right text-gray-600">50000000</h1>
+                            <h1 class="text-xl md:text-xl font-bold text-right text-gray-600">
+                                {{ str_pad(optional($allActiveMembers->where('status', 'ACTIVE'))->count(), 2, '0', STR_PAD_LEFT) }}
+                            </h1>
                         </div>
                     </div>
                     <!--Inactive Members Card-->
@@ -28,7 +30,9 @@
                             <h2 class="text-sm font-semibold text-gray-600">Inactive Members</h2>
                         </div>
                         <div class="flex flex-col justify-items-end items-end w-1/2">
-                            <h1 class="text-xl md:text-xl font-bold text-right text-gray-600">75843266</h1>
+                            <h1 class="text-xl md:text-xl font-bold text-right text-gray-600">
+                                {{ str_pad(optional($allActiveMembers->where('status', 'INACTIVE'))->count(), 2, '0', STR_PAD_LEFT) }}
+                            </h1>
                         </div>
                     </div>
                 </div>
@@ -238,13 +242,14 @@
                                                     data-member_id='{{ $member->nic_number }}' data-loan-balance="20000"
                                                     data-member='@json($member)'>
                                                     <!--<td class="pl-2 text-left">
-                                                                                                                                                                                                                                                                                                    <input type="checkbox" name="selected_ids[]" value="1"
-                                                                                                                                                                                                                                                                                                        class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                                                                                                                                                                                                                                                                                </td>-->
+                                                                                                                                                                                                                                                                                                            <input type="checkbox" name="selected_ids[]" value="1"
+                                                                                                                                                                                                                                                                                                                class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                                                                                                                                                                                                                                                                                                        </td>-->
                                                     <td class="py-2 text-center">
                                                         {{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
                                                     </td>
-                                                    <td class="py-2 text-left">{{ capitalizeEachWord($member->full_name) }}
+                                                    <td class="py-2 text-left">
+                                                        {{ capitalizeEachWord($member->full_name) }}
                                                     </td>
                                                     <td class="py-2 text-left">
                                                         {{ capitalizeEachWord($member->group->center->center_name) }}
@@ -358,9 +363,9 @@
                                                     data-member_id='{{ $member->nic_number }}' data-loan-balance="20000"
                                                     data-member='@json($member)'>
                                                     <!--<td class="pl-2 text-left">
-                                                                                                                                                                                                                                                                            <input type="checkbox" name="selected_ids[]" value="1"
-                                                                                                                                                                                                                                                                                class="form-checkbox h-4 w-4 text-blue-600 m-1">
-                                                                                                                                                                                                                    </td>-->
+                                                                                                                                                                                                                                                                                    <input type="checkbox" name="selected_ids[]" value="1"
+                                                                                                                                                                                                                                                                                        class="form-checkbox h-4 w-4 text-blue-600 m-1">
+                                                                                                                                                                                                                            </td>-->
                                                     <td class="py-2 text-center">
                                                         {{ str_pad($member->id, 3, '0', STR_PAD_LEFT) }}
                                                     </td>

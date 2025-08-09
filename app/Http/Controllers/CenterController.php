@@ -81,6 +81,18 @@ class CenterController extends Controller
             return redirect()->back()->with('error', 'Something went wrong.');
         }
     }
+
+     public function incomeReportView()
+    {
+        try {
+            $all_active_centers = $this->centerRepository->get_all();
+            $all_active_branches =  $this->branchRepository->get_all();
+            return View('reports.incomeReports', ['all_active_centers' => $all_active_centers, 'all_active_branches' => $all_active_branches]);
+        } catch (\Exception $e) {
+            Log::error('Error getting active centers: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+    }
     public function collectionView()
     {
         try {

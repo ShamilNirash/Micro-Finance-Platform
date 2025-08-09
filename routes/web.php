@@ -137,9 +137,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/loneIssue', function () {
         return view('reports/loneIssue');
     });
-    Route::get('/incomeReports', function () {
-        return view('reports/incomeReports');
-    });
+        Route::get('/incomeReports', [CenterController::class, 'incomeReportView'])->name('centers.viewIncomeReportBlade');
+
     Route::get('/pendingPaymentsReport', function () {
         return view('reports/pendingPaymentsReport');
     });
