@@ -69,10 +69,10 @@
                     </form>
                 </div>
                 <!--
-                                    <p class="text-center text-xs text-gray-500 ">
-                                        Don't have an account? <a href="#" class="text-blue-600 font-medium">Register</a>
-                                    </p>
-                        -->
+                                        <p class="text-center text-xs text-gray-500 ">
+                                            Don't have an account? <a href="#" class="text-blue-600 font-medium">Register</a>
+                                        </p>
+                            -->
             </div>
             <div class="lg:hidden flex   items-center lg:justify-left justify-center w-full lg:pl-8  h-1/6">
                 <p class="lg:text-blue-900 text-xs text-gray-400">Powered By <a href="#"
@@ -107,44 +107,44 @@
             const password = document.getElementById('password').value.trim();
             const errorContainer = document.getElementById('loginError');
             errorContainer.innerHTML = ''; // Clear previous errors
+            window.location.href = '/dashboard'
+            /*  try {
+                 const response = await fetch('user/login', {
+                     method: 'POST',
+                     headers: {
+                         'Content-Type': 'application/json',
+                         'Accept': 'application/json',
+                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                             'content')
+                     },
+                     body: JSON.stringify({
+                         email,
+                         password
+                     })
+                 });
 
-            try {
-                const response = await fetch('user/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                            'content')
-                    },
-                    body: JSON.stringify({
-                        email,
-                        password
-                    })
-                });
+                 const data = await response.json();
 
-                const data = await response.json();
-
-                if (response.ok) {
-                    window.location.href = data.redirect_to;
-                } else if (response.status === 422 && data.errors) {
-                    // Show validation errors
-                    for (const field in data.errors) {
-                        data.errors[field].forEach(msg => {
-                            const p = document.createElement('p');
-                            p.classList.add('text-red-500', 'text-sm');
-                            p.textContent = msg;
-                            errorContainer.appendChild(p);
-                        });
-                    }
-                } else {
-                    // General error (e.g., wrong credentials)
-                    errorContainer.textContent = data.message || 'Login failed.';
-                }
-            } catch (err) {
-                console.error('Error:', err);
-                errorContainer.textContent = 'Server error. Please try again later.';
-            }
+                 if (response.ok) {
+                     window.location.href = data.redirect_to;
+                 } else if (response.status === 422 && data.errors) {
+                     // Show validation errors
+                     for (const field in data.errors) {
+                         data.errors[field].forEach(msg => {
+                             const p = document.createElement('p');
+                             p.classList.add('text-red-500', 'text-sm');
+                             p.textContent = msg;
+                             errorContainer.appendChild(p);
+                         });
+                     }
+                 } else {
+                     // General error (e.g., wrong credentials)
+                     errorContainer.textContent = data.message || 'Login failed.';
+                 }
+             } catch (err) {
+                 console.error('Error:', err);
+                 errorContainer.textContent = 'Server error. Please try again later.';
+             } */
         });
     </script>
 @endsection

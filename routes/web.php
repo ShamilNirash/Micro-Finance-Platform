@@ -31,7 +31,7 @@ Route::get('/signup', function () {
 });
 Route::post('user/login', [UserController::class, 'login']);
 
-Route::middleware('auth')->group(function () {
+
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
@@ -150,5 +150,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/membersReport', function () {
         return view('reports/membersReport');
     });
-});
+
 /*Settings*/
